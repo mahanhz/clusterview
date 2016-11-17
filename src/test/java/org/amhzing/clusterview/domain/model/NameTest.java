@@ -14,16 +14,27 @@ public class NameTest {
 
     @Test
     @Parameters(method = "values")
-    public void name_is_valid(final Class<? extends Exception> exception,
+    public void test_creation(final Class<? extends Exception> exception,
                               final FirstName firstName,
                               final MiddleName middleName,
                               final LastName lastName,
-                              final Suffix suffix)  {
+                              final Suffix suffix) {
         try {
             Name.create(firstName, middleName, lastName, suffix);
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
+    }
+
+    @Test
+    public void test_equals_hashcode() {
+        final Name value = Name.create(firstName(), middleName(), lastName(), suffix());
+        final Name value2 = Name.create(firstName(), middleName(), lastName(), suffix());
+        final Name value3 = Name.create(firstName(), null, lastName(), null);
+
+        assertThat(value).isEqualTo(value2);
+        assertThat(value).isNotEqualTo(value3);
+        assertThat(value.hashCode()).isEqualTo(value2.hashCode());
     }
 
     @SuppressWarnings("unused")

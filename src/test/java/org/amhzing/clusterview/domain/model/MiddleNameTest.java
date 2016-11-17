@@ -16,13 +16,24 @@ public class MiddleNameTest {
 
     @Test
     @Parameters(method = "values")
-    public void shouldValidate(final Class<? extends Exception> exception,
-                               final String value)  {
+    public void test_creation(final Class<? extends Exception> exception,
+                              final String value) {
         try {
             MiddleName.create(value);
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
+    }
+
+    @Test
+    public void test_equals_hashcode() {
+        final MiddleName value = MiddleName.create("Arnold");
+        final MiddleName value2 = MiddleName.create("Arnold");
+        final MiddleName value3 = MiddleName.create("Winston");
+
+        assertThat(value).isEqualTo(value2);
+        assertThat(value).isNotEqualTo(value3);
+        assertThat(value.hashCode()).isEqualTo(value2.hashCode());
     }
 
     @SuppressWarnings("unused")

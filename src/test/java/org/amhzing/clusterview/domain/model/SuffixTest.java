@@ -16,13 +16,24 @@ public class SuffixTest {
 
     @Test
     @Parameters(method = "values")
-    public void shouldValidate(final Class<? extends Exception> exception,
-                               final String value)  {
+    public void test_creation(final Class<? extends Exception> exception,
+                              final String value) {
         try {
             Suffix.create(value);
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
+    }
+
+    @Test
+    public void test_equals_hashcode() {
+        final Suffix value = Suffix.create("Junior");
+        final Suffix value2 = Suffix.create("Junior");
+        final Suffix value3 = Suffix.create("II");
+
+        assertThat(value).isEqualTo(value2);
+        assertThat(value).isNotEqualTo(value3);
+        assertThat(value.hashCode()).isEqualTo(value2.hashCode());
     }
 
     @SuppressWarnings("unused")
