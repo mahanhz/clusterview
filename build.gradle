@@ -34,7 +34,7 @@ plugins {
 	id 'com.gorylenko.gradle-git-properties' version '1.4.17'
 }
 
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
