@@ -1,0 +1,29 @@
+def integrationTests = 'org/amhzing/clusterview/integrationtest/**'
+def acceptanceTests = 'org/amhzing/clusterview/acceptancetest/**'
+def functionalTests = 'org/amhzing/clusterview/functionaltest/**'
+def smokeTests = 'org/amhzing/clusterview/smoketest/**'
+
+test {
+    exclude integrationTests
+    exclude acceptanceTests
+    exclude functionalTests
+    exclude smokeTests
+}
+
+task integrationTest(type:Test) {
+    include integrationTests
+    systemProperties['spring.profiles.active'] = 'online,test'
+}
+
+task acceptanceTest(type:Test) {
+    include acceptanceTests
+    systemProperties['spring.profiles.active'] = 'online,test'
+}
+
+task functionalTest(type:Test) {
+    include functionalTests
+}
+
+task smokeTest(type:Test) {
+    include smokeTests
+}

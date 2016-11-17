@@ -1,0 +1,85 @@
+buildscript {
+	ext {
+		NEXUS_REPO_URL = 'http://192.168.1.31:8082/nexus/content/repositories'
+
+		springBootVersion = '1.4.2.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+
+		maven {
+			url 'https://plugins.gradle.org/m2/'
+		}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+plugins {
+	id 'java'
+	id 'maven'
+	id 'jacoco'
+	id 'idea'
+	id 'jdepend'
+	id 'findbugs'
+	id 'pmd'
+
+	id 'org.kravemir.gradle.sass' version '1.2.2'
+	id 'net.saliman.cobertura' version '2.3.2'
+	id 'com.github.kt3k.coveralls' version '2.6.3'
+	id 'org.hidetake.ssh' version '2.2.0'
+	id 'net.researchgate.release' version '2.4.0'
+	id 'org.owasp.dependencycheck' version '1.4.3'
+	id 'com.gorylenko.gradle-git-properties' version '1.4.17'
+}
+
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.14'
+}
+
+// Dependencies
+apply from: 'gradle-segment/dependencies.gradle'
+
+// Test
+apply from: 'gradle-segment/test.gradle'
+
+// Code analysis
+apply from: 'gradle-segment/code-analysis.gradle'
+
+// Publish to Nexus
+apply from: 'gradle-segment/publish.gradle'
+
+
+// Git properties that display in the actuator /info endpoint
+gitProperties {
+	dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ z"
+	dateFormatTimeZone = "UTC"
+}
+
+springBoot {
+	excludeDevtools = true
+
+	buildInfo {
+		additionalProperties = [
+				'description': "${description}",
+				'jenkins.node': "${System.env.NODE_NAME}",
+				'jenkins.job-name': "${System.env.JOB_NAME}",
+				'jenkins.build-timestamp': "${System.env.BUILD_TIMESTAMP}",
+				'jenkins.build-id': "${System.env.BUILD_ID}",
+				'jenkins.build-number': "${System.env.BUILD_NUMBER}",
+				'jenkins.git-commit': "${System.env.GIT_COMMIT_ID}", // Custom env variable set in the Jenkinsfile
+				'jenkins.git-branch': "${System.env.BRANCH_NAME}"
+		]
+	}
+}
+
+// Make the System.properties available in the bootRun task.
+bootRun {
+	systemProperties = System.properties
+}

@@ -1,0 +1,31 @@
+findbugs {
+    sourceSets = [sourceSets.main, sourceSets.test]
+    ignoreFailures = true
+}
+
+pmd {
+    sourceSets = [sourceSets.main, sourceSets.test]
+    ignoreFailures = true
+}
+
+jdepend {
+    sourceSets = [sourceSets.main, sourceSets.test]
+    ignoreFailures = true
+}
+
+dependencyCheck {
+    format = 'ALL'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}
+
+// This is needed as Vaadin causes javadoc to fail otherwise
+javadoc
+{
+    options.addStringOption("sourcepath", "")
+}
