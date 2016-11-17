@@ -5,6 +5,7 @@ import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.amhzing.clusterview.helper.DomainModelHelper.*;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.invalidMatching;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.valid;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,21 +47,5 @@ public class NameTest {
                 { invalidMatching(NullPointerException.class), firstName(), middleName(), null, suffix() },
                 { invalidMatching(NullPointerException.class), null, middleName(), null, suffix() }
         };
-    }
-
-    private FirstName firstName() {
-        return FirstName.create("firstName");
-    }
-
-    private MiddleName middleName() {
-        return MiddleName.create("middleName");
-    }
-
-    private LastName lastName() {
-        return LastName.create("lastName");
-    }
-
-    private Suffix suffix() {
-        return Suffix.create("suffix");
     }
 }

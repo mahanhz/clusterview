@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 
 import static com.google.common.collect.ImmutableSet.of;
 import static org.amhzing.clusterview.domain.model.Activity.*;
+import static org.amhzing.clusterview.helper.DomainModelHelper.anotherName;
+import static org.amhzing.clusterview.helper.DomainModelHelper.name;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.invalidMatching;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.valid;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,13 +53,5 @@ public class MemberTest {
                 { valid(), name(), null, null },
                 { invalidMatching(NullPointerException.class), null, Capability.create(of(STUDY_CIRCLE)), Commitment.create(of(HOME_VISIT)) }
         };
-    }
-
-    private Name name() {
-        return Name.create(FirstName.create("John"), null, LastName.create("Doe"), null);
-    }
-
-    private Name anotherName() {
-        return Name.create(FirstName.create("Jane"), null, LastName.create("Doe"), null);
     }
 }

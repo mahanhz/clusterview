@@ -6,23 +6,21 @@ import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.amhzing.clusterview.helper.DomainModelHelper.anotherMember;
-import static org.amhzing.clusterview.helper.DomainModelHelper.location;
-import static org.amhzing.clusterview.helper.DomainModelHelper.member;
+import static org.amhzing.clusterview.helper.DomainModelHelper.anotherGroup;
+import static org.amhzing.clusterview.helper.DomainModelHelper.group;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.invalidMatching;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.valid;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
-public class GroupTest {
+public class ClusterTest {
 
     @Test
     @Parameters(method = "values")
     public void test_creation(final Class<? extends Exception> exception,
-                              final Location location,
-                              final Member... members) {
+                              final Group... groups) {
         try {
-            Group.create(ImmutableSet.copyOf(members), location);
+            Cluster.create(ImmutableSet.copyOf(groups));
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
@@ -30,9 +28,9 @@ public class GroupTest {
 
     @Test
     public void test_equals_hashcode() {
-        final Group value = Group.create(ImmutableSet.of(member(), anotherMember()), location());
-        final Group value2 = Group.create(ImmutableSet.of(anotherMember(), member()), location());
-        final Group value3 = Group.create(ImmutableSet.of(anotherMember()), location());
+        final Cluster value = Cluster.create(ImmutableSet.of(group(), anotherGroup()));
+        final Cluster value2 = Cluster.create(ImmutableSet.of(anotherGroup(), group()));
+        final Cluster value3 = Cluster.create(ImmutableSet.of(anotherGroup()));
 
         assertThat(value).isEqualTo(value2);
         assertThat(value).isNotEqualTo(value3);
@@ -42,9 +40,8 @@ public class GroupTest {
     @SuppressWarnings("unused")
     private Object values() {
         return new Object[][]{
-                { valid(), location(), member() },
-                { invalidMatching(NullPointerException.class), location(), null },
-                { invalidMatching(NullPointerException.class), null, member() }
+                { valid(), group() },
+                { invalidMatching(NullPointerException.class), null }
         };
     }
 }
