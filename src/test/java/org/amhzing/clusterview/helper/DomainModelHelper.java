@@ -13,6 +13,14 @@ public final class DomainModelHelper {
         // To prevent instantiation
     }
 
+    public static Cluster cluster() {
+        return Cluster.create("Cluster1", ImmutableSet.of(group()));
+    }
+
+    public static Cluster anotherCluster() {
+        return Cluster.create("Cluster2", ImmutableSet.of(anotherGroup()));
+    }
+
     public static Group group() {
         return Group.create(ImmutableSet.of(member()), location());
     }

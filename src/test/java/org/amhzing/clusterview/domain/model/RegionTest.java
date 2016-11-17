@@ -6,22 +6,21 @@ import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.amhzing.clusterview.helper.DomainModelHelper.anotherGroup;
-import static org.amhzing.clusterview.helper.DomainModelHelper.group;
+import static org.amhzing.clusterview.helper.DomainModelHelper.*;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.invalidMatching;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.valid;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
-public class ClusterTest {
+public class RegionTest {
 
     @Test
     @Parameters(method = "values")
     public void test_creation(final Class<? extends Exception> exception,
                               final String name,
-                              final Group... groups) {
+                              final Cluster... clusters) {
         try {
-            Cluster.create(name, ImmutableSet.copyOf(groups));
+            Region.create(name, ImmutableSet.copyOf(clusters));
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
@@ -29,9 +28,9 @@ public class ClusterTest {
 
     @Test
     public void test_equals_hashcode() {
-        final Cluster value = Cluster.create("Cluster1", ImmutableSet.of(group(), anotherGroup()));
-        final Cluster value2 = Cluster.create("Cluster1", ImmutableSet.of(anotherGroup(), group()));
-        final Cluster value3 = Cluster.create("Cluster2", ImmutableSet.of(anotherGroup()));
+        final Region value = Region.create("Central", ImmutableSet.of(cluster(), anotherCluster()));
+        final Region value2 = Region.create("Central", ImmutableSet.of(anotherCluster(), cluster()));
+        final Region value3 = Region.create("Southern", ImmutableSet.of(anotherCluster()));
 
         assertThat(value).isEqualTo(value2);
         assertThat(value).isNotEqualTo(value3);
@@ -41,8 +40,8 @@ public class ClusterTest {
     @SuppressWarnings("unused")
     private Object values() {
         return new Object[][]{
-                { valid(), "Cluster1", group() },
-                { invalidMatching(IllegalArgumentException.class), "", group() },
+                { valid(), "Central", cluster() },
+                { invalidMatching(IllegalArgumentException.class), "", cluster() },
                 { invalidMatching(NullPointerException.class), null, null }
         };
     }
