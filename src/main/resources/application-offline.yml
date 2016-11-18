@@ -1,0 +1,9 @@
+server:
+  port: 12101
+  error:
+    whitelabel:
+      enabled: false
+
+management:
+  port: 12102
+  context-path: /manage
