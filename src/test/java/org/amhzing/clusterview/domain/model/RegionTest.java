@@ -17,10 +17,10 @@ public class RegionTest {
     @Test
     @Parameters(method = "values")
     public void test_creation(final Class<? extends Exception> exception,
-                              final String name,
-                              final Cluster... clusters) {
+                              final String id,
+                              final Cluster.Id... clusters) {
         try {
-            Region.create(name, ImmutableSet.copyOf(clusters));
+            Region.create(Region.Id.create(id), ImmutableSet.copyOf(clusters));
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
@@ -28,9 +28,12 @@ public class RegionTest {
 
     @Test
     public void test_equals_hashcode() {
-        final Region value = Region.create("Central", ImmutableSet.of(cluster(), anotherCluster()));
-        final Region value2 = Region.create("Central", ImmutableSet.of(anotherCluster(), cluster()));
-        final Region value3 = Region.create("Southern", ImmutableSet.of(anotherCluster()));
+        final Region.Id region1 = Region.Id.create("Central");
+        final Region.Id region2 = Region.Id.create("Southern");
+
+        final Region value = Region.create(region1, ImmutableSet.of(clusterId(), anotherClusterId()));
+        final Region value2 = Region.create(region1, ImmutableSet.of(anotherClusterId(), clusterId()));
+        final Region value3 = Region.create(region2, ImmutableSet.of(anotherClusterId()));
 
         assertThat(value).isEqualTo(value2);
         assertThat(value).isNotEqualTo(value3);
@@ -40,8 +43,8 @@ public class RegionTest {
     @SuppressWarnings("unused")
     private Object values() {
         return new Object[][]{
-                { valid(), "Central", cluster() },
-                { invalidMatching(IllegalArgumentException.class), "", cluster() },
+                { valid(), "Central", clusterId() },
+                { invalidMatching(IllegalArgumentException.class), "", clusterId() },
                 { invalidMatching(NullPointerException.class), null, null }
         };
     }

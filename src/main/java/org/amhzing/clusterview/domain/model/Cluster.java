@@ -1,33 +1,32 @@
 package org.amhzing.clusterview.domain.model;
 
-import com.google.common.collect.ImmutableSet;
-
 import java.util.Objects;
 import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notBlank;
+import static org.apache.commons.lang3.Validate.notNull;
 
 public class Cluster {
 
-    private String name;
-    private Set<Group> groups;
+    private Id id;
+    private Set<Group.Id> groups;
 
-    private Cluster(final String name, final Set<Group> groups) {
-        this.name = notBlank(name);
+    private Cluster(final Id id, final Set<Group.Id> groups) {
+        this.id = notNull(id);
         this.groups = noNullElements(groups);
     }
 
-    public static Cluster create(final String name, final Set<Group> groups) {
-        return new Cluster(name, groups);
+    public static Cluster create(final Id id, final Set<Group.Id> groups) {
+        return new Cluster(id, groups);
     }
 
-    public String getName() {
-        return name;
+    public Id getId() {
+        return id;
     }
 
-    public Set<Group> getGroups() {
-        return ImmutableSet.copyOf(groups);
+    public Set<Group.Id> getGroups() {
+        return groups;
     }
 
     @Override
@@ -35,20 +34,40 @@ public class Cluster {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final Cluster cluster = (Cluster) o;
-        return Objects.equals(name, cluster.name) &&
+        return Objects.equals(id, cluster.id) &&
                 Objects.equals(groups, cluster.groups);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, groups);
+        return Objects.hash(id, groups);
     }
 
     @Override
     public String toString() {
         return "Cluster{" +
-                "name='" + name + '\'' +
+                "id=" + id +
                 ", groups=" + groups +
                 '}';
+    }
+
+    public static class Id {
+
+        private String id;
+
+        private Id(final String id) {
+            this.id = notBlank(id);
+        }
+
+        public static Id create(final String id) {
+            return new Id(id);
+        }
+
+        @Override
+        public String toString() {
+            return "Id{" +
+                    "id='" + id + '\'' +
+                    '}';
+        }
     }
 }

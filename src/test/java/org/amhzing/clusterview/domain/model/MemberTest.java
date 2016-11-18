@@ -19,11 +19,12 @@ public class MemberTest {
     @Test
     @Parameters(method = "values")
     public void test_creation(final Class<? extends Exception> exception,
+                              final String id,
                               final Name name,
                               final Capability capability,
                               final Commitment commitment) {
         try {
-            Member.create(name, capability, commitment);
+            Member.create(Member.Id.create(id), name, capability, commitment);
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
@@ -31,13 +32,19 @@ public class MemberTest {
 
     @Test
     public void test_equals_hashcode() {
-        final Member value = Member.create(name(),
+        final Member.Id member1 = Member.Id.create("member1");
+        final Member.Id member2 = Member.Id.create("member2");
+
+        final Member value = Member.create(member1,
+                                           name(),
                                            Capability.create(of(STUDY_CIRCLE, CHILDRENS_CLASS)),
                                            Commitment.create(of(HOME_VISIT, DEVOTIONAL_MEETING)));
-        final Member value2 = Member.create(name(),
+        final Member value2 = Member.create(member1,
+                                            name(),
                                             Capability.create(of(CHILDRENS_CLASS, STUDY_CIRCLE)),
                                             Commitment.create(of(DEVOTIONAL_MEETING, HOME_VISIT)));
-        final Member value3 = Member.create(anotherName(),
+        final Member value3 = Member.create(member2,
+                                            anotherName(),
                                             Capability.create(of(CHILDRENS_CLASS, STUDY_CIRCLE)),
                                             Commitment.create(of(DEVOTIONAL_MEETING, HOME_VISIT)));
 
@@ -49,9 +56,9 @@ public class MemberTest {
     @SuppressWarnings("unused")
     private Object values() {
         return new Object[][]{
-                { valid(), name(), Capability.create(of(STUDY_CIRCLE)), Commitment.create(of(HOME_VISIT)) },
-                { valid(), name(), null, null },
-                { invalidMatching(NullPointerException.class), null, Capability.create(of(STUDY_CIRCLE)), Commitment.create(of(HOME_VISIT)) }
+                { valid(), "member1", name(), Capability.create(of(STUDY_CIRCLE)), Commitment.create(of(HOME_VISIT)) },
+                { valid(), "member2", name(), null, null },
+                { invalidMatching(NullPointerException.class), "member1", null, Capability.create(of(STUDY_CIRCLE)), Commitment.create(of(HOME_VISIT)) }
         };
     }
 }

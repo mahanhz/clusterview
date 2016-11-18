@@ -9,24 +9,34 @@ import static org.amhzing.clusterview.domain.model.Activity.STUDY_CIRCLE;
 
 public final class DomainModelHelper {
 
+    private static final Group.Id GROUP_1 = Group.Id.create("Group1");
+    private static final Group.Id GROUP_2 = Group.Id.create("Group2");
+    private static final Cluster.Id CLUSTER_1 = Cluster.Id.create("Cluster1");
+    private static final Cluster.Id CLUSTER_2 = Cluster.Id.create("Cluster2");
+    private static final Region.Id REGION_1 = Region.Id.create("Region1");
+    private static final Region.Id REGION_2 = Region.Id.create("Region2");
+
     private DomainModelHelper() {
         // To prevent instantiation
     }
 
+    private static final Member.Id MEMBER_1 = Member.Id.create("member1");
+    private static final Member.Id MEMBER_2 = Member.Id.create("member2");
+
     public static Cluster cluster() {
-        return Cluster.create("Cluster1", ImmutableSet.of(group()));
+        return Cluster.create(clusterId(), ImmutableSet.of(groupId()));
     }
 
     public static Cluster anotherCluster() {
-        return Cluster.create("Cluster2", ImmutableSet.of(anotherGroup()));
+        return Cluster.create(anotherClusterId(), ImmutableSet.of(anotherGroupId()));
     }
 
     public static Group group() {
-        return Group.create(ImmutableSet.of(member()), location());
+        return Group.create(groupId(), ImmutableSet.of(memberId()), location());
     }
 
     public static Group anotherGroup() {
-        return Group.create(ImmutableSet.of(anotherMember()), anotherLocation());
+        return Group.create(anotherGroupId(), ImmutableSet.of(anotherMemberId()), anotherLocation());
     }
 
     public static Location location() {
@@ -38,11 +48,17 @@ public final class DomainModelHelper {
     }
 
     public static Member member() {
-        return Member.create(name(), Capability.create(of(STUDY_CIRCLE)), Commitment.create(of(HOME_VISIT)));
+        return Member.create(memberId(),
+                             name(),
+                             Capability.create(of(STUDY_CIRCLE)),
+                             Commitment.create(of(HOME_VISIT)));
     }
 
     public static Member anotherMember() {
-        return Member.create(anotherName(), Capability.create(of(STUDY_CIRCLE)), Commitment.create(of(HOME_VISIT)));
+        return Member.create(anotherMemberId(),
+                             anotherName(),
+                             Capability.create(of(STUDY_CIRCLE)),
+                             Commitment.create(of(HOME_VISIT)));
     }
 
     public static Name name() {
@@ -67,5 +83,37 @@ public final class DomainModelHelper {
 
     public static Suffix suffix() {
         return Suffix.create("suffix");
+    }
+
+    public static Member.Id memberId() {
+        return MEMBER_1;
+    }
+
+    public static Member.Id anotherMemberId() {
+        return MEMBER_2;
+    }
+
+    public static Group.Id groupId() {
+        return GROUP_1;
+    }
+
+    public static Group.Id anotherGroupId() {
+        return GROUP_2;
+    }
+
+    public static Cluster.Id clusterId() {
+        return CLUSTER_1;
+    }
+
+    public static Cluster.Id anotherClusterId() {
+        return CLUSTER_2;
+    }
+
+    public static Region.Id regionId() {
+        return REGION_1;
+    }
+
+    public static Region.Id anotherRegionId() {
+        return REGION_2;
     }
 }
