@@ -19,16 +19,6 @@ public class Member {
     public Member() {
     }
 
-    private Member(final long id, final Name name, final Set<Capability> capability) {
-        this.id = id;
-        this.name = name;
-        this.capability = capability;
-    }
-
-    public static Member create(final long id, final Name name, final Set<Capability> capability) {
-        return new Member(id, name, capability);
-    }
-
     public long getId() {
         return id;
     }

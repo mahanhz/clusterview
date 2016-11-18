@@ -28,6 +28,9 @@ public class MemberRepositoryTest {
     @Autowired
     private MemberRepository repository;
 
+    @Autowired
+    private CapabilityRepository capabilityRepository;
+
     @Test
     public void should_get_member() throws Exception {
         final Member member = this.repository.findOne(111L);
@@ -41,7 +44,10 @@ public class MemberRepositoryTest {
     }
 
     @Test
-    public void should_insert_member() throws Exception {
+    public void should_insert_member_and_capabilities() throws Exception {
+        final List<Capability> capabilitiesBefore = this.capabilityRepository.findAll();
+        assertThat(capabilitiesBefore).hasSize(6);
+
         final List<Member> membersBeforeInsert = this.repository.findAll();
         assertThat(membersBeforeInsert).hasSize(3);
 
@@ -52,6 +58,25 @@ public class MemberRepositoryTest {
 
         final Member lastMember = membersAfterInsert.get(membersAfterInsert.size() - 1);
         assertThat(lastMember).isEqualTo(persistedMember);
+
+        final List<Capability> capabilitiesAfter = this.capabilityRepository.findAll();
+        assertThat(capabilitiesAfter).hasSize(7);
+    }
+
+    @Test
+    public void should_delete_member_and_capabilities() throws Exception {
+        final List<Capability> capabilitiesBefore = this.capabilityRepository.findAll();
+        assertThat(capabilitiesBefore).hasSize(6);
+
+        final Member member = this.repository.findOne(111L);
+
+        entityManager.remove(member);
+
+        final List<Member> membersAfterInsert = this.repository.findAll();
+        assertThat(membersAfterInsert).hasSize(2);
+
+        final List<Capability> capabilitiesAfter = this.capabilityRepository.findAll();
+        assertThat(capabilitiesAfter).hasSize(3);
     }
 
     public static Member member() {
@@ -63,11 +88,7 @@ public class MemberRepositoryTest {
     }
 
     private static ImmutableSet<Capability> capabilities(final Member member) {
-        final Capability capability = new Capability();
-        capability.setActivity(activity());
-        capability.setMember(member);
-
-        return ImmutableSet.of(capability);
+        return ImmutableSet.of(Capability.create(activity(), member));
     }
 
     private static Activity activity() {
