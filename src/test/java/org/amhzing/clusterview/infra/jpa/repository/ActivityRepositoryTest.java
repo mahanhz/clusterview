@@ -27,7 +27,7 @@ public class ActivityRepositoryTest {
 
     @Test
     public void should_get_activity() throws Exception {
-        final Activity sc = activityRepository.findOne("SC");
+        final Activity sc = activityRepository.findOne("sc");
 
         assertThat(sc).isNotNull();
         assertThat(sc.getName()).isEqualTo("Study Circle");

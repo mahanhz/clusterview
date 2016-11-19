@@ -16,6 +16,9 @@ public class Team {
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private Set<Member> members;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cluster cluster;
+
     public long getId() {
         return id;
     }
@@ -40,5 +43,20 @@ public class Team {
         this.members = members;
     }
 
+    public Cluster getCluster() {
+        return cluster;
+    }
 
+    public void setCluster(final Cluster cluster) {
+        this.cluster = cluster;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", location=" + location +
+                ", members=" + members +
+                '}';
+    }
 }

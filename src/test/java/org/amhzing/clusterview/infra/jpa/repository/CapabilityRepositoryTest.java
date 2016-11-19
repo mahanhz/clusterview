@@ -28,6 +28,6 @@ public class CapabilityRepositoryTest {
         final Capability sc = capabilityRepository.findOne(1L);
 
         assertThat(sc).isNotNull();
-        assertThat(sc.getActivity().getId()).isEqualTo("SC");
+        assertThat(sc.getActivity().getId()).isEqualToIgnoringCase("sc");
     }
 }

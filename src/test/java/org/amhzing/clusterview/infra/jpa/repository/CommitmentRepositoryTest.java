@@ -28,6 +28,6 @@ public class CommitmentRepositoryTest {
         final Commitment commitment = commitmentRepository.findOne(15L);
 
         assertThat(commitment).isNotNull();
-        assertThat(commitment.getActivity().getId()).isEqualTo("JYG");
+        assertThat(commitment.getActivity().getId()).isEqualToIgnoringCase("JYG");
     }
 }
