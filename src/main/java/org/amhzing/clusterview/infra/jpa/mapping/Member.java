@@ -14,10 +14,13 @@ public class Member {
     private Name name;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private Set<Capability> capability;
+    private Set<Capability> capabilities;
 
-    public Member() {
-    }
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private Set<Commitment> commitments;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Team team;
 
     public long getId() {
         return id;
@@ -35,12 +38,28 @@ public class Member {
         this.name = name;
     }
 
-    public Set<Capability> getCapability() {
-        return capability;
+    public Set<Capability> getCapabilities() {
+        return capabilities;
     }
 
-    public void setCapability(final Set<Capability> capability) {
-        this.capability = capability;
+    public void setCapabilities(final Set<Capability> capabilities) {
+        this.capabilities = capabilities;
+    }
+
+    public Set<Commitment> getCommitments() {
+        return commitments;
+    }
+
+    public void setCommitments(final Set<Commitment> commitments) {
+        this.commitments = commitments;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(final Team team) {
+        this.team = team;
     }
 
     @Override
@@ -48,7 +67,7 @@ public class Member {
         return "Member{" +
                 "id=" + id +
                 ", name=" + name +
-                ", capability=" + capability +
+                ", capabilities=" + capabilities +
                 '}';
     }
 }
