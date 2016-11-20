@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.repository;
 
 import org.amhzing.clusterview.annotation.TestOffline;
-import org.amhzing.clusterview.infra.jpa.mapping.Activity;
+import org.amhzing.clusterview.infra.jpa.mapping.ActivityEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.Capability;
 import org.amhzing.clusterview.infra.jpa.mapping.Commitment;
 import org.amhzing.clusterview.infra.jpa.mapping.Member;
@@ -96,7 +96,7 @@ public class MemberJpaRepositoryTest {
         return capabilityJpaRepository.findAll();
     }
 
-    private List<Activity> allActivities() {
+    private List<ActivityEntity> allActivities() {
         return activityJpaRepository.findAll();
     }
 }

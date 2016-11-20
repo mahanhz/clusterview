@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ActivityTest {
+public class ActivityEntityTest {
 
     @Test
     public void test_equals_hashcode() {

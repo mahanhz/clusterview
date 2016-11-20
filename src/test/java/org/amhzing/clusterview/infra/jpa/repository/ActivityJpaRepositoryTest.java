@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.repository;
 
 import org.amhzing.clusterview.annotation.TestOffline;
-import org.amhzing.clusterview.infra.jpa.mapping.Activity;
+import org.amhzing.clusterview.infra.jpa.mapping.ActivityEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class ActivityJpaRepositoryTest {
 
     @Test
     public void should_get_activity() throws Exception {
-        final Activity sc = activityJpaRepository.findOne("sc");
+        final ActivityEntity sc = activityJpaRepository.findOne("sc");
 
         assertThat(sc).isNotNull();
         assertThat(sc.getName()).isEqualTo("Study Circle");
@@ -46,14 +46,14 @@ public class ActivityJpaRepositoryTest {
     public void should_delete_activity() throws Exception {
         assertThat(allActivities()).hasSize(5);
 
-        final Activity activity = newActivity();
+        final ActivityEntity activity = newActivity();
         entityManager.persist(activity); // +1
         entityManager.remove(activity);  // -1
 
         assertThat(allActivities()).hasSize(5);
     }
 
-    private List<Activity> allActivities() {
+    private List<ActivityEntity> allActivities() {
         return activityJpaRepository.findAll();
     }
 }

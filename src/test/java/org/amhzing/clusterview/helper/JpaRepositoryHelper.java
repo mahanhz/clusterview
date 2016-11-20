@@ -39,12 +39,12 @@ public final class JpaRepositoryHelper {
         return ImmutableSet.of(Commitment.create(anotherNewActivity(), member));
     }
 
-    public static Activity newActivity() {
-        return Activity.create("NO", "Nonsense");
+    public static ActivityEntity newActivity() {
+        return ActivityEntity.create("NO", "Nonsense");
     }
 
-    public static Activity anotherNewActivity() {
-        return Activity.create("YE", "Something");
+    public static ActivityEntity anotherNewActivity() {
+        return ActivityEntity.create("YE", "Something");
     }
 
     public static Name name() {

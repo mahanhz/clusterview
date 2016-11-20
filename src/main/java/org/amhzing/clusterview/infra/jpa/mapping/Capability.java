@@ -10,7 +10,7 @@ public class Capability {
     private long id;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private Activity activity;
+    private ActivityEntity activity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
@@ -18,12 +18,12 @@ public class Capability {
     public Capability() {
     }
 
-    private Capability(final Activity activity, final Member member) {
+    private Capability(final ActivityEntity activity, final Member member) {
         this.activity = activity;
         this.member = member;
     }
 
-    public static Capability create(final Activity activity, final Member member) {
+    public static Capability create(final ActivityEntity activity, final Member member) {
         return new Capability(activity, member);
     }
 
@@ -35,11 +35,11 @@ public class Capability {
         this.id = id;
     }
 
-    public Activity getActivity() {
+    public ActivityEntity getActivity() {
         return activity;
     }
 
-    public void setActivity(final Activity activity) {
+    public void setActivity(final ActivityEntity activity) {
         this.activity = activity;
     }
 

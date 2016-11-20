@@ -80,7 +80,7 @@ public class TeamJpaRepositoryTest {
         return capabilityJpaRepository.findAll();
     }
 
-    private List<Activity> allActivities() {
+    private List<ActivityEntity> allActivities() {
         return activityJpaRepository.findAll();
     }
 }

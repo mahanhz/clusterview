@@ -4,23 +4,23 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "activity")
-public class Activity {
+public class ActivityEntity {
 
     @Id
     private String id;
 
     private String name;
 
-    public Activity() {
+    public ActivityEntity() {
     }
 
-    private Activity(final String id, final String name) {
+    private ActivityEntity(final String id, final String name) {
         this.id = id;
         this.name = name;
     }
 
-    public static Activity create(final String id, final String name) {
-        return new Activity(id, name);
+    public static ActivityEntity create(final String id, final String name) {
+        return new ActivityEntity(id, name);
     }
 
     public String getId() {
@@ -41,7 +41,7 @@ public class Activity {
 
     @Override
     public String toString() {
-        return "Activity{" +
+        return "ActivityEntity{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
