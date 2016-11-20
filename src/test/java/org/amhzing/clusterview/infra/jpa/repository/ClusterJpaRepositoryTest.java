@@ -45,7 +45,7 @@ public class ClusterJpaRepositoryTest {
 
     @Test
     public void should_get_cluster() throws Exception {
-        final Cluster cluster = clusterJpaRepository.findOne("stockholm");
+        final ClusterEntity cluster = clusterJpaRepository.findOne("stockholm");
 
         assertThat(cluster).isNotNull();
         assertThat(cluster.getId()).isEqualToIgnoringCase("stockholm");
@@ -61,7 +61,7 @@ public class ClusterJpaRepositoryTest {
         assertThat(allTeams()).hasSize(INITIAL_TEAM_SIZE);
         assertThat(allClusters()).hasSize(INITIAL_CLUSTERS_SIZE);
 
-        final Cluster cluster = clusterJpaRepository.findOne("stockholm");
+        final ClusterEntity cluster = clusterJpaRepository.findOne("stockholm");
         entityManager.remove(cluster);
 
         assertThat(allClusters()).hasSize(INITIAL_CLUSTERS_SIZE - 1);
@@ -72,7 +72,7 @@ public class ClusterJpaRepositoryTest {
         assertThat(allActivities()).hasSize(INITIAL_ACTIVITIES_SIZE);
     }
 
-    private List<Cluster> allClusters() {
+    private List<ClusterEntity> allClusters() {
         return clusterJpaRepository.findAll();
     }
 

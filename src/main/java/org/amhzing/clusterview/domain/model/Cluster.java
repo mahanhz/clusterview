@@ -63,6 +63,10 @@ public class Cluster {
             return new Id(id);
         }
 
+        public String getId() {
+            return id;
+        }
+
         @Override
         public String toString() {
             return "Id{" +

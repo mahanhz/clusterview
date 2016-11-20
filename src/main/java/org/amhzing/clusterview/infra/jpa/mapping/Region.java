@@ -12,7 +12,7 @@ public class Region {
     private String areaCoords;
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
-    private Set<Cluster> clusters;
+    private Set<ClusterEntity> clusters;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Country country;
@@ -33,11 +33,11 @@ public class Region {
         this.areaCoords = areaCoords;
     }
 
-    public Set<Cluster> getClusters() {
+    public Set<ClusterEntity> getClusters() {
         return clusters;
     }
 
-    public void setClusters(final Set<Cluster> clusters) {
+    public void setClusters(final Set<ClusterEntity> clusters) {
         this.clusters = clusters;
     }
 

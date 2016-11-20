@@ -17,18 +17,18 @@ public class Team {
     private Set<Member> members;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Cluster cluster;
+    private ClusterEntity cluster;
 
     public Team() {
     }
 
-    private Team(final Location location, final Set<Member> members, final Cluster cluster) {
+    private Team(final Location location, final Set<Member> members, final ClusterEntity cluster) {
         this.location = location;
         this.members = members;
         this.cluster = cluster;
     }
 
-    public static Team create(final Location location, final Set<Member> members, final Cluster cluster) {
+    public static Team create(final Location location, final Set<Member> members, final ClusterEntity cluster) {
         return new Team(location, members, cluster);
     }
 
@@ -56,11 +56,11 @@ public class Team {
         this.members = members;
     }
 
-    public Cluster getCluster() {
+    public ClusterEntity getCluster() {
         return cluster;
     }
 
-    public void setCluster(final Cluster cluster) {
+    public void setCluster(final ClusterEntity cluster) {
         this.cluster = cluster;
     }
 

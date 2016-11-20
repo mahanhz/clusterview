@@ -3,8 +3,8 @@ package org.amhzing.clusterview.infra.jpa.mapping;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-public class Cluster {
+@Entity(name = "cluster")
+public class ClusterEntity {
 
     @Id
     private String id;
@@ -51,7 +51,7 @@ public class Cluster {
 
     @Override
     public String toString() {
-        return "Cluster{" +
+        return "ClusterEntity{" +
                 "id='" + id + '\'' +
                 ", areaCoords='" + areaCoords + '\'' +
                 ", teams=" + teams +
