@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.infra.jpa.repository;
 
-import org.amhzing.clusterview.infra.jpa.mapping.Country;
+import org.amhzing.clusterview.infra.jpa.mapping.CountryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CountryJpaRepository extends JpaRepository<Country, String> {
+public interface CountryJpaRepository extends JpaRepository<CountryEntity, String> {
 
 }

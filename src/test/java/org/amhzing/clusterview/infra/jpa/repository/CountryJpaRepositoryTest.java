@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.repository;
 
 import org.amhzing.clusterview.annotation.TestOffline;
-import org.amhzing.clusterview.infra.jpa.mapping.Country;
+import org.amhzing.clusterview.infra.jpa.mapping.CountryEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class CountryJpaRepositoryTest {
 
     @Test
     public void should_get_country() throws Exception {
-        final Country country = countryJpaRepository.findOne("se");
+        final CountryEntity country = countryJpaRepository.findOne("se");
 
         assertThat(country).isNotNull();
         assertThat(country.getId()).isEqualToIgnoringCase("se");

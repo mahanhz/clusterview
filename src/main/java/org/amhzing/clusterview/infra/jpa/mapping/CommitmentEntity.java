@@ -2,7 +2,7 @@ package org.amhzing.clusterview.infra.jpa.mapping;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "commitment")
 public class CommitmentEntity {
 
     @Id

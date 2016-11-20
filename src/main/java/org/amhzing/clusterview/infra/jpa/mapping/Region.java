@@ -15,7 +15,7 @@ public class Region {
     private Set<ClusterEntity> clusters;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Country country;
+    private CountryEntity country;
 
     public String getId() {
         return id;
@@ -41,11 +41,11 @@ public class Region {
         this.clusters = clusters;
     }
 
-    public Country getCountry() {
+    public CountryEntity getCountry() {
         return country;
     }
 
-    public void setCountry(final Country country) {
+    public void setCountry(final CountryEntity country) {
         this.country = country;
     }
 

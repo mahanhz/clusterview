@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.Set;
 
-@Entity
-public class Country {
+@Entity(name = "country")
+public class CountryEntity {
 
     @Id
     private String id;
@@ -33,7 +33,7 @@ public class Country {
 
     @Override
     public String toString() {
-        return "Country{" +
+        return "CountryEntity{" +
                 "id='" + id + '\'' +
                 ", regions=" + regions +
                 '}';
