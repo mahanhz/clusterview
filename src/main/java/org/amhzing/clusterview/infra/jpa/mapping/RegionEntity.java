@@ -3,7 +3,7 @@ package org.amhzing.clusterview.infra.jpa.mapping;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
+@Entity(name = "region")
 public class RegionEntity {
 
     @Id

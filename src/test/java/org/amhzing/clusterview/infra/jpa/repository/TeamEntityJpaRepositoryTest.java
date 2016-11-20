@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @TestOffline
-public class TeamJpaRepositoryTest {
+public class TeamEntityJpaRepositoryTest {
 
     @Autowired
     private TeamJpaRepository teamJpaRepository;
@@ -40,7 +40,7 @@ public class TeamJpaRepositoryTest {
 
     @Test
     public void should_get_team() throws Exception {
-        final Team team = teamJpaRepository.findOne(901L);
+        final TeamEntity team = teamJpaRepository.findOne(901L);
 
         assertThat(team).isNotNull();
         assertThat(team.getMembers()).hasSize(2);
@@ -54,7 +54,7 @@ public class TeamJpaRepositoryTest {
         assertThat(allCommitments()).hasSize(INITIAL_COMMITMENTS_SIZE);
         assertThat(allMembers()).hasSize(INITIAL_MEMBERS_SIZE);
 
-        final Team team = teamJpaRepository.findOne(901L);
+        final TeamEntity team = teamJpaRepository.findOne(901L);
         entityManager.remove(team);
 
         assertThat(allTeams()).hasSize(INITIAL_TEAM_SIZE - 1);
@@ -64,7 +64,7 @@ public class TeamJpaRepositoryTest {
         assertThat(allActivities()).hasSize(INITIAL_ACTIVITIES_SIZE);
     }
 
-    private List<Team> allTeams() {
+    private List<TeamEntity> allTeams() {
         return teamJpaRepository.findAll();
     }
 

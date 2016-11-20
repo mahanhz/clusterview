@@ -20,7 +20,7 @@ public class MemberEntity {
     private Set<CommitmentEntity> commitments;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Team team;
+    private TeamEntity team;
 
     public long getId() {
         return id;
@@ -54,11 +54,11 @@ public class MemberEntity {
         this.commitments = commitments;
     }
 
-    public Team getTeam() {
+    public TeamEntity getTeam() {
         return team;
     }
 
-    public void setTeam(final Team team) {
+    public void setTeam(final TeamEntity team) {
         this.team = team;
     }
 

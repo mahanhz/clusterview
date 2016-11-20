@@ -76,7 +76,7 @@ public class ClusterJpaRepositoryTest {
         return clusterJpaRepository.findAll();
     }
 
-    private List<Team> allTeams() {
+    private List<TeamEntity> allTeams() {
         return teamJpaRepository.findAll();
     }
 

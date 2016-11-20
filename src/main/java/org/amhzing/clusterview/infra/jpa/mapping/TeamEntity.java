@@ -3,8 +3,8 @@ package org.amhzing.clusterview.infra.jpa.mapping;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-public class Team {
+@Entity(name = "team")
+public class TeamEntity {
 
     @Id
     @GeneratedValue
@@ -19,17 +19,17 @@ public class Team {
     @ManyToOne(fetch = FetchType.LAZY)
     private ClusterEntity cluster;
 
-    public Team() {
+    public TeamEntity() {
     }
 
-    private Team(final Location location, final Set<MemberEntity> members, final ClusterEntity cluster) {
+    private TeamEntity(final Location location, final Set<MemberEntity> members, final ClusterEntity cluster) {
         this.location = location;
         this.members = members;
         this.cluster = cluster;
     }
 
-    public static Team create(final Location location, final Set<MemberEntity> members, final ClusterEntity cluster) {
-        return new Team(location, members, cluster);
+    public static TeamEntity create(final Location location, final Set<MemberEntity> members, final ClusterEntity cluster) {
+        return new TeamEntity(location, members, cluster);
     }
 
     public long getId() {
@@ -66,7 +66,7 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team{" +
+        return "TeamEntity{" +
                 "id=" + id +
                 ", location=" + location +
                 ", members=" + members +

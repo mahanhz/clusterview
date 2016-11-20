@@ -3,7 +3,7 @@ package org.amhzing.clusterview.infra.repository;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.repository.ClusterRepository;
 import org.amhzing.clusterview.infra.jpa.mapping.ClusterEntity;
-import org.amhzing.clusterview.infra.jpa.mapping.Team;
+import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class DefaultClusterRepository implements ClusterRepository {
     }
 
     @Override
-    public List<Team> teams(final Cluster.Id clusterId) {
+    public List<TeamEntity> teams(final Cluster.Id clusterId) {
         final ClusterEntity cluster = clusterJpaRepository.findOne(clusterId.getId());
         return null;
     }
