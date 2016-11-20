@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.repository;
 
 import org.amhzing.clusterview.annotation.TestOffline;
-import org.amhzing.clusterview.infra.jpa.mapping.Commitment;
+import org.amhzing.clusterview.infra.jpa.mapping.CommitmentEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class CommitmentJpaRepositoryTest {
 
     @Test
     public void should_get_commitment() throws Exception {
-        final Commitment commitment = commitmentJpaRepository.findOne(15L);
+        final CommitmentEntity commitment = commitmentJpaRepository.findOne(15L);
 
         assertThat(commitment).isNotNull();
         assertThat(commitment.getActivity().getId()).isEqualToIgnoringCase("JYG");

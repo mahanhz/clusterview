@@ -3,7 +3,7 @@ package org.amhzing.clusterview.infra.jpa.mapping;
 import javax.persistence.*;
 
 @Entity
-public class Commitment {
+public class CommitmentEntity {
 
     @Id
     @GeneratedValue
@@ -15,16 +15,16 @@ public class Commitment {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    public Commitment() {
+    public CommitmentEntity() {
     }
 
-    private Commitment(final ActivityEntity activity, final Member member) {
+    private CommitmentEntity(final ActivityEntity activity, final Member member) {
         this.activity = activity;
         this.member = member;
     }
 
-    public static Commitment create(final ActivityEntity activity, final Member member) {
-        return new Commitment(activity, member);
+    public static CommitmentEntity create(final ActivityEntity activity, final Member member) {
+        return new CommitmentEntity(activity, member);
     }
 
     public long getId() {
@@ -53,7 +53,7 @@ public class Commitment {
 
     @Override
     public String toString() {
-        return "Commitment{" +
+        return "CommitmentEntity{" +
                 "activity=" + activity +
                 ", id=" + id +
                 '}';

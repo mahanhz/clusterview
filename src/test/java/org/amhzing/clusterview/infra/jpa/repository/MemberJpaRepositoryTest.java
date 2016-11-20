@@ -3,7 +3,7 @@ package org.amhzing.clusterview.infra.jpa.repository;
 import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.infra.jpa.mapping.ActivityEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.CapabilityEntity;
-import org.amhzing.clusterview.infra.jpa.mapping.Commitment;
+import org.amhzing.clusterview.infra.jpa.mapping.CommitmentEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.Member;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -88,7 +88,7 @@ public class MemberJpaRepositoryTest {
         return memberJpaRepository.findAll();
     }
 
-    private List<Commitment> allCommitments() {
+    private List<CommitmentEntity> allCommitments() {
         return commitmentJpaRepository.findAll();
     }
 

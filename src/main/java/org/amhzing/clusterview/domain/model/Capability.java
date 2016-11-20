@@ -38,7 +38,7 @@ public class Capability {
 
     @Override
     public String toString() {
-        return "CapabilityEntity{" +
+        return "Capability{" +
                 "activities=" + activities +
                 '}';
     }

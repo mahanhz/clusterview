@@ -17,7 +17,7 @@ public class Member {
     private Set<CapabilityEntity> capabilities;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private Set<Commitment> commitments;
+    private Set<CommitmentEntity> commitments;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Team team;
@@ -46,11 +46,11 @@ public class Member {
         this.capabilities = capabilities;
     }
 
-    public Set<Commitment> getCommitments() {
+    public Set<CommitmentEntity> getCommitments() {
         return commitments;
     }
 
-    public void setCommitments(final Set<Commitment> commitments) {
+    public void setCommitments(final Set<CommitmentEntity> commitments) {
         this.commitments = commitments;
     }
 

@@ -35,8 +35,8 @@ public final class JpaRepositoryHelper {
         return CapabilityEntity.create(newActivity(), member);
     }
 
-    public static ImmutableSet<Commitment> commitments(final Member member) {
-        return ImmutableSet.of(Commitment.create(anotherNewActivity(), member));
+    public static ImmutableSet<CommitmentEntity> commitments(final Member member) {
+        return ImmutableSet.of(CommitmentEntity.create(anotherNewActivity(), member));
     }
 
     public static ActivityEntity newActivity() {
