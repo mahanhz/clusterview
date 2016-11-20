@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.repository;
 
 import org.amhzing.clusterview.annotation.TestOffline;
-import org.amhzing.clusterview.infra.jpa.mapping.Region;
+import org.amhzing.clusterview.infra.jpa.mapping.RegionEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class RegionJpaRepositoryTest {
 
     @Test
     public void should_get_cluster() throws Exception {
-        final Region region = regionJpaRepository.findOne("central");
+        final RegionEntity region = regionJpaRepository.findOne("central");
 
         assertThat(region).isNotNull();
         assertThat(region.getId()).isEqualToIgnoringCase("central");

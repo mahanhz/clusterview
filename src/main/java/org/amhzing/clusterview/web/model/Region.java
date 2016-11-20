@@ -28,7 +28,7 @@ public class Region {
 
     @Override
     public String toString() {
-        return "Region{" +
+        return "RegionEntity{" +
                 "country='" + country + '\'' +
                 ", region='" + region + '\'' +
                 '}';

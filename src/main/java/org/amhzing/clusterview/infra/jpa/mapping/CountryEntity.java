@@ -13,7 +13,7 @@ public class CountryEntity {
     private String id;
 
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
-    private Set<Region> regions;
+    private Set<RegionEntity> regions;
 
     public String getId() {
         return id;
@@ -23,11 +23,11 @@ public class CountryEntity {
         this.id = id;
     }
 
-    public Set<Region> getRegions() {
+    public Set<RegionEntity> getRegions() {
         return regions;
     }
 
-    public void setRegions(final Set<Region> regions) {
+    public void setRegions(final Set<RegionEntity> regions) {
         this.regions = regions;
     }
 

@@ -15,7 +15,7 @@ public class ClusterEntity {
     private Set<Team> teams;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Region region;
+    private RegionEntity region;
 
     public String getId() {
         return id;
@@ -41,11 +41,11 @@ public class ClusterEntity {
         this.teams = teams;
     }
 
-    public Region getRegion() {
+    public RegionEntity getRegion() {
         return region;
     }
 
-    public void setRegion(final Region region) {
+    public void setRegion(final RegionEntity region) {
         this.region = region;
     }
 

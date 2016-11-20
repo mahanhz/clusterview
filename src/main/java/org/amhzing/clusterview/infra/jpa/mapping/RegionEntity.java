@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Region {
+public class RegionEntity {
 
     @Id
     private String id;
@@ -51,7 +51,7 @@ public class Region {
 
     @Override
     public String toString() {
-        return "Region{" +
+        return "RegionEntity{" +
                 "id='" + id + '\'' +
                 ", areaCoords='" + areaCoords + '\'' +
                 ", clusters=" + clusters +
