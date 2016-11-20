@@ -20,26 +20,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @TestOffline
-public class MemberRepositoryTest {
+public class MemberJpaRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
 
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberJpaRepository memberJpaRepository;
 
     @Autowired
-    private CapabilityRepository capabilityRepository;
+    private CapabilityJpaRepository capabilityJpaRepository;
 
     @Autowired
-    private CommitmentRepository commitmentRepository;
+    private CommitmentJpaRepository commitmentJpaRepository;
 
     @Autowired
-    private ActivityRepository activityRepository;
+    private ActivityJpaRepository activityJpaRepository;
 
     @Test
     public void should_get_member() throws Exception {
-        final Member member = this.memberRepository.findOne(111L);
+        final Member member = this.memberJpaRepository.findOne(111L);
 
         assertThat(member).isNotNull();
         assertThat(member.getName().getFirstName()).isEqualTo(nameFor111().getFirstName());
@@ -75,7 +75,7 @@ public class MemberRepositoryTest {
         assertThat(allCommitments()).hasSize(INITIAL_COMMITMENTS_SIZE);
         assertThat(allMembers()).hasSize(INITIAL_MEMBERS_SIZE);
 
-        final Member member = this.memberRepository.findOne(111L);
+        final Member member = this.memberJpaRepository.findOne(111L);
         entityManager.remove(member);
 
         final List<Member> membersAfterDelete = allMembers();
@@ -87,18 +87,18 @@ public class MemberRepositoryTest {
     }
 
     private List<Member> allMembers() {
-        return memberRepository.findAll();
+        return memberJpaRepository.findAll();
     }
 
     private List<Commitment> allCommitments() {
-        return commitmentRepository.findAll();
+        return commitmentJpaRepository.findAll();
     }
 
     private List<Capability> allCapabilities() {
-        return capabilityRepository.findAll();
+        return capabilityJpaRepository.findAll();
     }
 
     private List<Activity> allActivities() {
-        return activityRepository.findAll();
+        return activityJpaRepository.findAll();
     }
 }

@@ -14,10 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @TestOffline
-public class CommitmentRepositoryTest {
+public class CommitmentJpaRepositoryTest {
 
     @Autowired
-    private CommitmentRepository commitmentRepository;
+    private CommitmentJpaRepository commitmentJpaRepository;
 
     @Autowired
     private TestEntityManager entityManager;
@@ -25,7 +25,7 @@ public class CommitmentRepositoryTest {
 
     @Test
     public void should_get_commitment() throws Exception {
-        final Commitment commitment = commitmentRepository.findOne(15L);
+        final Commitment commitment = commitmentJpaRepository.findOne(15L);
 
         assertThat(commitment).isNotNull();
         assertThat(commitment.getActivity().getId()).isEqualToIgnoringCase("JYG");

@@ -14,10 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @TestOffline
-public class CapabilityRepositoryTest {
+public class CapabilityJpaRepositoryTest {
 
     @Autowired
-    private CapabilityRepository capabilityRepository;
+    private CapabilityJpaRepository capabilityJpaRepository;
 
     @Autowired
     private TestEntityManager entityManager;
@@ -25,7 +25,7 @@ public class CapabilityRepositoryTest {
 
     @Test
     public void should_get_capability() throws Exception {
-        final Capability sc = capabilityRepository.findOne(1L);
+        final Capability sc = capabilityJpaRepository.findOne(1L);
 
         assertThat(sc).isNotNull();
         assertThat(sc.getActivity().getId()).isEqualToIgnoringCase("sc");

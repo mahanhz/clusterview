@@ -17,17 +17,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @TestOffline
-public class ActivityRepositoryTest {
+public class ActivityJpaRepositoryTest {
 
     @Autowired
-    private ActivityRepository activityRepository;
+    private ActivityJpaRepository activityJpaRepository;
 
     @Autowired
     private TestEntityManager entityManager;
 
     @Test
     public void should_get_activity() throws Exception {
-        final Activity sc = activityRepository.findOne("sc");
+        final Activity sc = activityJpaRepository.findOne("sc");
 
         assertThat(sc).isNotNull();
         assertThat(sc.getName()).isEqualTo("Study Circle");
@@ -54,6 +54,6 @@ public class ActivityRepositoryTest {
     }
 
     private List<Activity> allActivities() {
-        return activityRepository.findAll();
+        return activityJpaRepository.findAll();
     }
 }
