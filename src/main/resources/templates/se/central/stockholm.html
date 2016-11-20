@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head th:replace="se/fragments/head :: head"></head>
+    <body>
+        <input type="text" id="country" name="country" th:value="${cluster.country}" />
+        <input type="text" id="region" name="region" th:value="${cluster.region}" />
+        <input type="text" id="cluster" name="cluster" th:value="${cluster.cluster}" />
+    </body>
+</html>

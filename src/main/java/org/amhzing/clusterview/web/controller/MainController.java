@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MainController {
+public class MainController extends AbstractController {
 
     @GetMapping(path = "/{country}")
     public ModelAndView index(@PathVariable final String country) {

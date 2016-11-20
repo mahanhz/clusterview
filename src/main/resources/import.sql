@@ -11,6 +11,7 @@ INSERT INTO REGION VALUES('southern', '128, 136, 25, 88', 'se');
 
 INSERT INTO CLUSTER VALUES('stockholm', '128, 136, 25, 88', 'central');
 INSERT INTO CLUSTER VALUES('uppsala', '128, 136, 25, 88', 'central');
+INSERT INTO CLUSTER VALUES('gotland', '128, 136, 25, 88', 'southern');
 
 INSERT INTO TEAM VALUES(901, 127, 138, 'stockholm');
 INSERT INTO TEAM VALUES(902, 58, 69, 'uppsala');

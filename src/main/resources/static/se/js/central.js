@@ -6,16 +6,32 @@ $(function() {
     clickNavigate: true,
     showToolTip: true,
     mapKey: 'data-group',
-    areas: [{
+    areas: [
+        {
+            key: 'stockholm-cluster',
+            toolTip: 'Stockholm',
+            stroke: false
+        },
+        {
+            key: 'uppsala-cluster',
+            toolTip: 'Uppsala',
+            stroke: false
+        },
+        {
+            key: 'malardalen-cluster',
+            toolTip: 'Malardalen',
+            stroke: false
+        },
+        {
             key: 'northern-region',
             toolTip: 'Northern region',
             stroke: false,
             staticState: true,
             fillColor: 'ffffff',
-            fillOpacity: 1,
+            fillOpacity: 0.8,
             render_highlight: {
                   fillOpacity: 0
-             }
+            }
 		},
         {
             key: 'central-region',
@@ -28,10 +44,10 @@ $(function() {
             stroke: false,
             staticState: true,
             fillColor: 'ffffff',
-            fillOpacity: 1,
+            fillOpacity: 0.8,
             render_highlight: {
                   fillOpacity: 0
-             }
+            }
         },
         {
             key: 'southern-region2',
@@ -39,7 +55,7 @@ $(function() {
             stroke: false,
             staticState: true,
             fillColor: 'ffffff',
-            fillOpacity: 1,
+            fillOpacity: 0.8,
             render_highlight: {
                    fillOpacity: 0
             }
@@ -50,7 +66,7 @@ $(function() {
             stroke: false,
             staticState: true,
             fillColor: 'ffffff',
-            fillOpacity: 1,
+            fillOpacity: 0.8,
             render_highlight: {
                    fillOpacity: 0
             }
