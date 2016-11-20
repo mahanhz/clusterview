@@ -3,8 +3,8 @@ package org.amhzing.clusterview.infra.jpa.mapping;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-public class Member {
+@Entity(name = "member")
+public class MemberEntity {
 
     @Id
     @GeneratedValue
@@ -64,7 +64,7 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" +
+        return "MemberEntity{" +
                 "id=" + id +
                 ", name=" + name +
                 ", capabilities=" + capabilities +

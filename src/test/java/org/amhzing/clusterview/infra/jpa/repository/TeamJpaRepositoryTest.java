@@ -68,7 +68,7 @@ public class TeamJpaRepositoryTest {
         return teamJpaRepository.findAll();
     }
 
-    private List<Member> allMembers() {
+    private List<MemberEntity> allMembers() {
         return memberJpaRepository.findAll();
     }
 

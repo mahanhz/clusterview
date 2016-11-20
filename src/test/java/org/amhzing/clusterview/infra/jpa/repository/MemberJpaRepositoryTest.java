@@ -4,7 +4,7 @@ import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.infra.jpa.mapping.ActivityEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.CapabilityEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.CommitmentEntity;
-import org.amhzing.clusterview.infra.jpa.mapping.Member;
+import org.amhzing.clusterview.infra.jpa.mapping.MemberEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class MemberJpaRepositoryTest {
 
     @Test
     public void should_get_member() throws Exception {
-        final Member member = this.memberJpaRepository.findOne(111L);
+        final MemberEntity member = this.memberJpaRepository.findOne(111L);
 
         assertThat(member).isNotNull();
         assertThat(member.getName().getFirstName()).isEqualTo(nameFor111().getFirstName());
@@ -56,11 +56,11 @@ public class MemberJpaRepositoryTest {
         assertThat(allCommitments()).hasSize(INITIAL_COMMITMENTS_SIZE);
         assertThat(allMembers()).hasSize(INITIAL_MEMBERS_SIZE);
 
-        final Member persistedMember = entityManager.persist(member());
+        final MemberEntity persistedMember = entityManager.persist(member());
 
-        final List<Member> membersAfterInsert = allMembers();
+        final List<MemberEntity> membersAfterInsert = allMembers();
         assertThat(allMembers()).hasSize(INITIAL_MEMBERS_SIZE + 1);
-        final Member lastMember = membersAfterInsert.get(membersAfterInsert.size() - 1);
+        final MemberEntity lastMember = membersAfterInsert.get(membersAfterInsert.size() - 1);
         assertThat(lastMember).isEqualTo(persistedMember);
 
         assertThat(allCommitments()).hasSize(INITIAL_COMMITMENTS_SIZE + 1);
@@ -75,7 +75,7 @@ public class MemberJpaRepositoryTest {
         assertThat(allCommitments()).hasSize(INITIAL_COMMITMENTS_SIZE);
         assertThat(allMembers()).hasSize(INITIAL_MEMBERS_SIZE);
 
-        final Member member = this.memberJpaRepository.findOne(111L);
+        final MemberEntity member = this.memberJpaRepository.findOne(111L);
         entityManager.remove(member);
 
         assertThat(allMembers()).hasSize(INITIAL_MEMBERS_SIZE -1);
@@ -84,7 +84,7 @@ public class MemberJpaRepositoryTest {
         assertThat(allActivities()).hasSize(INITIAL_ACTIVITIES_SIZE);
     }
 
-    private List<Member> allMembers() {
+    private List<MemberEntity> allMembers() {
         return memberJpaRepository.findAll();
     }
 

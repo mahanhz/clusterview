@@ -13,17 +13,17 @@ public class CommitmentEntity {
     private ActivityEntity activity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private MemberEntity member;
 
     public CommitmentEntity() {
     }
 
-    private CommitmentEntity(final ActivityEntity activity, final Member member) {
+    private CommitmentEntity(final ActivityEntity activity, final MemberEntity member) {
         this.activity = activity;
         this.member = member;
     }
 
-    public static CommitmentEntity create(final ActivityEntity activity, final Member member) {
+    public static CommitmentEntity create(final ActivityEntity activity, final MemberEntity member) {
         return new CommitmentEntity(activity, member);
     }
 
@@ -43,11 +43,11 @@ public class CommitmentEntity {
         this.activity = activity;
     }
 
-    public Member getMember() {
+    public MemberEntity getMember() {
         return member;
     }
 
-    public void setMember(final Member member) {
+    public void setMember(final MemberEntity member) {
         this.member = member;
     }
 

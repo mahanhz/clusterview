@@ -14,7 +14,7 @@ public class Team {
     private Location location;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-    private Set<Member> members;
+    private Set<MemberEntity> members;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ClusterEntity cluster;
@@ -22,13 +22,13 @@ public class Team {
     public Team() {
     }
 
-    private Team(final Location location, final Set<Member> members, final ClusterEntity cluster) {
+    private Team(final Location location, final Set<MemberEntity> members, final ClusterEntity cluster) {
         this.location = location;
         this.members = members;
         this.cluster = cluster;
     }
 
-    public static Team create(final Location location, final Set<Member> members, final ClusterEntity cluster) {
+    public static Team create(final Location location, final Set<MemberEntity> members, final ClusterEntity cluster) {
         return new Team(location, members, cluster);
     }
 
@@ -48,11 +48,11 @@ public class Team {
         this.location = location;
     }
 
-    public Set<Member> getMembers() {
+    public Set<MemberEntity> getMembers() {
         return members;
     }
 
-    public void setMembers(final Set<Member> members) {
+    public void setMembers(final Set<MemberEntity> members) {
         this.members = members;
     }
 

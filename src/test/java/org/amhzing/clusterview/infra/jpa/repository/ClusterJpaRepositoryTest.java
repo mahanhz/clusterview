@@ -80,7 +80,7 @@ public class ClusterJpaRepositoryTest {
         return teamJpaRepository.findAll();
     }
 
-    private List<Member> allMembers() {
+    private List<MemberEntity> allMembers() {
         return memberJpaRepository.findAll();
     }
 

@@ -18,8 +18,8 @@ public final class JpaRepositoryHelper {
     }
 
 
-    public static Member member() {
-        final Member member = new Member();
+    public static MemberEntity member() {
+        final MemberEntity member = new MemberEntity();
         member.setName(name());
         member.setCapabilities(capabilities(member));
         member.setCommitments(commitments(member));
@@ -27,15 +27,15 @@ public final class JpaRepositoryHelper {
         return member;
     }
 
-    public static ImmutableSet<CapabilityEntity> capabilities(final Member member) {
+    public static ImmutableSet<CapabilityEntity> capabilities(final MemberEntity member) {
         return ImmutableSet.of(capability(member));
     }
 
-    public static CapabilityEntity capability(final Member member) {
+    public static CapabilityEntity capability(final MemberEntity member) {
         return CapabilityEntity.create(newActivity(), member);
     }
 
-    public static ImmutableSet<CommitmentEntity> commitments(final Member member) {
+    public static ImmutableSet<CommitmentEntity> commitments(final MemberEntity member) {
         return ImmutableSet.of(CommitmentEntity.create(anotherNewActivity(), member));
     }
 
