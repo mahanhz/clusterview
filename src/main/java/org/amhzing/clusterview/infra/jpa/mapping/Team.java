@@ -19,6 +19,19 @@ public class Team {
     @ManyToOne(fetch = FetchType.LAZY)
     private Cluster cluster;
 
+    public Team() {
+    }
+
+    private Team(final Location location, final Set<Member> members, final Cluster cluster) {
+        this.location = location;
+        this.members = members;
+        this.cluster = cluster;
+    }
+
+    public static Team create(final Location location, final Set<Member> members, final Cluster cluster) {
+        return new Team(location, members, cluster);
+    }
+
     public long getId() {
         return id;
     }

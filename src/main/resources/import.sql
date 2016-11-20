@@ -6,6 +6,7 @@ INSERT INTO ACTIVITY VALUES('hv', 'Home Visit');
 
 INSERT INTO COUNTRY VALUES('se');
 
+INSERT INTO REGION VALUES('northern', '128, 136, 25, 88', 'se');
 INSERT INTO REGION VALUES('central', '128, 136, 25, 88', 'se');
 INSERT INTO REGION VALUES('southern', '128, 136, 25, 88', 'se');
 

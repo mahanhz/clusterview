@@ -6,6 +6,7 @@ import org.amhzing.clusterview.infra.jpa.mapping.*;
 public final class JpaRepositoryHelper {
 
     public static final int INITIAL_ACTIVITIES_SIZE = 5;
+    public static final int INITIAL_CLUSTERS_SIZE = 3;
     public static final int INITIAL_TEAM_SIZE = 2;
     public static final int INITIAL_MEMBERS_SIZE = 3;
     public static final int INITIAL_CAPABILITIES_SIZE = 6;
@@ -15,6 +16,7 @@ public final class JpaRepositoryHelper {
     private JpaRepositoryHelper() {
         // To prevent instantiation
     }
+
 
     public static Member member() {
         final Member member = new Member();
