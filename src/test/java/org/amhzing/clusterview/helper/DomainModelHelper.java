@@ -4,8 +4,6 @@ import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.domain.model.*;
 
 import static com.google.common.collect.ImmutableSet.of;
-import static org.amhzing.clusterview.domain.model.Activity.HOME_VISIT;
-import static org.amhzing.clusterview.domain.model.Activity.STUDY_CIRCLE;
 
 public final class DomainModelHelper {
 
@@ -16,27 +14,35 @@ public final class DomainModelHelper {
     private static final Region.Id REGION_1 = Region.Id.create("Region1");
     private static final Region.Id REGION_2 = Region.Id.create("Region2");
 
+    private static final Member.Id MEMBER_1 = Member.Id.create("member1");
+    private static final Member.Id MEMBER_2 = Member.Id.create("member2");
+
     private DomainModelHelper() {
         // To prevent instantiation
     }
 
-    private static final Member.Id MEMBER_1 = Member.Id.create("member1");
-    private static final Member.Id MEMBER_2 = Member.Id.create("member2");
+    public static Region region() {
+        return Region.create(regionId(), ImmutableSet.of(cluster()));
+    }
+
+    public static Region anotherRegion() {
+        return Region.create(anotherRegionId(), ImmutableSet.of(anotherCluster()));
+    }
 
     public static Cluster cluster() {
-        return Cluster.create(clusterId(), ImmutableSet.of(groupId()));
+        return Cluster.create(clusterId(), ImmutableSet.of(group()));
     }
 
     public static Cluster anotherCluster() {
-        return Cluster.create(anotherClusterId(), ImmutableSet.of(anotherGroupId()));
+        return Cluster.create(anotherClusterId(), ImmutableSet.of(anotherGroup()));
     }
 
     public static Group group() {
-        return Group.create(groupId(), ImmutableSet.of(memberId()), location());
+        return Group.create(groupId(), ImmutableSet.of(member()), location());
     }
 
     public static Group anotherGroup() {
-        return Group.create(anotherGroupId(), ImmutableSet.of(anotherMemberId()), anotherLocation());
+        return Group.create(anotherGroupId(), ImmutableSet.of(anotherMember()), anotherLocation());
     }
 
     public static Location location() {
@@ -50,15 +56,23 @@ public final class DomainModelHelper {
     public static Member member() {
         return Member.create(memberId(),
                              name(),
-                             Capability.create(of(STUDY_CIRCLE)),
-                             Commitment.create(of(HOME_VISIT)));
+                             Capability.create(of(activity())),
+                             Commitment.create(of(anotherActivity())));
     }
 
     public static Member anotherMember() {
         return Member.create(anotherMemberId(),
                              anotherName(),
-                             Capability.create(of(STUDY_CIRCLE)),
-                             Commitment.create(of(HOME_VISIT)));
+                             Capability.create(of(activity())),
+                             Commitment.create(of(anotherActivity())));
+    }
+
+    public static Activity activity() {
+        return Activity.create(Activity.Id.create("sc"), "Study Circle");
+    }
+
+    public static Activity anotherActivity() {
+        return Activity.create(Activity.Id.create("hv"), "Home Visit");
     }
 
     public static Name name() {

@@ -8,14 +8,14 @@ import static org.apache.commons.lang3.Validate.*;
 public class Region {
 
     private Id id;
-    private Set<Cluster.Id> clusters;
+    private Set<Cluster> clusters;
 
-    private Region(final Id id, final Set<Cluster.Id> clusters) {
+    private Region(final Id id, final Set<Cluster> clusters) {
         this.id = notNull(id);
         this.clusters = noNullElements(clusters);
     }
 
-    public static Region create(final Id id, final Set<Cluster.Id> clusters) {
+    public static Region create(final Id id, final Set<Cluster> clusters) {
         return new Region(id, clusters);
     }
 
@@ -23,7 +23,7 @@ public class Region {
         return id;
     }
 
-    public Set<Cluster.Id> getClusters() {
+    public Set<Cluster> getClusters() {
         return clusters;
     }
 

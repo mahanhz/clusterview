@@ -13,9 +13,9 @@ public class Country {
 
     private Id id;
     private String name;
-    private Set<Region.Id> regions;
+    private Set<Region> regions;
 
-    private Country(final Id id, final String name, final Set<Region.Id> regions) {
+    private Country(final Id id, final String name, final Set<Region> regions) {
         isValidName(name);
 
         this.id = notNull(id);
@@ -23,7 +23,7 @@ public class Country {
         this.regions = noNullElements(regions);
     }
 
-    public static Country create(final Id id, final String name, final Set<Region.Id> regions) {
+    public static Country create(final Id id, final String name, final Set<Region> regions) {
         return new Country(id, name, regions);
     }
 
@@ -35,7 +35,7 @@ public class Country {
         return name;
     }
 
-    public Set<Region.Id> getRegions() {
+    public Set<Region> getRegions() {
         return regions;
     }
 

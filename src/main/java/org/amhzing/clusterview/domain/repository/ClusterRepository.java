@@ -1,11 +1,11 @@
 package org.amhzing.clusterview.domain.repository;
 
 import org.amhzing.clusterview.domain.model.Cluster;
-import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
+import org.amhzing.clusterview.domain.model.Group;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ClusterRepository {
 
-    List<TeamEntity> teams(final Cluster.Id clusterId);
+    Set<Group> groups(final Cluster.Id clusterId);
 }

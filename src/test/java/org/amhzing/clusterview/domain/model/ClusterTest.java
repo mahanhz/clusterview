@@ -18,7 +18,7 @@ public class ClusterTest {
     @Parameters(method = "values")
     public void test_creation(final Class<? extends Exception> exception,
                               final String id,
-                              final Group.Id... groups) {
+                              final Group... groups) {
         try {
             Cluster.create(Cluster.Id.create(id), ImmutableSet.copyOf(groups));
         } catch (Exception ex) {
@@ -26,25 +26,11 @@ public class ClusterTest {
         }
     }
 
-    @Test
-    public void test_equals_hashcode() {
-        final Cluster.Id cluster1 = Cluster.Id.create("Cluster1");
-        final Cluster.Id cluster2 = Cluster.Id.create("Cluster1");
-
-        final Cluster value = Cluster.create(cluster1, ImmutableSet.of(groupId(), anotherGroupId()));
-        final Cluster value2 = Cluster.create(cluster1, ImmutableSet.of(anotherGroupId(), groupId()));
-        final Cluster value3 = Cluster.create(cluster2, ImmutableSet.of(anotherGroupId()));
-
-        assertThat(value).isEqualTo(value2);
-        assertThat(value).isNotEqualTo(value3);
-        assertThat(value.hashCode()).isEqualTo(value2.hashCode());
-    }
-
     @SuppressWarnings("unused")
     private Object values() {
         return new Object[][]{
-                { valid(), "Cluster1", groupId() },
-                { invalidMatching(IllegalArgumentException.class), "", groupId() },
+                { valid(), "Cluster1", group() },
+                { invalidMatching(IllegalArgumentException.class), "", group() },
                 { invalidMatching(NullPointerException.class), null, null }
         };
     }

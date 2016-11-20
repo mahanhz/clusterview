@@ -10,14 +10,14 @@ import static org.apache.commons.lang3.Validate.notNull;
 public class Cluster {
 
     private Id id;
-    private Set<Group.Id> groups;
+    private Set<Group> groups;
 
-    private Cluster(final Id id, final Set<Group.Id> groups) {
+    private Cluster(final Id id, final Set<Group> groups) {
         this.id = notNull(id);
         this.groups = noNullElements(groups);
     }
 
-    public static Cluster create(final Id id, final Set<Group.Id> groups) {
+    public static Cluster create(final Id id, final Set<Group> groups) {
         return new Cluster(id, groups);
     }
 
@@ -25,7 +25,7 @@ public class Cluster {
         return id;
     }
 
-    public Set<Group.Id> getGroups() {
+    public Set<Group> getGroups() {
         return groups;
     }
 

@@ -10,16 +10,16 @@ import static org.apache.commons.lang3.Validate.notNull;
 public class Group {
 
     private Id id;
-    private Set<Member.Id> members;
+    private Set<Member> members;
     private Location location;
 
-    private Group(final Id id, final Set<Member.Id> members, final Location location) {
+    private Group(final Id id, final Set<Member> members, final Location location) {
         this.id = notNull(id);
         this.members = noNullElements(members);
         this.location = notNull(location);
     }
 
-    public static Group create(final Id id, final Set<Member.Id> members, final Location location) {
+    public static Group create(final Id id, final Set<Member> members, final Location location) {
         return new Group(id, members, location);
     }
 
@@ -27,7 +27,7 @@ public class Group {
         return id;
     }
 
-    public Set<Member.Id> getMembers() {
+    public Set<Member> getMembers() {
         return members;
     }
 

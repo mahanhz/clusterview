@@ -7,5 +7,42 @@
         <input type="text" id="country" name="country" th:value="${cluster.country}" />
         <input type="text" id="region" name="region" th:value="${cluster.region}" />
         <input type="text" id="cluster" name="cluster" th:value="${cluster.cluster}" />
+
+        <table>
+            <thead>
+            <tr>
+                <th>X coord</th>
+                <th>Y coord</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="group : ${groups}">
+                <td th:text="${group.location.coordX}">x coord</td>
+                <td th:text="${group.location.coordY}">y coord</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <th:block th:each="group : ${groups}">
+            <thead>
+            <tr>
+                <th>first name</th>
+                <th>Middle name</th>
+                <th>Last name</th>
+                <th>Suffix</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="member : ${group.members}">
+                        <td th:text="${member.name.firstName}">x coord</td>
+                        <td th:text="${member.name.middleName}">y coord</td>
+                        <td th:text="${member.name.lastName}">y coord</td>
+                        <td th:text="${member.name.suffix}">y coord</td>
+                </tr>
+            </tbody>
+            </th:block>
+        </table>
+
     </body>
 </html>

@@ -1,28 +1,75 @@
 package org.amhzing.clusterview.domain.model;
 
+import java.util.Objects;
+
 import static org.apache.commons.lang3.Validate.notBlank;
+import static org.apache.commons.lang3.Validate.notNull;
 
-public enum Activity {
+public class Activity {
 
-    STUDY_CIRCLE("SC", "Study Circle"),
-    DEVOTIONAL_MEETING("DM", "Devotional Meeting"),
-    JUNIOR_YOUTH_GROUP("JYG", "Junior Youth Group"),
-    CHILDRENS_CLASS("CC", "Childrens class"),
-    HOME_VISIT("HV", "Home Visit");
+    private Id id;
+    private String name;
 
-    private final String code;
-    private final String name;
-
-    Activity(final String code, final String name) {
-        this.code = notBlank(code);
+    private Activity(final Id id, final String name) {
+        this.id = notNull(id);
         this.name = notBlank(name);
     }
 
-    public String getCode() {
-        return code;
+    public static Activity create(final Id id, final String name) {
+        return new Activity(id, name);
+    }
+
+    public Id getId() {
+        return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Activity activity = (Activity) o;
+        return Objects.equals(id, activity.id) &&
+                Objects.equals(name, activity.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public static class Id {
+
+        private String id;
+
+        private Id(final String id) {
+            this.id = notBlank(id);
+        }
+
+        public static Id create(final String id) {
+            return new Id(id);
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        @Override
+        public String toString() {
+            return "Id{" +
+                    "id='" + id + '\'' +
+                    '}';
+        }
     }
 }
