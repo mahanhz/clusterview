@@ -12,7 +12,7 @@ import static org.amhzing.clusterview.helper.JUnitParamHelper.valid;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
-public class CountryEntityTest {
+public class CountryTest {
 
     @Test
     @Parameters(method = "values")
