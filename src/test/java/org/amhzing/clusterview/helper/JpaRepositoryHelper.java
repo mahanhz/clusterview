@@ -27,12 +27,12 @@ public final class JpaRepositoryHelper {
         return member;
     }
 
-    public static ImmutableSet<Capability> capabilities(final Member member) {
+    public static ImmutableSet<CapabilityEntity> capabilities(final Member member) {
         return ImmutableSet.of(capability(member));
     }
 
-    public static Capability capability(final Member member) {
-        return Capability.create(newActivity(), member);
+    public static CapabilityEntity capability(final Member member) {
+        return CapabilityEntity.create(newActivity(), member);
     }
 
     public static ImmutableSet<Commitment> commitments(final Member member) {

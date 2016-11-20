@@ -14,7 +14,7 @@ public class Member {
     private Name name;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private Set<Capability> capabilities;
+    private Set<CapabilityEntity> capabilities;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<Commitment> commitments;
@@ -38,11 +38,11 @@ public class Member {
         this.name = name;
     }
 
-    public Set<Capability> getCapabilities() {
+    public Set<CapabilityEntity> getCapabilities() {
         return capabilities;
     }
 
-    public void setCapabilities(final Set<Capability> capabilities) {
+    public void setCapabilities(final Set<CapabilityEntity> capabilities) {
         this.capabilities = capabilities;
     }
 

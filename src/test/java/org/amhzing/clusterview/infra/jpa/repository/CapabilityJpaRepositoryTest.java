@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.repository;
 
 import org.amhzing.clusterview.annotation.TestOffline;
-import org.amhzing.clusterview.infra.jpa.mapping.Capability;
+import org.amhzing.clusterview.infra.jpa.mapping.CapabilityEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class CapabilityJpaRepositoryTest {
 
     @Test
     public void should_get_capability() throws Exception {
-        final Capability sc = capabilityJpaRepository.findOne(1L);
+        final CapabilityEntity sc = capabilityJpaRepository.findOne(1L);
 
         assertThat(sc).isNotNull();
         assertThat(sc.getActivity().getId()).isEqualToIgnoringCase("sc");

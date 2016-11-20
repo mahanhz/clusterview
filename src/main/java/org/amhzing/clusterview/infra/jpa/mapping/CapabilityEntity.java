@@ -2,8 +2,8 @@ package org.amhzing.clusterview.infra.jpa.mapping;
 
 import javax.persistence.*;
 
-@Entity
-public class Capability {
+@Entity(name = "capability")
+public class CapabilityEntity {
 
     @Id
     @GeneratedValue
@@ -15,16 +15,16 @@ public class Capability {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    public Capability() {
+    public CapabilityEntity() {
     }
 
-    private Capability(final ActivityEntity activity, final Member member) {
+    private CapabilityEntity(final ActivityEntity activity, final Member member) {
         this.activity = activity;
         this.member = member;
     }
 
-    public static Capability create(final ActivityEntity activity, final Member member) {
-        return new Capability(activity, member);
+    public static CapabilityEntity create(final ActivityEntity activity, final Member member) {
+        return new CapabilityEntity(activity, member);
     }
 
     public long getId() {
@@ -53,7 +53,7 @@ public class Capability {
 
     @Override
     public String toString() {
-        return "Capability{" +
+        return "CapabilityEntity{" +
                 "activity=" + activity +
                 ", id=" + id +
                 '}';

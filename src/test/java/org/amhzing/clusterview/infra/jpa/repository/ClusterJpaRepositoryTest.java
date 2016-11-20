@@ -88,7 +88,7 @@ public class ClusterJpaRepositoryTest {
         return commitmentJpaRepository.findAll();
     }
 
-    private List<Capability> allCapabilities() {
+    private List<CapabilityEntity> allCapabilities() {
         return capabilityJpaRepository.findAll();
     }
 
