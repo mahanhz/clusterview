@@ -3,7 +3,6 @@
       xmlns:th="http://www.thymeleaf.org">
     <head>
         <th:block th:replace="se/fragments/head :: head"></th:block>
-        <link th:href="@{/se/css/app.css}" rel="stylesheet" media="screen" />
     </head>
     <body>
         <input type="text" id="country" name="country" th:value="${cluster.country}" />
@@ -13,49 +12,17 @@
         <div class="clusterContainer">
             <img th:src="@{/se/images/cluster-stockholm.png}" />
             <th:block th:each="group : ${groups}">
-                <div class="clusterGroup" th:style="'left: ' + ${group.location.coordX - 10} + 'px; top: ' + ${group.location.coordY - 10} + 'px;'" >
-                    <a href="junk.html"><i class="fa fa-users" aria-hidden="true"></i></a>
+                <div class="clusterGroup"
+                     th:style="'left: ' + ${group.location.coordX - 10} + 'px; top: ' + ${group.location.coordY - 10} + 'px;'" >
+                    <a th:href="@{stockholm/} + ${group.id}" class="various" data-fancybox-type="iframe">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </a>
                 </div>
             </th:block>
         </div>
 
-        <table>
-            <thead>
-            <tr>
-                <th>X coord</th>
-                <th>Y coord</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="group : ${groups}">
-                <td th:text="${group.location.coordX}">x coord</td>
-                <td th:text="${group.location.coordY}">y coord</td>
-            </tr>
-            </tbody>
-        </table>
-
-        <table>
-            <th:block th:each="group : ${groups}">
-            <thead>
-            <tr>
-                <th>first name</th>
-                <th>Middle name</th>
-                <th>Last name</th>
-                <th>Suffix</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr th:each="member : ${group.members}">
-                        <td th:text="${member.name.firstName}">x coord</td>
-                        <td th:text="${member.name.middleName}">y coord</td>
-                        <td th:text="${member.name.lastName}">y coord</td>
-                        <td th:text="${member.name.suffix}">y coord</td>
-                </tr>
-            </tbody>
-            </th:block>
-        </table>
-
         <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+        <script th:src="@{/se/js/cluster.js}"></script>
 
     </body>
 </html>

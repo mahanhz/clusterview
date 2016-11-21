@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:replace="se/fragments/head :: head"></th:block>
+    </head>
+    <body>
+        <input type="text" id="country" name="country" th:value="${cluster.country}" />
+        <input type="text" id="region" name="region" th:value="${group.id}" />
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>first name</th>
+                        <th>Middle name</th>
+                        <th>Last name</th>
+                        <th>Suffix</th>
+                        <th>Capabilities</th>
+                        <th>Commitments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="member : ${group.members}">
+                        <td th:text="${member.name.firstName}">x coord</td>
+                        <td th:text="${member.name.middleName}">y coord</td>
+                        <td th:text="${member.name.lastName}">y coord</td>
+                        <td th:text="${member.name.suffix}">y coord</td>
+                        <td>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="activity : ${member.capability.activities}">
+                                    <td th:text="${activity.id}">x coord</td>
+                                    <td th:text="${activity.name}">y coord</td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="activity : ${member.commitment.activities}">
+                                    <td th:text="${activity.id}">x coord</td>
+                                    <td th:text="${activity.name}">y coord</td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+
+    </body>
+</html>

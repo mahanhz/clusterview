@@ -6,18 +6,28 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public class MemberModel {
 
+    private long id;
     private NameModel name;
     private CapabilityModel capability;
     private CommitmentModel commitment;
 
-    private MemberModel(final NameModel name, final CapabilityModel capability, final CommitmentModel commitment) {
+    private MemberModel(final long id, final NameModel name, final CapabilityModel capability, final CommitmentModel commitment) {
+        this.id = id;
         this.name = notNull(name);
         this.capability = capability;
         this.commitment = commitment;
     }
 
-    public static MemberModel create(final NameModel name, final CapabilityModel capability, final CommitmentModel commitment) {
-        return new MemberModel(name, capability, commitment);
+    public static MemberModel create(final long id, final NameModel name, final CapabilityModel capability, final CommitmentModel commitment) {
+        return new MemberModel(id, name, capability, commitment);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(final long id) {
+        this.id = id;
     }
 
     public NameModel getName() {
@@ -49,20 +59,22 @@ public class MemberModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final MemberModel that = (MemberModel) o;
-        return Objects.equals(name, that.name) &&
+        return id == that.id &&
+                Objects.equals(name, that.name) &&
                 Objects.equals(capability, that.capability) &&
                 Objects.equals(commitment, that.commitment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, capability, commitment);
+        return Objects.hash(id, name, capability, commitment);
     }
 
     @Override
     public String toString() {
         return "MemberModel{" +
-                "name=" + name +
+                "id=" + id +
+                ", name=" + name +
                 ", capability=" + capability +
                 ", commitment=" + commitment +
                 '}';

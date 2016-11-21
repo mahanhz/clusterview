@@ -34,7 +34,8 @@ public class ClusterAdapter {
     }
 
     private GroupModel createGroup(final Group group) {
-        return GroupModel.create(convertMembers(group.getMembers()),
+        return GroupModel.create(group.getId().getId(),
+                                 convertMembers(group.getMembers()),
                                  convertLocation(group.getLocation()));
     }
 
@@ -49,7 +50,8 @@ public class ClusterAdapter {
     }
 
     private MemberModel createMember(final Member member) {
-        return MemberModel.create(convertName(member.getName()),
+        return MemberModel.create(member.getId().getId(),
+                                  convertName(member.getName()),
                                   convertCapabilities(member.getCapability()),
                                   convertCommitments(member.getCommitment()));
     }

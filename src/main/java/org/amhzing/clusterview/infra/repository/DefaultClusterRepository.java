@@ -34,7 +34,7 @@ public class DefaultClusterRepository implements ClusterRepository {
     }
 
     private Group createGroup(final TeamEntity team) {
-        return Group.create(Group.Id.create(new Long(team.getId()).toString()),
+        return Group.create(Group.Id.create(team.getId()),
                             convertMembers(team.getMembers()),
                             convertLocation(team.getLocation()));
     }
@@ -50,7 +50,7 @@ public class DefaultClusterRepository implements ClusterRepository {
     }
 
     private Member createMember(final MemberEntity member) {
-        return Member.create(Member.Id.create(new Long(member.getId()).toString()),
+        return Member.create(Member.Id.create(member.getId()),
                              convertName(member.getName()),
                              convertCapabilities(member.getCapabilities()),
                              convertCommitments(member.getCommitments()));

@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
-import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public class Group {
@@ -61,14 +60,18 @@ public class Group {
 
     public static class Id {
 
-        private String id;
+        private long id;
 
-        private Id(final String id) {
-            this.id = notBlank(id);
+        private Id(final long id) {
+            this.id = id;
         }
 
-        public static Id create(final String id) {
+        public static Id create(final long id) {
             return new Id(id);
+        }
+
+        public long getId() {
+            return id;
         }
 
         @Override
