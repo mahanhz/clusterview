@@ -5,13 +5,14 @@
         <th:block th:replace="se/fragments/head :: head"></th:block>
     </head>
     <body>
-        <input type="text" id="country" name="country" th:value="${cluster.country}" />
-        <input type="text" id="region" name="region" th:value="${group.id}" />
+        <input type="hidden" id="country" name="country" th:value="${cluster.country}" />
+        <input type="hidden" id="region" name="region" th:value="${group.id}" />
 
-            <table>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-condensed">
                 <thead>
                     <tr>
-                        <th>first name</th>
+                        <th>First name</th>
                         <th>Middle name</th>
                         <th>Last name</th>
                         <th>Suffix</th>
@@ -20,41 +21,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="member : ${group.members}">
-                        <td th:text="${member.name.firstName}">x coord</td>
-                        <td th:text="${member.name.middleName}">y coord</td>
-                        <td th:text="${member.name.lastName}">y coord</td>
-                        <td th:text="${member.name.suffix}">y coord</td>
+                    <tr th:each="member : ${group.members}" class="info">
+                        <td th:text="${member.name.firstName}">John</td>
+                        <td th:text="${member.name.middleName}">M</td>
+                        <td th:text="${member.name.lastName}">Doe</td>
+                        <td th:text="${member.name.suffix}">Junior</td>
                         <td>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                </tr>
-                                </thead>
+                            <table class="table">
                                 <tbody>
-                                <tr th:each="activity : ${member.capability.activities}">
-                                    <td th:text="${activity.id}">x coord</td>
-                                    <td th:text="${activity.name}">y coord</td>
-                                    <td></td>
-                                </tr>
+                                    <tr th:each="activity : ${member.capability.activities}" class="default">
+                                        <td th:text="${activity.name}">Study Circle</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </td>
                         <td>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                </tr>
-                                </thead>
+                            <table class="table">
                                 <tbody>
-                                <tr th:each="activity : ${member.commitment.activities}">
-                                    <td th:text="${activity.id}">x coord</td>
-                                    <td th:text="${activity.name}">y coord</td>
-                                    <td></td>
+                                <tr th:each="activity : ${member.commitment.activities}" class="warning">
+                                    <td th:text="${activity.name}">Study Circle</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -62,6 +47,8 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+
 
         <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
 

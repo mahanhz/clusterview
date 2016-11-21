@@ -5,9 +5,9 @@
         <th:block th:replace="se/fragments/head :: head"></th:block>
     </head>
     <body>
-        <input type="text" id="country" name="country" th:value="${cluster.country}" />
-        <input type="text" id="region" name="region" th:value="${cluster.region}" />
-        <input type="text" id="cluster" name="cluster" th:value="${cluster.cluster}" />
+        <input type="hidden" id="country" name="country" th:value="${cluster.country}" />
+        <input type="hidden" id="region" name="region" th:value="${cluster.region}" />
+        <input type="hidden" id="cluster" name="cluster" th:value="${cluster.cluster}" />
 
         <div class="clusterContainer">
             <img th:src="@{/se/images/cluster-stockholm.png}" />
