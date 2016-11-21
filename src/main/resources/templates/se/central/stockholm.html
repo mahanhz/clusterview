@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-    <head th:replace="se/fragments/head :: head"></head>
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:replace="se/fragments/head :: head"></th:block>
+        <link th:href="@{/se/css/app.css}" rel="stylesheet" media="screen" />
+    </head>
     <body>
         <input type="text" id="country" name="country" th:value="${cluster.country}" />
         <input type="text" id="region" name="region" th:value="${cluster.region}" />
         <input type="text" id="cluster" name="cluster" th:value="${cluster.cluster}" />
+
+        <div class="clusterContainer">
+            <img th:src="@{/se/images/cluster-stockholm.png}" />
+            <th:block th:each="group : ${groups}">
+                <div class="clusterGroup" th:style="'left: ' + ${group.location.coordX - 10} + 'px; top: ' + ${group.location.coordY - 10} + 'px;'" >
+                    <a href="junk.html"><i class="fa fa-users" aria-hidden="true"></i></a>
+                </div>
+            </th:block>
+        </div>
 
         <table>
             <thead>
@@ -43,6 +54,8 @@
             </tbody>
             </th:block>
         </table>
+
+        <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
 
     </body>
 </html>

@@ -49,7 +49,7 @@ public class ClusterJpaRepositoryTest {
 
         assertThat(cluster).isNotNull();
         assertThat(cluster.getId()).isEqualToIgnoringCase("stockholm");
-        assertThat(cluster.getTeams()).hasSize(1);
+        assertThat(cluster.getTeams()).hasSize(2);
     }
 
     @Test

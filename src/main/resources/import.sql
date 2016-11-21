@@ -14,13 +14,15 @@ INSERT INTO CLUSTER VALUES('stockholm', '128, 136, 25, 88', 'central');
 INSERT INTO CLUSTER VALUES('uppsala', '128, 136, 25, 88', 'central');
 INSERT INTO CLUSTER VALUES('gotland', '128, 136, 25, 88', 'southern');
 
-INSERT INTO TEAM VALUES(901, 127, 138, 'stockholm');
-INSERT INTO TEAM VALUES(902, 58, 69, 'uppsala');
+INSERT INTO TEAM VALUES(901, 262, 413.125, 'stockholm');
+INSERT INTO TEAM VALUES(902, 189, 443.125, 'stockholm');
+INSERT INTO TEAM VALUES(903, 58, 69, 'uppsala');
 
 /* Hibernate generates columns in alphabetic order */
 INSERT INTO MEMBER VALUES(111, 'John', 'Doe', 'M', 'I', 901);
 INSERT INTO MEMBER VALUES(222, 'Jane', 'Die', 'O', 'II', 901);
 INSERT INTO MEMBER VALUES(333, 'Michael', 'Rie', 'T', 'III', 902);
+INSERT INTO MEMBER VALUES(444, 'Joss', 'Alright', '', '', 903);
 
 INSERT INTO CAPABILITY VALUES(1, 'sc', 111);
 INSERT INTO CAPABILITY VALUES(2, 'cc', 111);
