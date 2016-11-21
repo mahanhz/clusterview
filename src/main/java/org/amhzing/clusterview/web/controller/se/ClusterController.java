@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.Validate.notNull;
 @Controller
 public class ClusterController extends AbstractController {
 
-    final ClusterAdapter clusterAdapter;
+    private ClusterAdapter clusterAdapter;
 
     @Autowired
     public ClusterController(final ClusterAdapter clusterAdapter) {
