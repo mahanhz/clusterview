@@ -5,6 +5,7 @@ $(function() {
     stroke: false,
     clickNavigate: true,
     showToolTip: true,
+    //wrapClass: 'center-block',
     mapKey: 'data-group',
     areas: [{
             key: 'northern-region',
@@ -13,26 +14,39 @@ $(function() {
 		},
         {
             key: 'central-region',
+            includeKeys: 'central-region2',
             toolTip: 'Central region',
             stroke: false
         },
         {
-            key: 'southern-region1',
-            includeKeys: 'southern-region2,southern-region3',
+            key: 'central-region2',
+            includeKeys: 'central-region',
+            toolTip: 'Central region',
+            stroke: false
+        },
+        {
+            key: 'southern-region',
+            includeKeys: 'southern-region2',
             toolTip: 'Southern region',
             stroke: false
         },
         {
             key: 'southern-region2',
-            includeKeys: 'southern-region1,southern-region3',
-            toolTip: 'Southern region',
-            stroke: false
-        },
-        {
-            key: 'southern-region3',
-            includeKeys: 'southern-region1,southern-region2',
+            includeKeys: 'southern-region',
             toolTip: 'Southern region',
             stroke: false
 		}]
     });
+});
+
+$('#small').bind('click',function() {
+    $('.regionsImage').mapster('resize', 245, 0, 1000);
+});
+
+$('#large').bind('click',function() {
+    $('.regionsImage').mapster('resize', 345, 0, 1000);
+});
+
+$('#xlarge').bind('click',function() {
+    $('.regionsImage').mapster('resize', 490, 0, 1000);
 });

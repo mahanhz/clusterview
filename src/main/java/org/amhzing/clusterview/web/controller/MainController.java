@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController extends AbstractController {
 
     @GetMapping(path = "/{country}")
-    public ModelAndView index(@PathVariable final String country) {
+    public ModelAndView country(@PathVariable final String country) {
         return new ModelAndView(country + "/index");
     }
 }

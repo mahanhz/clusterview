@@ -73,3 +73,15 @@ $(function() {
 		}]
     });
 });
+
+$('#small').bind('click',function() {
+    $('.centralRegionImage').mapster('resize', 245, 0, 1000);
+});
+
+$('#large').bind('click',function() {
+    $('.centralRegionImage').mapster('resize', 345, 0, 1000);
+});
+
+$('#xlarge').bind('click',function() {
+    $('.centralRegionImage').mapster('resize', 490, 0, 1000);
+});
