@@ -39,4 +39,10 @@ public class DefaultGroupService implements GroupService {
         final TeamEntity teamEntity = groupRepository.createGroup(group, clusterId);
     }
 
+    @Override
+    public void deleteGroup(final Group.Id groupId) {
+        notNull(groupId);
+
+        groupRepository.deleteGroup(groupId);
+    }
 }

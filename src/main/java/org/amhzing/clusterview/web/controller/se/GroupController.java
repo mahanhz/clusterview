@@ -7,6 +7,7 @@ import org.amhzing.clusterview.web.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,5 +68,13 @@ public class GroupController extends AbstractController {
         groupAdapter.createGroup(groupModel1, clusterPath.getCluster());
 
         return new ModelAndView("redirect:" + clusterPath.getCountry() + "/cluster");
+    }
+
+    @DeleteMapping(path = "/{country}/{region}/{cluster}/{groupId}")
+    public ModelAndView deleteGroup(@ModelAttribute final GroupPath groupPath) {
+
+        groupAdapter.deleteGroup(groupPath.getGroupId());
+
+        return new ModelAndView("redirect:" + groupPath.getCountry() + "/cluster");
     }
 }

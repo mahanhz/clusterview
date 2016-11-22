@@ -58,4 +58,11 @@ public class DefaultGroupRepository implements GroupRepository {
 
         return teamJpaRepository.saveAndFlush(teamEntity);
     }
+
+    @Override
+    public void deleteGroup(final Group.Id groupId) {
+        notNull(groupId);
+
+        teamJpaRepository.delete(groupId.getId());
+    }
 }

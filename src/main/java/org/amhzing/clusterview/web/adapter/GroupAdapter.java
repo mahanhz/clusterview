@@ -46,4 +46,8 @@ public class GroupAdapter {
 
         groupService.createGroup(group, Cluster.Id.create(clusterId));
     }
+
+    public void deleteGroup(final long groupId) {
+        groupService.deleteGroup(Group.Id.create(groupId));
+    }
 }
