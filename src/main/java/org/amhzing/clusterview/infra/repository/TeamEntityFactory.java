@@ -69,10 +69,15 @@ public class TeamEntityFactory {
     }
 
     private Name convertName(final org.amhzing.clusterview.domain.model.Name name) {
-        return Name.create(name.getFirstName().getValue(),
-                           name.getMiddleName().getValue(),
-                           name.getLastName().getValue(),
-                           name.getSuffix().getValue());
+        final FirstName firstName = name.getFirstName();
+        final MiddleName middleName = name.getMiddleName();
+        final LastName lastName = name.getLastName();
+        final Suffix suffix = name.getSuffix();
+
+        return Name.create(firstName == null ? "" : firstName.getValue(),
+                           middleName == null ? "" : middleName.getValue(),
+                           lastName == null ? "" : lastName.getValue(),
+                           suffix == null ? "" : suffix.getValue());
     }
 
     private Set<CapabilityEntity> convertCapabilities(final Capability capability, final MemberEntity memberEntity) {

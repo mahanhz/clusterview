@@ -79,7 +79,7 @@ public final class DomainModelHelper {
     }
 
     public static Name anotherName() {
-        return Name.create(FirstName.create("Jane"), null, LastName.create("Doe"), null);
+        return Name.create(FirstName.create("Jane"), MiddleName.create("D"), LastName.create("Doe"), Suffix.create("I"));
     }
 
     public static FirstName firstName() {

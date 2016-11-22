@@ -3,6 +3,8 @@ package org.amhzing.clusterview.helper;
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.infra.jpa.mapping.*;
 
+import java.util.HashSet;
+
 public final class JpaRepositoryHelper {
 
     public static final int INITIAL_ACTIVITIES_SIZE = 5;
@@ -28,26 +30,28 @@ public final class JpaRepositoryHelper {
     public static RegionEntity region() {
         final RegionEntity region = new RegionEntity();
         region.setId("central");
-        region.setClusters(ImmutableSet.of(cluster()));
+        region.setClusters(ImmutableSet.of(clusterEntity()));
         region.setCountry(country());
 
         return region;
     }
 
-    public static ClusterEntity cluster() {
+    public static ClusterEntity clusterEntity() {
         final ClusterEntity cluster = new ClusterEntity();
         cluster.setId("stockholm");
-        cluster.setTeams(ImmutableSet.of(team()));
-        cluster.setRegion(region());
+        cluster.setTeams(ImmutableSet.of(teamEntity()));
+        //cluster.setRegion(region());
 
         return cluster;
     }
 
-    public static TeamEntity team() {
+    public static TeamEntity teamEntity() {
         final TeamEntity team = new TeamEntity();
         team.setLocation(location());
-        team.setMembers(ImmutableSet.of(member()));
-        //team.setCluster(cluster());
+        final HashSet<MemberEntity> memberEntities = new HashSet<>();
+        memberEntities.add(member());
+        team.setMembers(memberEntities);
+        //teamEntity.setCluster(clusterEntity());
 
         return team;
     }
@@ -65,7 +69,7 @@ public final class JpaRepositoryHelper {
         member.setName(name());
         member.setCapabilities(capabilities(member));
         member.setCommitments(commitments(member));
-        //member.setTeam(team());
+        //member.setTeam(teamEntity());
 
         return member;
     }

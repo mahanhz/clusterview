@@ -55,7 +55,7 @@ public class TeamEntityJpaRepositoryTest {
         assertThat(allMembers()).hasSize(INITIAL_MEMBERS_SIZE);
         assertThat(allTeams()).hasSize(INITIAL_TEAM_SIZE);
 
-        entityManager.persist(team());
+        entityManager.persist(teamEntity());
 
         assertThat(allTeams()).hasSize(INITIAL_TEAM_SIZE + 1);
         assertThat(allMembers().size()).isGreaterThan(INITIAL_MEMBERS_SIZE);
