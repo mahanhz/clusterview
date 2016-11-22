@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.mapping;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "member")
@@ -13,10 +14,10 @@ public class MemberEntity {
     @Embedded
     private Name name;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CapabilityEntity> capabilities;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CommitmentEntity> commitments;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -63,11 +64,28 @@ public class MemberEntity {
     }
 
     @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final MemberEntity that = (MemberEntity) o;
+        return id == that.id &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(capabilities, that.capabilities) &&
+                Objects.equals(commitments, that.commitments);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, capabilities, commitments);
+    }
+
+    @Override
     public String toString() {
         return "MemberEntity{" +
                 "id=" + id +
                 ", name=" + name +
                 ", capabilities=" + capabilities +
+                ", commitments=" + commitments +
                 '}';
     }
 }

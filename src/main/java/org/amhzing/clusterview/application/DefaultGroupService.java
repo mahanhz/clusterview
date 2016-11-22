@@ -3,7 +3,6 @@ package org.amhzing.clusterview.application;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Group;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
-import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 
 import java.util.Set;
 
@@ -36,7 +35,14 @@ public class DefaultGroupService implements GroupService {
         notNull(group);
         notNull(clusterId);
 
-        final TeamEntity teamEntity = groupRepository.createGroup(group, clusterId);
+        groupRepository.createGroup(group, clusterId);
+    }
+
+    @Override
+    public void updateGroup(final Group group) {
+        notNull(group);
+
+        groupRepository.updateGroup(group);
     }
 
     @Override

@@ -14,5 +14,7 @@ public interface GroupRepository {
 
     TeamEntity createGroup(final Group group, final Cluster.Id clusterId);
 
+    TeamEntity updateGroup(final Group group);
+
     void deleteGroup(final Group.Id groupId);
 }

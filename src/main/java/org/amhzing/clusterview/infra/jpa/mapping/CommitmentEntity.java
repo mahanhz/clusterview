@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.mapping;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name = "commitment")
 public class CommitmentEntity {
@@ -49,6 +50,20 @@ public class CommitmentEntity {
 
     public void setMember(final MemberEntity member) {
         this.member = member;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final CommitmentEntity that = (CommitmentEntity) o;
+        return id == that.id &&
+                Objects.equals(activity, that.activity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, activity);
     }
 
     @Override

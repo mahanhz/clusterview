@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.mapping;
 
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 @Embeddable
 public class Name {
@@ -54,6 +55,22 @@ public class Name {
 
     public void setSuffix(final String suffix) {
         this.suffix = suffix;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Name name = (Name) o;
+        return Objects.equals(firstName, name.firstName) &&
+                Objects.equals(middleName, name.middleName) &&
+                Objects.equals(lastName, name.lastName) &&
+                Objects.equals(suffix, name.suffix);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, middleName, lastName, suffix);
     }
 
     @Override

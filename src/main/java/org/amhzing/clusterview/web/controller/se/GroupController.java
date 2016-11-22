@@ -7,10 +7,7 @@ import org.amhzing.clusterview.web.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Set;
@@ -76,5 +73,26 @@ public class GroupController extends AbstractController {
         groupAdapter.deleteGroup(groupPath.getGroupId());
 
         return new ModelAndView("redirect:" + groupPath.getCountry() + "/cluster");
+    }
+
+    @PutMapping(path = "/{country}/{region}/{cluster}/{groupId}")
+    public ModelAndView updateGroup(@ModelAttribute final ClusterPath clusterPath) {
+
+        final LocationModel locationModel = LocationModel.create(267.0, 277.47);
+        final ActivityModel activityModel2 = ActivityModel.create("jyg", "Study Circle");
+        final ActivityModel activityModel3 = ActivityModel.create("dm", "Study Circle");
+        final CapabilityModel capabilityModel = CapabilityModel.create(ImmutableSet.of(activityModel2));
+        final CommitmentModel commitmentModel = CommitmentModel.create(ImmutableSet.of(activityModel3));
+        final NameModel nameModel = NameModel.create("What", "The", "Did", "Junior");
+        final MemberModel memberModel = MemberModel.create(445, nameModel, capabilityModel, commitmentModel);
+        final GroupModel groupModel1 = GroupModel.create(904, ImmutableSet.of(memberModel), locationModel);
+
+//        if (bindingResult.hasErrors()) {
+//            throw new RuntimeException("Could not create group due to: " + bindingResult.getFieldError());
+//        }
+
+        groupAdapter.updateGroup(groupModel1);
+
+        return new ModelAndView("redirect:" + clusterPath.getCountry() + "/cluster");
     }
 }

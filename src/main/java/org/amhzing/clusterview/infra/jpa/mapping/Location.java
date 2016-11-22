@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.mapping;
 
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 @Embeddable
 public class Location {
@@ -34,6 +35,20 @@ public class Location {
 
     public void setY(final double y) {
         this.y = y;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Location location = (Location) o;
+        return Double.compare(location.x, x) == 0 &&
+                Double.compare(location.y, y) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
     @Override

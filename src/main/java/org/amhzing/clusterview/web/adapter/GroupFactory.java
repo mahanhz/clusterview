@@ -17,7 +17,8 @@ public final class GroupFactory {
     public static Group convert(final GroupModel groupModel) {
         notNull(groupModel);
 
-        return Group.create(convertMembers(groupModel.getMembers()),
+        return Group.create(Group.Id.create(groupModel.getId()),
+                            convertMembers(groupModel.getMembers()),
                             convertLocation(groupModel.getLocation()));
     }
 
@@ -32,7 +33,8 @@ public final class GroupFactory {
     }
 
     private static Member convertMember(final MemberModel member) {
-        return Member.create(convertName(member.getName()),
+        return Member.create(Member.Id.create(member.getId()),
+                             convertName(member.getName()),
                              convertCapabilities(member.getCapability()),
                              convertCommitments(member.getCommitment()));
     }

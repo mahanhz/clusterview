@@ -50,4 +50,12 @@ public class GroupAdapter {
     public void deleteGroup(final long groupId) {
         groupService.deleteGroup(Group.Id.create(groupId));
     }
+
+    public void updateGroup(final GroupModel groupModel) {
+        notNull(groupModel);
+
+        final Group group = GroupFactory.convert(groupModel);
+
+        groupService.updateGroup(group);
+    }
 }

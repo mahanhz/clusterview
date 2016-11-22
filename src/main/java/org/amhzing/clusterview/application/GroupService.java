@@ -13,5 +13,7 @@ public interface GroupService {
 
     void createGroup(final Group group, final Cluster.Id clusterId);
 
+    void updateGroup(final Group group);
+
     void deleteGroup(final Group.Id groupId);
 }

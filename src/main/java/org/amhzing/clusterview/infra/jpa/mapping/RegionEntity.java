@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.mapping;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "region")
@@ -11,7 +12,7 @@ public class RegionEntity {
 
     private String areaCoords;
 
-    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ClusterEntity> clusters;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -47,6 +48,21 @@ public class RegionEntity {
 
     public void setCountry(final CountryEntity country) {
         this.country = country;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final RegionEntity that = (RegionEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(areaCoords, that.areaCoords) &&
+                Objects.equals(clusters, that.clusters);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, areaCoords, clusters);
     }
 
     @Override

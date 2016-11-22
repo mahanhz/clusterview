@@ -52,11 +52,24 @@ public class DefaultGroupRepository implements GroupRepository {
         notNull(group);
         notNull(clusterId);
 
-        final TeamEntityFactory teamEntityFactory = TeamEntityFactory.create(clusterJpaRepository,
-                                                                             activityJpaRepository);
-        final TeamEntity teamEntity = teamEntityFactory.convertGroup(group, clusterId);
+        final ClusterEntity clusterEntity = clusterJpaRepository.findOne(clusterId.getId());
 
-        return teamJpaRepository.saveAndFlush(teamEntity);
+        final TeamEntityFactory teamEntityFactory = TeamEntityFactory.create(activityJpaRepository);
+        final TeamEntity teamEntity = teamEntityFactory.convertGroupForNewTeam(group, clusterEntity);
+
+        return teamJpaRepository.save(teamEntity);
+    }
+
+    @Override
+    public TeamEntity updateGroup(final Group group) {
+        notNull(group);
+
+        final TeamEntity currentTeam = teamJpaRepository.findOne(group.getId().getId());
+
+        final TeamEntityFactory teamEntityFactory = TeamEntityFactory.create(activityJpaRepository);
+        final TeamEntity updatedTeam = teamEntityFactory.convertGroupForExistingTeam(group, currentTeam);
+
+        return teamJpaRepository.save(updatedTeam);
     }
 
     @Override
