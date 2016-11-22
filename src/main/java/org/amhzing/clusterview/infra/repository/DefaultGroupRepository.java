@@ -5,6 +5,7 @@ import org.amhzing.clusterview.domain.model.Group;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
 import org.amhzing.clusterview.infra.jpa.mapping.ClusterEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
+import org.amhzing.clusterview.infra.jpa.repository.ActivityJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.TeamJpaRepository;
 
@@ -16,13 +17,16 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public class DefaultGroupRepository implements GroupRepository {
 
-    private TeamJpaRepository teamJpaRepository;
     private ClusterJpaRepository clusterJpaRepository;
+    private TeamJpaRepository teamJpaRepository;
+    private ActivityJpaRepository activityJpaRepository;
 
-    public DefaultGroupRepository(final TeamJpaRepository teamJpaRepository,
-                                  final ClusterJpaRepository clusterJpaRepository) {
-        this.teamJpaRepository = notNull(teamJpaRepository);
+    public DefaultGroupRepository(final ClusterJpaRepository clusterJpaRepository,
+                                  final TeamJpaRepository teamJpaRepository,
+                                  final ActivityJpaRepository activityJpaRepository) {
         this.clusterJpaRepository = notNull(clusterJpaRepository);
+        this.teamJpaRepository = notNull(teamJpaRepository);
+        this.activityJpaRepository = notNull(activityJpaRepository);
     }
 
     @Override
@@ -48,9 +52,9 @@ public class DefaultGroupRepository implements GroupRepository {
         notNull(group);
         notNull(clusterId);
 
-        final ClusterEntity cluster = clusterJpaRepository.findOne(clusterId.getId());
-
-        final TeamEntity teamEntity = TeamEntityFactory.convertGroup(group, cluster);
+        final TeamEntityFactory teamEntityFactory = TeamEntityFactory.create(clusterJpaRepository,
+                                                                             activityJpaRepository);
+        final TeamEntity teamEntity = teamEntityFactory.convertGroup(group, clusterId);
 
         return teamJpaRepository.saveAndFlush(teamEntity);
     }

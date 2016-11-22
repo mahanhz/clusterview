@@ -52,8 +52,8 @@ public class GroupController extends AbstractController {
 
         final LocationModel locationModel = LocationModel.create(345.0, 192.47);
         final ActivityModel activityModel1 = ActivityModel.create("sc", "Study Circle");
-        final ActivityModel activityModel2 = ActivityModel.create("sc", "Study Circle");
-        final ActivityModel activityModel3 = ActivityModel.create("sc", "Study Circle");
+        final ActivityModel activityModel2 = ActivityModel.create("jyg", "Study Circle");
+        final ActivityModel activityModel3 = ActivityModel.create("hv", "Study Circle");
         final CapabilityModel capabilityModel = CapabilityModel.create(ImmutableSet.of(activityModel1, activityModel2));
         final CommitmentModel commitmentModel = CommitmentModel.create(ImmutableSet.of(activityModel3));
         final NameModel nameModel = NameModel.create("Say", "The", "Man", "Junior");
