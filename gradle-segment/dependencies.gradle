@@ -29,6 +29,7 @@ ext {
     cucumberVersion = '1.2.5'
     meanBeanVersion = '2.0.3'
     equalsVerifierVersion = '2.1.7'
+    jsoupVersion = '1.10.1'
 }
 
 repositories {
@@ -81,6 +82,7 @@ dependencies {
     testCompile ("info.cukes:cucumber-spring:${cucumberVersion}")
     testCompile ("org.meanbean:meanbean:${meanBeanVersion}")
     testCompile ("nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}")
+    testCompile ("org.jsoup:jsoup:${jsoupVersion}")
 }
 
 dependencyManagement {
