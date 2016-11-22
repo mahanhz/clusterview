@@ -4,7 +4,7 @@ import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
-public class Location {
+public final class Location {
 
     private double x;
     private double y;

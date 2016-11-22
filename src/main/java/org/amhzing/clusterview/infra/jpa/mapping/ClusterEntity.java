@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "cluster")
-public class ClusterEntity {
+public final class ClusterEntity {
 
     @Id
     private String id;

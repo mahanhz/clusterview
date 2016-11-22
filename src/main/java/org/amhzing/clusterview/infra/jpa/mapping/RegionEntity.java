@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "region")
-public class RegionEntity {
+public final class RegionEntity {
 
     @Id
     private String id;

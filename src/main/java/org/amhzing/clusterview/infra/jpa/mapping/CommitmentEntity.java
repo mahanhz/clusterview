@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity(name = "commitment")
-public class CommitmentEntity {
+public final class CommitmentEntity {
 
     @Id
     @GeneratedValue

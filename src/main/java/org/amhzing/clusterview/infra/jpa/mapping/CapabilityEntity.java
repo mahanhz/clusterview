@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity(name = "capability")
-public class CapabilityEntity {
+public final class CapabilityEntity {
 
     @Id
     @GeneratedValue

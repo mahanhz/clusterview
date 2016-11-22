@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "team")
-public class TeamEntity {
+public final class TeamEntity {
 
     @Id
     @GeneratedValue

@@ -9,7 +9,7 @@ public class ActivityTest {
 
     @Test
     public void getterAndSetterCorrectness() throws Exception {
-        new BeanTester().testBean(Group.class);
+        new BeanTester().testBean(Activity.class);
     }
 
     @Test

@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "country")
-public class CountryEntity {
+public final class CountryEntity {
 
     @Id
     private String id;

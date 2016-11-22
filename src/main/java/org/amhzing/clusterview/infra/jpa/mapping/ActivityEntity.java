@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity(name = "activity")
-public class ActivityEntity {
+public final class ActivityEntity {
 
     @Id
     private String id;

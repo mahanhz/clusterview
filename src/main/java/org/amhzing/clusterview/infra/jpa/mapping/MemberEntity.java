@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "member")
-public class MemberEntity {
+public final class MemberEntity {
 
     @Id
     @GeneratedValue
