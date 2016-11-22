@@ -40,11 +40,19 @@ public final class JpaRepositoryHelper {
     }
 
     public static ActivityEntity newActivity() {
-        return ActivityEntity.create("NO", "Nonsense");
+        final ActivityEntity activityEntity = new ActivityEntity();
+        activityEntity.setId("NO");
+        activityEntity.setName("Nonsense");
+
+        return activityEntity;
     }
 
     public static ActivityEntity anotherNewActivity() {
-        return ActivityEntity.create("YE", "Something");
+        final ActivityEntity activityEntity = new ActivityEntity();
+        activityEntity.setId("YE");
+        activityEntity.setName("Something");
+
+        return activityEntity;
     }
 
     public static Name name() {

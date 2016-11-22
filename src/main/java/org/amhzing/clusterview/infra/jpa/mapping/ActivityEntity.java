@@ -12,18 +12,6 @@ public class ActivityEntity {
 
     private String name;
 
-    public ActivityEntity() {
-    }
-
-    private ActivityEntity(final String id, final String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public static ActivityEntity create(final String id, final String name) {
-        return new ActivityEntity(id, name);
-    }
-
     public String getId() {
         return id;
     }

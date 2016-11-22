@@ -20,19 +20,6 @@ public class TeamEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private ClusterEntity cluster;
 
-    public TeamEntity() {
-    }
-
-    private TeamEntity(final Location location, final Set<MemberEntity> members, final ClusterEntity cluster) {
-        this.location = location;
-        this.members = members;
-        this.cluster = cluster;
-    }
-
-    public static TeamEntity create(final Location location, final Set<MemberEntity> members, final ClusterEntity cluster) {
-        return new TeamEntity(location, members, cluster);
-    }
-
     public long getId() {
         return id;
     }
