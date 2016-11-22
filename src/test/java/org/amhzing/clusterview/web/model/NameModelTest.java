@@ -4,7 +4,6 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
-import org.amhzing.clusterview.domain.model.Capability;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -44,9 +43,5 @@ public class NameModelTest {
                 { invalidMatching(NullPointerException.class), "John", "D", null, "I" },
                 { invalidMatching(NullPointerException.class), null, "D", null, "I" }
         };
-    }
-
-    private NameModel name() {
-        return NameModel.create("John", null, "Doe", null);
     }
 }
