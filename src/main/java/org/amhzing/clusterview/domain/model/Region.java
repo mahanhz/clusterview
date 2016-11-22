@@ -5,7 +5,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.*;
 
-public class Region {
+public final class Region {
 
     private Id id;
     private Set<Cluster> clusters;

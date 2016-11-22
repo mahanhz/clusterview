@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class Member {
+public final class Member {
 
     private Id id;
     private Name name;

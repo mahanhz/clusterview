@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.notBlank;
 
-public class ActivityModel {
+public final class ActivityModel {
 
     private String id;
     private String name;

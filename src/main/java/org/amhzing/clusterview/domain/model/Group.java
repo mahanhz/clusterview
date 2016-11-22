@@ -6,11 +6,14 @@ import java.util.Set;
 import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class Group {
+public final class Group {
 
     private Id id;
     private Set<Member> members;
     private Location location;
+
+    public Group() {
+    }
 
     private Group(final Set<Member> members, final Location location) {
         this.members = members;

@@ -7,7 +7,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 
-public class Commitment {
+public final class Commitment {
 
     private Set<Activity> activities;
 

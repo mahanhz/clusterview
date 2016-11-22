@@ -2,7 +2,7 @@ package org.amhzing.clusterview.web.model;
 
 import java.util.Objects;
 
-public class LocationModel {
+public final class LocationModel {
 
     private double coordX;
     private double coordY;

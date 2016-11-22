@@ -7,7 +7,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 
-public class Capability {
+public final class Capability {
 
     private Set<Activity> activities;
 

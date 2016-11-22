@@ -6,7 +6,7 @@ import static org.apache.commons.lang3.StringUtils.trim;
 import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.notBlank;
 
-public class LastName {
+public final class LastName {
 
     protected static final int MAX_LENGTH = 25;
 

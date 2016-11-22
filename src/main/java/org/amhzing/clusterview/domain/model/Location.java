@@ -2,7 +2,7 @@ package org.amhzing.clusterview.domain.model;
 
 import java.util.Objects;
 
-public class Location {
+public final class Location {
 
     private double coordX;
     private double coordY;
@@ -29,8 +29,8 @@ public class Location {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final Location location = (Location) o;
-        return coordX == location.coordX &&
-                coordY == location.coordY;
+        return Double.compare(location.coordX, coordX) == 0 &&
+                Double.compare(location.coordY, coordY) == 0;
     }
 
     @Override

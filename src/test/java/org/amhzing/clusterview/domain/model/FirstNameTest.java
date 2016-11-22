@@ -2,6 +2,8 @@ package org.amhzing.clusterview.domain.model;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,14 +28,8 @@ public class FirstNameTest {
     }
 
     @Test
-    public void test_equals_hashcode() {
-        final FirstName firstName = FirstName.create("John");
-        final FirstName firstName2 = FirstName.create("John");
-        final FirstName firstName3 = FirstName.create("Jane");
-
-        assertThat(firstName).isEqualTo(firstName2);
-        assertThat(firstName).isNotEqualTo(firstName3);
-        assertThat(firstName.hashCode()).isEqualTo(firstName2.hashCode());
+    public void equalsAndHashCodeContract() throws Exception {
+        EqualsVerifier.forClass(FirstName.class).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
     }
 
     @SuppressWarnings("unused")

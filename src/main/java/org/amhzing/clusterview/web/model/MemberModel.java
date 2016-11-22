@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class MemberModel {
+public final class MemberModel {
 
     private long id;
 

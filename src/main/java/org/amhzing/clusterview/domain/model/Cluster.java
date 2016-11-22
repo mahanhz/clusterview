@@ -7,7 +7,7 @@ import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class Cluster {
+public final class Cluster {
 
     private Id id;
     private Set<Group> groups;

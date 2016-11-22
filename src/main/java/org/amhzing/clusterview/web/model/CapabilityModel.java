@@ -8,7 +8,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 
-public class CapabilityModel {
+public final class CapabilityModel {
 
     @NotNull
     private Set<ActivityModel> activities;

@@ -1,13 +1,12 @@
 package org.amhzing.clusterview.domain.model;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.trim;
 import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.notBlank;
 
-public class Suffix implements Serializable {
+public final class Suffix {
 
     protected static final int MAX_LENGTH = 10;
 

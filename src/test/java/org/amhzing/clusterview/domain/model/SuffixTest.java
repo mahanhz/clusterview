@@ -2,6 +2,8 @@ package org.amhzing.clusterview.domain.model;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,14 +28,8 @@ public class SuffixTest {
     }
 
     @Test
-    public void test_equals_hashcode() {
-        final Suffix value = Suffix.create("Junior");
-        final Suffix value2 = Suffix.create("Junior");
-        final Suffix value3 = Suffix.create("II");
-
-        assertThat(value).isEqualTo(value2);
-        assertThat(value).isNotEqualTo(value3);
-        assertThat(value.hashCode()).isEqualTo(value2.hashCode());
+    public void equalsAndHashCodeContract() throws Exception {
+        EqualsVerifier.forClass(Suffix.class).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
     }
 
     @SuppressWarnings("unused")

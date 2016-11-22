@@ -8,7 +8,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 
-public class CommitmentModel {
+public final class CommitmentModel {
 
     @NotNull
     private Set<ActivityModel> activities;

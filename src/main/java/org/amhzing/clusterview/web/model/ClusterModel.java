@@ -5,7 +5,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 
-public class ClusterModel {
+public final class ClusterModel {
 
     private Set<GroupModel> groups;
 

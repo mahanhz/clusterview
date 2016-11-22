@@ -25,10 +25,10 @@ ext {
     togglzThymeleafVersion = '2.0.0.RELEASE'
 
     junitParamsVersion = '1.0.5'
-
     springSecurityTestVersion = '4.1.3.RELEASE'
-
     cucumberVersion = '1.2.5'
+    meanBeanVersion = '2.0.3'
+    equalsVerifierVersion = '2.1.7'
 }
 
 repositories {
@@ -79,6 +79,8 @@ dependencies {
     testCompile ("info.cukes:cucumber-junit:${cucumberVersion}")
     testCompile ("info.cukes:cucumber-java8:${cucumberVersion}")
     testCompile ("info.cukes:cucumber-spring:${cucumberVersion}")
+    testCompile ("org.meanbean:meanbean:${meanBeanVersion}")
+    testCompile ("nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}")
 }
 
 dependencyManagement {

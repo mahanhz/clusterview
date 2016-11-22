@@ -7,7 +7,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.trim;
 import static org.apache.commons.lang3.Validate.*;
 
-public class Country {
+public final class Country {
 
     private static final int MAX_NAME_LENGTH = 100;
 

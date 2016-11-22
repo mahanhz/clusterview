@@ -10,7 +10,7 @@ import java.util.Set;
 import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class GroupModel {
+public final class GroupModel {
 
     private long id;
 

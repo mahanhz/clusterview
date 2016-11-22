@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.notBlank;
 
-public class NameModel implements Serializable {
+public final class NameModel implements Serializable {
 
     private String firstName;
     private String middleName;
