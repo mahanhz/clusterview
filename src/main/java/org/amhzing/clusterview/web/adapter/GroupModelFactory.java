@@ -6,15 +6,15 @@ import org.amhzing.clusterview.web.model.*;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public final class AdapterFactory {
+public final class GroupModelFactory {
 
-    private AdapterFactory() {
+    private GroupModelFactory() {
         // To prevent instantiation
     }
 
     public static Set<GroupModel> convertGroups(final Set<Group> groups) {
         return groups.stream()
-                     .map(AdapterFactory::convertGroup)
+                     .map(GroupModelFactory::convertGroup)
                      .collect(Collectors.toSet());
     }
 
@@ -30,7 +30,7 @@ public final class AdapterFactory {
 
     private static Set<MemberModel> convertMembers(final Set<Member> members) {
         return members.stream()
-                      .map(AdapterFactory::convertMember)
+                      .map(GroupModelFactory::convertMember)
                       .collect(Collectors.toSet());
     }
 
@@ -58,7 +58,7 @@ public final class AdapterFactory {
 
     private static Set<ActivityModel> activities(final Set<Activity> activities) {
         return activities.stream()
-                         .map(AdapterFactory::activity)
+                         .map(GroupModelFactory::activity)
                          .collect(Collectors.toSet());
     }
 

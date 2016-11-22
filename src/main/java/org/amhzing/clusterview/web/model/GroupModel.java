@@ -1,5 +1,9 @@
 package org.amhzing.clusterview.web.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,7 +13,11 @@ import static org.apache.commons.lang3.Validate.notNull;
 public class GroupModel {
 
     private long id;
+
+    @NotEmpty @Valid
     private Set<MemberModel> members;
+
+    @NotNull
     private LocationModel location;
 
     private GroupModel(final long id, final Set<MemberModel> members, final LocationModel location) {

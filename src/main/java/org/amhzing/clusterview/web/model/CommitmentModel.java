@@ -2,6 +2,7 @@ package org.amhzing.clusterview.web.model;
 
 import com.google.common.collect.ImmutableSet;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import static org.apache.commons.lang3.Validate.noNullElements;
 
 public class CommitmentModel {
 
+    @NotNull
     private Set<ActivityModel> activities;
 
     private CommitmentModel(final Set<ActivityModel> activities) {

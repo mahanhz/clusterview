@@ -12,6 +12,11 @@ public class Group {
     private Set<Member> members;
     private Location location;
 
+    private Group(final Set<Member> members, final Location location) {
+        this.members = members;
+        this.location = location;
+    }
+
     private Group(final Id id, final Set<Member> members, final Location location) {
         this.id = notNull(id);
         this.members = noNullElements(members);
@@ -20,6 +25,10 @@ public class Group {
 
     public static Group create(final Id id, final Set<Member> members, final Location location) {
         return new Group(id, members, location);
+    }
+
+    public static Group create(final Set<Member> members, final Location location) {
+        return new Group(members, location);
     }
 
     public Id getId() {

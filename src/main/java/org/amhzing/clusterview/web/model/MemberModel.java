@@ -1,5 +1,7 @@
 package org.amhzing.clusterview.web.model;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.notNull;
@@ -7,15 +9,21 @@ import static org.apache.commons.lang3.Validate.notNull;
 public class MemberModel {
 
     private long id;
+
+    @NotNull @Valid
     private NameModel name;
+
+    @NotNull @Valid
     private CapabilityModel capability;
+
+    @NotNull @Valid
     private CommitmentModel commitment;
 
     private MemberModel(final long id, final NameModel name, final CapabilityModel capability, final CommitmentModel commitment) {
         this.id = id;
         this.name = notNull(name);
-        this.capability = capability;
-        this.commitment = commitment;
+        this.capability = notNull(capability);
+        this.commitment = notNull(commitment);
     }
 
     public static MemberModel create(final long id, final NameModel name, final CapabilityModel capability, final CommitmentModel commitment) {

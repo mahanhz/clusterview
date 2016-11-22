@@ -8,19 +8,26 @@ import org.amhzing.clusterview.infra.jpa.mapping.Name;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public final class RepositoryFactory {
+import static org.apache.commons.lang3.Validate.noNullElements;
+import static org.apache.commons.lang3.Validate.notNull;
 
-    private RepositoryFactory() {
+public final class GroupFactory {
+
+    private GroupFactory() {
         // To prevent instantiation
     }
 
     public static Set<Group> convertTeams(final Set<TeamEntity> teams) {
+        noNullElements(teams);
+
         return teams.stream()
-                    .map(RepositoryFactory::convertGroup)
+                    .map(GroupFactory::convertTeam)
                     .collect(Collectors.toSet());
     }
 
-    public static Group convertGroup(final TeamEntity team) {
+    public static Group convertTeam(final TeamEntity team) {
+        notNull(team);
+
         return Group.create(Group.Id.create(team.getId()),
                             convertMembers(team.getMembers()),
                             convertLocation(team.getLocation()));
@@ -32,7 +39,7 @@ public final class RepositoryFactory {
 
     private static Set<Member> convertMembers(final Set<MemberEntity> members) {
         return members.stream()
-                      .map(RepositoryFactory::convertMember)
+                      .map(GroupFactory::convertMember)
                       .collect(Collectors.toSet());
     }
 
