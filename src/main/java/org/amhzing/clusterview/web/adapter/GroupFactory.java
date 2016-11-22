@@ -6,6 +6,7 @@ import org.amhzing.clusterview.web.model.*;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public final class GroupFactory {
@@ -40,10 +41,15 @@ public final class GroupFactory {
     }
 
     private static Name convertName(final NameModel name) {
-        return org.amhzing.clusterview.domain.model.Name.create(FirstName.create(name.getFirstName()),
-                                                                MiddleName.create(name.getMiddleName()),
-                                                                LastName.create(name.getLastName()),
-                                                                Suffix.create(name.getSuffix()));
+        final String firstName = name.getFirstName();
+        final String middleName = name.getMiddleName();
+        final String lastName = name.getLastName();
+        final String suffix = name.getSuffix();
+
+        return org.amhzing.clusterview.domain.model.Name.create(isBlank(firstName) ? null : FirstName.create(firstName),
+                                                                isBlank(middleName) ? null : MiddleName.create(middleName),
+                                                                isBlank(lastName) ? null : LastName.create(lastName),
+                                                                isBlank(suffix) ? null : Suffix.create(suffix));
     }
 
     private static Capability convertCapabilities(final CapabilityModel capability) {
