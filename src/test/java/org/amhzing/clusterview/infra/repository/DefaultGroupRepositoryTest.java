@@ -6,9 +6,9 @@ import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.infra.jpa.repository.ActivityJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.TeamJpaRepository;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -34,12 +34,8 @@ public class DefaultGroupRepositoryTest {
     @Mock
     private ActivityJpaRepository activityJpaRepository;
 
+    @InjectMocks
     private DefaultGroupRepository defaultGroupRepository;
-
-    @Before
-    public void setUp() {
-        defaultGroupRepository = new DefaultGroupRepository(clusterJpaRepository, teamJpaRepository, activityJpaRepository);
-    }
 
     @Test
     public void should_get_groups() throws Exception {
