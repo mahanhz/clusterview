@@ -1,6 +1,5 @@
 package org.amhzing.clusterview.helper;
 
-import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.domain.model.*;
 
 import static com.google.common.collect.ImmutableSet.of;
@@ -22,27 +21,27 @@ public final class DomainModelHelper {
     }
 
     public static Region region() {
-        return Region.create(regionId(), ImmutableSet.of(cluster()));
+        return Region.create(regionId(), of(cluster()));
     }
 
     public static Region anotherRegion() {
-        return Region.create(anotherRegionId(), ImmutableSet.of(anotherCluster()));
+        return Region.create(anotherRegionId(), of(anotherCluster()));
     }
 
     public static Cluster cluster() {
-        return Cluster.create(clusterId(), ImmutableSet.of(group()));
+        return Cluster.create(clusterId(), of(group()));
     }
 
     public static Cluster anotherCluster() {
-        return Cluster.create(anotherClusterId(), ImmutableSet.of(anotherGroup()));
+        return Cluster.create(anotherClusterId(), of(anotherGroup()));
     }
 
     public static Group group() {
-        return Group.create(groupId(), ImmutableSet.of(member()), location());
+        return Group.create(groupId(), of(member()), location());
     }
 
     public static Group anotherGroup() {
-        return Group.create(anotherGroupId(), ImmutableSet.of(anotherMember()), anotherLocation());
+        return Group.create(anotherGroupId(), of(anotherMember()), anotherLocation());
     }
 
     public static Location location() {
