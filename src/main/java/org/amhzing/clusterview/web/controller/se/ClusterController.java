@@ -2,7 +2,7 @@ package org.amhzing.clusterview.web.controller.se;
 
 import org.amhzing.clusterview.web.adapter.ClusterAdapter;
 import org.amhzing.clusterview.web.controller.AbstractController;
-import org.amhzing.clusterview.web.model.Cluster;
+import org.amhzing.clusterview.web.model.ClusterPath;
 import org.amhzing.clusterview.web.model.GroupModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -29,30 +28,13 @@ public class ClusterController extends AbstractController {
     }
 
     @GetMapping(path = "/{country}/{region}/{cluster}")
-    public ModelAndView cluster(@ModelAttribute @Valid final Cluster cluster,
+    public ModelAndView cluster(@ModelAttribute @Valid final ClusterPath clusterPath,
                                 final BindingResult bindingResult,
                                 final Model model) {
 
-        final Set<GroupModel> groups = clusterAdapter.groups(cluster.getCluster());
+        final Set<GroupModel> groups = clusterAdapter.groups(clusterPath.getCluster());
         model.addAttribute("groups", groups);
 
-        return new ModelAndView(cluster.getCountry() + "/" + cluster.getRegion() + "/" + cluster.getCluster());
-    }
-
-    @GetMapping(path = "/{country}/{region}/{cluster}/{groupId}")
-    public ModelAndView group(@PathVariable long groupId,
-                              @ModelAttribute @Valid final Cluster cluster,
-                              final BindingResult bindingResult,
-                              final Model model) {
-
-        final Set<GroupModel> groups = clusterAdapter.groups(cluster.getCluster());
-        final GroupModel groupModel = groups.stream()
-                                            .filter(group -> group.getId() == groupId)
-                                            .findFirst()
-                                            .orElseThrow(() -> new RuntimeException("No group found"));
-
-        model.addAttribute("group", groupModel);
-
-        return new ModelAndView(cluster.getCountry() + "/group");
+        return new ModelAndView(clusterPath.getCountry() + "/" + clusterPath.getRegion() + "/" + clusterPath.getCluster());
     }
 }

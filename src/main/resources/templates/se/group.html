@@ -5,52 +5,54 @@
         <th:block th:replace="se/fragments/head :: head"></th:block>
     </head>
     <body>
-        <input type="hidden" id="country" name="country" th:value="${cluster.country}" />
-        <input type="hidden" id="region" name="region" th:value="${group.id}" />
 
-        <div class="table-responsive">
-            <table class="table table-striped table-hover table-condensed">
-                <thead>
-                    <tr>
-                        <th>First name</th>
-                        <th>Middle name</th>
-                        <th>Last name</th>
-                        <th>Suffix</th>
-                        <th>Capabilities</th>
-                        <th>Commitments</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="member : ${group.members}" class="info">
-                        <td th:text="${member.name.firstName}">John</td>
-                        <td th:text="${member.name.middleName}">M</td>
-                        <td th:text="${member.name.lastName}">Doe</td>
-                        <td th:text="${member.name.suffix}">Junior</td>
-                        <td>
-                            <table class="table">
-                                <tbody>
-                                    <tr th:each="activity : ${member.capability.activities}" class="default">
-                                        <td th:text="${activity.name}">Study Circle</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td>
-                            <table class="table">
-                                <tbody>
-                                <tr th:each="activity : ${member.commitment.activities}" class="warning">
-                                    <td th:text="${activity.name}">Study Circle</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>First name</th>
+                <th>Middle name</th>
+                <th>Last name</th>
+                <th>Suffix</th>
+                <th>Capabilities</th>
+                <th>Commitments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${group.members}" class="info">
+                <td th:text="${member.name.firstName}">John</td>
+                <td th:text="${member.name.middleName}">M</td>
+                <td th:text="${member.name.lastName}">Doe</td>
+                <td th:text="${member.name.suffix}">Junior</td>
+                <td>
+                    <table class="table">
+                        <tbody>
+                        <tr th:each="activity : ${member.capability.activities}" class="default">
+                            <td th:text="${activity.name}">Study Circle</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <table class="table">
+                        <tbody>
+                        <tr th:each="activity : ${member.commitment.activities}" class="warning">
+                            <td th:text="${activity.name}">Study Circle</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
+    <input type="hidden" id="country" name="country" th:value="${groupPath.country}" />
+    <input type="hidden" id="region" name="region" th:value="${groupPath.region}" />
+    <input type="hidden" id="cluster" name="cluster" th:value="${groupPath.cluster}" />
+    <input type="hidden" id="groupId" name="region" th:value="${groupPath.groupId}" />
 
-        <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+    <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
 
     </body>
 </html>

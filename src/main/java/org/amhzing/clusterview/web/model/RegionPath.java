@@ -2,7 +2,7 @@ package org.amhzing.clusterview.web.model;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Region {
+public class RegionPath {
 
     @NotBlank
     private String country;
@@ -28,7 +28,7 @@ public class Region {
 
     @Override
     public String toString() {
-        return "RegionEntity{" +
+        return "RegionPath{" +
                 "country='" + country + '\'' +
                 ", region='" + region + '\'' +
                 '}';

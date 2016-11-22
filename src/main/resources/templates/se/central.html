@@ -26,8 +26,8 @@
             </div>
         </div>
 
-        <input type="hidden" id="country" name="country" th:value="${region.country}" />
-        <input type="hidden" id="region" name="region" th:value="${region.region}" />
+        <input type="hidden" id="country" name="country" th:value="${regionPath.country}" />
+        <input type="hidden" id="region" name="region" th:value="${regionPath.region}" />
 
         <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
         <script th:src="@{/se/js/central.js}"></script>
