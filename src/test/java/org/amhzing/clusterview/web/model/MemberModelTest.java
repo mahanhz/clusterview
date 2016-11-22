@@ -4,7 +4,6 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
-import org.amhzing.clusterview.domain.model.Capability;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
