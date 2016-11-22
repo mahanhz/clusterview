@@ -48,11 +48,29 @@ public class TeamEntityJpaRepositoryTest {
     }
 
     @Test
+    public void should_insert_team() throws Exception {
+        assertThat(allActivities()).hasSize(INITIAL_ACTIVITIES_SIZE);
+        assertThat(allCapabilities()).hasSize(INITIAL_CAPABILITIES_SIZE);
+        assertThat(allCommitments()).hasSize(INITIAL_COMMITMENTS_SIZE);
+        assertThat(allMembers()).hasSize(INITIAL_MEMBERS_SIZE);
+        assertThat(allTeams()).hasSize(INITIAL_TEAM_SIZE);
+
+        entityManager.persist(team());
+
+        assertThat(allTeams()).hasSize(INITIAL_TEAM_SIZE + 1);
+        assertThat(allMembers().size()).isGreaterThan(INITIAL_MEMBERS_SIZE);
+        assertThat(allCommitments().size()).isGreaterThan(INITIAL_COMMITMENTS_SIZE);
+        assertThat(allCapabilities().size()).isGreaterThan(INITIAL_CAPABILITIES_SIZE);
+        assertThat(allActivities().size()).isGreaterThan(INITIAL_ACTIVITIES_SIZE);
+    }
+
+    @Test
     public void should_delete_team() throws Exception {
         assertThat(allActivities()).hasSize(INITIAL_ACTIVITIES_SIZE);
         assertThat(allCapabilities()).hasSize(INITIAL_CAPABILITIES_SIZE);
         assertThat(allCommitments()).hasSize(INITIAL_COMMITMENTS_SIZE);
         assertThat(allMembers()).hasSize(INITIAL_MEMBERS_SIZE);
+        assertThat(allTeams()).hasSize(INITIAL_TEAM_SIZE);
 
         final TeamEntity team = teamJpaRepository.findOne(901L);
         entityManager.remove(team);

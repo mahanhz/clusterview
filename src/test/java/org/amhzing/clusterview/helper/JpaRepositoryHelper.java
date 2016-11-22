@@ -17,12 +17,55 @@ public final class JpaRepositoryHelper {
         // To prevent instantiation
     }
 
+    public static CountryEntity country() {
+        final CountryEntity country = new CountryEntity();
+        country.setId("se");
+        country.setRegions(ImmutableSet.of(region()));
+
+        return country;
+    }
+
+    public static RegionEntity region() {
+        final RegionEntity region = new RegionEntity();
+        region.setId("central");
+        region.setClusters(ImmutableSet.of(cluster()));
+        region.setCountry(country());
+
+        return region;
+    }
+
+    public static ClusterEntity cluster() {
+        final ClusterEntity cluster = new ClusterEntity();
+        cluster.setId("stockholm");
+        cluster.setTeams(ImmutableSet.of(team()));
+        cluster.setRegion(region());
+
+        return cluster;
+    }
+
+    public static TeamEntity team() {
+        final TeamEntity team = new TeamEntity();
+        team.setLocation(location());
+        team.setMembers(ImmutableSet.of(member()));
+        //team.setCluster(cluster());
+
+        return team;
+    }
+
+    public static Location location() {
+        final Location location = new Location();
+        location.setX(1.0);
+        location.setY(1.0);
+
+        return location;
+    }
 
     public static MemberEntity member() {
         final MemberEntity member = new MemberEntity();
         member.setName(name());
         member.setCapabilities(capabilities(member));
         member.setCommitments(commitments(member));
+        //member.setTeam(team());
 
         return member;
     }
