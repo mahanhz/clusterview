@@ -35,6 +35,6 @@ public class ClusterController extends AbstractController {
         final Set<GroupModel> groups = clusterAdapter.groups(clusterPath.getCluster());
         model.addAttribute("groups", groups);
 
-        return new ModelAndView(clusterPath.getCountry() + "/" + clusterPath.getRegion() + "/" + clusterPath.getCluster());
+        return new ModelAndView(clusterPath.getCountry() + "/cluster");
     }
 }

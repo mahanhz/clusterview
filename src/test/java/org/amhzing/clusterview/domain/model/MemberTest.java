@@ -17,7 +17,7 @@ public class MemberTest {
     @Test
     @Parameters(method = "values")
     public void test_creation(final Class<? extends Exception> exception,
-                              final String id,
+                              final long id,
                               final Name name,
                               final Capability capability,
                               final Commitment commitment) {
@@ -31,9 +31,9 @@ public class MemberTest {
     @SuppressWarnings("unused")
     private Object values() {
         return new Object[][]{
-                { valid(), "member1", name(), Capability.create(of(activity())), Commitment.create(of(activity())) },
-                { valid(), "member2", name(), null, null },
-                { invalidMatching(NullPointerException.class), "member1", null, Capability.create(of(activity())), Commitment.create(of(activity())) }
+                { valid(), 123L, name(), Capability.create(of(activity())), Commitment.create(of(activity())) },
+                { valid(), 123L, name(), null, null },
+                { invalidMatching(NullPointerException.class), 123L, null, Capability.create(of(activity())), Commitment.create(of(activity())) }
         };
     }
 }

@@ -17,7 +17,7 @@ public class GroupTest {
     @Test
     @Parameters(method = "values")
     public void test_creation(final Class<? extends Exception> exception,
-                              final String id,
+                              final long id,
                               final Location location,
                               final Member... members) {
         try {
@@ -30,10 +30,9 @@ public class GroupTest {
     @SuppressWarnings("unused")
     private Object values() {
         return new Object[][]{
-                { valid(), "Group1", location(), member() },
-                { invalidMatching(IllegalArgumentException.class), "", location(), member() },
-                { invalidMatching(NullPointerException.class), "Group1", location(), null },
-                { invalidMatching(NullPointerException.class), "Group1", null, member() }
+                { valid(), 123L, location(), member() },
+                { invalidMatching(NullPointerException.class), 123L, location(), null },
+                { invalidMatching(NullPointerException.class), 123L, null, member() }
         };
     }
 }

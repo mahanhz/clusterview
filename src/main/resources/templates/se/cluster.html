@@ -12,11 +12,11 @@
         <input type="hidden" id="cluster" name="cluster" th:value="${clusterPath.cluster}" />
 
         <div class="clusterContainer">
-            <img th:src="@{/se/images/cluster-stockholm.png}" />
+            <img th:src="@{/se/images/cluster-} + ${clusterPath.cluster} + '.png'" />
             <th:block th:each="group : ${groups}">
                 <div class="clusterGroup"
                      th:style="'left: ' + ${group.location.coordX - 10} + 'px; top: ' + ${group.location.coordY - 10} + 'px;'" >
-                    <a th:href="@{stockholm/} + ${group.id}" class="various" data-fancybox-type="iframe">
+                    <a th:href="${clusterPath.cluster} + '/' + ${group.id}" class="various" data-fancybox-type="iframe">
                         <i class="fa fa-users" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -24,7 +24,6 @@
         </div>
 
         <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
-        <script th:src="@{/se/js/cluster.js}"></script>
 
     </body>
 </html>
