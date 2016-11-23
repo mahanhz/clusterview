@@ -9,6 +9,9 @@ public final class ActivityModel {
     private String id;
     private String name;
 
+    public ActivityModel() {
+    }
+
     private ActivityModel(final String id, final String name) {
         this.id = notBlank(id);
         this.name = notBlank(name);

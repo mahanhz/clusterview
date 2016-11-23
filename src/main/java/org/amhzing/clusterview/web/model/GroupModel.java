@@ -4,8 +4,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -15,18 +16,23 @@ public final class GroupModel {
     private long id;
 
     @NotEmpty @Valid
-    private Set<MemberModel> members;
+    private List<MemberModel> members;
 
     @NotNull
     private LocationModel location;
 
-    private GroupModel(final long id, final Set<MemberModel> members, final LocationModel location) {
+    public GroupModel() {
+        members = new ArrayList<>();
+        location = new LocationModel();
+    }
+
+    private GroupModel(final long id, final List<MemberModel> members, final LocationModel location) {
         this.id = id;
         this.members = noNullElements(members);
         this.location = notNull(location);
     }
 
-    public static GroupModel create(final long id, final Set<MemberModel> members, final LocationModel location) {
+    public static GroupModel create(final long id, final List<MemberModel> members, final LocationModel location) {
         return new GroupModel(id, members, location);
     }
 
@@ -38,11 +44,11 @@ public final class GroupModel {
         this.id = id;
     }
 
-    public Set<MemberModel> getMembers() {
+    public List<MemberModel> getMembers() {
         return members;
     }
 
-    public void setMembers(final Set<MemberModel> members) {
+    public void setMembers(final List<MemberModel> members) {
         this.members = members;
     }
 

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="se/fragments/head :: head"></th:block>
+</head>
+<body>
+    <th:block th:replace="se/fragments/navbar :: navbar(${clusterPath.cluster} + ' cluster')"></th:block>
+
+    <form action="#" th:action="@{group-create}" th:object="${groupModel}" method="post">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="tab_logic">
+                <thead>
+                    <tr >
+                        <th class="text-center">#</th>
+                        <th class="text-center">First name</th>
+                        <th class="text-center">Middle name</th>
+                        <th class="text-center">Last name</th>
+                        <th class="text-center">Suffix</th>
+                        <th class="text-center">Capabilities</th>
+                        <th class="text-center">Commitments</th>
+                        <th class="text-center">Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id='member0' th:each="member, rowStat : *{members}" class="form-group">
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{members[__${rowStat.index}__]}" placeholder="First name" class="form-control"/>
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{members[__${rowStat.index}__].name.middleName" placeholder="Middle name" class="form-control"/>
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{members[__${rowStat.index}__].name.lastName" placeholder="Last name" class="form-control"/>
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{members[__${rowStat.index}__].name.suffix" placeholder="Suffix" class="form-control"/>
+                        </td>
+                        <td>
+                            text
+                        </td>
+                        <td>
+                            text
+                        </td>
+                        <td>
+                            <input type="text" name="location.coordX" placeholder="Location" class="form-control"/>
+                            <input type="text" name="location.coordY" placeholder="Location" class="form-control"/>
+                        </td>
+                    </tr>
+                    <tr id='member1'>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <input type="text" id="members0.name.firstName" name="members[0].name.firstName" placeholder="First name" class="form-control"/>
+                        </td>
+                        <td>
+                            <input type="text" id="members0.name.middleName" name="members[0].name.middleName" placeholder="Middle name" class="form-control"/>
+                        </td>
+                        <td>
+                            <input type="text" id="members0.name.lastName" name="members[0].name.lastName" placeholder="Last name" class="form-control"/>
+                        </td>
+                        <td>
+                            <input type="text" id="members0.name.suffix" name="members[0].name.sufix" placeholder="Suffix" class="form-control"/>
+                        </td>
+                        <td>
+                            <select id="capability0-select" multiple="multiple">
+                                <option value="sc">Study Circle</option>
+                                <option value="dm">Devotional Meeting</option>
+                                <option value="cc">Childrens class</option>
+                                <option value="jyg">Junior Youth Group</option>
+                                <option value="hv">Home Visit</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="commitment0-select" multiple="multiple">
+                                <option value="sc">Study Circle</option>
+                                <option value="dm">Devotional Meeting</option>
+                                <option value="cc">Childrens class</option>
+                                <option value="jyg">Junior Youth Group</option>
+                                <option value="hv">Home Visit</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="location.coordX" placeholder="Location" class="form-control"/>
+                            <input type="text" name="location.coordY" placeholder="Location" class="form-control"/>
+                        </td>
+                    </tr>
+                    <tr id='member2'></tr>
+                </tbody>
+            </table>
+            <a id="add_row" class="btn btn-default pull-left">Add Row</a>
+            <input type="submit" value="Submit" />
+            <a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="activitiesModal" tabindex="-1" role="dialog" aria-labelledby="activitiesModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="activitiesModalLabel">Activities</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="checkbox" id="sc" name="activities" value="sc" />
+                        <label for="sc">Study Circle</label>
+                        <br/>
+                        <input type="checkbox" id="dm" name="activities" value="dm" />
+                        <label for="dm">Devotional Meeting</label>
+                        <br/>
+                        <input type="checkbox" id="cc" name="activities" value="cc" />
+                        <label for="cc">Childrens class</label>
+                        <br/>
+                        <input type="checkbox" id="jyg" name="activities" value="jyg" />
+                        <label for="jyg">Junior Youth Group</label>
+                        <br/>
+                        <input type="checkbox" id="hv" name="activities" value="hv" />
+                        <label for="hv">Home Visit</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <input type="hidden" id="country" name="country" th:value="${clusterPath.country}" />
+    <input type="hidden" id="region" name="region" th:value="${clusterPath.region}" />
+    <input type="hidden" id="cluster" name="cluster" th:value="${clusterPath.cluster}" />
+
+    <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+    <script th:src="@{/se/js/group.js}"></script>
+
+</body>
+</html>

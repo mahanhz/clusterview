@@ -1,31 +1,34 @@
 package org.amhzing.clusterview.web.model;
 
-import com.google.common.collect.ImmutableSet;
-
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 
 public final class CommitmentModel {
 
     @NotNull
-    private Set<ActivityModel> activities;
+    private List<ActivityModel> activities;
 
-    private CommitmentModel(final Set<ActivityModel> activities) {
+    public CommitmentModel() {
+        activities = new ArrayList<>();
+    }
+
+    private CommitmentModel(final List<ActivityModel> activities) {
         this.activities = noNullElements(activities);
     }
 
-    public static CommitmentModel create(final Set<ActivityModel> activities) {
+    public static CommitmentModel create(final List<ActivityModel> activities) {
         return new CommitmentModel(activities);
     }
 
-    public Set<ActivityModel> getActivities() {
-        return ImmutableSet.copyOf(activities);
+    public List<ActivityModel> getActivities() {
+        return activities;
     }
 
-    public void setActivities(final Set<ActivityModel> activities) {
+    public void setActivities(final List<ActivityModel> activities) {
         this.activities = activities;
     }
 

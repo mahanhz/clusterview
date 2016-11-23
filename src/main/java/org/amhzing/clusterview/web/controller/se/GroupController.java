@@ -1,6 +1,6 @@
 package org.amhzing.clusterview.web.controller.se;
 
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableList;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.controller.AbstractController;
 import org.amhzing.clusterview.web.model.*;
@@ -52,11 +52,11 @@ public class GroupController extends AbstractController {
         final ActivityModel activityModel1 = ActivityModel.create("sc", "Study Circle");
         final ActivityModel activityModel2 = ActivityModel.create("jyg", "Study Circle");
         final ActivityModel activityModel3 = ActivityModel.create("hv", "Study Circle");
-        final CapabilityModel capabilityModel = CapabilityModel.create(ImmutableSet.of(activityModel1, activityModel2));
-        final CommitmentModel commitmentModel = CommitmentModel.create(ImmutableSet.of(activityModel3));
+        final CapabilityModel capabilityModel = CapabilityModel.create(ImmutableList.of(activityModel1, activityModel2));
+        final CommitmentModel commitmentModel = CommitmentModel.create(ImmutableList.of(activityModel3));
         final NameModel nameModel = NameModel.create("Say", "The", "Man", "Junior");
         final MemberModel memberModel = MemberModel.create(999, nameModel, capabilityModel, commitmentModel);
-        final GroupModel groupModel1 = GroupModel.create(888, ImmutableSet.of(memberModel), locationModel);
+        final GroupModel groupModel1 = GroupModel.create(888, ImmutableList.of(memberModel), locationModel);
 
 //        if (bindingResult.hasErrors()) {
 //            throw new RuntimeException("Could not create group due to: " + bindingResult.getFieldError());
@@ -81,11 +81,11 @@ public class GroupController extends AbstractController {
         final LocationModel locationModel = LocationModel.create(267.0, 277.47);
         final ActivityModel activityModel2 = ActivityModel.create("jyg", "Study Circle");
         final ActivityModel activityModel3 = ActivityModel.create("dm", "Study Circle");
-        final CapabilityModel capabilityModel = CapabilityModel.create(ImmutableSet.of(activityModel2));
-        final CommitmentModel commitmentModel = CommitmentModel.create(ImmutableSet.of(activityModel3));
+        final CapabilityModel capabilityModel = CapabilityModel.create(ImmutableList.of(activityModel2));
+        final CommitmentModel commitmentModel = CommitmentModel.create(ImmutableList.of(activityModel3));
         final NameModel nameModel = NameModel.create("What", "The", "Did", "Junior");
         final MemberModel memberModel = MemberModel.create(445, nameModel, capabilityModel, commitmentModel);
-        final GroupModel groupModel1 = GroupModel.create(904, ImmutableSet.of(memberModel), locationModel);
+        final GroupModel groupModel1 = GroupModel.create(904, ImmutableList.of(memberModel), locationModel);
 
 //        if (bindingResult.hasErrors()) {
 //            throw new RuntimeException("Could not create group due to: " + bindingResult.getFieldError());

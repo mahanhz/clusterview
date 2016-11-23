@@ -1,31 +1,34 @@
 package org.amhzing.clusterview.web.model;
 
-import com.google.common.collect.ImmutableSet;
-
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 
 public final class CapabilityModel {
 
     @NotNull
-    private Set<ActivityModel> activities;
+    private List<ActivityModel> activities;
 
-    private CapabilityModel(final Set<ActivityModel> activities) {
+    public CapabilityModel() {
+        activities = new ArrayList<>();
+    }
+
+    private CapabilityModel(final List<ActivityModel> activities) {
         this.activities = noNullElements(activities);
     }
 
-    public static CapabilityModel create(final Set<ActivityModel> activities) {
+    public static CapabilityModel create(final List<ActivityModel> activities) {
         return new CapabilityModel(activities);
     }
 
-    public Set<ActivityModel> getActivities() {
-        return ImmutableSet.copyOf(activities);
+    public List<ActivityModel> getActivities() {
+        return activities;
     }
 
-    public void setActivities(final Set<ActivityModel> activities) {
+    public void setActivities(final List<ActivityModel> activities) {
         this.activities = activities;
     }
 

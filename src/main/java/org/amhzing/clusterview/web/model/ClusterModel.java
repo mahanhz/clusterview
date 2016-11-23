@@ -1,27 +1,32 @@
 package org.amhzing.clusterview.web.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 
 public final class ClusterModel {
 
-    private Set<GroupModel> groups;
+    private List<GroupModel> groups;
 
-    private ClusterModel(final Set<GroupModel> groups) {
+    public ClusterModel() {
+        groups = new ArrayList<>();
+    }
+
+    private ClusterModel(final List<GroupModel> groups) {
         this.groups = noNullElements(groups);
     }
 
-    public static ClusterModel create(final Set<GroupModel> groups) {
+    public static ClusterModel create(final List<GroupModel> groups) {
         return new ClusterModel(groups);
     }
 
-    public Set<GroupModel> getGroups() {
+    public List<GroupModel> getGroups() {
         return groups;
     }
 
-    public void setGroups(final Set<GroupModel> groups) {
+    public void setGroups(final List<GroupModel> groups) {
         this.groups = groups;
     }
 

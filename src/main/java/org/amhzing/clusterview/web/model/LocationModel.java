@@ -7,6 +7,9 @@ public final class LocationModel {
     private double coordX;
     private double coordY;
 
+    public LocationModel() {
+    }
+
     private LocationModel(final double coordX, final double coordY) {
         this.coordX = coordX;
         this.coordY = coordY;

@@ -3,6 +3,7 @@ package org.amhzing.clusterview.web.adapter;
 import org.amhzing.clusterview.domain.model.*;
 import org.amhzing.clusterview.web.model.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,10 +29,10 @@ public final class GroupModelFactory {
         return LocationModel.create(location.getCoordX(), location.getCoordY());
     }
 
-    private static Set<MemberModel> convertMembers(final Set<Member> members) {
+    private static List<MemberModel> convertMembers(final Set<Member> members) {
         return members.stream()
                       .map(GroupModelFactory::convertMember)
-                      .collect(Collectors.toSet());
+                      .collect(Collectors.toList());
     }
 
     private static MemberModel convertMember(final Member member) {
@@ -62,10 +63,10 @@ public final class GroupModelFactory {
         return CommitmentModel.create(activities(commitment.getActivities()));
     }
 
-    private static Set<ActivityModel> activities(final Set<Activity> activities) {
+    private static List<ActivityModel> activities(final Set<Activity> activities) {
         return activities.stream()
                          .map(GroupModelFactory::activity)
-                         .collect(Collectors.toSet());
+                         .collect(Collectors.toList());
     }
 
     private static ActivityModel activity(final Activity activity) {

@@ -19,6 +19,12 @@ public final class MemberModel {
     @NotNull @Valid
     private CommitmentModel commitment;
 
+    public MemberModel() {
+        name = new NameModel();
+        capability = new CapabilityModel();
+        commitment = new CommitmentModel();
+    }
+
     private MemberModel(final long id, final NameModel name, final CapabilityModel capability, final CommitmentModel commitment) {
         this.id = id;
         this.name = notNull(name);

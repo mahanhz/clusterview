@@ -7,21 +7,21 @@
     <body>
         <th:block th:replace="se/fragments/navbar :: navbar(${clusterPath.cluster} + ' cluster')"></th:block>
 
-        <input type="hidden" id="country" name="country" th:value="${clusterPath.country}" />
-        <input type="hidden" id="region" name="region" th:value="${clusterPath.region}" />
-        <input type="hidden" id="cluster" name="cluster" th:value="${clusterPath.cluster}" />
-
         <div class="clusterContainer">
             <img th:src="@{/se/images/cluster-} + ${clusterPath.cluster} + '.png'" />
             <th:block th:each="group : ${groups}">
                 <div class="clusterGroup"
-                     th:style="'left: ' + ${group.location.coordX - 10} + 'px; top: ' + ${group.location.coordY - 10} + 'px;'" >
+                th:style="'left: ' + ${group.location.coordX - 10} + 'px; top: ' + ${group.location.coordY - 10} + 'px;'" >
                     <a th:href="${clusterPath.cluster} + '/' + ${group.id}" class="various" data-fancybox-type="iframe">
                         <i class="fa fa-users" aria-hidden="true"></i>
                     </a>
                 </div>
             </th:block>
         </div>
+
+        <input type="hidden" id="country" name="country" th:value="${clusterPath.country}" />
+        <input type="hidden" id="region" name="region" th:value="${clusterPath.region}" />
+        <input type="hidden" id="cluster" name="cluster" th:value="${clusterPath.cluster}" />
 
         <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
 
