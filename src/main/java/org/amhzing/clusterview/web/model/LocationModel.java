@@ -1,37 +1,40 @@
 package org.amhzing.clusterview.web.model;
 
+import javax.validation.constraints.Min;
 import java.util.Objects;
 
 public final class LocationModel {
 
-    private double coordX;
-    private double coordY;
+    @Min(value = 0, message = "Location x is required")
+    private int coordX;
+    @Min(value = 0, message = "Location y is required")
+    private int coordY;
 
     public LocationModel() {
     }
 
-    private LocationModel(final double coordX, final double coordY) {
+    private LocationModel(final int coordX, final int coordY) {
         this.coordX = coordX;
         this.coordY = coordY;
     }
 
-    public static LocationModel create(final double coordX, final double coordY) {
+    public static LocationModel create(final int coordX, final int coordY) {
         return new LocationModel(coordX, coordY);
     }
 
-    public double getCoordX() {
+    public int getCoordX() {
         return coordX;
     }
 
-    public void setCoordX(final double coordX) {
+    public void setCoordX(final int coordX) {
         this.coordX = coordX;
     }
 
-    public double getCoordY() {
+    public int getCoordY() {
         return coordY;
     }
 
-    public void setCoordY(final double coordY) {
+    public void setCoordY(final int coordY) {
         this.coordY = coordY;
     }
 
@@ -40,8 +43,8 @@ public final class LocationModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final LocationModel that = (LocationModel) o;
-        return Double.compare(that.coordX, coordX) == 0 &&
-                Double.compare(that.coordY, coordY) == 0;
+        return coordX == that.coordX &&
+                coordY == that.coordY;
     }
 
     @Override

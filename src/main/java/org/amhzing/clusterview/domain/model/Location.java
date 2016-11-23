@@ -4,23 +4,23 @@ import java.util.Objects;
 
 public final class Location {
 
-    private double coordX;
-    private double coordY;
+    private int coordX;
+    private int coordY;
 
-    private Location(final double coordX, final double coordY) {
+    private Location(final int coordX, final int coordY) {
         this.coordX = coordX;
         this.coordY = coordY;
     }
 
-    public static Location create(final double coordX, final double coordY) {
+    public static Location create(final int coordX, final int coordY) {
         return new Location(coordX, coordY);
     }
 
-    public double getCoordX() {
+    public int getCoordX() {
         return coordX;
     }
 
-    public double getCoordY() {
+    public int getCoordY() {
         return coordY;
     }
 
@@ -29,8 +29,8 @@ public final class Location {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final Location location = (Location) o;
-        return Double.compare(location.coordX, coordX) == 0 &&
-                Double.compare(location.coordY, coordY) == 0;
+        return coordX == location.coordX &&
+                coordY == location.coordY;
     }
 
     @Override

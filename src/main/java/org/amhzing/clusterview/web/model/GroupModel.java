@@ -18,7 +18,7 @@ public final class GroupModel {
     @NotEmpty @Valid
     private List<MemberModel> members;
 
-    @NotNull
+    @NotNull @Valid
     private LocationModel location;
 
     public GroupModel() {

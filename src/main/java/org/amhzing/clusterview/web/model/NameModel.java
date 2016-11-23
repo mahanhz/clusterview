@@ -1,5 +1,7 @@
 package org.amhzing.clusterview.web.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -7,8 +9,10 @@ import static org.apache.commons.lang3.Validate.notBlank;
 
 public final class NameModel implements Serializable {
 
+    @NotEmpty(message = "First name is required")
     private String firstName;
     private String middleName;
+    @NotEmpty(message = "Last name is required")
     private String lastName;
     private String suffix;
 

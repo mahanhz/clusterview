@@ -6,34 +6,34 @@ import java.util.Objects;
 @Embeddable
 public final class Location {
 
-    private double x;
-    private double y;
+    private int x;
+    private int y;
 
     public Location() {
     }
 
-    private Location(final double x, final double y) {
+    private Location(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
 
-    public static Location create(final double x, final double y) {
+    public static Location create(final int x, final int y) {
         return new Location(x, y);
     }
 
-    public double getX() {
+    public int getX() {
         return x;
     }
 
-    public void setX(final double x) {
+    public void setX(final int x) {
         this.x = x;
     }
 
-    public double getY() {
+    public int getY() {
         return y;
     }
 
-    public void setY(final double y) {
+    public void setY(final int y) {
         this.y = y;
     }
 
@@ -42,8 +42,8 @@ public final class Location {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final Location location = (Location) o;
-        return Double.compare(location.x, x) == 0 &&
-                Double.compare(location.y, y) == 0;
+        return x == location.x &&
+                y == location.y;
     }
 
     @Override

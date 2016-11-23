@@ -48,7 +48,7 @@ public class GroupController extends AbstractController {
     @PostMapping(path = "/{country}/{region}/{cluster}/create-group")
     public ModelAndView createGroup(@ModelAttribute final ClusterPath clusterPath) {
 
-        final LocationModel locationModel = LocationModel.create(345.0, 192.47);
+        final LocationModel locationModel = LocationModel.create(345, 192);
         final ActivityModel activityModel1 = ActivityModel.create("sc", "Study Circle");
         final ActivityModel activityModel2 = ActivityModel.create("jyg", "Study Circle");
         final ActivityModel activityModel3 = ActivityModel.create("hv", "Study Circle");
@@ -78,7 +78,7 @@ public class GroupController extends AbstractController {
     @PutMapping(path = "/{country}/{region}/{cluster}/{groupId}")
     public ModelAndView updateGroup(@ModelAttribute final ClusterPath clusterPath) {
 
-        final LocationModel locationModel = LocationModel.create(267.0, 277.47);
+        final LocationModel locationModel = LocationModel.create(267, 277);
         final ActivityModel activityModel2 = ActivityModel.create("jyg", "Study Circle");
         final ActivityModel activityModel3 = ActivityModel.create("dm", "Study Circle");
         final CapabilityModel capabilityModel = CapabilityModel.create(ImmutableList.of(activityModel2));
