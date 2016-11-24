@@ -1,6 +1,6 @@
 package org.amhzing.clusterview.web.model;
 
-public class GroupActionPath extends ClusterPath {
+public class GroupActionPath extends GroupPath {
 
     private String groupAction;
 

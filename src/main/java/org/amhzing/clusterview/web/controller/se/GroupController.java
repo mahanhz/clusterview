@@ -17,6 +17,8 @@ import static org.apache.commons.lang3.Validate.notNull;
 @Controller
 public class GroupController extends AbstractController {
 
+    private static final String PATH = "/{country}/{region}/{cluster}";
+
     private GroupAdapter groupAdapter;
 
     @Autowired
@@ -24,7 +26,7 @@ public class GroupController extends AbstractController {
         this.groupAdapter = notNull(groupAdapter);
     }
 
-    @GetMapping(path = "/{country}/{region}/{cluster}")
+    @GetMapping(path = PATH)
     public ModelAndView groups(@ModelAttribute final ClusterPath clusterPath,
                                final Model model) {
 
@@ -34,7 +36,7 @@ public class GroupController extends AbstractController {
         return new ModelAndView(clusterPath.getCountry() + "/cluster");
     }
 
-    @GetMapping(path = "/{country}/{region}/{cluster}/{groupId}")
+    @GetMapping(path = PATH + "/{groupId}")
     public ModelAndView group(@ModelAttribute final GroupPath groupPath,
                               final Model model) {
 
@@ -45,15 +47,15 @@ public class GroupController extends AbstractController {
         return new ModelAndView(groupPath.getCountry() + "/group");
     }
 
-    @DeleteMapping(path = "/{country}/{region}/{cluster}/{groupId}")
-    public ModelAndView deleteGroup(@ModelAttribute final GroupPath groupPath) {
+//    @DeleteMapping(path = PATH_PREFIX + "/{groupId}")
+//    public ModelAndView deleteGroup(@ModelAttribute final GroupPath groupPath) {
+//
+//        groupAdapter.deleteGroup(groupPath.getGroupId());
+//
+//        return new ModelAndView("redirect:" + groupPath.getCountry() + "/cluster");
+//    }
 
-        groupAdapter.deleteGroup(groupPath.getGroupId());
-
-        return new ModelAndView("redirect:" + groupPath.getCountry() + "/cluster");
-    }
-
-    @PutMapping(path = "/{country}/{region}/{cluster}/{groupId}")
+    @PutMapping(path = PATH + "/{groupId}")
     public ModelAndView updateGroup(@ModelAttribute final ClusterPath clusterPath) {
 
         final LocationModel locationModel = LocationModel.create(267, 277);

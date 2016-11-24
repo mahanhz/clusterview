@@ -29,10 +29,9 @@ $('.map').click(function(e) {
     var relativeX = (e.pageX - offset.left);
     var relativeY = (e.pageY - offset.top);
 
-    $(".groupPos").remove()
-    $("#groupLocationModal").append('<i class="fa fa-users clusterGroup groupPos" aria-hidden="true">')
-    $(".groupPos").css("left", e.pageX - 10)
-    $(".groupPos").css("top", e.pageY - 10)
+    $("#groupLocationModal .cluster-group").css('visibility', 'visible');
+    $("#groupLocationModal .cluster-group").css('left', relativeX - 10);
+    $("#groupLocationModal .cluster-group").css('top', relativeY - 10);
 
     $("#locationX").val(relativeX);
     $("#locationY").val(relativeY);

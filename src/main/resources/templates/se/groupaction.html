@@ -135,8 +135,11 @@
                     <h4 class="modal-title" id="groupLocationModalLabel">Click on the map to select the location</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="clusterContainer">
+                    <div class="cluster-container">
                         <img class="map" th:src="@{/se/images/cluster-} + ${groupActionPath.cluster} + '.png'" />
+                        <div class="cluster-group" style="visibility:hidden" >
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                        </div>
                     </div>
                 </div>
             </div>
