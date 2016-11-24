@@ -5,8 +5,8 @@ import org.amhzing.clusterview.web.model.ClusterPath;
 import org.amhzing.clusterview.web.model.GroupModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,31 +26,35 @@ public class GroupEditController {
         this.groupAdapter = notNull(groupAdapter);
     }
 
-    @GetMapping(path = "/clusteredit/{country}/{region}/{cluster}/group-new")
-    public ModelAndView newGroup(@ModelAttribute final ClusterPath clusterPath,
-                                 @ModelAttribute final GroupModel groupModel,
-                                 final BindingResult bindingResult) {
+    @ModelAttribute
+    public GroupModel groupModel() {
+        return new GroupModel();
+    }
 
-        if (bindingResult.hasErrors()) {
-            throw new RuntimeException("New group failed due to: " + bindingResult.getFieldError());
-        }
-
+    @GetMapping(path = "/clusteredit/{country}/{region}/{cluster}/newgroup")
+    public ModelAndView newGroup(@ModelAttribute final ClusterPath clusterPath) {
         return new ModelAndView(clusterPath.getCountry() + "/group-new");
     }
 
-    @PostMapping(path = "/clusteredit/{country}/{region}/{cluster}/group-create")
-    public String createGroup(@ModelAttribute final ClusterPath clusterPath,
-                              @ModelAttribute @Valid final GroupModel groupModel,
-                              final BindingResult bindingResult) {
+//    @GetMapping(path = "/clusteredit/{country}/{region}/{cluster}/editgroup/${groupId}")
+//    public ModelAndView editGroup(@ModelAttribute final ClusterPath clusterPath,
+//                                 @ModelAttribute final GroupModel groupModel) {
+//        return new ModelAndView(clusterPath.getCountry() + "/group-edit");
+//    }
+
+    @PostMapping(path = "/clusteredit/{country}/{region}/{cluster}/creategroup")
+    public ModelAndView createGroup(@ModelAttribute final ClusterPath clusterPath,
+                                    @ModelAttribute @Valid final GroupModel groupModel,
+                                    final BindingResult bindingResult,
+                                    final Model model) {
 
         if (bindingResult.hasErrors()) {
-            final FieldError fieldError = bindingResult.getFieldError();
-
-            return clusterPath.getCountry() + "/group-new";
+            model.addAttribute("groupModel", groupModel);
+            return new ModelAndView(clusterPath.getCountry() + "/group-new");
         }
 
         groupAdapter.createGroup(groupModel, clusterPath.getCluster());
 
-        return "redirect:/clusterview/" + clusterPath.getCountry() + "/" + clusterPath.getRegion() + "/" + clusterPath.getCluster();
+        return new ModelAndView("redirect:/clusterview/" + clusterPath.getCountry() + "/" + clusterPath.getRegion() + "/" + clusterPath.getCluster());
     }
 }

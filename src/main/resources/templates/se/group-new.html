@@ -9,13 +9,16 @@
 
     <div class="container">
         <div class="jumbotron">
-            <form action="#" th:action="@{group-create}" th:object="${groupModel}" method="post">
+            <form action="#" th:action="@{creategroup}" th:object="${groupModel}" method="post">
 
                 <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                     <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
                 </ul>
 
-                <input type="hidden" id="numMembers" th:value="${members != null and !members.isNotEmpty} ? ${members.size} : 1" />
+                <input type="text" th:value="${groupModel}" />
+                <input type="text" th:value="${groupModel.members}" />
+
+                <input type="hidden" id="numMembers" th:value="${groupModel.members != null and not #lists.isEmpty(groupModel.members)} ? ${groupModel.members.size()} : 1" />
 
                 <input type="hidden" id="locationX" name="location.coordX" placeholder="Location" class="form-control" value="-1"/>
                 <input type="hidden" id="locationY" name="location.coordY" placeholder="Location" class="form-control" value="-1"/>
@@ -26,7 +29,6 @@
 
                 <br/><br/>
 
-                <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="membersTable">
                         <thead>
                             <tr >
@@ -40,23 +42,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <th:block th:if="${members != null and !members.isNotEmpty}">
+                            <th:block th:if="${groupModel.members != null and not #lists.isEmpty(groupModel.members)}">
                                 <th:block th:each="member, rowStat : *{members}">
-                                    <tr id="member + ${rowStat}">
+                                    <tr th:id="member + ${rowStat}">
                                         <td>
                                             1
                                         </td>
                                         <td>
-                                            <input type="text" th:field="*{members[__${rowStat.index}__]}" placeholder="First name" class="form-control"/>
+                                            <input type="text" th:field="*{members[__${rowStat.index}__].name.firstName}" placeholder="First name" class="form-control"/>
                                         </td>
                                         <td>
-                                            <input type="text" th:field="*{members[__${rowStat.index}__].name.middleName" placeholder="Middle name" class="form-control"/>
+                                            <input type="text" th:field="*{members[__${rowStat.index}__].name.middleName}" placeholder="Middle name" class="form-control"/>
                                         </td>
                                         <td>
-                                            <input type="text" th:field="*{members[__${rowStat.index}__].name.lastName" placeholder="Last name" class="form-control"/>
+                                            <input type="text" th:field="*{members[__${rowStat.index}__].name.lastName}" placeholder="Last name" class="form-control"/>
                                         </td>
                                         <td>
-                                            <input type="text" th:field="*{members[__${rowStat.index}__].name.suffix" placeholder="Suffix" class="form-control"/>
+                                            <input type="text" th:field="*{members[__${rowStat.index}__].name.suffix}" placeholder="Suffix" class="form-control"/>
                                         </td>
                                         <td>
                                             text
@@ -65,10 +67,10 @@
                                             text
                                         </td>
                                     </tr>
-                                    <tr th:id="member + ${members.size()}"></tr>
+                                    <tr th:id="member + ${groupModel.members.size()}"></tr>
                                 </th:block>
                             </th:block>
-                            <tr id="member0" th:if="${members == null or !members.isNotEmpty()}">
+                            <tr id="member0" th:if="${groupModel.members == null or #lists.isEmpty(groupModel.members)}">
                                 <td>
                                     1
                                 </td>
@@ -103,13 +105,12 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr id="member1" th:if="${members == null or !members.isNotEmpty()}"></tr>
+                            <tr id="member1" th:if="${groupModel.members == null or #lists.isEmpty(groupModel.members)}"></tr>
                         </tbody>
                     </table>
                     <a id="add_row" class="btn btn-default pull-left">Add Row</a>
                     <input type="submit" value="Submit" />
                     <a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
-                </div>
 
             </form>
         </div>

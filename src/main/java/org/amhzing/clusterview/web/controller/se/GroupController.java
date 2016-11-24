@@ -45,28 +45,6 @@ public class GroupController extends AbstractController {
         return new ModelAndView(groupPath.getCountry() + "/group");
     }
 
-    @PostMapping(path = "/{country}/{region}/{cluster}/create-group")
-    public ModelAndView createGroup(@ModelAttribute final ClusterPath clusterPath) {
-
-        final LocationModel locationModel = LocationModel.create(345, 192);
-        final ActivityModel activityModel1 = ActivityModel.create("sc", "Study Circle");
-        final ActivityModel activityModel2 = ActivityModel.create("jyg", "Study Circle");
-        final ActivityModel activityModel3 = ActivityModel.create("hv", "Study Circle");
-        final CapabilityModel capabilityModel = CapabilityModel.create(ImmutableList.of(activityModel1, activityModel2));
-        final CommitmentModel commitmentModel = CommitmentModel.create(ImmutableList.of(activityModel3));
-        final NameModel nameModel = NameModel.create("Say", "The", "Man", "Junior");
-        final MemberModel memberModel = MemberModel.create(999, nameModel, capabilityModel, commitmentModel);
-        final GroupModel groupModel1 = GroupModel.create(888, ImmutableList.of(memberModel), locationModel);
-
-//        if (bindingResult.hasErrors()) {
-//            throw new RuntimeException("Could not create group due to: " + bindingResult.getFieldError());
-//        }
-
-        groupAdapter.createGroup(groupModel1, clusterPath.getCluster());
-
-        return new ModelAndView("redirect:" + clusterPath.getCountry() + "/cluster");
-    }
-
     @DeleteMapping(path = "/{country}/{region}/{cluster}/{groupId}")
     public ModelAndView deleteGroup(@ModelAttribute final GroupPath groupPath) {
 
