@@ -5,7 +5,6 @@ import org.amhzing.clusterview.web.model.ClusterPath;
 import org.amhzing.clusterview.web.model.GroupModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,18 +42,16 @@ public class GroupEditController {
 //    }
 
     @PostMapping(path = "/clusteredit/{country}/{region}/{cluster}/creategroup")
-    public ModelAndView createGroup(@ModelAttribute final ClusterPath clusterPath,
+    public String createGroup(@ModelAttribute final ClusterPath clusterPath,
                                     @ModelAttribute @Valid final GroupModel groupModel,
-                                    final BindingResult bindingResult,
-                                    final Model model) {
+                                    final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("groupModel", groupModel);
-            return new ModelAndView(clusterPath.getCountry() + "/group-new");
+            return clusterPath.getCountry() + "/group-new";
         }
 
         groupAdapter.createGroup(groupModel, clusterPath.getCluster());
 
-        return new ModelAndView("redirect:/clusterview/" + clusterPath.getCountry() + "/" + clusterPath.getRegion() + "/" + clusterPath.getCluster());
+        return "redirect:/clusterview/" + clusterPath.getCountry() + "/" + clusterPath.getRegion() + "/" + clusterPath.getCluster();
     }
 }
