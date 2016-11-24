@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.web.controller.se;
 
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
-import org.amhzing.clusterview.web.model.ClusterPath;
+import org.amhzing.clusterview.web.model.GroupActionPath;
 import org.amhzing.clusterview.web.model.GroupModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +30,9 @@ public class GroupEditController {
         return new GroupModel();
     }
 
-    @GetMapping(path = "/clusteredit/{country}/{region}/{cluster}/newgroup")
-    public ModelAndView newGroup(@ModelAttribute final ClusterPath clusterPath) {
-        return new ModelAndView(clusterPath.getCountry() + "/group-new");
+    @GetMapping(path = "/clusteredit/{country}/{region}/{cluster}/{groupAction}")
+    public ModelAndView newGroup(@ModelAttribute final GroupActionPath groupActionPath) {
+        return new ModelAndView(groupActionPath.getCountry() + "/" + groupActionPath.getGroupAction());
     }
 
 //    @GetMapping(path = "/clusteredit/{country}/{region}/{cluster}/editgroup/${groupId}")
@@ -41,17 +41,17 @@ public class GroupEditController {
 //        return new ModelAndView(clusterPath.getCountry() + "/group-edit");
 //    }
 
-    @PostMapping(path = "/clusteredit/{country}/{region}/{cluster}/creategroup")
-    public String createGroup(@ModelAttribute final ClusterPath clusterPath,
-                                    @ModelAttribute @Valid final GroupModel groupModel,
-                                    final BindingResult bindingResult) {
+    @PostMapping(path = "/clusteredit/{country}/{region}/{cluster}/{groupAction}")
+    public String createGroup(@ModelAttribute final GroupActionPath groupActionPath,
+                              @ModelAttribute @Valid final GroupModel groupModel,
+                              final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return clusterPath.getCountry() + "/group-new";
+            return groupActionPath.getCountry() + "/" + groupActionPath.getGroupAction();
         }
 
-        groupAdapter.createGroup(groupModel, clusterPath.getCluster());
+        groupAdapter.createGroup(groupModel, groupActionPath.getCluster());
 
-        return "redirect:/clusterview/" + clusterPath.getCountry() + "/" + clusterPath.getRegion() + "/" + clusterPath.getCluster();
+        return "redirect:/clusterview/" + groupActionPath.getCountry() + "/" + groupActionPath.getRegion() + "/" + groupActionPath.getCluster();
     }
 }
