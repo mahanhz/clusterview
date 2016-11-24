@@ -8,20 +8,17 @@ import org.amhzing.clusterview.web.model.GroupPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
+import static org.amhzing.clusterview.web.controller.MainController.CLUSTER_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
 public class GroupEditController extends AbstractEditController {
-
-    private static final String PATH_PREFIX = "/{country}/{region}/{cluster}";
 
     private GroupAdapter groupAdapter;
 
@@ -35,7 +32,7 @@ public class GroupEditController extends AbstractEditController {
         return new GroupModel();
     }
 
-    @GetMapping(path = PATH_PREFIX + "/{groupAction}")
+    @GetMapping(path = CLUSTER_PATH + "/{groupAction}")
     public ModelAndView newGroup(@ModelAttribute final GroupActionPath groupActionPath) {
         return new ModelAndView(groupActionPath.getCountry() + "/" + groupActionPath.getGroupAction());
     }
@@ -46,7 +43,7 @@ public class GroupEditController extends AbstractEditController {
 //        return new ModelAndView(clusterPath.getCountry() + "/group-edit");
 //    }
 
-    @PostMapping(path = PATH_PREFIX + "/{groupAction}")
+    @PostMapping(path = CLUSTER_PATH + "/{groupAction}")
     public String createGroup(@ModelAttribute final GroupActionPath groupActionPath,
                               @ModelAttribute @Valid final GroupModel groupModel,
                               final BindingResult bindingResult) {
@@ -60,11 +57,17 @@ public class GroupEditController extends AbstractEditController {
         return "redirect:/clusterview/" + groupActionPath.getCountry() + "/" + groupActionPath.getRegion() + "/" + groupActionPath.getCluster();
     }
 
-    @DeleteMapping(path = PATH_PREFIX + "/{groupId}")
-    public String deleteGroup(@ModelAttribute final GroupPath groupPath) {
+    @DeleteMapping(path = CLUSTER_PATH + "/{groupId}")
+    public String deleteGroup(@ModelAttribute final GroupPath groupPath,
+                              @RequestParam(required = false) final boolean displayConfirmation,
+                              final RedirectAttributes redirectAttributes) {
 
         groupAdapter.deleteGroup(groupPath.getGroupId());
 
+        if (displayConfirmation) {
+            redirectAttributes.addFlashAttribute("confirmationMessage", "Group has been deleted.");
+            return "redirect:/clusterview/" + groupPath.getCountry() + "/confirmation";
+        }
         return "redirect:/clusterview/" + groupPath.getCountry() + "/" + groupPath.getRegion() + "/" + groupPath.getCluster();
     }
 }

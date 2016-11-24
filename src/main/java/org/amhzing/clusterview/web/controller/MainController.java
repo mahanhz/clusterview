@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController extends AbstractController {
 
+    public static final String CLUSTER_PATH = "/{country}/{region}/{cluster}";
+
     @GetMapping(path = "/{country}")
     public ModelAndView country(@ModelAttribute @PathVariable final String country) {
         return new ModelAndView(country + "/index");

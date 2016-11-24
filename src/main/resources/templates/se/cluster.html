@@ -12,7 +12,7 @@
             <th:block th:each="group : ${groups}">
                 <div class="cluster-group"
                 th:style="'left: ' + ${group.location.coordX - 10} + 'px; top: ' + ${group.location.coordY - 10} + 'px;'" >
-                    <a th:href="${clusterPath.cluster} + '/' + ${group.id}" class="various" data-fancybox-type="iframe">
+                    <a th:href="${clusterPath.cluster} + '/' + ${group.id}" class="fancyLightbox" data-fancybox-type="iframe">
                         <i class="fa fa-users" aria-hidden="true"></i>
                     </a>
                 </div>

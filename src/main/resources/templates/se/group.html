@@ -45,6 +45,11 @@
             </tbody>
         </table>
 
+        <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId} + '?displayConfirmation=true'"
+              th:method="delete">
+            <button id="deleteGroup" type="submit" class="btn btn-danger btn-md">Delete Group</button>
+        </form>
+
         <input type="hidden" id="country" name="country" th:value="${groupPath.country}" />
         <input type="hidden" id="region" name="region" th:value="${groupPath.region}" />
         <input type="hidden" id="cluster" name="cluster" th:value="${groupPath.cluster}" />

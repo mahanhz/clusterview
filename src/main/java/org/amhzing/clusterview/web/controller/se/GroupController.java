@@ -12,12 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Set;
 
+import static org.amhzing.clusterview.web.controller.MainController.CLUSTER_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
 public class GroupController extends AbstractController {
-
-    private static final String PATH = "/{country}/{region}/{cluster}";
 
     private GroupAdapter groupAdapter;
 
@@ -26,7 +25,7 @@ public class GroupController extends AbstractController {
         this.groupAdapter = notNull(groupAdapter);
     }
 
-    @GetMapping(path = PATH)
+    @GetMapping(path = CLUSTER_PATH)
     public ModelAndView groups(@ModelAttribute final ClusterPath clusterPath,
                                final Model model) {
 
@@ -36,7 +35,7 @@ public class GroupController extends AbstractController {
         return new ModelAndView(clusterPath.getCountry() + "/cluster");
     }
 
-    @GetMapping(path = PATH + "/{groupId}")
+    @GetMapping(path = CLUSTER_PATH + "/{groupId}")
     public ModelAndView group(@ModelAttribute final GroupPath groupPath,
                               final Model model) {
 
@@ -55,7 +54,7 @@ public class GroupController extends AbstractController {
 //        return new ModelAndView("redirect:" + groupPath.getCountry() + "/cluster");
 //    }
 
-    @PutMapping(path = PATH + "/{groupId}")
+    @PutMapping(path = CLUSTER_PATH + "/{groupId}")
     public ModelAndView updateGroup(@ModelAttribute final ClusterPath clusterPath) {
 
         final LocationModel locationModel = LocationModel.create(267, 277);
