@@ -33,7 +33,7 @@ $('.map').click(function(e) {
     $("#groupLocationModal .cluster-group").css('left', relativeX - 10);
     $("#groupLocationModal .cluster-group").css('top', relativeY - 10);
 
-    $("#locationX").val(relativeX);
-    $("#locationY").val(relativeY);
+    $("#location\\.coordX").val(relativeX);
+    $("#location\\.coordY").val(relativeY);
 });
 

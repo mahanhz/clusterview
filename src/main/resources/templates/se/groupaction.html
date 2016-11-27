@@ -5,20 +5,20 @@
     <th:block th:replace="se/fragments/head :: head"></th:block>
 </head>
 <body>
-    <th:block th:replace="se/fragments/navbar :: navbar(${groupActionPath.cluster} + ' cluster')"></th:block>
+    <th:block th:replace="se/fragments/navbar :: navbar(${groupPath.cluster} + ' cluster')"></th:block>
 
     <div class="container">
         <div class="jumbotron">
-            <form action="#" th:action="${groupActionPath.groupAction}" th:object="${groupModel}" method="post">
+            <form action="#" th:action="${groupPath.action}" th:object="${groupModel}" th:method="${groupPath.method}">
 
                 <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                     <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
                 </ul>
 
+                <input type="hidden" th:field="*{id}" />
                 <input type="hidden" id="numMembers" th:value="${groupModel.members != null and not #lists.isEmpty(groupModel.members)} ? ${groupModel.members.size()} : 1" />
-
-                <input type="hidden" id="locationX" name="location.coordX" placeholder="Location" class="form-control" value="-1"/>
-                <input type="hidden" id="locationY" name="location.coordY" placeholder="Location" class="form-control" value="-1"/>
+                <input type="hidden" th:field="*{location.coordX}" value="-1"/>
+                <input type="hidden" th:field="*{location.coordY}" value="-1"/>
 
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#groupLocationModal">
                     Select location
@@ -136,7 +136,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="cluster-container">
-                        <img class="map" th:src="@{/se/images/cluster-} + ${groupActionPath.cluster} + '.png'" />
+                        <img class="map" th:src="@{'/se/images/cluster-' + ${groupPath.cluster} + '.png'}" />
                         <div class="cluster-group" style="visibility:hidden" >
                             <i class="fa fa-users" aria-hidden="true"></i>
                         </div>
@@ -146,9 +146,9 @@
         </div>
     </div>
 
-    <input type="hidden" id="country" name="country" th:value="${groupActionPath.country}" />
-    <input type="hidden" id="region" name="region" th:value="${groupActionPath.region}" />
-    <input type="hidden" id="cluster" name="cluster" th:value="${groupActionPath.cluster}" />
+    <input type="hidden" id="country" name="country" th:value="${groupPath.country}" />
+    <input type="hidden" id="region" name="region" th:value="${groupPath.region}" />
+    <input type="hidden" id="cluster" name="cluster" th:value="${groupPath.cluster}" />
 
     <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
     <script th:src="@{/se/js/group.js}"></script>

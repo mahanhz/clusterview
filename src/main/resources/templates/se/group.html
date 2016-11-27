@@ -45,10 +45,21 @@
             </tbody>
         </table>
 
-        <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId} + '?displayConfirmation=true'"
-              th:method="delete">
-            <button id="deleteGroup" type="submit" class="btn btn-danger btn-md">Delete Group</button>
-        </form>
+        <div class="row pull-right">
+            <div class="col-xs-6">
+                <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
+                      th:method="delete" target="_top">
+                    <button id="deleteGroup" type="submit" class="btn btn-danger btn-md">Delete Group</button>
+                </form>
+            </div>
+
+            <div class="col-xs-6">
+                <a th:href="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
+                   target="_top">
+                    <button id="editGroup" type="submit" class="btn btn-primary btn-md">Edit Group</button>
+                </a>
+            </div>
+        </div>
 
         <input type="hidden" id="country" name="country" th:value="${groupPath.country}" />
         <input type="hidden" id="region" name="region" th:value="${groupPath.region}" />

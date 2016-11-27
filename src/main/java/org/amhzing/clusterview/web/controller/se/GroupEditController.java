@@ -2,14 +2,14 @@ package org.amhzing.clusterview.web.controller.se;
 
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.controller.AbstractEditController;
-import org.amhzing.clusterview.web.model.GroupActionPath;
 import org.amhzing.clusterview.web.model.GroupModel;
 import org.amhzing.clusterview.web.model.GroupPath;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -19,6 +19,8 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
 public class GroupEditController extends AbstractEditController {
+
+    public static final String CREATE_GROUP = "creategroup";
 
     private GroupAdapter groupAdapter;
 
@@ -32,29 +34,51 @@ public class GroupEditController extends AbstractEditController {
         return new GroupModel();
     }
 
-    @GetMapping(path = CLUSTER_PATH + "/{groupAction}")
-    public ModelAndView newGroup(@ModelAttribute final GroupActionPath groupActionPath) {
-        return new ModelAndView(groupActionPath.getCountry() + "/" + groupActionPath.getGroupAction());
+    @GetMapping(path = CLUSTER_PATH + "/groupaction")
+    public String groupAction(@ModelAttribute final GroupPath groupPath) {
+        return groupPath.getCountry() + "/groupaction";
     }
 
-//    @GetMapping(path = "/clusteredit/{country}/{region}/{cluster}/editgroup/${groupId}")
-//    public ModelAndView editGroup(@ModelAttribute final ClusterPath clusterPath,
-//                                 @ModelAttribute final GroupModel groupModel) {
-//        return new ModelAndView(clusterPath.getCountry() + "/group-edit");
-//    }
+    @GetMapping(path = CLUSTER_PATH + "/{groupId}")
+    public String editGroup(@ModelAttribute final GroupPath groupPath,
+                            final Model model) {
 
-    @PostMapping(path = CLUSTER_PATH + "/{groupAction}")
-    public String createGroup(@ModelAttribute final GroupActionPath groupActionPath,
+        groupPath.setAction(String.valueOf(groupPath.getGroupId()));
+        groupPath.setMethod(HttpMethod.PUT.name());
+
+        final GroupModel group = groupAdapter.group(groupPath.getGroupId());
+
+        model.addAttribute("groupModel", group);
+
+        return groupAction(groupPath);
+    }
+
+    @PostMapping(path = CLUSTER_PATH + "/" + CREATE_GROUP)
+    public String createGroup(@ModelAttribute final GroupPath groupPath,
                               @ModelAttribute @Valid final GroupModel groupModel,
                               final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return groupActionPath.getCountry() + "/" + groupActionPath.getGroupAction();
+            return groupAction(groupPath);
         }
 
-        groupAdapter.createGroup(groupModel, groupActionPath.getCluster());
+        groupAdapter.createGroup(groupModel, groupPath.getCluster());
 
-        return "redirect:/clusterview/" + groupActionPath.getCountry() + "/" + groupActionPath.getRegion() + "/" + groupActionPath.getCluster();
+        return redirectToClusterView(groupPath);
+    }
+
+    @PutMapping(path = CLUSTER_PATH + "/{groupId}")
+    public String updateGroup(@ModelAttribute final GroupPath groupPath,
+                            @ModelAttribute @Valid final GroupModel groupModel,
+                            final BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return groupAction(groupPath);
+        }
+        
+        groupAdapter.updateGroup(groupModel);
+
+        return redirectToClusterView(groupPath);
     }
 
     @DeleteMapping(path = CLUSTER_PATH + "/{groupId}")
@@ -66,8 +90,16 @@ public class GroupEditController extends AbstractEditController {
 
         if (displayConfirmation) {
             redirectAttributes.addFlashAttribute("confirmationMessage", "Group has been deleted.");
-            return "redirect:/clusterview/" + groupPath.getCountry() + "/confirmation";
+            return redirectToConfirmationView(groupPath);
         }
+        return redirectToClusterView(groupPath);
+    }
+
+    private String redirectToConfirmationView(final GroupPath groupPath) {
+        return "redirect:/clusterview/" + groupPath.getCountry() + "/confirmation";
+    }
+
+    private String redirectToClusterView(final GroupPath groupPath) {
         return "redirect:/clusterview/" + groupPath.getCountry() + "/" + groupPath.getRegion() + "/" + groupPath.getCluster();
     }
 }

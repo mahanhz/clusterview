@@ -1,13 +1,15 @@
 package org.amhzing.clusterview.web.controller.se;
 
-import com.google.common.collect.ImmutableList;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.controller.AbstractController;
-import org.amhzing.clusterview.web.model.*;
+import org.amhzing.clusterview.web.model.ClusterPath;
+import org.amhzing.clusterview.web.model.GroupModel;
+import org.amhzing.clusterview.web.model.GroupPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Set;
@@ -44,34 +46,5 @@ public class GroupController extends AbstractController {
         model.addAttribute("group", group);
 
         return new ModelAndView(groupPath.getCountry() + "/group");
-    }
-
-//    @DeleteMapping(path = PATH_PREFIX + "/{groupId}")
-//    public ModelAndView deleteGroup(@ModelAttribute final GroupPath groupPath) {
-//
-//        groupAdapter.deleteGroup(groupPath.getGroupId());
-//
-//        return new ModelAndView("redirect:" + groupPath.getCountry() + "/cluster");
-//    }
-
-    @PutMapping(path = CLUSTER_PATH + "/{groupId}")
-    public ModelAndView updateGroup(@ModelAttribute final ClusterPath clusterPath) {
-
-        final LocationModel locationModel = LocationModel.create(267, 277);
-        final ActivityModel activityModel2 = ActivityModel.create("jyg", "Study Circle");
-        final ActivityModel activityModel3 = ActivityModel.create("dm", "Study Circle");
-        final CapabilityModel capabilityModel = CapabilityModel.create(ImmutableList.of(activityModel2));
-        final CommitmentModel commitmentModel = CommitmentModel.create(ImmutableList.of(activityModel3));
-        final NameModel nameModel = NameModel.create("What", "The", "Did", "Junior");
-        final MemberModel memberModel = MemberModel.create(445, nameModel, capabilityModel, commitmentModel);
-        final GroupModel groupModel1 = GroupModel.create(904, ImmutableList.of(memberModel), locationModel);
-
-//        if (bindingResult.hasErrors()) {
-//            throw new RuntimeException("Could not create group due to: " + bindingResult.getFieldError());
-//        }
-
-        groupAdapter.updateGroup(groupModel1);
-
-        return new ModelAndView("redirect:" + clusterPath.getCountry() + "/cluster");
     }
 }
