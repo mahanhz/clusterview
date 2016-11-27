@@ -2,8 +2,6 @@ package org.amhzing.clusterview.web.model;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,11 +22,6 @@ public class ActivityModelTest {
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
-    }
-
-    @Test
-    public void equalsAndHashCodeContract() throws Exception {
-        EqualsVerifier.forClass(ActivityModel.class).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
     }
 
     @SuppressWarnings("unused")

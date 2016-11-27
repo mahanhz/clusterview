@@ -2,7 +2,7 @@ package org.amhzing.clusterview.helper;
 
 import org.amhzing.clusterview.web.model.*;
 
-import static com.google.common.collect.ImmutableSet.of;
+import static com.google.common.collect.ImmutableList.of;
 
 public class ClientModelHelper {
 

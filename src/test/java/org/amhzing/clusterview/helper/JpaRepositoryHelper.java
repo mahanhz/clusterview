@@ -58,8 +58,8 @@ public final class JpaRepositoryHelper {
 
     public static Location location() {
         final Location location = new Location();
-        location.setX(1.0);
-        location.setY(1.0);
+        location.setX(1);
+        location.setY(1);
 
         return location;
     }

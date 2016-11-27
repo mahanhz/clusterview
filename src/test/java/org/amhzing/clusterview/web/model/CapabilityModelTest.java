@@ -1,6 +1,5 @@
 package org.amhzing.clusterview.web.model;
 
-import com.google.common.collect.ImmutableSet;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -8,6 +7,7 @@ import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static com.google.common.collect.ImmutableList.copyOf;
 import static org.amhzing.clusterview.helper.ClientModelHelper.activityModel;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.invalidMatching;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.valid;
@@ -21,7 +21,7 @@ public class CapabilityModelTest {
     public void test_creation(final Class<? extends Exception> exception,
                               final ActivityModel... activities) {
         try {
-            CapabilityModel.create(ImmutableSet.copyOf(activities));
+            CapabilityModel.create(copyOf(activities));
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }

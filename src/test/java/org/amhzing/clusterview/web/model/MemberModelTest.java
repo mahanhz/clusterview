@@ -7,7 +7,7 @@ import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.google.common.collect.ImmutableSet.of;
+import static com.google.common.collect.ImmutableList.of;
 import static org.amhzing.clusterview.helper.ClientModelHelper.activityModel;
 import static org.amhzing.clusterview.helper.ClientModelHelper.nameModel;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.invalidMatching;

@@ -75,7 +75,7 @@ public class GroupEditController extends AbstractEditController {
         if (bindingResult.hasErrors()) {
             return groupAction(groupPath);
         }
-        
+
         groupAdapter.updateGroup(groupModel);
 
         return redirectToClusterView(groupPath);
@@ -88,10 +88,6 @@ public class GroupEditController extends AbstractEditController {
 
         groupAdapter.deleteGroup(groupPath.getGroupId());
 
-        if (displayConfirmation) {
-            redirectAttributes.addFlashAttribute("confirmationMessage", "Group has been deleted.");
-            return redirectToConfirmationView(groupPath);
-        }
         return redirectToClusterView(groupPath);
     }
 

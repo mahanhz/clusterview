@@ -1,6 +1,6 @@
 package org.amhzing.clusterview.web.model;
 
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableList;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -21,7 +21,7 @@ public class ClusterModelTest {
     public void test_creation(final Class<? extends Exception> exception,
                               final GroupModel... groups) {
         try {
-            ClusterModel.create(ImmutableSet.copyOf(groups));
+            ClusterModel.create(ImmutableList.copyOf(groups));
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
