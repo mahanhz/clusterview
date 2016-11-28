@@ -42,40 +42,6 @@ stage ('Build') {
 }
 
 if (!isMasterBranch()) {
-    stage ('Integration test') {
-        node {
-            timeout(time: 10, unit: 'MINUTES') {
-                try {
-                    unstash 'source'
-
-                    grantExecutePermission 'gradlew'
-
-                    gradle 'integrationTest'
-                } catch(err) {
-                    junit '**/build/test-results/*.xml'
-                    throw err
-                }
-            }
-        }
-    }
-
-    stage ('Acceptance test') {
-        node {
-            timeout(time: 10, unit: 'MINUTES') {
-                try {
-                    unstash 'source'
-
-                    grantExecutePermission 'gradlew'
-
-                    gradle 'acceptanceTest'
-                } catch(err) {
-                    junit '**/build/test-results/*.xml'
-                    throw err
-                }
-            }
-        }
-    }
-
     // one at a time!
     lock('lock-merge') {
         stage ('Merge') {
@@ -99,6 +65,24 @@ if (!isMasterBranch()) {
 }
 
 if (isMasterBranch()) {
+
+    stage ('Acceptance test') {
+        node {
+            timeout(time: 10, unit: 'MINUTES') {
+                try {
+                    unstash 'source'
+
+                    grantExecutePermission 'gradlew'
+
+                    gradle 'acceptanceTest'
+                } catch(err) {
+                    junit '**/build/test-results/*.xml'
+                    throw err
+                }
+            }
+        }
+    }
+
     // one at a time!
     lock('lock-publish-snapshot') {
         stage ('Publish snapshot') {
