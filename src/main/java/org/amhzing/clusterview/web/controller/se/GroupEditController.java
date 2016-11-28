@@ -1,10 +1,11 @@
 package org.amhzing.clusterview.web.controller.se;
 
+import org.amhzing.clusterview.web.adapter.ActivityAdapter;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.controller.AbstractEditController;
+import org.amhzing.clusterview.web.model.ActivityModel;
 import org.amhzing.clusterview.web.model.GroupModel;
 import org.amhzing.clusterview.web.model.GroupPath;
-import org.amhzing.clusterview.web.model.MemberModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.amhzing.clusterview.web.controller.MainController.CLUSTER_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -26,16 +26,23 @@ public class GroupEditController extends AbstractEditController {
     public static final String CREATE_GROUP = "creategroup";
 
     private GroupAdapter groupAdapter;
+    private ActivityAdapter activityAdapter;
 
     @Autowired
-    public GroupEditController(final GroupAdapter groupAdapter) {
+    public GroupEditController(final GroupAdapter groupAdapter,
+                               final ActivityAdapter activityAdapter) {
         this.groupAdapter = notNull(groupAdapter);
+        this.activityAdapter = notNull(activityAdapter);
     }
 
     @ModelAttribute
     public GroupModel groupModel() {
-        //removeEmptyMembers(groupModel);
         return new GroupModel();
+    }
+
+    @ModelAttribute("activities")
+    public List<ActivityModel> activityModel() {
+        return activityAdapter.activities();
     }
 
     @GetMapping(path = CLUSTER_PATH + "/newgroup")
@@ -79,7 +86,7 @@ public class GroupEditController extends AbstractEditController {
         if (bindingResult.hasErrors()) {
             groupPath.setAction(String.valueOf(groupPath.getGroupId()));
             groupPath.setMethod(HttpMethod.PUT.name());
-            
+
             return groupActionView(groupPath);
         }
 
@@ -108,14 +115,5 @@ public class GroupEditController extends AbstractEditController {
 
     private String redirectToEditGroupView(final GroupPath groupPath) {
         return "redirect:/clusteredit/" + groupPath.getCountry() + "/" + groupPath.getRegion() + "/" + groupPath.getCluster() + "/" + groupPath.getGroupId();
-    }
-
-    private void removeEmptyMembers(final GroupModel groupModel) {
-        final List<MemberModel> emptyMembers = groupModel.getMembers()
-                                                         .stream()
-                                                         .filter(MemberModel::isEmpty)
-                                                         .collect(Collectors.toList());
-
-        groupModel.getMembers().removeAll(emptyMembers);
     }
 }

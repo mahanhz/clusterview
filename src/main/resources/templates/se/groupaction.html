@@ -15,8 +15,13 @@
                     <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
                 </ul>
 
+                <div id="activityOptions" style="display: none;">
+                    <option th:each="activity : ${activities}"
+                            th:value="${activity.id}"
+                            th:text="${activity.name}">Study circle</option>
+                </div>
+
                 <input type="hidden" th:field="*{id}" />
-                <input type="hidden" id="numMembers" th:value="${groupModel.members != null and not #lists.isEmpty(groupModel.members)} ? ${groupModel.members.size()} : 1" />
                 <input type="hidden" id="location.coordX" name="location.coordX" th:value="${groupModel.location.coordX}"/>
                 <input type="hidden" id="location.coordY" name="location.coordY" th:value="${groupModel.location.coordY}"/>
 
@@ -52,21 +57,18 @@
                                         </td>
                                         <td>
                                             <select class="activitiesMultiSelect" th:field="*{members[__${rowStat.index}__].capability.activities}" multiple="multiple">
-                                                <option value="sc">Study Circle</option>
-                                                <option value="dm">Devotional Meeting</option>
-                                                <option value="cc">Childrens class</option>
-                                                <option value="jyg">Junior Youth Group</option>
-                                                <option value="hv">Home Visit</option>
+                                                <option th:each="activity : ${activities}"
+                                                        th:value="${activity.id}"
+                                                        th:text="${activity.name}">Study circle</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select class="activitiesMultiSelect" th:field="*{members[__${rowStat.index}__].commitment.activities}" multiple="multiple">
-                                                <option value="sc">Study Circle</option>
-                                                <option value="dm">Devotional Meeting</option>
-                                                <option value="cc">Childrens class</option>
-                                                <option value="jyg">Junior Youth Group</option>
-                                                <option value="hv">Home Visit</option>
-                                            </select>                                        </td>
+                                                <option th:each="activity : ${activities}"
+                                                        th:value="${activity.id}"
+                                                        th:text="${activity.name}">Study circle</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                 </th:block>
                                 <tr th:id="member + ${groupModel.members.size()}"></tr>
@@ -84,20 +86,16 @@
                                     </td>
                                     <td>
                                         <select class="activitiesMultiSelect" name="members[0].capability.activities" multiple="multiple">
-                                            <option value="sc">Study Circle</option>
-                                            <option value="dm">Devotional Meeting</option>
-                                            <option value="cc">Childrens class</option>
-                                            <option value="jyg">Junior Youth Group</option>
-                                            <option value="hv">Home Visit</option>
+                                            <option th:each="activity : ${activities}"
+                                                    th:value="${activity.id}"
+                                                    th:text="${activity.name}">Study circle</option>
                                         </select>
                                     </td>
                                     <td>
                                         <select class="activitiesMultiSelect" name="members[0].commitment.activities" multiple="multiple">
-                                            <option value="sc">Study Circle</option>
-                                            <option value="dm">Devotional Meeting</option>
-                                            <option value="cc">Childrens class</option>
-                                            <option value="jyg">Junior Youth Group</option>
-                                            <option value="hv">Home Visit</option>
+                                            <option th:each="activity : ${activities}"
+                                                    th:value="${activity.id}"
+                                                    th:text="${activity.name}">Study circle</option>
                                         </select>
                                     </td>
                                 </tr>
