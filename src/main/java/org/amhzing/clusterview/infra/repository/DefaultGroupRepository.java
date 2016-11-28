@@ -11,6 +11,7 @@ import org.amhzing.clusterview.infra.jpa.repository.TeamJpaRepository;
 
 import java.util.Set;
 
+import static java.util.Collections.emptySet;
 import static org.amhzing.clusterview.infra.repository.GroupFactory.convertTeam;
 import static org.amhzing.clusterview.infra.repository.GroupFactory.convertTeams;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -35,7 +36,11 @@ public class DefaultGroupRepository implements GroupRepository {
 
         final ClusterEntity cluster = clusterJpaRepository.findOne(clusterId.getId());
 
-        return convertTeams(cluster.getTeams());
+        if (cluster != null) {
+            return convertTeams(cluster.getTeams());
+        }
+
+        return emptySet();
     }
 
     @Override

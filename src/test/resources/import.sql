@@ -6,13 +6,13 @@ INSERT INTO ACTIVITY VALUES('hv', 'Home Visit');
 
 INSERT INTO COUNTRY VALUES('se');
 
-INSERT INTO REGION VALUES('northern', '128, 136, 25, 88', 'se');
-INSERT INTO REGION VALUES('central', '128, 136, 25, 88', 'se');
-INSERT INTO REGION VALUES('southern', '128, 136, 25, 88', 'se');
+INSERT INTO REGION VALUES('northern', '', 'se');
+INSERT INTO REGION VALUES('central', '', 'se');
+INSERT INTO REGION VALUES('southern', '', 'se');
 
-INSERT INTO CLUSTER VALUES('stockholm', '128, 136, 25, 88', 'central');
-INSERT INTO CLUSTER VALUES('uppsala', '128, 136, 25, 88', 'central');
-INSERT INTO CLUSTER VALUES('gotland', '128, 136, 25, 88', 'southern');
+INSERT INTO CLUSTER VALUES('stockholm', '', 'central');
+INSERT INTO CLUSTER VALUES('uppsala', '', 'central');
+INSERT INTO CLUSTER VALUES('gotland', '', 'southern');
 
 INSERT INTO TEAM VALUES(901, 262, 413.125, 'stockholm');
 INSERT INTO TEAM VALUES(902, 189, 443.125, 'stockholm');
