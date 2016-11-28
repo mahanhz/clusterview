@@ -17,48 +17,73 @@
 
                 <input type="hidden" th:field="*{id}" />
                 <input type="hidden" id="numMembers" th:value="${groupModel.members != null and not #lists.isEmpty(groupModel.members)} ? ${groupModel.members.size()} : 1" />
-                <input type="hidden" th:field="*{location.coordX}" value="-1"/>
-                <input type="hidden" th:field="*{location.coordY}" value="-1"/>
+                <input type="hidden" id="location.coordX" name="location.coordX" th:value="${groupModel.location.coordX}"/>
+                <input type="hidden" id="location.coordY" name="location.coordY" th:value="${groupModel.location.coordY}"/>
 
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#groupLocationModal">
-                    Select location
-                </button>
-
-                <br/><br/>
-
-                <table class="table table-bordered table-hover" id="membersTable">
-                    <thead>
-                        <tr >
-                            <th class="text-center">#</th>
-                            <th class="text-center">First name</th>
-                            <th class="text-center">Middle name</th>
-                            <th class="text-center">Last name</th>
-                            <th class="text-center">Suffix</th>
-                            <th class="text-center">Capabilities</th>
-                            <th class="text-center">Commitments</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <th:block th:if="${groupModel.members != null and not #lists.isEmpty(groupModel.members)}">
-                            <th:block th:each="member, rowStat : *{members}">
-                                <tr th:id="member + ${rowStat.index}">
+                <div class="row">
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#groupLocationModal">
+                        Select location
+                    </button>
+                </div>
+                <div class="row"><br/></div>
+                <div class="row">
+                    <table class="table table-hover" id="membersTable">
+                        <thead>
+                            <tr >
+                                <th></th>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Capabilities</th>
+                                <th>Commitments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <th:block th:if="${groupModel.members != null and not #lists.isEmpty(groupModel.members)}">
+                                <th:block th:each="member, rowStat : *{members}">
+                                    <tr th:id="member + ${rowStat.index}">
+                                        <td>
+                                            <input type="checkbox" name="memberIds" th:value="${groupModel.members[__${rowStat.index}__].id}" />
+                                        </td>
+                                        <td>
+                                            <input type="text" th:field="*{members[__${rowStat.index}__].name.firstName}" placeholder="First name" class="form-control"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" th:field="*{members[__${rowStat.index}__].name.lastName}" placeholder="Last name" class="form-control"/>
+                                        </td>
+                                        <td>
+                                            <select class="activitiesMultiSelect" th:field="*{members[__${rowStat.index}__].capability.activities}" multiple="multiple">
+                                                <option value="sc">Study Circle</option>
+                                                <option value="dm">Devotional Meeting</option>
+                                                <option value="cc">Childrens class</option>
+                                                <option value="jyg">Junior Youth Group</option>
+                                                <option value="hv">Home Visit</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="activitiesMultiSelect" th:field="*{members[__${rowStat.index}__].commitment.activities}" multiple="multiple">
+                                                <option value="sc">Study Circle</option>
+                                                <option value="dm">Devotional Meeting</option>
+                                                <option value="cc">Childrens class</option>
+                                                <option value="jyg">Junior Youth Group</option>
+                                                <option value="hv">Home Visit</option>
+                                            </select>                                        </td>
+                                    </tr>
+                                </th:block>
+                                <tr th:id="member + ${groupModel.members.size()}"></tr>
+                            </th:block>
+                            <th:block th:if="${groupModel.members == null or #lists.isEmpty(groupModel.members)}">
+                                <tr id="member0">
                                     <td>
-                                        1
+                                        <input type="checkbox" name="memberIds" />
                                     </td>
                                     <td>
-                                        <input type="text" th:field="*{members[__${rowStat.index}__].name.firstName}" placeholder="First name" class="form-control"/>
+                                        <input type="text" name="members[0].name.firstName" placeholder="First name" class="form-control"/>
                                     </td>
                                     <td>
-                                        <input type="text" th:field="*{members[__${rowStat.index}__].name.middleName}" placeholder="Middle name" class="form-control"/>
+                                        <input type="text" name="members[0].name.lastName" placeholder="Last name" class="form-control"/>
                                     </td>
                                     <td>
-                                        <input type="text" th:field="*{members[__${rowStat.index}__].name.lastName}" placeholder="Last name" class="form-control"/>
-                                    </td>
-                                    <td>
-                                        <input type="text" th:field="*{members[__${rowStat.index}__].name.suffix}" placeholder="Suffix" class="form-control"/>
-                                    </td>
-                                    <td>
-                                        <select class="activitiesMultiSelect" th:field="*{members[__${rowStat.index}__].capability.activities}" multiple="multiple">
+                                        <select class="activitiesMultiSelect" name="members[0].capability.activities" multiple="multiple">
                                             <option value="sc">Study Circle</option>
                                             <option value="dm">Devotional Meeting</option>
                                             <option value="cc">Childrens class</option>
@@ -67,61 +92,34 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select class="activitiesMultiSelect" th:field="*{members[__${rowStat.index}__].commitment.activities}" multiple="multiple">
+                                        <select class="activitiesMultiSelect" name="members[0].commitment.activities" multiple="multiple">
                                             <option value="sc">Study Circle</option>
                                             <option value="dm">Devotional Meeting</option>
                                             <option value="cc">Childrens class</option>
                                             <option value="jyg">Junior Youth Group</option>
                                             <option value="hv">Home Visit</option>
-                                        </select>                                        </td>
+                                        </select>
+                                    </td>
                                 </tr>
+                                <tr id="member1"></tr>
                             </th:block>
-                            <tr th:id="member + ${groupModel.members.size()}"></tr>
-                        </th:block>
-                        <th:block th:if="${groupModel.members == null or #lists.isEmpty(groupModel.members)}">
-                            <tr id="member0">
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    <input type="text" name="members[0].name.firstName" placeholder="First name" class="form-control"/>
-                                </td>
-                                <td>
-                                    <input type="text" name="members[0].name.middleName" placeholder="Middle name" class="form-control"/>
-                                </td>
-                                <td>
-                                    <input type="text" name="members[0].name.lastName" placeholder="Last name" class="form-control"/>
-                                </td>
-                                <td>
-                                    <input type="text" name="members[0].name.sufix" placeholder="Suffix" class="form-control"/>
-                                </td>
-                                <td>
-                                    <select class="activitiesMultiSelect" name="members[0].capability.activities" multiple="multiple">
-                                        <option value="sc">Study Circle</option>
-                                        <option value="dm">Devotional Meeting</option>
-                                        <option value="cc">Childrens class</option>
-                                        <option value="jyg">Junior Youth Group</option>
-                                        <option value="hv">Home Visit</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="activitiesMultiSelect" name="members[0].commitment.activities" multiple="multiple">
-                                        <option value="sc">Study Circle</option>
-                                        <option value="dm">Devotional Meeting</option>
-                                        <option value="cc">Childrens class</option>
-                                        <option value="jyg">Junior Youth Group</option>
-                                        <option value="hv">Home Visit</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr id="member1"></tr>
-                        </th:block>
-                    </tbody>
-                </table>
-                <a id="add_row" class="btn btn-default pull-left">Add Row</a>
-                <input type="submit" value="Submit" />
-                <a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
-
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <a id="delete_row" class="btn btn-default">Delete Row</a>
+                        <a id="add_row" class="btn btn-default">Add Row</a>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="pull-right">
+                            <a th:href="'/clusterview/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster}" class="btn btn-default">
+                                Close
+                            </a>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

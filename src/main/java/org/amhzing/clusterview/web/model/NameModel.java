@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.web.model;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
@@ -60,6 +61,13 @@ public final class NameModel implements Serializable {
 
     public void setSuffix(final String suffix) {
         this.suffix = suffix;
+    }
+
+    public boolean isEmpty() {
+        return StringUtils.isBlank(firstName) &&
+                StringUtils.isBlank(middleName) &&
+                StringUtils.isBlank(lastName) &&
+                StringUtils.isBlank(suffix);
     }
 
     @Override

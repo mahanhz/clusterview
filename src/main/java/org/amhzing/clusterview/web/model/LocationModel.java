@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public final class LocationModel {
 
-    @Min(value = 0, message = "Location x is required")
+    @Min(value = 1, message = "Location x is required")
     private int coordX;
-    @Min(value = 0, message = "Location y is required")
+    @Min(value = 1, message = "Location y is required")
     private int coordY;
 
     public LocationModel() {

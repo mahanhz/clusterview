@@ -1,5 +1,7 @@
 package org.amhzing.clusterview.web.model;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -66,6 +68,12 @@ public final class MemberModel {
 
     public void setCommitment(final CommitmentModel commitment) {
         this.commitment = commitment;
+    }
+
+    public boolean isEmpty() {
+        return name.isEmpty() &&
+                CollectionUtils.isEmpty(capability.getActivities()) &&
+                CollectionUtils.isEmpty(commitment.getActivities());
     }
 
     @Override

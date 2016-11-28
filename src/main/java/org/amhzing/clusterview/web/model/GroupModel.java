@@ -15,7 +15,7 @@ public final class GroupModel {
 
     private long id;
 
-    @NotEmpty @Valid
+    @NotEmpty(message = "Group must have at least one member") @Valid
     private List<MemberModel> members;
 
     @NotNull @Valid
