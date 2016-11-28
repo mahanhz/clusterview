@@ -6,4 +6,25 @@
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mahanhz/clusterview.svg)](http://isitmaintained.com/project/mahanhz/clusterview "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/mahanhz/clusterview.svg)](http://isitmaintained.com/project/mahanhz/clusterview "Percentage of issues still open")
 
-IN PROGRESS
+A view into the details of each cluster.
+
+## Cloud deployment
+
+* Create an account on Pivotal Web Services
+* Install the CLI
+
+### To login
+
+cf login -a api.run.pivotal.io
+
+### To deploy the app
+
+cf push clusterview -p /build/libs/clusterview-1.0.0.jar
+
+### To view the logs
+
+cf logs clusterview
+
+### To restage the application
+
+cf restage clusterview

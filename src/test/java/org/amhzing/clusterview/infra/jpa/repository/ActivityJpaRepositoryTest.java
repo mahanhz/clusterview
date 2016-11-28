@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+import static org.amhzing.clusterview.helper.JpaRepositoryHelper.INITIAL_ACTIVITIES_SIZE;
 import static org.amhzing.clusterview.helper.JpaRepositoryHelper.newActivity;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,30 +28,30 @@ public class ActivityJpaRepositoryTest {
 
     @Test
     public void should_get_activity() throws Exception {
-        final ActivityEntity sc = activityJpaRepository.findOne("sc");
+        final ActivityEntity sc = activityJpaRepository.findOne("sct");
 
         assertThat(sc).isNotNull();
-        assertThat(sc.getName()).isEqualTo("Study Circle");
+        assertThat(sc.getName()).isEqualTo("SC Tutor");
     }
 
     @Test
     public void should_insert_activity() throws Exception {
-        assertThat(allActivities()).hasSize(5);
+        assertThat(allActivities()).hasSize(INITIAL_ACTIVITIES_SIZE);
 
         entityManager.persist(newActivity());
 
-        assertThat(allActivities()).hasSize(6);
+        assertThat(allActivities()).hasSize(INITIAL_ACTIVITIES_SIZE + 1);
     }
 
     @Test
     public void should_delete_activity() throws Exception {
-        assertThat(allActivities()).hasSize(5);
+        assertThat(allActivities()).hasSize(INITIAL_ACTIVITIES_SIZE);
 
         final ActivityEntity activity = newActivity();
         entityManager.persist(activity); // +1
         entityManager.remove(activity);  // -1
 
-        assertThat(allActivities()).hasSize(5);
+        assertThat(allActivities()).hasSize(INITIAL_ACTIVITIES_SIZE);
     }
 
     private List<ActivityEntity> allActivities() {

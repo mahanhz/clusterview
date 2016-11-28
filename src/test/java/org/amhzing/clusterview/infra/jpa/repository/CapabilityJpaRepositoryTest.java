@@ -23,6 +23,6 @@ public class CapabilityJpaRepositoryTest {
         final CapabilityEntity sc = capabilityJpaRepository.findOne(1L);
 
         assertThat(sc).isNotNull();
-        assertThat(sc.getActivity().getId()).isEqualToIgnoringCase("sc");
+        assertThat(sc.getActivity().getId()).isEqualToIgnoringCase("sct");
     }
 }
