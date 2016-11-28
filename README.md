@@ -10,7 +10,7 @@ A view into the details of each cluster.
 
 ## Cloud deployment
 
-* Create an account on Pivotal Web Services
+* Create an account on Pivotal Web Services (https://run.pivotal.io/)
 * Install the CLI
 
 ### To login
@@ -23,7 +23,10 @@ cf push clusterview -p /build/libs/clusterview-1.0.0.jar
 
 ### To view the logs
 
-cf logs clusterview
+See: https://docs.run.pivotal.io/devguide/deploy-apps/streaming-logs.html
+
+cf logs clusterview (this tails the log)
+cf logs clusterview --recent (displays all the lines in the Loggregator buffer)
 
 ### To restage the application
 
