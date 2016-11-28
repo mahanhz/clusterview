@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-
-    <head></head>
+    <head>
+        <th:block th:replace="se/fragments/head :: head"></th:block>
+    </head>
 
     <body>
-        <h1>Nothing to see here</h1>
+        <th:block th:replace="se/fragments/navbar :: navbar('ERROR')"></th:block>
 
-        <p th:if="${url}">
-            <b>Page:</b> <span th:text="${url}">Page URL</span>
-        </p>
+        <div class="container">
+            <div class="jumbotron">
+                <h1 style="color:red">Oops! Something went wrong!</h1>
 
-        <p th:if="${timestamp}" id='created'>
-            <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
-        </p>
+                <br/>
+                <p th:if="${url}">
+                    <b>Page:</b> <span th:text="${url}">Page URL</span>
+                </p>
 
-        <p th:if="${status}">
-            <b>There was an error:</b> <span th:text="${status}">status-code</span>
-            <span th:if="${error}" th:text="'('+${error}+')'">error ...</span>
-        </p>
+                <br/>
+                <p th:if="${timestamp}" id='created'>
+                    <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
+                    (Please reference this when reporting the issue)
+                </p>
 
-        <p>
-            <a th:href="@{/login}">Back to Login</a>
-        </p>
+                <br/>
+                <p th:if="${status}">
+                    <b>There was an error:</b> <span th:text="${status}">status-code</span>
+                    <span th:if="${error}" th:text="'('+${error}+')'">error ...</span>
+                </p>
 
+                <br/>
+                <p th:if="${errorId}">
+                    <b>Error Id:</b> <span th:text="${errorId}">Error Id should display here</span>
+                    (Please reference this when reporting the issue)
+                </p>
+
+            </div>
+        </div>
+
+        <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
     </body>
 </html>
