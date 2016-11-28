@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <body>
+        <th:block th:fragment="group-operations">
+            <div class="col-xs-2">
+                <div class="list-group">
+                    <a href="#" class="list-group-item disabled">Group operations</a>
+                    <a th:href="@{'/clusteredit/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '/newgroup'}"
+                       id="addNewGroup"
+                       class="list-group-item list-group-item-info">
+                        Add new group
+                    </a>
+                </div>
+            </div>
+        </th:block>
+    </body>
+
+</html>

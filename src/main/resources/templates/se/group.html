@@ -12,9 +12,7 @@
                     <thead>
                     <tr>
                         <th>First name</th>
-                        <th>Middle name</th>
                         <th>Last name</th>
-                        <th>Suffix</th>
                         <th>Capabilities</th>
                         <th>Commitments</th>
                     </tr>
@@ -22,9 +20,7 @@
                     <tbody>
                     <tr th:each="member : ${group.members}" class="info">
                         <td th:text="${member.name.firstName}">John</td>
-                        <td th:text="${member.name.middleName}">M</td>
                         <td th:text="${member.name.lastName}">Doe</td>
-                        <td th:text="${member.name.suffix}">Junior</td>
                         <td>
                             <table class="table">
                                 <tbody>
