@@ -5,6 +5,7 @@ import org.amhzing.clusterview.domain.repository.ActivityRepository;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
 import org.amhzing.clusterview.infra.repository.ClusterStatisticRepository;
 import org.amhzing.clusterview.infra.repository.CountryStatisticRepository;
+import org.amhzing.clusterview.infra.repository.RegionStatisticRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
