@@ -67,14 +67,7 @@ springBoot {
 
 	buildInfo {
 		additionalProperties = [
-				'description': "${description}",
-				'jenkins.node': "${System.env.NODE_NAME}",
-				'jenkins.job-name': "${System.env.JOB_NAME}",
-				'jenkins.build-timestamp': "${System.env.BUILD_TIMESTAMP}",
-				'jenkins.build-id': "${System.env.BUILD_ID}",
-				'jenkins.build-number': "${System.env.BUILD_NUMBER}",
-				'jenkins.git-commit': "${System.env.GIT_COMMIT_ID}", // Custom env variable set in the Jenkinsfile
-				'jenkins.git-branch': "${System.env.BRANCH_NAME}"
+				'description': "${description}"
 		]
 	}
 }

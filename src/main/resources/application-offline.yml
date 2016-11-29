@@ -1,2 +1,6 @@
 server:
   port: 12101
+
+spring:
+  datasource:
+    platform: h2
