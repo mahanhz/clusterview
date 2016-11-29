@@ -19,19 +19,19 @@ public final class JpaRepositoryHelper {
         // To prevent instantiation
     }
 
-    public static CountryEntity country() {
+    public static CountryEntity countryEntity() {
         final CountryEntity country = new CountryEntity();
         country.setId("se");
-        country.setRegions(ImmutableSet.of(region()));
+        country.setRegions(ImmutableSet.of(regionEntity()));
 
         return country;
     }
 
-    public static RegionEntity region() {
+    public static RegionEntity regionEntity() {
         final RegionEntity region = new RegionEntity();
         region.setId("central");
         region.setClusters(ImmutableSet.of(clusterEntity()));
-        region.setCountry(country());
+        //region.setCountry(countryEntity());
 
         return region;
     }

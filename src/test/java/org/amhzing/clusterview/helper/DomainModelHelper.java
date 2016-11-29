@@ -12,12 +12,17 @@ public final class DomainModelHelper {
     private static final Cluster.Id CLUSTER_2 = Cluster.Id.create("Cluster2");
     private static final Region.Id REGION_1 = Region.Id.create("Region1");
     private static final Region.Id REGION_2 = Region.Id.create("Region2");
+    private static final Country.Id COUNTRY_1 = Country.Id.create("Country1");
 
     private static final Member.Id MEMBER_1 = Member.Id.create(789L);
     private static final Member.Id MEMBER_2 = Member.Id.create(101L);
 
     private DomainModelHelper() {
         // To prevent instantiation
+    }
+
+    public static Country country() {
+        return Country.create(countryId(), "Country1Name", of(region()));
     }
 
     public static Region region() {
@@ -128,5 +133,9 @@ public final class DomainModelHelper {
 
     public static Region.Id anotherRegionId() {
         return REGION_2;
+    }
+
+    public static Country.Id countryId() {
+        return COUNTRY_1;
     }
 }

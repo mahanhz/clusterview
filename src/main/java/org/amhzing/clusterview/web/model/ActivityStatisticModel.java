@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class ActivityStatisticModel {
+public final class ActivityStatisticModel {
 
     private Map<String, Long> activityQuantity;
 
