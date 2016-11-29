@@ -3,6 +3,7 @@ package org.amhzing.clusterview.web.controller.se;
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
+import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -33,6 +34,9 @@ public class GroupControllerTest {
     @MockBean
     private GroupAdapter groupAdapter;
 
+    @MockBean
+    private StatisticAdapter statisticAdapter;
+    
     @Test
     public void should_get_groups() throws Exception {
         given(groupAdapter.groups(any())).willReturn(ImmutableSet.of(groupModel()));
