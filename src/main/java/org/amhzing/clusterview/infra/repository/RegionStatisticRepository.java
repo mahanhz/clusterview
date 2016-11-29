@@ -4,6 +4,7 @@ import org.amhzing.clusterview.domain.model.Activity;
 import org.amhzing.clusterview.domain.model.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.Quantity;
 import org.amhzing.clusterview.domain.model.Region;
+import org.amhzing.clusterview.domain.repository.StatisticRepository;
 import org.amhzing.clusterview.infra.jpa.mapping.ClusterEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.MemberEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.RegionEntity;
@@ -17,7 +18,7 @@ import static org.amhzing.clusterview.infra.repository.StatisticFactory.*;
 import static org.amhzing.clusterview.infra.repository.StatisticFactory.activityQuantities;
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class RegionStatisticRepository2 {
+public class RegionStatisticRepository implements StatisticRepository<Region.Id> {
 
     private RegionJpaRepository regionJpaRepository;
 
