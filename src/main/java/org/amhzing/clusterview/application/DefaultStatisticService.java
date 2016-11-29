@@ -6,7 +6,6 @@ import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.domain.model.Region;
 import org.amhzing.clusterview.infra.repository.ClusterStatisticRepository;
 import org.amhzing.clusterview.infra.repository.CountryStatisticRepository;
-import org.amhzing.clusterview.infra.repository.RegionStatisticRepository;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
