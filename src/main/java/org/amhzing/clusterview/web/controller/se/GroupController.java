@@ -1,7 +1,9 @@
 package org.amhzing.clusterview.web.controller.se;
 
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
+import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.web.controller.AbstractController;
+import org.amhzing.clusterview.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.web.model.ClusterPath;
 import org.amhzing.clusterview.web.model.GroupModel;
 import org.amhzing.clusterview.web.model.GroupPath;
@@ -15,16 +17,20 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Set;
 
 import static org.amhzing.clusterview.web.controller.MainController.CLUSTER_PATH;
+import static org.amhzing.clusterview.web.controller.MainController.STATISTICS_MODEL_ATTR;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
 public class GroupController extends AbstractController {
 
     private GroupAdapter groupAdapter;
+    private StatisticAdapter statisticAdapter;
 
     @Autowired
-    public GroupController(final GroupAdapter groupAdapter) {
+    public GroupController(final GroupAdapter groupAdapter,
+                           final StatisticAdapter statisticAdapter) {
         this.groupAdapter = notNull(groupAdapter);
+        this.statisticAdapter = notNull(statisticAdapter);
     }
 
     @GetMapping(path = CLUSTER_PATH)
@@ -33,6 +39,9 @@ public class GroupController extends AbstractController {
 
         final Set<GroupModel> groups = groupAdapter.groups(clusterPath.getCluster());
         model.addAttribute("groups", groups);
+
+        final ActivityStatisticModel statistics = statisticAdapter.clusterStats(clusterPath.getCluster());
+        model.addAttribute(STATISTICS_MODEL_ATTR, statistics);
 
         return new ModelAndView(clusterPath.getCountry() + "/cluster");
     }

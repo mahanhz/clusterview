@@ -22,6 +22,7 @@
                     </th:block>
                 </div>
             </div>
+            <th:block th:replace="se/fragments/statistics :: statistics"></th:block>
         </div>
 
         <input type="hidden" id="country" name="country" th:value="${clusterPath.country}" />

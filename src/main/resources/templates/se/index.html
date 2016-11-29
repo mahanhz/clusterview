@@ -22,6 +22,7 @@
                     <area data-group="southern-region2" th:href="@{se/southern}" shape="poly" coords="116,464,116,458,118,451,123,447,124,441,126,434,128,432,128,450,125,455,123,459,121,464,120,472,117,475,115,472" />
                 </map>
             </div>
+            <th:block th:replace="se/fragments/statistics :: statistics"></th:block>
         </div>
 
         <input type="hidden" id="country" name="country" th:value="${country}" />

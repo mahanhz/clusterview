@@ -4,10 +4,16 @@ import org.amhzing.clusterview.application.ClusterStatisticService;
 import org.amhzing.clusterview.application.CountryStatisticService;
 import org.amhzing.clusterview.application.RegionStatisticService;
 import org.amhzing.clusterview.domain.model.ActivityStatistic;
+import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Country;
+import org.amhzing.clusterview.domain.model.Region;
+import org.amhzing.clusterview.web.model.ActivityStatisticModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
+import static java.util.stream.Collectors.toMap;
 import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -27,11 +33,35 @@ public class StatisticAdapter {
         this.clusterStatisticService = notNull(clusterStatisticService);
     }
 
-    public void countryStats(final String countryId) {
+    public ActivityStatisticModel countryStats(final String countryId) {
         notBlank(countryId);
 
         final ActivityStatistic statistics = countryStatisticService.statistics(Country.Id.create(countryId));
 
-        statistics.getActivityQuantity();
+        return ActivityStatisticModel.create(activityQuantities(statistics));
+    }
+
+    public ActivityStatisticModel regionStats(final String regionId) {
+        notBlank(regionId);
+
+        final ActivityStatistic statistics = regionStatisticService.statistics(Region.Id.create(regionId));
+
+        return ActivityStatisticModel.create(activityQuantities(statistics));
+    }
+
+    public ActivityStatisticModel clusterStats(final String clusterId) {
+        notBlank(clusterId);
+
+        final ActivityStatistic statistics = clusterStatisticService.statistics(Cluster.Id.create(clusterId));
+
+        return ActivityStatisticModel.create(activityQuantities(statistics));
+    }
+
+    private Map<String, Long> activityQuantities(final ActivityStatistic statistics) {
+        return statistics.getActivityQuantity()
+                         .entrySet()
+                         .stream()
+                         .collect(toMap(entry -> entry.getKey().getName(),
+                                        entry -> entry.getValue().getValue()));
     }
 }
