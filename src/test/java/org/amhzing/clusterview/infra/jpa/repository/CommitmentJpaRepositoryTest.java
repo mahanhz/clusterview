@@ -23,6 +23,6 @@ public class CommitmentJpaRepositoryTest {
         final CommitmentEntity commitment = commitmentJpaRepository.findOne(15L);
 
         assertThat(commitment).isNotNull();
-        assertThat(commitment.getActivity().getId()).isEqualToIgnoringCase("JYGA");
+        assertThat(commitment.getActivity().getId()).isEqualToIgnoringCase("fh");
     }
 }

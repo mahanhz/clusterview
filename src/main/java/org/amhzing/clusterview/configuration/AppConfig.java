@@ -39,17 +39,9 @@ public class AppConfig {
     }
 
     @Bean
-    public CountryStatisticService countryStatisticService() {
-        return new CountryStatisticService(countryStatisticRepository);
-    }
-
-    @Bean
-    public RegionStatisticService regionStatisticService() {
-        return new RegionStatisticService(regionStatisticRepository);
-    }
-
-    @Bean
-    public ClusterStatisticService clusterStatisticService() {
-        return new ClusterStatisticService(clusterStatisticRepository);
+    public StatisticService statisticService() {
+        return new DefaultStatisticService(countryStatisticRepository,
+                                           regionStatisticRepository,
+                                           clusterStatisticRepository);
     }
 }

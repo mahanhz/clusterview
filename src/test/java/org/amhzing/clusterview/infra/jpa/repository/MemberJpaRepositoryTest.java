@@ -78,8 +78,8 @@ public class MemberJpaRepositoryTest {
         final MemberEntity member = this.memberJpaRepository.findOne(111L);
         entityManager.remove(member);
 
-        assertThat(allMembers()).hasSize(INITIAL_MEMBERS_SIZE -1);
-        assertThat(allCommitments()).hasSize(INITIAL_COMMITMENTS_SIZE - 1);
+        assertThat(allMembers()).hasSize(INITIAL_MEMBERS_SIZE - 1);
+        assertThat(allCommitments()).hasSize(INITIAL_COMMITMENTS_SIZE - 2);
         assertThat(allCapabilities()).hasSize(INITIAL_CAPABILITIES_SIZE - 3);
         assertThat(allActivities()).hasSize(INITIAL_ACTIVITIES_SIZE);
     }

@@ -1,8 +1,6 @@
 package org.amhzing.clusterview.web.adapter;
 
-import org.amhzing.clusterview.application.ClusterStatisticService;
-import org.amhzing.clusterview.application.CountryStatisticService;
-import org.amhzing.clusterview.application.RegionStatisticService;
+import org.amhzing.clusterview.application.StatisticService;
 import org.amhzing.clusterview.domain.model.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Country;
@@ -20,23 +18,17 @@ import static org.apache.commons.lang3.Validate.notNull;
 @Service
 public class StatisticAdapter {
 
-    private CountryStatisticService countryStatisticService;
-    private RegionStatisticService regionStatisticService;
-    private ClusterStatisticService clusterStatisticService;
+    private StatisticService statisticService;
 
     @Autowired
-    public StatisticAdapter(final CountryStatisticService countryStatisticService,
-                            final RegionStatisticService regionStatisticService,
-                            final ClusterStatisticService clusterStatisticService) {
-        this.countryStatisticService = notNull(countryStatisticService);
-        this.regionStatisticService = notNull(regionStatisticService);
-        this.clusterStatisticService = notNull(clusterStatisticService);
+    public StatisticAdapter(final StatisticService statisticService) {
+        this.statisticService = notNull(statisticService);
     }
 
     public ActivityStatisticModel countryStats(final String countryId) {
         notBlank(countryId);
 
-        final ActivityStatistic statistics = countryStatisticService.statistics(Country.Id.create(countryId));
+        final ActivityStatistic statistics = statisticService.statistics(Country.Id.create(countryId));
 
         return ActivityStatisticModel.create(activityQuantities(statistics));
     }
@@ -44,7 +36,7 @@ public class StatisticAdapter {
     public ActivityStatisticModel regionStats(final String regionId) {
         notBlank(regionId);
 
-        final ActivityStatistic statistics = regionStatisticService.statistics(Region.Id.create(regionId));
+        final ActivityStatistic statistics = statisticService.statistics(Region.Id.create(regionId));
 
         return ActivityStatisticModel.create(activityQuantities(statistics));
     }
@@ -52,7 +44,7 @@ public class StatisticAdapter {
     public ActivityStatisticModel clusterStats(final String clusterId) {
         notBlank(clusterId);
 
-        final ActivityStatistic statistics = clusterStatisticService.statistics(Cluster.Id.create(clusterId));
+        final ActivityStatistic statistics = statisticService.statistics(Cluster.Id.create(clusterId));
 
         return ActivityStatisticModel.create(activityQuantities(statistics));
     }
