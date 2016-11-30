@@ -3,6 +3,8 @@ package org.amhzing.clusterview.web.adapter;
 import com.google.common.collect.ImmutableMap;
 import org.amhzing.clusterview.application.StatisticService;
 import org.amhzing.clusterview.domain.model.*;
+import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
+import org.amhzing.clusterview.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;

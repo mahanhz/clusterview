@@ -1,4 +1,6 @@
-package org.amhzing.clusterview.domain.model;
+package org.amhzing.clusterview.domain.model.statistic;
+
+import org.amhzing.clusterview.domain.model.Activity;
 
 import java.util.Map;
 import java.util.Objects;

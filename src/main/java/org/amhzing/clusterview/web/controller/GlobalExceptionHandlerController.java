@@ -24,7 +24,7 @@ public class GlobalExceptionHandlerController {
         final ModelAndView mav = new ModelAndView();
         mav.addObject("cameFrom", request.getRequestURI());
         mav.addObject("errorId", errorId);
-        mav.setViewName("error");
+        mav.setViewName("se/error");
 
         return mav;
     }

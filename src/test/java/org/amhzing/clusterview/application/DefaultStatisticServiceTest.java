@@ -2,6 +2,8 @@ package org.amhzing.clusterview.application;
 
 import com.google.common.collect.ImmutableMap;
 import org.amhzing.clusterview.domain.model.*;
+import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
+import org.amhzing.clusterview.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.infra.repository.ClusterStatisticRepository;
 import org.amhzing.clusterview.infra.repository.CountryStatisticRepository;
 import org.amhzing.clusterview.infra.repository.RegionStatisticRepository;

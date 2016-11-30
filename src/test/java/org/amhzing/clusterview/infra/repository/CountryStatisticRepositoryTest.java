@@ -1,6 +1,6 @@
 package org.amhzing.clusterview.infra.repository;
 
-import org.amhzing.clusterview.domain.model.ActivityStatistic;
+import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.infra.jpa.repository.CountryJpaRepository;
 import org.junit.Test;

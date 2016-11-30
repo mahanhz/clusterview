@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.domain.model;
+package org.amhzing.clusterview.domain.model.statistic;
 
 import java.util.Objects;
 

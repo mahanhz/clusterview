@@ -3,11 +3,11 @@ spring:
     generate-ddl: true
 
 server:
-  session:
-    timeout: 600 # 10 minutes
   error:
     whitelabel:
       enabled: false
+  session:
+    timeout: 600 # 10 minutes
 
 management:
   context-path: /manage

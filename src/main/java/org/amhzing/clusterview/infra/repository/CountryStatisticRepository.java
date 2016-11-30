@@ -1,9 +1,9 @@
 package org.amhzing.clusterview.infra.repository;
 
 import org.amhzing.clusterview.domain.model.Activity;
-import org.amhzing.clusterview.domain.model.ActivityStatistic;
+import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.Country;
-import org.amhzing.clusterview.domain.model.Quantity;
+import org.amhzing.clusterview.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.domain.repository.StatisticRepository;
 import org.amhzing.clusterview.infra.jpa.mapping.ClusterEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.CountryEntity;

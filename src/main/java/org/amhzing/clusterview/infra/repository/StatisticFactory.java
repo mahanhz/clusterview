@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.infra.repository;
 
 import org.amhzing.clusterview.domain.model.Activity;
-import org.amhzing.clusterview.domain.model.Quantity;
+import org.amhzing.clusterview.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.infra.jpa.mapping.*;
 
 import java.util.Map;
