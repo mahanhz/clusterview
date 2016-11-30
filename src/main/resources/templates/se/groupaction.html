@@ -7,7 +7,7 @@
 <body>
     <th:block th:replace="se/fragments/navbar :: navbar(${groupPath.cluster} + ' cluster')"></th:block>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="jumbotron">
             <form action="#" th:action="${groupPath.action}" th:object="${groupModel}" th:method="${groupPath.method}">
 

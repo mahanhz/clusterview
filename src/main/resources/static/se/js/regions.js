@@ -50,3 +50,7 @@ $('#large').bind('click',function() {
 $('#xlarge').bind('click',function() {
     $('.regionsImage').mapster('resize', 490, 0, 1000);
 });
+
+$('#xxlarge').bind('click',function() {
+    $('.regionsImage').mapster('resize', 600, 0, 1000);
+});

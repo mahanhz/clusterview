@@ -85,3 +85,7 @@ $('#large').bind('click',function() {
 $('#xlarge').bind('click',function() {
     $('.centralRegionImage').mapster('resize', 490, 0, 1000);
 });
+
+$('#xxlarge').bind('click',function() {
+    $('.centralRegionImage').mapster('resize', 600, 0, 1000);
+});
