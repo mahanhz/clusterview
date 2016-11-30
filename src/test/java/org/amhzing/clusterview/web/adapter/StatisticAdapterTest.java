@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.web.adapter;
 
 import com.google.common.collect.ImmutableMap;
+import org.amhzing.clusterview.application.ActivityService;
 import org.amhzing.clusterview.application.StatisticService;
 import org.amhzing.clusterview.domain.model.*;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
@@ -22,6 +23,8 @@ public class StatisticAdapterTest {
 
     @Mock
     private StatisticService statisticService;
+    @Mock
+    private ActivityService activityService;
 
     @InjectMocks
     private StatisticAdapter statisticAdapter;

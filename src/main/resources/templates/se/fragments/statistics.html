@@ -5,12 +5,20 @@
     <body>
         <th:block th:fragment="statistics">
             <div class="col-xs-3" th:if="${statistics != null}">
-                <div class="list-group">
-                    <div class="list-group-item disabled">Statistics</div>
-                    <div class="list-group-item"
-                         th:each="statistic : ${statistics.activityQuantity}"
-                         th:text="${statistic.key} + ': ' + ${statistic.value}">Statistic</div>
-                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr >
+                            <th>Activity</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="statistic : ${statistics.activityQuantity}">
+                            <td th:text="${statistic.key}" />
+                            <td th:text="${statistic.value}" />
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </th:block>
     </body>

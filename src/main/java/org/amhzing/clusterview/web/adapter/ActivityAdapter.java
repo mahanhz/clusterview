@@ -26,6 +26,7 @@ public class ActivityAdapter {
 
         return activities.stream()
                          .map(activity -> activityModel(activity))
+                         .sorted((a1, a2) -> a1.getName().compareTo(a2.getName()))
                          .collect(Collectors.toList());
     }
 

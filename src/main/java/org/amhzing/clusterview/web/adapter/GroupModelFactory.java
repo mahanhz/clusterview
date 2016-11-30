@@ -66,6 +66,7 @@ public final class GroupModelFactory {
     private static List<ActivityModel> activities(final Set<Activity> activities) {
         return activities.stream()
                          .map(GroupModelFactory::activity)
+                         .sorted((a1, a2) -> a1.getName().compareTo(a2.getName()))
                          .collect(Collectors.toList());
     }
 
