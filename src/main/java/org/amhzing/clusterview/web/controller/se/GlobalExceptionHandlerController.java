@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.web.controller;
+package org.amhzing.clusterview.web.controller.se;
 
 import com.fasterxml.uuid.Generators;
 import org.slf4j.Logger;

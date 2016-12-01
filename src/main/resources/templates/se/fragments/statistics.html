@@ -7,6 +7,22 @@
             <div class="col-xs-3" th:if="${statistics != null}">
                 <table class="table table-hover">
                     <thead>
+                    <tr >
+                        <th></th>
+                        <th>Total</th>
+                        <th>CoI</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="statistic : ${statistics.coreActivities}">
+                        <td th:text="${statistic.name}" />
+                        <td th:text="${statistic.totalParticipants}" />
+                        <td th:text="${statistic.communityOfInterest}" />
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table table-hover">
+                    <thead>
                         <tr >
                             <th>Activity</th>
                             <th>Quantity</th>

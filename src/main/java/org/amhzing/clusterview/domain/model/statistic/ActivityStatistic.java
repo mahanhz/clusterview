@@ -4,23 +4,31 @@ import org.amhzing.clusterview.domain.model.Activity;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
+import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public class ActivityStatistic {
 
     private Map<Activity, Quantity> activityQuantity;
+    private Set<CoreActivity> coreActivities;
 
-    private ActivityStatistic(final Map<Activity, Quantity> activityQuantity) {
-        this.activityQuantity = notNull(activityQuantity);
+    private ActivityStatistic(final Map<Activity, Quantity> activityQuantity, final Set<CoreActivity> coreActivities) {
+        this.activityQuantity = notNull(activityQuantity);;
+        this.coreActivities = noNullElements(coreActivities);
     }
 
-    public static ActivityStatistic create(final Map<Activity, Quantity> activityQuantity) {
-        return new ActivityStatistic(activityQuantity);
+    public static ActivityStatistic create(final Map<Activity, Quantity> activityQuantity, final Set<CoreActivity> coreActivities) {
+        return new ActivityStatistic(activityQuantity, coreActivities);
     }
 
     public Map<Activity, Quantity> getActivityQuantity() {
         return activityQuantity;
+    }
+
+    public Set<CoreActivity> getCoreActivities() {
+        return coreActivities;
     }
 
     @Override
@@ -28,18 +36,20 @@ public class ActivityStatistic {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final ActivityStatistic that = (ActivityStatistic) o;
-        return Objects.equals(activityQuantity, that.activityQuantity);
+        return Objects.equals(activityQuantity, that.activityQuantity) &&
+                Objects.equals(coreActivities, that.coreActivities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(activityQuantity);
+        return Objects.hash(activityQuantity, coreActivities);
     }
 
     @Override
     public String toString() {
         return "ActivityStatistic{" +
                 "activityQuantity=" + activityQuantity +
+                ", coreActivities=" + coreActivities +
                 '}';
     }
 }

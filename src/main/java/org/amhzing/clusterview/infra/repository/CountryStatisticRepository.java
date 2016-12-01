@@ -1,8 +1,9 @@
 package org.amhzing.clusterview.infra.repository;
 
 import org.amhzing.clusterview.domain.model.Activity;
-import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.Country;
+import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
+import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.domain.repository.StatisticRepository;
 import org.amhzing.clusterview.infra.jpa.mapping.ClusterEntity;
@@ -12,12 +13,14 @@ import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.infra.jpa.repository.CountryJpaRepository;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.amhzing.clusterview.infra.repository.StatisticFactory.*;
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class CountryStatisticRepository implements StatisticRepository<Country.Id> {
+public class CountryStatisticRepository implements StatisticRepository<Country.Id, ActivityStatistic> {
 
     private CountryJpaRepository countryJpaRepository;
 
@@ -32,14 +35,16 @@ public class CountryStatisticRepository implements StatisticRepository<Country.I
 
         final Stream<ClusterEntity> clusterEntityStream = clusterEntities(country);
 
-        final Stream<TeamEntity> teamEntityStream = teamEntities(clusterEntityStream);
+        final Set<TeamEntity> teamEntitySet = teamEntities(clusterEntityStream).collect(Collectors.toSet());
 
-        final Stream<MemberEntity> memberEntityStream = memberEntities(teamEntityStream);
+        final Stream<MemberEntity> memberEntityStream = memberEntities(teamEntitySet.stream());
 
         final Stream<Activity> activityStream = activities(memberEntityStream);
 
         final Map<Activity, Quantity> activityQuantityMap = activityQuantities(activityStream);
 
-        return ActivityStatistic.create(activityQuantityMap);
+        final Set<CoreActivity> coreActivities = coreActivities(teamEntitySet);
+
+        return ActivityStatistic.create(activityQuantityMap, coreActivities);
     }
 }

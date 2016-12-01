@@ -1,16 +1,18 @@
 package org.amhzing.clusterview.infra.repository;
 
 import org.amhzing.clusterview.domain.model.Activity;
+import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.infra.jpa.mapping.*;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.*;
 
 public final class StatisticFactory {
 
@@ -50,7 +52,38 @@ public final class StatisticFactory {
                                                  collectingAndThen(counting(), Quantity::create)));
     }
 
+    public static Set<CoreActivity> coreActivities(final Set<TeamEntity> teamEntityStream) {
+        final Map<CoreActivityEntity, List<ParticipantQuantity>> collect =
+                teamEntityStream.stream().flatMap(team -> team.getCoreActivities().entrySet().stream())
+                                .collect(groupingBy(Map.Entry::getKey,
+                                                    Collectors.mapping(a -> ParticipantQuantity.create(a.getValue().getTotal(),
+                                                                                                       a.getValue().getCommunityOfInterest()),
+                                                                       Collectors.toList())));
+
+        return collect.entrySet()
+                      .stream()
+                      .map(StatisticFactory::convertCoreActivity)
+                      .collect(Collectors.toSet());
+    }
+
     private static Activity activity(final ActivityEntity activity) {
         return Activity.create(Activity.Id.create(activity.getId()), activity.getName());
+    }
+
+    private static CoreActivity convertCoreActivity(final Map.Entry<CoreActivityEntity, List<ParticipantQuantity>> entry) {
+        final CoreActivityEntity activity = entry.getKey();
+        final ParticipantQuantity quantity = convertParticipantQuantities(entry.getValue());
+
+        return CoreActivity.create(CoreActivity.Id.create(activity.getId()),
+                                   activity.getName(),
+                                   Quantity.create(quantity.getTotal()),
+                                   Quantity.create(quantity.getCommunityOfInterest()));
+    }
+
+    private static ParticipantQuantity convertParticipantQuantities(final List<ParticipantQuantity> participantQuantities) {
+        return participantQuantities.stream()
+                                    .reduce((a, b) -> ParticipantQuantity.create(a.getTotal() + b.getTotal(),
+                                                                                 a.getCommunityOfInterest() + b.getCommunityOfInterest()))
+                                    .orElseGet(() -> ParticipantQuantity.create(0L, 0L));
     }
 }
