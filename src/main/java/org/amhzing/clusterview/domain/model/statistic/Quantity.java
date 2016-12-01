@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.isTrue;
 
-public class Quantity {
+public final class Quantity {
 
     public static final int MIN_QUANTITY = 0;
 

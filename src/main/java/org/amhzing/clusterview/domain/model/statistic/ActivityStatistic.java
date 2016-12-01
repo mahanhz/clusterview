@@ -11,7 +11,7 @@ import static java.util.Collections.emptySet;
 import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class ActivityStatistic {
+public final class ActivityStatistic {
 
     private Map<Activity, Quantity> activityQuantity;
     private Set<CoreActivity> coreActivities;
