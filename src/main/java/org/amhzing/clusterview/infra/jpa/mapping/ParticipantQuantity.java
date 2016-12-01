@@ -9,6 +9,18 @@ public class ParticipantQuantity {
     private long total;
     private long communityOfInterest;
 
+    public ParticipantQuantity() {
+    }
+
+    private ParticipantQuantity(final long total, final long communityOfInterest) {
+        this.total = total;
+        this.communityOfInterest = communityOfInterest;
+    }
+
+    public static ParticipantQuantity create(final long total, final long communityOfInterest) {
+        return new ParticipantQuantity(total, communityOfInterest);
+    }
+
     public long getTotal() {
         return total;
     }

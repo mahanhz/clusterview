@@ -2,6 +2,7 @@ package org.amhzing.clusterview.configuration;
 
 import org.amhzing.clusterview.application.*;
 import org.amhzing.clusterview.domain.repository.ActivityRepository;
+import org.amhzing.clusterview.domain.repository.CoreActivityRepository;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
 import org.amhzing.clusterview.infra.repository.ClusterStatisticRepository;
 import org.amhzing.clusterview.infra.repository.CountryStatisticRepository;
@@ -20,6 +21,9 @@ public class AppConfig {
     private ActivityRepository activityRepository;
 
     @Autowired
+    private CoreActivityRepository coreActivityRepository;
+
+    @Autowired
     private CountryStatisticRepository countryStatisticRepository;
 
     @Autowired
@@ -36,6 +40,11 @@ public class AppConfig {
     @Bean
     public ActivityService activityService() {
         return new DefaultActivityService(activityRepository);
+    }
+
+    @Bean
+    public CoreActivityService coreActivityService() {
+        return new DefaultCoreActivityService(coreActivityRepository);
     }
 
     @Bean

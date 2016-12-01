@@ -1,14 +1,17 @@
 package org.amhzing.clusterview.infra.repository;
 
 import org.amhzing.clusterview.domain.model.*;
+import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.infra.jpa.mapping.*;
 import org.amhzing.clusterview.infra.jpa.mapping.Location;
 import org.amhzing.clusterview.infra.jpa.mapping.Name;
 import org.amhzing.clusterview.infra.jpa.repository.ActivityJpaRepository;
 
+import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.toSet;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public class TeamEntityFactory {
@@ -31,6 +34,8 @@ public class TeamEntityFactory {
         teamEntity.setLocation(convertLocation(group.getLocation()));
         teamEntity.getMembers().clear();
         teamEntity.getMembers().addAll(convertMembers(group.getMembers(), teamEntity));
+        teamEntity.getCoreActivities().clear();
+        teamEntity.getCoreActivities().putAll(convertCoreActivities(group.getCoreActivities()));
         teamEntity.setCluster(teamEntity.getCluster());
 
         return teamEntity;
@@ -43,6 +48,7 @@ public class TeamEntityFactory {
         final TeamEntity teamEntity = new TeamEntity();
         teamEntity.setLocation(convertLocation(group.getLocation()));
         teamEntity.setMembers(convertMembers(group.getMembers(), teamEntity));
+        teamEntity.setCoreActivities(convertCoreActivities(group.getCoreActivities()));
         teamEntity.setCluster(clusterEntity);
 
         return teamEntity;
@@ -55,7 +61,25 @@ public class TeamEntityFactory {
     private Set<MemberEntity> convertMembers(final Set<Member> members, final TeamEntity teamEntity) {
         return members.stream()
                       .map(member -> convertMember(member, teamEntity))
-                      .collect(Collectors.toSet());
+                      .collect(toSet());
+    }
+
+    private Map<CoreActivityEntity, ParticipantQuantity> convertCoreActivities(final Set<CoreActivity> coreActivities) {
+        return coreActivities.stream()
+                             .collect(toMap(this::convertCoreActivity, this::convertParticipantQuantity));
+    }
+
+    private ParticipantQuantity convertParticipantQuantity(final CoreActivity coreActivity) {
+        return ParticipantQuantity.create(coreActivity.getTotalParticipants().getValue(),
+                                          coreActivity.getCommunityOfInterest().getValue());
+    }
+
+    private CoreActivityEntity convertCoreActivity(final CoreActivity coreActivity) {
+        final CoreActivityEntity coreActivityEntity = new CoreActivityEntity();
+        coreActivityEntity.setId(coreActivity.getId().getId());
+        coreActivityEntity.setName(coreActivity.getName());
+
+        return coreActivityEntity;
     }
 
     private MemberEntity convertMember(final Member member, final TeamEntity teamEntity) {
@@ -84,14 +108,14 @@ public class TeamEntityFactory {
         return capability.getActivities()
                          .stream()
                          .map(activity -> CapabilityEntity.create(activity(activity), memberEntity))
-                         .collect(Collectors.toSet());
+                         .collect(toSet());
     }
 
     private Set<CommitmentEntity> convertCommitments(final Commitment commitment, final MemberEntity memberEntity) {
         return commitment.getActivities()
                          .stream()
                          .map(activity -> CommitmentEntity.create(activity(activity), memberEntity))
-                         .collect(Collectors.toSet());
+                         .collect(toSet());
     }
 
     private ActivityEntity activity(final Activity activity) {

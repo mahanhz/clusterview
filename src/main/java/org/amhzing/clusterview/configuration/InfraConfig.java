@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.configuration;
 
 import org.amhzing.clusterview.domain.repository.ActivityRepository;
+import org.amhzing.clusterview.domain.repository.CoreActivityRepository;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
 import org.amhzing.clusterview.infra.jpa.repository.*;
 import org.amhzing.clusterview.infra.repository.*;
@@ -26,6 +27,9 @@ public class InfraConfig {
     @Autowired
     private ActivityJpaRepository activityJpaRepository;
 
+    @Autowired
+    private CoreActivityJpaRepository coreActivityJpaRepository;
+
     @Bean
     public GroupRepository groupRepository() {
         return new DefaultGroupRepository(clusterJpaRepository, teamJpaRepository, activityJpaRepository);
@@ -34,6 +38,11 @@ public class InfraConfig {
     @Bean
     public ActivityRepository activityRepository() {
         return new DefaultActivityRepository(activityJpaRepository);
+    }
+
+    @Bean
+    public CoreActivityRepository coreActivityRepository() {
+        return new DefaultCoreActivityRepository(coreActivityJpaRepository);
     }
 
     @Bean

@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.lang3.Validate.noNullElements;
+import static org.apache.commons.lang3.Validate.notNull;
+
 public final class GroupModelFactory {
 
     private GroupModelFactory() {
@@ -15,25 +18,30 @@ public final class GroupModelFactory {
     }
 
     public static Set<GroupModel> convertGroups(final Set<Group> groups) {
+        noNullElements(groups);
+
         return groups.stream()
                      .map(GroupModelFactory::convertGroup)
                      .collect(Collectors.toSet());
     }
 
     public static GroupModel convertGroup(final Group group) {
+        notNull(group);
+
         return GroupModel.create(group.getId().getId(),
                                  convertMembers(group.getMembers()),
                                  convertLocation(group.getLocation()),
-                                 coreAcivities(group.getCoreActivities()));
+                                 coreActivities(group.getCoreActivities()));
     }
 
     private static LocationModel convertLocation(final Location location) {
         return LocationModel.create(location.getCoordX(), location.getCoordY());
     }
 
-    private static List<CoreActivityModel> coreAcivities(final Set<CoreActivity> coreActivities) {
+    private static List<CoreActivityModel> coreActivities(final Set<CoreActivity> coreActivities) {
         return coreActivities.stream()
                              .map(coreActivity -> convertCoreActivity(coreActivity))
+                             .sorted((a1, a2) -> a1.getName().compareTo(a2.getName()))
                              .collect(Collectors.toList());
     }
 
@@ -47,6 +55,7 @@ public final class GroupModelFactory {
     private static List<MemberModel> convertMembers(final Set<Member> members) {
         return members.stream()
                       .map(GroupModelFactory::convertMember)
+                      .sorted((a1, a2) -> a1.getName().getLastName().compareTo(a2.getName().getLastName()))
                       .collect(Collectors.toList());
     }
 
