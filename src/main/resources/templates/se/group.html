@@ -8,38 +8,60 @@
 
         <div class="container-fluid">
             <div class="row">
+                <th:block th:each="coreActivity : ${group.coreActivities}">
+                    <div th:class="'col-xs-' + (12 / ${group.coreActivities.size()})">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Total</th>
+                                    <th>CoI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="default">
+                                    <td th:text="${coreActivity.name}">Study Circle</td>
+                                    <td th:text="${coreActivity.totalParticipants}">10</td>
+                                    <td th:text="${coreActivity.communityOfInterest}">5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </th:block>
+            </div>
+            <div class="row">
                 <table class="table table-striped table-hover table-condensed">
                     <thead>
-                    <tr>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Capabilities</th>
-                        <th>Commitments</th>
-                    </tr>
+                        <tr>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Capabilities</th>
+                            <th>Commitments</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="member : ${group.members}" class="info">
-                        <td th:text="${member.name.firstName}">John</td>
-                        <td th:text="${member.name.lastName}">Doe</td>
-                        <td>
-                            <table class="table">
-                                <tbody>
-                                <tr th:each="activity : ${member.capability.activities}" class="default">
-                                    <td th:text="${activity.name}">Study Circle</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td>
-                            <table class="table">
-                                <tbody>
-                                <tr th:each="activity : ${member.commitment.activities}" class="warning">
-                                    <td th:text="${activity.name}">Study Circle</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
+                        <tr th:each="member : ${group.members}" class="info">
+                            <td th:text="${member.name.firstName}">John</td>
+                            <td th:text="${member.name.lastName}">Doe</td>
+                            <td>
+                                <table class="table">
+                                    <tbody>
+                                    <tr th:each="activity : ${member.capability.activities}" class="default">
+                                        <td th:text="${activity.name}">Study Circle</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="table">
+                                    <tbody>
+                                    <tr th:each="activity : ${member.commitment.activities}" class="warning">
+                                        <td th:text="${activity.name}">Study Circle</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

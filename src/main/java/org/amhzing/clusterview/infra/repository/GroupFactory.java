@@ -1,10 +1,13 @@
 package org.amhzing.clusterview.infra.repository;
 
 import org.amhzing.clusterview.domain.model.*;
+import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
+import org.amhzing.clusterview.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.infra.jpa.mapping.*;
 import org.amhzing.clusterview.infra.jpa.mapping.Location;
 import org.amhzing.clusterview.infra.jpa.mapping.Name;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,11 +34,28 @@ public final class GroupFactory {
 
         return Group.create(Group.Id.create(team.getId()),
                             convertMembers(team.getMembers()),
-                            convertLocation(team.getLocation()));
+                            convertLocation(team.getLocation()),
+                            convertCoreActivities(team.getCoreActivities()));
     }
 
     private static org.amhzing.clusterview.domain.model.Location convertLocation(final Location location) {
         return org.amhzing.clusterview.domain.model.Location.create(location.getX(), location.getY());
+    }
+
+    private static Set<CoreActivity> convertCoreActivities(final Map<CoreActivityEntity, ParticipantQuantity> coreActivityQuantities) {
+        return coreActivityQuantities.entrySet().stream()
+                                     .map(GroupFactory::convertCoreActivity)
+                                     .collect(Collectors.toSet());
+    }
+
+    private static CoreActivity convertCoreActivity(final Map.Entry<CoreActivityEntity, ParticipantQuantity> entry) {
+        final CoreActivityEntity activity = entry.getKey();
+        final ParticipantQuantity quantity = entry.getValue();
+
+        return CoreActivity.create(CoreActivity.Id.create(activity.getId()),
+                                   activity.getName(),
+                                   Quantity.create(quantity.getTotal()),
+                                   Quantity.create(quantity.getCommunityOfInterest()));
     }
 
     private static Set<Member> convertMembers(final Set<MemberEntity> members) {

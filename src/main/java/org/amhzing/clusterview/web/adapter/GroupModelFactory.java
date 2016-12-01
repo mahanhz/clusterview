@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.web.adapter;
 
 import org.amhzing.clusterview.domain.model.*;
+import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.web.model.*;
 
 import java.util.List;
@@ -22,11 +23,25 @@ public final class GroupModelFactory {
     public static GroupModel convertGroup(final Group group) {
         return GroupModel.create(group.getId().getId(),
                                  convertMembers(group.getMembers()),
-                                 convertLocation(group.getLocation()));
+                                 convertLocation(group.getLocation()),
+                                 coreAcivities(group.getCoreActivities()));
     }
 
     private static LocationModel convertLocation(final Location location) {
         return LocationModel.create(location.getCoordX(), location.getCoordY());
+    }
+
+    private static List<CoreActivityModel> coreAcivities(final Set<CoreActivity> coreActivities) {
+        return coreActivities.stream()
+                             .map(coreActivity -> convertCoreActivity(coreActivity))
+                             .collect(Collectors.toList());
+    }
+
+    private static CoreActivityModel convertCoreActivity(final CoreActivity coreActivity) {
+        return CoreActivityModel.create(coreActivity.getId().getId(),
+                                        coreActivity.getName(),
+                                        coreActivity.getTotalParticipants().getValue(),
+                                        coreActivity.getCommunityOfInterest().getValue());
     }
 
     private static List<MemberModel> convertMembers(final Set<Member> members) {
