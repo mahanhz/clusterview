@@ -9,6 +9,11 @@ INSERT INTO ACTIVITY VALUES('ccp', 'CC Participant');
 INSERT INTO ACTIVITY VALUES('fh', 'Fireside Host');
 INSERT INTO ACTIVITY VALUES('fp', 'Fireside Participant');
 
+INSERT INTO COREACTIVITY VALUES('sc', 'Study Circle');
+INSERT INTO COREACTIVITY VALUES('jyg', 'Junior Youth Group');
+INSERT INTO COREACTIVITY VALUES('dm', 'Devotional Meeting');
+INSERT INTO COREACTIVITY VALUES('cc', 'Childrens Class');
+
 INSERT INTO COUNTRY VALUES('se');
 
 INSERT INTO REGION VALUES('northern', '', 'se');
@@ -22,6 +27,9 @@ INSERT INTO CLUSTER VALUES('skane', '', 'southern');
 INSERT INTO TEAM VALUES(901, 262, 413.125, 'stockholm');
 INSERT INTO TEAM VALUES(902, 189, 443.125, 'stockholm');
 INSERT INTO TEAM VALUES(903, 58, 69, 'uppsala');
+
+INSERT INTO TEAMS_COREACTIVITIES  VALUES(901, 5, 12, 'sc');
+INSERT INTO TEAMS_COREACTIVITIES  VALUES(901, 8, 9, 'jyg');
 
 /* Hibernate generates columns in alphabetic order */
 INSERT INTO MEMBER VALUES(111, 'John', 'Doe', 'M', 'I', 901);

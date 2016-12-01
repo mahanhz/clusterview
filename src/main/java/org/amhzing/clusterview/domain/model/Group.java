@@ -1,5 +1,7 @@
 package org.amhzing.clusterview.domain.model;
 
+import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,27 +13,32 @@ public final class Group {
     private Id id;
     private Set<Member> members;
     private Location location;
+    private Set<CoreActivity> coreActivities;
 
     public Group() {
     }
 
-    private Group(final Set<Member> members, final Location location) {
-        this.members = members;
-        this.location = location;
+    private Group(final Id id, final Set<Member> members, final Location location, final Set<CoreActivity> coreActivities) {
+        this.id = notNull(id);
+        this.members = noNullElements(members);
+        this.location = notNull(location);
+        this.coreActivities = noNullElements(coreActivities);
     }
 
+    @Deprecated
     private Group(final Id id, final Set<Member> members, final Location location) {
         this.id = notNull(id);
         this.members = noNullElements(members);
         this.location = notNull(location);
     }
 
+    @Deprecated
     public static Group create(final Id id, final Set<Member> members, final Location location) {
         return new Group(id, members, location);
     }
 
-    public static Group create(final Set<Member> members, final Location location) {
-        return new Group(members, location);
+    public static Group create(final Id id, final Set<Member> members, final Location location, final Set<CoreActivity> coreActivities) {
+        return new Group(id, members, location, coreActivities);
     }
 
     public Id getId() {
@@ -46,6 +53,10 @@ public final class Group {
         return location;
     }
 
+    public Set<CoreActivity> getCoreActivities() {
+        return coreActivities;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -53,12 +64,13 @@ public final class Group {
         final Group group = (Group) o;
         return Objects.equals(id, group.id) &&
                 Objects.equals(members, group.members) &&
-                Objects.equals(location, group.location);
+                Objects.equals(location, group.location) &&
+                Objects.equals(coreActivities, group.coreActivities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, members, location);
+        return Objects.hash(id, members, location, coreActivities);
     }
 
     @Override
@@ -67,6 +79,7 @@ public final class Group {
                 "id=" + id +
                 ", members=" + members +
                 ", location=" + location +
+                ", coreActivities=" + coreActivities +
                 '}';
     }
 
