@@ -1,9 +1,12 @@
 package org.amhzing.clusterview.web.adapter;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.application.ActivityService;
 import org.amhzing.clusterview.application.StatisticService;
-import org.amhzing.clusterview.domain.model.*;
+import org.amhzing.clusterview.domain.model.Cluster;
+import org.amhzing.clusterview.domain.model.Country;
+import org.amhzing.clusterview.domain.model.Region;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
@@ -63,7 +66,7 @@ public class StatisticAdapterTest {
     }
 
     private ActivityStatistic activityStatistic() {
-        return ActivityStatistic.create(ImmutableMap.of(anotherActivity(), quantity()));
+        return ActivityStatistic.create(ImmutableMap.of(anotherActivity(), quantity()), ImmutableSet.of(coreActivity()));
     }
 
     private Quantity quantity() {

@@ -3,6 +3,7 @@ package org.amhzing.clusterview.web.controller.se;
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.web.adapter.ActivityAdapter;
+import org.amhzing.clusterview.web.adapter.CoreActivityAdapter;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -37,6 +38,9 @@ public class GroupEditControllerTest {
 
     @MockBean
     private ActivityAdapter activityAdapter;
+
+    @MockBean
+    private CoreActivityAdapter coreActivityAdapter;
 
     @Test
     public void should_be_able_to_create_new_group() throws Exception {

@@ -34,6 +34,10 @@ public class RegionStatisticRepository implements StatisticRepository<Region.Id,
 
         final RegionEntity region = regionJpaRepository.findOne(id.getId());
 
+        if (region == null) {
+            return new ActivityStatistic();
+        }
+
         final Stream<ClusterEntity> clusterEntityStream = clusterEntities(region);
 
         final Set<TeamEntity> teamEntitySet = teamEntities(clusterEntityStream).collect(Collectors.toSet());

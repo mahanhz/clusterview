@@ -8,6 +8,7 @@ import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static java.util.Collections.emptyList;
 import static org.amhzing.clusterview.helper.ClientModelHelper.locationModel;
 import static org.amhzing.clusterview.helper.ClientModelHelper.memberModel;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.invalidMatching;
@@ -24,7 +25,7 @@ public class GroupModelTest {
                               final LocationModel location,
                               final MemberModel... members) {
         try {
-            GroupModel.create(id, ImmutableList.copyOf(members), location);
+            GroupModel.create(id, ImmutableList.copyOf(members), location, emptyList());
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }

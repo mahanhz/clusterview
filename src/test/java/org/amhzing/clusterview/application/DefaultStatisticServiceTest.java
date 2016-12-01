@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.application;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.domain.model.*;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.Quantity;
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.amhzing.clusterview.helper.DomainModelHelper.activity;
+import static org.amhzing.clusterview.helper.DomainModelHelper.coreActivity;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
@@ -65,7 +67,7 @@ public class DefaultStatisticServiceTest {
     }
 
     private ActivityStatistic activityStatistic() {
-        return ActivityStatistic.create(ImmutableMap.of(activity(), quantity()));
+        return ActivityStatistic.create(ImmutableMap.of(activity(), quantity()), ImmutableSet.of(coreActivity()));
     }
 
     private Quantity quantity() {

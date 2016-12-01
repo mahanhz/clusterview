@@ -1,9 +1,12 @@
 package org.amhzing.clusterview.helper;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Maps;
 import org.amhzing.clusterview.infra.jpa.mapping.*;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public final class JpaRepositoryHelper {
 
@@ -48,9 +51,12 @@ public final class JpaRepositoryHelper {
     public static TeamEntity teamEntity() {
         final TeamEntity team = new TeamEntity();
         team.setLocation(location());
+
         final HashSet<MemberEntity> memberEntities = new HashSet<>();
         memberEntities.add(member());
         team.setMembers(memberEntities);
+
+        team.setCoreActivities(coreActivityQuantity());
         //teamEntity.setCluster(clusterEntity());
 
         return team;
@@ -62,6 +68,26 @@ public final class JpaRepositoryHelper {
         location.setY(1);
 
         return location;
+    }
+
+    public static Map<CoreActivityEntity, ParticipantQuantity> coreActivityQuantity() {
+        final HashMap<CoreActivityEntity, ParticipantQuantity> map = Maps.newHashMap();
+
+         map.put(coreActivityEntity(), participantQuantity());
+
+        return map;
+    }
+
+    public static CoreActivityEntity coreActivityEntity() {
+        final CoreActivityEntity coreActivityEntity = new CoreActivityEntity();
+        coreActivityEntity.setId("sc");
+        coreActivityEntity.setName("SC");
+
+        return coreActivityEntity;
+    }
+
+    public static ParticipantQuantity participantQuantity() {
+        return ParticipantQuantity.create(10, 5);
     }
 
     public static MemberEntity member() {

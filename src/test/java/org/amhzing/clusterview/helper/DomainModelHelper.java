@@ -1,6 +1,8 @@
 package org.amhzing.clusterview.helper;
 
 import org.amhzing.clusterview.domain.model.*;
+import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
+import org.amhzing.clusterview.domain.model.statistic.Quantity;
 
 import static com.google.common.collect.ImmutableSet.of;
 
@@ -42,11 +44,11 @@ public final class DomainModelHelper {
     }
 
     public static Group group() {
-        return Group.create(groupId(), of(member()), location());
+        return Group.create(groupId(), of(member()), location(), of(coreActivity()));
     }
 
     public static Group anotherGroup() {
-        return Group.create(anotherGroupId(), of(anotherMember()), anotherLocation());
+        return Group.create(anotherGroupId(), of(anotherMember()), anotherLocation(), of(anotherCoreActivity()));
     }
 
     public static Location location() {
@@ -77,6 +79,14 @@ public final class DomainModelHelper {
 
     public static Activity anotherActivity() {
         return Activity.create(Activity.Id.create("hv"), "Home Visit");
+    }
+
+    public static CoreActivity coreActivity() {
+        return CoreActivity.create(CoreActivity.Id.create("sc"), "SC", Quantity.create(5), Quantity.create(3));
+    }
+
+    public static CoreActivity anotherCoreActivity() {
+        return CoreActivity.create(CoreActivity.Id.create("dm"), "DM", Quantity.create(12), Quantity.create(8));
     }
 
     public static Name name() {

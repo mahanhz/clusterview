@@ -32,6 +32,10 @@ public class ClusterStatisticRepository implements StatisticRepository<Cluster.I
 
         final ClusterEntity cluster = clusterJpaRepository.findOne(id.getId());
 
+        if (cluster == null) {
+            return new ActivityStatistic();
+        }
+
         final Set<TeamEntity> teamEntitySet = teamEntities(cluster).collect(Collectors.toSet());
 
         final Stream<MemberEntity> memberEntityStream = memberEntities(teamEntitySet.stream());

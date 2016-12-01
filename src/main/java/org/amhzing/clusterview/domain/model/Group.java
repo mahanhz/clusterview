@@ -25,18 +25,6 @@ public final class Group {
         this.coreActivities = noNullElements(coreActivities);
     }
 
-    @Deprecated
-    private Group(final Id id, final Set<Member> members, final Location location) {
-        this.id = notNull(id);
-        this.members = noNullElements(members);
-        this.location = notNull(location);
-    }
-
-    @Deprecated
-    public static Group create(final Id id, final Set<Member> members, final Location location) {
-        return new Group(id, members, location);
-    }
-
     public static Group create(final Id id, final Set<Member> members, final Location location, final Set<CoreActivity> coreActivities) {
         return new Group(id, members, location, coreActivities);
     }

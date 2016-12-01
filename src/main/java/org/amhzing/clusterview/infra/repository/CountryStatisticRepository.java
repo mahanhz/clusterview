@@ -33,6 +33,10 @@ public class CountryStatisticRepository implements StatisticRepository<Country.I
 
         final CountryEntity country = countryJpaRepository.findOne(id.getId());
 
+        if (country == null) {
+            return new ActivityStatistic();
+        }
+
         final Stream<ClusterEntity> clusterEntityStream = clusterEntities(country);
 
         final Set<TeamEntity> teamEntitySet = teamEntities(clusterEntityStream).collect(Collectors.toSet());

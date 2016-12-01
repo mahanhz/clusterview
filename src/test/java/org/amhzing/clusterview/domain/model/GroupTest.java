@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.meanbean.test.BeanTester;
 
+import static java.util.Collections.emptySet;
 import static org.amhzing.clusterview.helper.DomainModelHelper.location;
 import static org.amhzing.clusterview.helper.DomainModelHelper.member;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.invalidMatching;
@@ -25,7 +26,7 @@ public class GroupTest {
                               final Location location,
                               final Member... members) {
         try {
-            Group.create(Group.Id.create(id), ImmutableSet.copyOf(members), location);
+            Group.create(Group.Id.create(id), ImmutableSet.copyOf(members), location, emptySet());
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }

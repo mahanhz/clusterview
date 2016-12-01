@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.web.model;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -21,7 +22,8 @@ public class ActivityStatisticModelTest {
                               final String key,
                               final long value) {
         try {
-            ActivityStatisticModel.create(ImmutableMap.of(key, value));
+            ActivityStatisticModel.create(ImmutableMap.of(key, value),
+                                          ImmutableList.of(CoreActivityModel.create(key, key, value, value)));
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }

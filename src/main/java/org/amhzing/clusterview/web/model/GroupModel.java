@@ -36,18 +36,6 @@ public final class GroupModel {
         this.coreActivities = noNullElements(coreActivities);
     }
 
-    @Deprecated
-    private GroupModel(final long id, final List<MemberModel> members, final LocationModel location) {
-        this.id = id;
-        this.members = noNullElements(members);
-        this.location = notNull(location);
-    }
-
-    @Deprecated
-    public static GroupModel create(final long id, final List<MemberModel> members, final LocationModel location) {
-        return new GroupModel(id, members, location);
-    }
-
     public static GroupModel create(final long id, final List<MemberModel> members, final LocationModel location, final List<CoreActivityModel> coreActivities) {
         return new GroupModel(id, members, location, coreActivities);
     }

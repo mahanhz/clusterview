@@ -11,7 +11,7 @@ public class ClientModelHelper {
     }
 
     public static GroupModel groupModel() {
-        return GroupModel.create(1L, of(memberModel()), locationModel());
+        return GroupModel.create(1L, of(memberModel()), locationModel(), of(coreActivityModel()));
     }
 
     public static MemberModel memberModel() {
@@ -50,5 +50,13 @@ public class ClientModelHelper {
 
     public static ActivityModel anotherActivityModel() {
         return ActivityModel.create("hv", "Home Visit");
+    }
+
+    public static CoreActivityModel coreActivityModel() {
+        return CoreActivityModel.create("sc", "SC", 10, 5);
+    }
+
+    public static CoreActivityModel anotherCoreActivityModel() {
+        return CoreActivityModel.create("dm", "DM", 13, 7);
     }
 }
