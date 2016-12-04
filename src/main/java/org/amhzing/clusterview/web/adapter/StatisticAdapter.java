@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.web.adapter;
 
+import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
 import org.amhzing.clusterview.application.ActivityService;
 import org.amhzing.clusterview.application.StatisticService;
 import org.amhzing.clusterview.domain.model.Cluster;
@@ -24,6 +25,8 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 @Service
 public class StatisticAdapter {
+
+    private static final String PARTICIPANT = "participant";
 
     private StatisticService statisticService;
     private ActivityService activityService;
@@ -67,6 +70,7 @@ public class StatisticAdapter {
         return statistics.getActivityQuantity()
                          .entrySet()
                          .stream()
+                         .filter(entry -> !StringUtils.containsIgnoreCase(entry.getKey().getName(), PARTICIPANT))
                          .collect(toMap(entry -> entry.getKey().getName(),
                                         entry -> entry.getValue().getValue()));
     }
@@ -77,6 +81,7 @@ public class StatisticAdapter {
         // Add the remainder of activities with a quantity of 0
         activityService.activities()
                        .stream()
+                       .filter(activity -> !StringUtils.containsIgnoreCase(activity.getName(), PARTICIPANT))
                        .forEach(activity -> committedActivityQuantities.computeIfAbsent(activity.getName(), a -> 0L));
 
         // return a sorted map
