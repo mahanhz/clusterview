@@ -35,7 +35,15 @@ $(function() {
             includeKeys: 'southern-region',
             toolTip: 'Southern region',
             stroke: false
-		}]
+		},
+		{
+            key: 'stockholm-cluster',
+            toolTip: 'Stockholm',
+            fillColor: '8e2a16',
+            fillOpacity: 0.5,
+            staticState: true,
+            stroke: false
+        }]
     });
 });
 

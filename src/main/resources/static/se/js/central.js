@@ -10,7 +10,12 @@ $(function() {
         {
             key: 'stockholm-cluster',
             toolTip: 'Stockholm',
-            stroke: false
+            selected: true,
+            render_select: {
+                fillColor: '8e2a16',
+                fillOpacity: 0.5,
+                stroke: false
+            }
         },
         {
             key: 'uppsala-cluster',
