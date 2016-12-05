@@ -5,7 +5,6 @@ import org.amhzing.clusterview.infra.jpa.mapping.user.UserEntity;
 import org.amhzing.clusterview.infra.jpa.repository.user.UserJpaRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,7 +30,13 @@ public class DefaultUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("No user found with username: " + user);
         }
 
-        return new User(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, authorities(user.getRoles()));
+        return new DefaultUserDetails(user.getEmail(),
+                                      user.getPassword(),
+                                      user.isEnabled(),
+                                      true, true, true,
+                                      authorities(user.getRoles()),
+                                      user.getFirstName(),
+                                      user.getLastName());
     }
 
     protected Collection<GrantedAuthority> authorities(final Collection<RoleEntity> roles) {

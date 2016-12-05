@@ -11,7 +11,9 @@ public class DefaultAuthenticationProvider extends DaoAuthenticationProvider {
     public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
         final Authentication result = super.authenticate(authentication);
 
-        return new UsernamePasswordAuthenticationToken(authentication, result.getCredentials(), result.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(result.getPrincipal(),
+                                                       result.getCredentials(),
+                                                       result.getAuthorities());
     }
 
     @Override

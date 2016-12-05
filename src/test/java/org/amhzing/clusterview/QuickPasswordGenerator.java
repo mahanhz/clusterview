@@ -11,6 +11,6 @@ public final class QuickPasswordGenerator {
         final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(11);
 
         Stream.of(passwords)
-              .forEach(password -> System.out.println("Generated password for " + password + " is >" + passwordEncoder.encode(password) + "<"));
+              .forEach(password -> System.out.println("Encoded password for " + password + " is >" + passwordEncoder.encode(password) + "<"));
     }
 }
