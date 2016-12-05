@@ -2,6 +2,7 @@ package org.amhzing.clusterview.web.controller.se;
 
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.annotation.TestOffline;
+import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.jsoup.Jsoup;
@@ -38,6 +39,7 @@ public class GroupControllerTest {
     private StatisticAdapter statisticAdapter;
     
     @Test
+    @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_groups() throws Exception {
         given(groupAdapter.groups(any())).willReturn(ImmutableSet.of(groupModel()));
 
@@ -53,6 +55,7 @@ public class GroupControllerTest {
     }
 
     @Test
+    @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_group() throws Exception {
         given(groupAdapter.group(1L)).willReturn(groupModel());
 

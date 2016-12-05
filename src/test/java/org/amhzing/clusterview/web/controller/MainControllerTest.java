@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.web.controller;
 
 import org.amhzing.clusterview.annotation.TestOffline;
+import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,7 +31,9 @@ public class MainControllerTest {
     private StatisticAdapter statisticAdapter;
 
     @Test
+    @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_country() throws Exception {
+
         final ResultActions result = this.mvc.perform(get("/clusterview/se"))
                                              .andExpect(status().isOk());
 

@@ -2,6 +2,7 @@ package org.amhzing.clusterview.web.controller.se;
 
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.annotation.TestOffline;
+import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.ActivityAdapter;
 import org.amhzing.clusterview.web.adapter.CoreActivityAdapter;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
@@ -43,6 +44,7 @@ public class GroupEditControllerTest {
     private CoreActivityAdapter coreActivityAdapter;
 
     @Test
+    @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_be_able_to_create_new_group() throws Exception {
         given(groupAdapter.groups(any())).willReturn(ImmutableSet.of(groupModel()));
 
@@ -62,6 +64,7 @@ public class GroupEditControllerTest {
     }
 
     @Test
+    @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void sshould_be_able_to_edit_new_group() throws Exception {
         given(groupAdapter.group(1L)).willReturn(groupModel());
 
