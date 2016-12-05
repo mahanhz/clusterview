@@ -1,11 +1,15 @@
 package org.amhzing.clusterview.configuration;
 
+import org.amhzing.clusterview.configuration.handler.RedirectAuthenticationSuccessHandler;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+import static org.amhzing.clusterview.user.UserRole.SE_ADMIN;
+import static org.amhzing.clusterview.user.UserRole.SE_USER;
 
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
@@ -15,13 +19,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/h2-console").permitAll()
-                .antMatchers("/clusterview/se/**").hasRole("SE_USER")
-                .antMatchers("/clusteredit/se/**").hasRole("SE_ADMIN")
+                .antMatchers("/clusterview/se/**").hasAuthority(SE_USER.getRole())
+                .antMatchers("/clusteredit/se/**").hasAuthority(SE_ADMIN.getRole())
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
                 .loginPage("/login")
-                //.successHandler(new RedirectAuthenticationSuccessHandler())
+                .successHandler(new RedirectAuthenticationSuccessHandler())
                 .permitAll() // Login page is accessible to anybody
                 .and()
             .logout()
@@ -30,7 +34,11 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .sessionManagement()
                 .sessionFixation()
-                .newSession(); // Create completely new session
+                .newSession() // Create completely new session
+                .and()
+            .headers()
+                .frameOptions()
+                .sameOrigin(); // To allow pages from the same domain inside an iframe (e.g. inside a lightbox)
     }
 
     @Override

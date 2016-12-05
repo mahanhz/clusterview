@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <th:block th:replace="se/fragments/head :: head"></th:block>
     </head>
@@ -10,6 +11,7 @@
         <div class="container-fluid">
             <div class="row">
                 <th:block th:replace="se/fragments/group-operations :: group-operations"></th:block>
+
                 <div class="col-xs-6">
                     <div class="cluster-container">
                         <img th:src="@{'/' + ${clusterPath.country} + '/images/cluster-' + ${clusterPath.cluster} + '.png'}"/>
@@ -23,6 +25,7 @@
                         </th:block>
                     </div>
                 </div>
+
                 <th:block th:replace="se/fragments/statistics :: statistics"></th:block>
             </div>
         </div>

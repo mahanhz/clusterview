@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <th:block th:replace="se/fragments/head :: head"></th:block>
     </head>
@@ -66,22 +67,24 @@
                 </table>
             </div>
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="pull-left">
-                        <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
-                              th:method="delete" target="_top">
-                            <button id="deleteGroup" type="submit" class="btn btn-danger btn-md">Delete Group</button>
-                        </form>
+            <div sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN)">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="pull-left">
+                            <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
+                                  th:method="delete" target="_top">
+                                <button id="deleteGroup" type="submit" class="btn btn-danger btn-md">Delete Group</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-6">
-                    <div class="pull-right">
-                        <a th:href="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
-                           target="_top">
-                            <button id="editGroup" type="submit" class="btn btn-primary btn-md">Edit Group</button>
-                        </a>
+                    <div class="col-xs-6">
+                        <div class="pull-right">
+                            <a th:href="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
+                               target="_top">
+                                <button id="editGroup" type="submit" class="btn btn-primary btn-md">Edit Group</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

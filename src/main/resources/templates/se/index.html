@@ -9,17 +9,6 @@
     <body>
         <th:block th:replace="se/fragments/navbar :: navbar('Please select a region')"></th:block>
 
-        <div sec:authorize="isAuthenticated()">
-            This content is only shown to authenticated users.
-            <span sec:authentication="principal.firstName"></span>
-        </div>
-        <div sec:authorize="hasRole('ROLE_SE_USER')">
-            This content is only shown to USERS.
-        </div>
-        <div sec:authorize="hasRole('ROLE_SE_ADMIN')">
-            This content is only shown to administrators.
-        </div>
-
         <div class="container-fluid">
             <div class="row">
                 <th:block th:replace="se/fragments/adjust-map-size :: adjust-map-size"></th:block>
