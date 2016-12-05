@@ -24,7 +24,7 @@ public class ManagementSecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(request -> StringUtils.startsWith(request.getRequestURI(), managementProperties.getContextPath()))
                 .and()
             .authorizeRequests()
-                .antMatchers("/manage/health").permitAll()
+                .antMatchers(managementProperties.getContextPath() + "/health").permitAll()
                 .anyRequest().hasRole("SUPER_ADMIN")
                 .and()
             .httpBasic();
