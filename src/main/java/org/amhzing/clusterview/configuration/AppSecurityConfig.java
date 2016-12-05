@@ -17,7 +17,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console").permitAll()
                 .antMatchers("/clusterview/se/**").hasRole("SE_USER")
                 .antMatchers("/clusteredit/se/**").hasRole("SE_ADMIN")
-                .antMatchers("/manage/**").hasRole("SUPER_ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

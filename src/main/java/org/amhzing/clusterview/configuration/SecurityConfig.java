@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-@Import({AuthenticationConfig.class, AppSecurityConfig.class})
+@Import({AuthenticationConfig.class, AppSecurityConfig.class, ManagementSecurityConfig.class })
 public class SecurityConfig {
 
 }
