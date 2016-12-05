@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <body>
+        <th:block th:fragment="error(headingText)">
+            <div class="container-fluid">
+                <div class="jumbotron">
+                    <h1 style="color:red" th:text="${headingText}">Invalid request</h1>
+
+                    <p th:if="${url}">
+                        <b>Page:</b> <span th:text="${url}">Page URL</span>
+                    </p>
+
+                    <br/>
+                    <p th:if="${timestamp}" id='created'>
+                        <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
+                    </p>
+
+                    <br/>
+                    <p th:if="${status}">
+                        <b>There was an error:</b> <span th:text="${status}">status-code</span>
+                        <span th:if="${error}" th:text="'('+${error}+')'">error ...</span>
+                    </p>
+
+                    <br/>
+                    <p th:if="${errorId}">
+                        <b>Error Id:</b> <span th:text="${errorId}">Error Id should display here</span>
+                    </p>
+
+                </div>
+            </div>
+        </th:block>
+    </body>
+</html>
