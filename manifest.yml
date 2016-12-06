@@ -1,3 +1,4 @@
 ---
 applications:
 - name: clusterview-test
+  path: build/libs/clusterview-1.0.0-SNAPSHOT.jar
