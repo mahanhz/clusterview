@@ -18,12 +18,8 @@ stage ('Build') {
     node {
         timeout(time: 10, unit: 'MINUTES') {
             try {
-                checkout([
-                        $class: 'GitSCM',
-                        branches: scm.branches,
-                        extensions: scm.extensions + [[$class: 'CleanBeforeCheckout']],
-                        userRemoteConfigs: scm.userRemoteConfigs
-                ])
+                deleteDir() // clean before checkout
+                checkout scm
 
                 gradle 'clean test assemble'
 
