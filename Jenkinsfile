@@ -18,12 +18,7 @@ stage ('Build') {
     node {
         timeout(time: 10, unit: 'MINUTES') {
             try {
-                checkout scm: [$class: 'GitSCM',
-                               branches: [[name: env.BRANCH_NAME]],
-                               doGenerateSubmoduleConfigurations: false,
-                               extensions: [[$class: 'CleanBeforeCheckout']],
-                               submoduleCfg: [],
-                               userRemoteConfigs: [[url: REPOSITORY_URL]]]
+                checkout scm
 
                 gradle 'clean test assemble'
 
