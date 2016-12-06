@@ -1,26 +1,29 @@
 package org.amhzing.clusterview.infra.repository;
 
 import org.amhzing.clusterview.domain.model.Activity;
+import org.amhzing.clusterview.domain.model.Region;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.domain.model.statistic.Quantity;
-import org.amhzing.clusterview.domain.model.Region;
 import org.amhzing.clusterview.domain.repository.StatisticRepository;
 import org.amhzing.clusterview.infra.jpa.mapping.ClusterEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.MemberEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.RegionEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.infra.jpa.repository.RegionJpaRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.amhzing.clusterview.cache.CacheSpec.STATS_CACHE_NAME;
 import static org.amhzing.clusterview.infra.repository.StatisticFactory.*;
-import static org.amhzing.clusterview.infra.repository.StatisticFactory.activityQuantities;
 import static org.apache.commons.lang3.Validate.notNull;
 
+@CacheConfig(cacheNames = STATS_CACHE_NAME)
 public class RegionStatisticRepository implements StatisticRepository<Region.Id, ActivityStatistic> {
 
     private RegionJpaRepository regionJpaRepository;
@@ -30,6 +33,7 @@ public class RegionStatisticRepository implements StatisticRepository<Region.Id,
     }
 
     @Override
+    @Cacheable(unless = "#result == null")
     public ActivityStatistic statistics(final Region.Id id) {
 
         final RegionEntity region = regionJpaRepository.findOne(id.getId());

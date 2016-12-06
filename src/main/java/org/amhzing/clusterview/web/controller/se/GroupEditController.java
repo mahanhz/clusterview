@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.web.controller.se;
 
+import org.amhzing.clusterview.cache.CacheEvicter;
 import org.amhzing.clusterview.web.adapter.ActivityAdapter;
 import org.amhzing.clusterview.web.adapter.CoreActivityAdapter;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
@@ -30,14 +31,17 @@ public class GroupEditController extends AbstractEditController {
     private GroupAdapter groupAdapter;
     private ActivityAdapter activityAdapter;
     private CoreActivityAdapter coreActivityAdapter;
+    private CacheEvicter cacheEvicter;
 
     @Autowired
     public GroupEditController(final GroupAdapter groupAdapter,
                                final ActivityAdapter activityAdapter,
-                               final CoreActivityAdapter coreActivityAdapter) {
+                               final CoreActivityAdapter coreActivityAdapter,
+                               final CacheEvicter cacheEvicter) {
         this.groupAdapter = notNull(groupAdapter);
         this.activityAdapter = notNull(activityAdapter);
         this.coreActivityAdapter = notNull(coreActivityAdapter);
+        this.cacheEvicter = notNull(cacheEvicter);
     }
 
     @ModelAttribute
@@ -85,6 +89,8 @@ public class GroupEditController extends AbstractEditController {
 
         groupAdapter.createGroup(groupModel, groupPath.getCluster());
 
+        clearStatsCache();
+
         return redirectToClusterView(groupPath);
     }
 
@@ -102,6 +108,8 @@ public class GroupEditController extends AbstractEditController {
 
         groupAdapter.updateGroup(groupModel);
 
+        clearStatsCache();
+
         return redirectToClusterView(groupPath);
     }
 
@@ -111,6 +119,8 @@ public class GroupEditController extends AbstractEditController {
                               final RedirectAttributes redirectAttributes) {
 
         groupAdapter.deleteGroup(groupPath.getGroupId());
+
+        clearStatsCache();
 
         return redirectToClusterView(groupPath);
     }
@@ -125,5 +135,9 @@ public class GroupEditController extends AbstractEditController {
 
     private String redirectToEditGroupView(final GroupPath groupPath) {
         return "redirect:/clusteredit/" + groupPath.getCountry() + "/" + groupPath.getRegion() + "/" + groupPath.getCluster() + "/" + groupPath.getGroupId();
+    }
+
+    private void clearStatsCache() {
+        cacheEvicter.clearStatsCache();
     }
 }

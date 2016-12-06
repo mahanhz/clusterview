@@ -1,6 +1,9 @@
 spring:
   jpa:
     generate-ddl: true
+  cache:
+    jcache:
+      config: ehcache.xml
 
 server:
   error:

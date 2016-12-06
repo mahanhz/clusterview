@@ -6,7 +6,7 @@
 
     <service>
         <jsr107:defaults enable-management="true" enable-statistics="true">
-          <jsr107:cache name="clusterviewCache" template="heap-cache"/>
+          <jsr107:cache name="statsCache" template="heap-cache"/>
         </jsr107:defaults>
     </service>
 
@@ -24,7 +24,7 @@
             </listener>
         </listeners>
         <resources>
-            <heap unit="entries">500</heap>
+            <heap unit="entries">50</heap>
         </resources>
     </cache-template>
 

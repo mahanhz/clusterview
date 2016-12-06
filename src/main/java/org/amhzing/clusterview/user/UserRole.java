@@ -11,6 +11,7 @@ public enum UserRole {
     SE_SUPER_ADMIN("ROLE_SUPER_ADMIN");
 
     private final String role;
+
     UserRole(final String role) {
         this.role = notBlank(role);
     }
