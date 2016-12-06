@@ -18,6 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.amhzing.clusterview.cache.CacheSpec.DEFAULT_CACHE_KEY;
 import static org.amhzing.clusterview.cache.CacheSpec.STATS_CACHE_NAME;
 import static org.amhzing.clusterview.infra.repository.StatisticFactory.*;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -32,7 +33,7 @@ public class ClusterStatisticRepository implements StatisticRepository<Cluster.I
     }
 
     @Override
-    @Cacheable(unless = "#result == null")
+    @Cacheable(key= DEFAULT_CACHE_KEY, unless = "#result == null")
     public ActivityStatistic statistics(final Cluster.Id id) {
 
         final ClusterEntity cluster = clusterJpaRepository.findOne(id.getId());

@@ -2,6 +2,7 @@ package org.amhzing.clusterview.web.controller.se;
 
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.annotation.TestOffline;
+import org.amhzing.clusterview.cache.CacheEvicter;
 import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.ActivityAdapter;
 import org.amhzing.clusterview.web.adapter.CoreActivityAdapter;
@@ -42,6 +43,9 @@ public class GroupEditControllerTest {
 
     @MockBean
     private CoreActivityAdapter coreActivityAdapter;
+
+    @MockBean
+    private CacheEvicter cacheEvicter;
 
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")

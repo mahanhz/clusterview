@@ -8,10 +8,13 @@ import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.infra.jpa.repository.ActivityJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.TeamJpaRepository;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.Set;
 
 import static java.util.Collections.emptySet;
+import static org.amhzing.clusterview.cache.CacheSpec.DEFAULT_CACHE_KEY;
+import static org.amhzing.clusterview.cache.CacheSpec.GROUPS_CACHE_NAME;
 import static org.amhzing.clusterview.infra.repository.GroupFactory.convertTeam;
 import static org.amhzing.clusterview.infra.repository.GroupFactory.convertTeams;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -31,6 +34,7 @@ public class DefaultGroupRepository implements GroupRepository {
     }
 
     @Override
+    @Cacheable(cacheNames = GROUPS_CACHE_NAME, key= DEFAULT_CACHE_KEY, unless = "#result == null")
     public Set<Group> groups(final Cluster.Id clusterId) {
         notNull(clusterId);
 

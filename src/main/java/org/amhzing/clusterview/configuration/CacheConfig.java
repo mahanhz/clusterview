@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.cache.configuration.MutableConfiguration;
 
 import static javax.cache.expiry.CreatedExpiryPolicy.factoryOf;
+import static org.amhzing.clusterview.cache.CacheSpec.Cache.GROUPS_CACHE;
 import static org.amhzing.clusterview.cache.CacheSpec.Cache.STATS_CACHE;
 
 @Configuration
@@ -20,6 +21,9 @@ public class CacheConfig {
         return cacheManager -> {
             cacheManager.createCache(STATS_CACHE.getName(),
                                      new MutableConfiguration<>().setExpiryPolicyFactory(factoryOf(STATS_CACHE.getDuration()))
+                                                                 .setStoreByValue(false));
+            cacheManager.createCache(GROUPS_CACHE.getName(),
+                                     new MutableConfiguration<>().setExpiryPolicyFactory(factoryOf(GROUPS_CACHE.getDuration()))
                                                                  .setStoreByValue(false));
         };
     }

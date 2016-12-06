@@ -89,7 +89,7 @@ public class GroupEditController extends AbstractEditController {
 
         groupAdapter.createGroup(groupModel, groupPath.getCluster());
 
-        clearStatsCache();
+        clearCaches();
 
         return redirectToClusterView(groupPath);
     }
@@ -108,7 +108,7 @@ public class GroupEditController extends AbstractEditController {
 
         groupAdapter.updateGroup(groupModel);
 
-        clearStatsCache();
+        clearCaches();
 
         return redirectToClusterView(groupPath);
     }
@@ -120,7 +120,7 @@ public class GroupEditController extends AbstractEditController {
 
         groupAdapter.deleteGroup(groupPath.getGroupId());
 
-        clearStatsCache();
+        clearCaches();
 
         return redirectToClusterView(groupPath);
     }
@@ -137,7 +137,8 @@ public class GroupEditController extends AbstractEditController {
         return "redirect:/clusteredit/" + groupPath.getCountry() + "/" + groupPath.getRegion() + "/" + groupPath.getCluster() + "/" + groupPath.getGroupId();
     }
 
-    private void clearStatsCache() {
+    private void clearCaches() {
         cacheEvicter.clearStatsCache();
+        cacheEvicter.clearGroupsCache();
     }
 }
