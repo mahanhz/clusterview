@@ -1,9 +1,15 @@
 def acceptanceTests = 'org/amhzing/clusterview/acceptancetest/**'
+def smokeTests = 'org/amhzing/clusterview/smoketest/**'
 
 test {
     exclude acceptanceTests
+    exclude smokeTests
 }
 
 task acceptanceTest(type:Test) {
     include acceptanceTests
+}
+
+task smokeTest(type:Test) {
+    include smokeTests
 }
