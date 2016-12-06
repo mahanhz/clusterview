@@ -46,8 +46,8 @@ stage ('Health check') {
 
                 sh 'SPRING_PROFILES_ACTIVE=test ./gradlew smokeTest'
             }
-        }
 
-        deleteDir() // Wipe out the workspace
+            deleteDir() // Wipe out the workspace
+        }
     }
 }
