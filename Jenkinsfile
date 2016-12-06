@@ -21,7 +21,8 @@ stage ('Build') {
                 checkout([
                         $class: 'GitSCM',
                         branches: scm.branches,
-                        extensions: scm.extensions + [[$class: 'CleanBeforeCheckout']]
+                        extensions: scm.extensions + [[$class: 'CleanBeforeCheckout']],
+                        userRemoteConfigs: scm.userRemoteConfigs
                 ])
 
                 gradle 'clean test assemble'
