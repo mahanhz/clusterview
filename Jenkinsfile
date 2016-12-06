@@ -18,7 +18,6 @@ stage ('Build') {
     node {
         timeout(time: 10, unit: 'MINUTES') {
             try {
-                deleteDir() // clean before checkout
                 checkout scm
 
                 gradle 'clean test assemble'
