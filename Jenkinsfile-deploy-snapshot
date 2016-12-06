@@ -16,7 +16,10 @@ lock('lock-deploy-snapshot') {
     stage('Deploy snapshot') {
         node {
             timeout(time: 5, unit: 'MINUTES') {
+                checkout scm
 
+                stash excludes: 'build/', includes: '**', name: 'source'
+                
                 def props = readProperties file: 'gradle.properties'
 
                 ARTIFACT_NEXUS_URL = props['artifactNexusUrl']
