@@ -26,12 +26,14 @@ lock('lock-deploy-snapshot') {
                 ARTIFACT_GROUP = props['artifactGroup']
                 ARTIFACT_NAME = props['artifactName']
                 ARTIFACT_VERSION = props['version']
+                CLOUD_SPACE = 'test'
 
-                build job: 'test_download_artifact', parameters: [string(name: 'NEXUS_URL', value: ARTIFACT_NEXUS_URL),
-                                                                  string(name: 'REPO', value: 'snapshots'),
-                                                                  string(name: 'GROUP', value: ARTIFACT_GROUP),
-                                                                  string(name: 'ARTIFACT', value: ARTIFACT_NAME),
-                                                                  string(name: 'VERSION', value: ARTIFACT_VERSION)]
+                build job: 'Clusterview-deploy-SNAPSHOT-cloudfoundry', parameters: [string(name: 'NEXUS_URL', value: ARTIFACT_NEXUS_URL),
+                                                                                    string(name: 'REPO', value: 'snapshots'),
+                                                                                    string(name: 'GROUP', value: ARTIFACT_GROUP),
+                                                                                    string(name: 'ARTIFACT', value: ARTIFACT_NAME),
+                                                                                    string(name: 'VERSION', value: ARTIFACT_VERSION),
+                                                                                    string(name: 'SPACE', value: CLOUD_SPACE)]
             }
         }
     }
