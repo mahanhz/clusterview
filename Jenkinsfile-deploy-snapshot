@@ -17,7 +17,12 @@ lock('lock-deploy-snapshot') {
         node {
             timeout(time: 5, unit: 'MINUTES') {
 
-                artifactProperties()
+                def props = readProperties file: 'gradle.properties'
+
+                ARTIFACT_NEXUS_URL = props['artifactNexusUrl'];
+                ARTIFACT_GROUP = props['artifactGroup'];
+                ARTIFACT_NAME = props['artifactName'];
+                ARTIFACT_VERSION = props['description'];
 
                 build job: 'test_download_artifact', parameters: [string(name: 'NEXUS_URL', value: ARTIFACT_NEXUS_URL),
                                                                   string(name: 'REPO', value: 'snapshots'),
@@ -27,13 +32,4 @@ lock('lock-deploy-snapshot') {
             }
         }
     }
-}
-
-def artifactProperties() {
-    def props = readProperties file: 'gradle.properties'
-
-    ARTIFACT_NEXUS_URL = props['artifactNexusUrl'];
-    ARTIFACT_GROUP = props['artifactGroup'];
-    ARTIFACT_NAME = props['artifactName'];
-    ARTIFACT_VERSION = props['description'];
 }
