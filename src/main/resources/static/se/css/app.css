@@ -1,0 +1,13 @@
+body:not(.excludes-header) {
+  padding-top: 55px;
+}
+
+.cluster-container {
+   position: relative;
+}
+
+.cluster-group {
+   position: absolute;
+   color: #337ab7;
+   font-size: 15px;
+}
