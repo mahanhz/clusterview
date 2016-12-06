@@ -19,19 +19,13 @@ lock('lock-deploy-snapshot') {
                 checkout scm
 
                 stash excludes: 'build/', includes: '**', name: 'source'
-                
+
                 def props = readProperties file: 'gradle.properties'
 
                 ARTIFACT_NEXUS_URL = props['artifactNexusUrl']
                 ARTIFACT_GROUP = props['artifactGroup']
                 ARTIFACT_NAME = props['artifactName']
-                ARTIFACT_VERSION = props['description']
-
-                echo 'mahan 1: ' + props['artifactNexusUrl']
-                echo 'mahan 2: ' + ARTIFACT_NEXUS_URL
-                echo 'mahan 3: ' + props['artifactGroup']
-                echo 'mahan 4: ' + ARTIFACT_NAME
-                echo 'mahan 5: ' + ARTIFACT_VERSION
+                ARTIFACT_VERSION = props['version']
 
                 build job: 'test_download_artifact', parameters: [string(name: 'NEXUS_URL', value: ARTIFACT_NEXUS_URL),
                                                                   string(name: 'REPO', value: 'snapshots'),
