@@ -1,7 +1,7 @@
-group = 'org.amhzing'
+group = artifactGroup
 
 jar {
-	baseName = 'clusterview'
+	baseName = artifactName
 
 	// Do not include environment specific properties in the built jar
 	exclude 'application-*'

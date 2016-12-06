@@ -1,0 +1,4 @@
+---
+applications:
+- name: clusterview-test
+  path: clusterview.jar
