@@ -19,7 +19,7 @@ stage ('Build') {
         timeout(time: 10, unit: 'MINUTES') {
             try {
                 checkout scm: [$class: 'GitSCM',
-                               branches: [[name: env.BRANCH_NAME]]],
+                               branches: [[name: env.BRANCH_NAME]],
                                doGenerateSubmoduleConfigurations: false,
                                extensions: [[$class: 'CleanBeforeCheckout']],
                                submoduleCfg: [],
