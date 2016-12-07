@@ -13,6 +13,21 @@ $(function() {
             stroke: false
         },
         {
+            key: 'vasterbotten-cluster',
+            toolTip: 'Vasterbotten',
+            stroke: false
+        },
+        {
+            key: 'jamtland-cluster',
+            toolTip: 'Jamtland',
+            stroke: false
+        },
+        {
+            key: 'vasternorrland-cluster',
+            toolTip: 'Vasternorrland',
+            stroke: false
+        },
+        {
             key: 'central-region',
             toolTip: 'Central region',
             stroke: false,
