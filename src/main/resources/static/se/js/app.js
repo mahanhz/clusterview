@@ -11,3 +11,19 @@ $(document).ready(function() {
 		closeEffect	: 'elastic'
 	});
 });
+
+$('#small').bind('click',function() {
+    $('.adjustableImage').mapster('resize', 245, 0, 1000);
+});
+
+$('#large').bind('click',function() {
+    $('.adjustableImage').mapster('resize', 345, 0, 1000);
+});
+
+$('#xlarge').bind('click',function() {
+    $('.adjustableImage').mapster('resize', 490, 0, 1000);
+});
+
+$('#xxlarge').bind('click',function() {
+    $('.adjustableImage').mapster('resize', 600, 0, 1000);
+});

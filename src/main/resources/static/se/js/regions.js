@@ -46,19 +46,3 @@ $(function() {
         }]
     });
 });
-
-$('#small').bind('click',function() {
-    $('.regionsImage').mapster('resize', 245, 0, 1000);
-});
-
-$('#large').bind('click',function() {
-    $('.regionsImage').mapster('resize', 345, 0, 1000);
-});
-
-$('#xlarge').bind('click',function() {
-    $('.regionsImage').mapster('resize', 490, 0, 1000);
-});
-
-$('#xxlarge').bind('click',function() {
-    $('.regionsImage').mapster('resize', 600, 0, 1000);
-});
