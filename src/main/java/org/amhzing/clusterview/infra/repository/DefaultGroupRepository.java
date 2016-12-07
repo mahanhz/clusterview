@@ -34,7 +34,9 @@ public class DefaultGroupRepository implements GroupRepository {
     }
 
     @Override
-    @Cacheable(cacheNames = GROUPS_CACHE_NAME, key= DEFAULT_CACHE_KEY, unless = "#result == null")
+    @Cacheable(cacheNames = GROUPS_CACHE_NAME,
+               key= DEFAULT_CACHE_KEY,
+               unless = "#result == null or #result != null and #result.isEmpty()")
     public Set<Group> groups(final Cluster.Id clusterId) {
         notNull(clusterId);
 

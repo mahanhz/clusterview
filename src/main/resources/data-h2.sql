@@ -37,8 +37,24 @@ INSERT INTO REGION VALUES('northern', '', 'se');
 INSERT INTO REGION VALUES('central', '', 'se');
 INSERT INTO REGION VALUES('southern', '', 'se');
 
+INSERT INTO CLUSTER VALUES('norrbotten', '', 'northern');
+INSERT INTO CLUSTER VALUES('vasterbotten', '', 'northern');
+INSERT INTO CLUSTER VALUES('jamtland', '', 'northern');
+INSERT INTO CLUSTER VALUES('vasternorrland', '', 'northern');
 INSERT INTO CLUSTER VALUES('stockholm', '', 'central');
 INSERT INTO CLUSTER VALUES('uppsala', '', 'central');
+INSERT INTO CLUSTER VALUES('malardalen', '', 'central');
+INSERT INTO CLUSTER VALUES('gavleborg', '', 'central');
+INSERT INTO CLUSTER VALUES('dalarna', '', 'central');
+INSERT INTO CLUSTER VALUES('varmland', '', 'central');
+INSERT INTO CLUSTER VALUES('gotland', '', 'central');
+INSERT INTO CLUSTER VALUES('vastragotaland', '', 'southern');
+INSERT INTO CLUSTER VALUES('ostergotland', '', 'southern');
+INSERT INTO CLUSTER VALUES('kalmarlan', '', 'southern');
+INSERT INTO CLUSTER VALUES('jonkoping', '', 'southern');
+INSERT INTO CLUSTER VALUES('halland', '', 'southern');
+INSERT INTO CLUSTER VALUES('kronoberg', '', 'southern');
+INSERT INTO CLUSTER VALUES('blekinge', '', 'southern');
 INSERT INTO CLUSTER VALUES('skane', '', 'southern');
 
 INSERT INTO TEAM VALUES(901, 262, 413.125, 'stockholm');
