@@ -18,13 +18,15 @@ $(function() {
             stroke: false
         },
         {
-            key: 'oland-cluster',
-            toolTip: 'Oland',
+            key: 'oland',
+            includeKeys: 'kalmar',
+            toolTip: 'Kalmar lan',
             stroke: false
         },
         {
-            key: 'kalmar-cluster',
-            toolTip: 'Kalmar',
+            key: 'kalmar',
+            includeKeys: 'oland',
+            toolTip: 'Kalmar lan',
             stroke: false
         },
         {
