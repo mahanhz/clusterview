@@ -113,7 +113,7 @@ if (isMasterBranch()) {
     lock('lock-publish-release-candidate') {
         stage ('Publish RC') {
             node {
-                timeout(time: 5, unit: 'MINUTES') {
+                timeout(time: 10, unit: 'MINUTES') {
                     sh "git branch -a -v --no-abbrev"
 
                     checkout scm: [$class: 'GitSCM',
