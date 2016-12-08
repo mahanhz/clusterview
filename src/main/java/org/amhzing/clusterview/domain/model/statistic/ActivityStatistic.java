@@ -22,7 +22,7 @@ public final class ActivityStatistic {
     }
 
     private ActivityStatistic(final Map<Activity, Quantity> activityQuantity, final Set<CoreActivity> coreActivities) {
-        this.activityQuantity = notNull(activityQuantity);;
+        this.activityQuantity = notNull(activityQuantity);
         this.coreActivities = noNullElements(coreActivities);
     }
 

@@ -13,7 +13,7 @@ public final class ActivityStatisticModel {
     private List<CoreActivityModel> coreActivities;
 
     private ActivityStatisticModel(final Map<String, Long> activityQuantity, final List<CoreActivityModel> coreActivities) {
-        this.activityQuantity = notNull(activityQuantity);;
+        this.activityQuantity = notNull(activityQuantity);
         this.coreActivities = noNullElements(coreActivities);
     }
 

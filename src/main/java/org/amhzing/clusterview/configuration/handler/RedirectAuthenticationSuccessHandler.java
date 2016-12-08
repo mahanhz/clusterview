@@ -32,7 +32,7 @@ public class RedirectAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 
         final String roleBasedTargetUri = uri(authentication);
 
-        if ((savedRequest == null) && isBlank(roleBasedTargetUri)) {
+        if (savedRequest == null && isBlank(roleBasedTargetUri)) {
             super.onAuthenticationSuccess(request, response, authentication);
             return;
         }

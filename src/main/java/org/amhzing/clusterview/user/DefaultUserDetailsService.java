@@ -27,7 +27,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
         final UserEntity user = userJpaRepository.findByEmail(username);
 
         if (user == null) {
-            throw new UsernameNotFoundException("No user found with username: " + user);
+            throw new UsernameNotFoundException("No user found with username: " + username);
         }
 
         return new DefaultUserDetails(user.getEmail(),
