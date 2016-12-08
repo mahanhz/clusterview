@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.web.controller.se;
+package org.amhzing.clusterview.web.controller;
 
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.annotation.TestOffline;

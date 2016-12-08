@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.web.controller.se;
+package org.amhzing.clusterview.web.controller;
 
 import com.fasterxml.uuid.Generators;
 import org.slf4j.Logger;
@@ -24,7 +24,7 @@ public class GlobalExceptionHandlerController {
         final ModelAndView mav = new ModelAndView();
         mav.addObject("cameFrom", request.getRequestURI());
         mav.addObject("errorId", errorId);
-        mav.setViewName("se/error");
+        mav.setViewName("error");
 
         return mav;
     }

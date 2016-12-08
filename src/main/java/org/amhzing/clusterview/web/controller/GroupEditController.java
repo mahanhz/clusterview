@@ -1,10 +1,9 @@
-package org.amhzing.clusterview.web.controller.se;
+package org.amhzing.clusterview.web.controller;
 
 import org.amhzing.clusterview.cache.CacheEvicter;
 import org.amhzing.clusterview.web.adapter.ActivityAdapter;
 import org.amhzing.clusterview.web.adapter.CoreActivityAdapter;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
-import org.amhzing.clusterview.web.controller.AbstractEditController;
 import org.amhzing.clusterview.web.model.ActivityModel;
 import org.amhzing.clusterview.web.model.CoreActivityModel;
 import org.amhzing.clusterview.web.model.GroupModel;
