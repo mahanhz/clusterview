@@ -1,0 +1,76 @@
+#!groovy
+
+ARTIFACT_NEXUS_URL = ""
+ARTIFACT_GROUP = ""
+ARTIFACT_NAME = ""
+ARTIFACT_VERSION = ""
+
+SELECTED_DEPLOYMENT_OPTION = "latest"
+SPECIFIC_VERSION = ""
+
+stage ('Approve deploy?') {
+    timeout(time: 5, unit: 'MINUTES') {
+        SELECTED_DEPLOYMENT_OPTION =
+                input message: 'Deploy to production?', parameters: [[$class: 'ChoiceParameterDefinition',
+                                                                      choices: 'latest\nspecific',
+                                                                      description: 'The latest or a specific manually entered version',
+                                                                      name: '']]
+        if (SELECTED_DEPLOYMENT_OPTION == "specific") {
+            SPECIFIC_VERSION =
+                    input message: 'Enter version?', parameters: [[$class: 'StringParameterDefinition',
+                                                                   defaultValue: '',
+                                                                   description: 'Specific version to deploy',
+                                                                   name: '']]
+        }
+    }
+}
+
+// one at a time!
+lock('lock-deploy-production') {
+    stage('Deploy production') {
+        node {
+            timeout(time: 5, unit: 'MINUTES') {
+                checkout scm
+
+                stash excludes: 'build/', includes: '**', name: 'source'
+
+                if (SELECTED_DEPLOYMENT_OPTION == "latest") {
+                    sh 'git describe --abbrev=0 > releaseTag'
+                    ARTIFACT_VERSION = readFile('releaseTag').trim()
+                } else if (SELECTED_DEPLOYMENT_OPTION == "specific") {
+                    echo "Deploying specific version: ${SPECIFIC_VERSION}"
+                    ARTIFACT_VERSION = SPECIFIC_VERSION
+                } else {
+                    throw new RuntimeException("Invalid deployment option selected: ${SELECTED_DEPLOYMENT_OPTION}")
+                }
+
+                def props = readProperties file: 'gradle.properties'
+
+                ARTIFACT_NEXUS_URL = props['artifactNexusUrl']
+                ARTIFACT_GROUP = props['artifactGroup']
+                ARTIFACT_NAME = props['artifactName']
+
+                build job: 'Clusterview-deploy-PRODUCTION-cloudfoundry', parameters: [string(name: 'NEXUS_URL', value: ARTIFACT_NEXUS_URL),
+                                                                                      string(name: 'REPO',      value: 'releases'),
+                                                                                      string(name: 'GROUP',     value: ARTIFACT_GROUP),
+                                                                                      string(name: 'ARTIFACT',  value: ARTIFACT_NAME),
+                                                                                      string(name: 'VERSION',   value: ARTIFACT_VERSION)]
+            }
+        }
+    }
+}
+
+stage ('Health check') {
+    timeout(time: 5, unit: 'MINUTES') {
+        node {
+            retry(5) {
+                unstash 'source'
+                sh 'chmod 755 gradlew'
+
+                sh 'SPRING_PROFILES_ACTIVE=production ./gradlew smokeTest'
+            }
+
+            deleteDir() // Wipe out the workspace
+        }
+    }
+}

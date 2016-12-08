@@ -1,0 +1,4 @@
+---
+applications:
+- name: clusterview
+  path: clusterview.jar
