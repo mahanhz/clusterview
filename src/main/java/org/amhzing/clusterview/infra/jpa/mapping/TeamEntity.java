@@ -5,11 +5,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity(name = "team")
 public final class TeamEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     private long id;
 
     @Embedded

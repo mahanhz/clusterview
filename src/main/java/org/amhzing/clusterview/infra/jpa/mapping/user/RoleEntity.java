@@ -7,11 +7,13 @@ import javax.persistence.ManyToMany;
 import java.util.Collection;
 import java.util.Objects;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity(name = "role")
 public class RoleEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     private long id;
 
     private String name;

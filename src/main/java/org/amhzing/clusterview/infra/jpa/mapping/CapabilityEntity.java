@@ -3,11 +3,13 @@ package org.amhzing.clusterview.infra.jpa.mapping;
 import javax.persistence.*;
 import java.util.Objects;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity(name = "capability")
 public final class CapabilityEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     private long id;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)

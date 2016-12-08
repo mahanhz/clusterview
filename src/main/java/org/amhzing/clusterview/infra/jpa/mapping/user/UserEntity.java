@@ -4,11 +4,13 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity(name = "userlogin")
 public class UserEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     private long id;
 
     private String firstName;
