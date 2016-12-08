@@ -11,7 +11,7 @@ import java.util.Map;
 public final class JpaRepositoryHelper {
 
     public static final int INITIAL_ACTIVITIES_SIZE = 10;
-    public static final int INITIAL_CLUSTERS_SIZE = 3;
+    public static final int INITIAL_CLUSTERS_SIZE = 19;
     public static final int INITIAL_TEAM_SIZE = 3;
     public static final int INITIAL_MEMBERS_SIZE = 4;
     public static final int INITIAL_CAPABILITIES_SIZE = 6;

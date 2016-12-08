@@ -24,6 +24,6 @@ public class RegionJpaRepositoryTest {
 
         assertThat(region).isNotNull();
         assertThat(region.getId()).isEqualToIgnoringCase("central");
-        assertThat(region.getClusters()).hasSize(2);
+        assertThat(region.getClusters()).hasSize(7);
     }
 }
