@@ -26,6 +26,7 @@ release {
 	failOnCommitNeeded = false
 	failOnUnversionedFiles = false
 	failOnUpdateNeeded = false
+	buildTasks = ['assemble'] // Avoid doing another build
 }
 
 afterReleaseBuild.dependsOn uploadArchives
