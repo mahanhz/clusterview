@@ -10,7 +10,7 @@
          See TCP Appenders https://github.com/logstash/logstash-logback-encoder -->
     <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook" />
 
-    <property name="offlineProfile" value="offline1" />
+    <property name="offlineProfile" value="offline" />
 
     <if condition='"${spring.profiles.active}".contains("${offlineProfile}")'>
         <then>

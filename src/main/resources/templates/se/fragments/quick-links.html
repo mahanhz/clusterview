@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <body>
+        <th:block th:fragment="quick-links">
+            <div class="quicklinks">
+                <span class="label label-default">Quick Links</span>
+                <a th:if="${country}" th:href="@{'/clusterview/' + ${country}}" th:text="${country}">Country</a>
+
+                <a th:if="${regionPath}"
+                   th:href="@{'/clusterview/' + ${regionPath.country}}"
+                   th:text="${regionPath.country}">Country</a>
+                <th:block th:if="${regionPath}">-</th:block>
+                <a th:if="${regionPath}"
+                   th:href="@{'/clusterview/' + ${regionPath.country} + '/' + ${regionPath.region}}"
+                   th:text="${regionPath.region}">Region</a>
+
+                <a th:if="${clusterPath}"
+                   th:href="@{'/clusterview/' + ${clusterPath.country}}"
+                   th:text="${clusterPath.country}">Country</a>
+                <th:block th:if="${clusterPath}">-</th:block>
+                <a th:if="${clusterPath}"
+                   th:href="@{'/clusterview/' + ${clusterPath.country} + '/' + ${clusterPath.region}}"
+                   th:text="${clusterPath.region}">Region</a>
+                <th:block th:if="${clusterPath}">-</th:block>
+                <a th:if="${clusterPath}"
+                   th:href="@{'/clusterview/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster}}"
+                   th:text="${clusterPath.cluster}">Cluster</a>
+            </div>
+        </th:block>
+        <!--<th:block th:fragment="quick-links">-->
+        <!--<div class="list-group">-->
+        <!--<a href="#" class="list-group-item disabled">Quick links</a>-->
+        <!--<a th:if="${country}"-->
+        <!--th:href="@{'/clusterview/' + ${country}}"-->
+        <!--th:text="'Country - ' + ${country}"-->
+        <!--class="list-group-item list-group-item-info">Country</a>-->
+
+        <!--<a th:if="${regionPath}"-->
+        <!--th:href="@{'/clusterview/' + ${regionPath.country}}"-->
+        <!--th:text="'Country - ' + ${regionPath.country}"-->
+        <!--class="list-group-item list-group-item-info">Country</a>-->
+        <!--<a th:if="${regionPath}"-->
+        <!--th:href="@{'/clusterview/' + ${regionPath.country} + '/' + ${regionPath.region}}"-->
+        <!--th:text="'Region - ' + ${regionPath.region}"-->
+        <!--class="list-group-item list-group-item-info">Region</a>-->
+
+        <!--<a th:if="${clusterPath}"-->
+        <!--th:href="@{'/clusterview/' + ${clusterPath.country}}"-->
+        <!--th:text="'Country - ' + ${clusterPath.country}"-->
+        <!--class="list-group-item list-group-item-info">Country</a>-->
+        <!--<a th:if="${clusterPath}"-->
+        <!--th:href="@{'/clusterview/' + ${clusterPath.country} + '/' + ${clusterPath.region}}"-->
+        <!--th:text="'Region - ' + ${clusterPath.region}"-->
+        <!--class="list-group-item list-group-item-info">Region</a>-->
+        <!--<a th:if="${clusterPath}"-->
+        <!--th:href="@{'/clusterview/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster}}"-->
+        <!--th:text="'Cluster - ' + ${clusterPath.cluster}"-->
+        <!--class="list-group-item list-group-item-info">Cluster</a>-->
+        <!--</div>-->
+        <!--</th:block>-->
+    </body>
+</html>

@@ -6,6 +6,8 @@
     <body>
         <th:block th:fragment="group-operations">
             <div class="col-xs-3">
+                <th:block th:replace="se/fragments/quick-links :: quick-links"></th:block>
+                <br/>
                 <div class="list-group">
                     <a href="#" class="list-group-item disabled">Group operations</a>
                     <div sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN)">

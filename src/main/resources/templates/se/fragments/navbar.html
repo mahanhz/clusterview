@@ -26,7 +26,11 @@
                                 <span sec:authentication="principal.lastName"></span>
                             </p>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a th:href="@{/login?logout}">Logout</a></li>
+                                <li>
+                                    <p class="navbar-btn">
+                                        <a th:href="@{/login?logout}" class="btn btn-default">Logout</a>
+                                    </p>
+                                </li>
                             </ul>
                         </div><!--/.nav-collapse -->
                     </div><!--/.container-fluid -->
