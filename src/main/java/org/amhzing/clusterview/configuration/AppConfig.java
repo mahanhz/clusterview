@@ -7,9 +7,12 @@ import org.amhzing.clusterview.domain.repository.GroupRepository;
 import org.amhzing.clusterview.infra.repository.ClusterStatisticRepository;
 import org.amhzing.clusterview.infra.repository.CountryStatisticRepository;
 import org.amhzing.clusterview.infra.repository.RegionStatisticRepository;
+import org.amhzing.clusterview.user.UserServletFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.servlet.Filter;
 
 @Configuration
 public class AppConfig {
@@ -52,5 +55,10 @@ public class AppConfig {
         return new DefaultStatisticService(countryStatisticRepository,
                                            regionStatisticRepository,
                                            clusterStatisticRepository);
+    }
+
+    @Bean
+    public Filter userServletFilter() {
+        return new UserServletFilter();
     }
 }

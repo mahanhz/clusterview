@@ -10,14 +10,14 @@
          See TCP Appenders https://github.com/logstash/logstash-logback-encoder -->
     <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook" />
 
-    <property name="offlineProfile" value="offline" />
+    <property name="offlineProfile" value="offline1" />
 
     <if condition='"${spring.profiles.active}".contains("${offlineProfile}")'>
         <then>
             <property name="logLevel" value="DEBUG"/>
             <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
                 <encoder>
-                    <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+                    <pattern>%date %level [%thread] %logger{10} [%file:%line] [%X{appuser}] %msg%n</pattern>
                     <outputPatternAsHeader>true</outputPatternAsHeader>
                 </encoder>
             </appender>
@@ -26,6 +26,7 @@
             <property name="logLevel" value="INFO"/>
             <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
                 <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                    <includeMdcKeyName>appuser</includeMdcKeyName>
                     <timeZone>UTC</timeZone>
                 </encoder>
             </appender>
