@@ -12,8 +12,8 @@ $(function() {
             toolTip: 'Stockholm',
             selected: true,
             render_select: {
-                fillColor: '8e2a16',
-                fillOpacity: 0.5,
+                fillColor: 'f72727',
+                fillOpacity: 0.3,
                 stroke: false
             }
         },
@@ -25,7 +25,12 @@ $(function() {
         {
             key: 'malardalen-cluster',
             toolTip: 'Malardalen',
-            stroke: false
+            selected: true,
+            render_select: {
+                fillColor: 'f78f27',
+                fillOpacity: 0.3,
+                stroke: false
+            }
         },
         {
             key: 'gavleborg-cluster',

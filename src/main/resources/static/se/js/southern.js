@@ -52,7 +52,12 @@ $(function() {
         {
             key: 'skane-cluster',
             toolTip: 'Skane',
-            stroke: false
+            selected: true,
+            render_select: {
+                fillColor: 'f78f27',
+                fillOpacity: 0.3,
+                stroke: false
+            }
         },
         {
             key: 'northern-region',

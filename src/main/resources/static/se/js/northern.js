@@ -15,7 +15,12 @@ $(function() {
         {
             key: 'vasterbotten-cluster',
             toolTip: 'Vasterbotten',
-            stroke: false
+            selected: true,
+            render_select: {
+                fillColor: 'f78f27',
+                fillOpacity: 0.3,
+                stroke: false
+            }
         },
         {
             key: 'jamtland-cluster',
