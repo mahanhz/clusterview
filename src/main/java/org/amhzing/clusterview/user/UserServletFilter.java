@@ -10,7 +10,7 @@ import java.security.Principal;
 
 public class UserServletFilter implements Filter {
 
-    private final String APP_USER = "appuser";
+    protected static final String APP_USER = "appuser";
 
     @Override
     public void init(final FilterConfig filterConfig) throws ServletException {
@@ -26,7 +26,7 @@ public class UserServletFilter implements Filter {
 
         if (principal != null) {
             String username = principal.getName();
-            successfulRegistration = registerUsername(username);
+            successfulRegistration = registerAppUser(username);
         }
 
         try {
@@ -43,7 +43,7 @@ public class UserServletFilter implements Filter {
 
     }
 
-    private boolean registerUsername(final String username) {
+    private boolean registerAppUser(final String username) {
         if (StringUtils.isNotBlank(username)) {
             MDC.put(APP_USER, username);
             return true;
