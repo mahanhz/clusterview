@@ -13,8 +13,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import static org.amhzing.clusterview.user.UserServletFilter.*;
-import static org.apache.commons.lang3.Validate.notNull;
+import static org.amhzing.clusterview.user.UserServletFilter.APP_USER;
+import static org.apache.commons.lang3.Validate.notBlank;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -53,8 +53,8 @@ public class UserServletFilterTest {
 
         public VerifyMDCFilterChain(final String expectedKey, final String expectedValue) {
             super();
-            this.key = notNull(expectedKey);
-            this.value = notNull(expectedValue);
+            this.key = notBlank(expectedKey);
+            this.value = notBlank(expectedValue);
         }
 
         @Override
