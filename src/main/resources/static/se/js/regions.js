@@ -39,8 +39,32 @@ $(function() {
 		{
             key: 'stockholm-cluster',
             toolTip: 'Stockholm',
-            fillColor: '8e2a16',
-            fillOpacity: 0.5,
+            fillColor: 'f72727',
+            fillOpacity: 0.3,
+            staticState: true,
+            stroke: false
+        },
+        {
+            key: 'vasterbotten-cluster',
+            toolTip: 'Vasterbotten',
+            fillColor: 'f78f27',
+            fillOpacity: 0.3,
+            staticState: true,
+            stroke: false
+        },
+        {
+            key: 'malardalen-cluster',
+            toolTip: 'Malardalen',
+            fillColor: 'f78f27',
+            fillOpacity: 0.3,
+            staticState: true,
+            stroke: false
+        },
+        {
+            key: 'skane-cluster',
+            toolTip: 'Skane',
+            fillColor: 'f78f27',
+            fillOpacity: 0.3,
             staticState: true,
             stroke: false
         }]
