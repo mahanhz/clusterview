@@ -29,17 +29,14 @@ public class GroupEditController extends AbstractEditController {
     private GroupAdapter groupAdapter;
     private ActivityAdapter activityAdapter;
     private CoreActivityAdapter coreActivityAdapter;
-    private CacheEvicter cacheEvicter;
 
     @Autowired
     public GroupEditController(final GroupAdapter groupAdapter,
                                final ActivityAdapter activityAdapter,
-                               final CoreActivityAdapter coreActivityAdapter,
-                               final CacheEvicter cacheEvicter) {
+                               final CoreActivityAdapter coreActivityAdapter) {
         this.groupAdapter = notNull(groupAdapter);
         this.activityAdapter = notNull(activityAdapter);
         this.coreActivityAdapter = notNull(coreActivityAdapter);
-        this.cacheEvicter = notNull(cacheEvicter);
     }
 
     @ModelAttribute

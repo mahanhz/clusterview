@@ -36,7 +36,7 @@ public class CacheTestConfig {
     private ActivityJpaRepository activityJpaRepository;
 
     @Bean
-    public StatisticRepository<Country.Id, ActivityStatistic> cuntryStatisticRepository() {
+    public StatisticRepository<Country.Id, ActivityStatistic> countryStatisticRepository() {
         return new CountryStatisticRepository(countryJpaRepository, groupRepository());
     }
 
@@ -77,5 +77,10 @@ public class CacheTestConfig {
         final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
         cacheFactoryBean.setName(CacheSpec.STATS_CACHE_NAME);
         return cacheFactoryBean;
+    }
+
+    @Bean
+    public CacheInvalidateRule cacheInvalidationRule() {
+        return new CacheInvalidateRule(cacheManager());
     }
 }

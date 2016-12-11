@@ -31,9 +31,4 @@ public class CacheConfig {
                                                                  .setStoreByValue(false));
         };
     }
-
-    @Bean
-    public CacheEvicter cacheEvicter() {
-        return new CacheEvicter();
-    }
 }
