@@ -54,6 +54,7 @@ public final class GroupFactory {
 
         return CoreActivity.create(CoreActivity.Id.create(activity.getId()),
                                    activity.getName(),
+                                   Quantity.create(quantity.getNumActivities()),
                                    Quantity.create(quantity.getTotal()),
                                    Quantity.create(quantity.getCommunityOfInterest()));
     }

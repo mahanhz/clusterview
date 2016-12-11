@@ -8,21 +8,23 @@ public final class CoreActivityModel {
 
     private String id;
     private String name;
+    private long quantity;
     private long totalParticipants;
     private long communityOfInterest;
 
     public CoreActivityModel() {
     }
 
-    private CoreActivityModel(final String id, final String name, final long totalParticipants, final long communityOfInterest) {
+    private CoreActivityModel(final String id, final String name, final long quantity, final long totalParticipants, final long communityOfInterest) {
         this.id = notBlank(id);
         this.name = notBlank(name);
+        this.quantity = quantity;
         this.totalParticipants = totalParticipants;
         this.communityOfInterest = communityOfInterest;
     }
 
-    public static CoreActivityModel create(final String id, final String name, final long totalParticipants, final long communityOfInterest) {
-        return new CoreActivityModel(id, name, totalParticipants, communityOfInterest);
+    public static CoreActivityModel create(final String id, final String name, final long quantity, final long totalParticipants, final long communityOfInterest) {
+        return new CoreActivityModel(id, name, quantity, totalParticipants, communityOfInterest);
     }
 
     public String getId() {
@@ -39,6 +41,14 @@ public final class CoreActivityModel {
 
     public void setName(final String name) {
         this.name = name;
+    }
+
+    public long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(final long quantity) {
+        this.quantity = quantity;
     }
 
     public long getTotalParticipants() {
@@ -60,9 +70,10 @@ public final class CoreActivityModel {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof CoreActivityModel)) return false;
         final CoreActivityModel that = (CoreActivityModel) o;
-        return totalParticipants == that.totalParticipants &&
+        return quantity == that.quantity &&
+                totalParticipants == that.totalParticipants &&
                 communityOfInterest == that.communityOfInterest &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name);
@@ -70,7 +81,7 @@ public final class CoreActivityModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, totalParticipants, communityOfInterest);
+        return Objects.hash(id, name, quantity, totalParticipants, communityOfInterest);
     }
 
     @Override
@@ -78,6 +89,7 @@ public final class CoreActivityModel {
         return "CoreActivityModel{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", quantity=" + quantity +
                 ", totalParticipants=" + totalParticipants +
                 ", communityOfInterest=" + communityOfInterest +
                 '}';

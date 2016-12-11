@@ -9,15 +9,17 @@
                     <thead>
                     <tr >
                         <th></th>
-                        <th>Total</th>
+                        <th>No.</th>
+                        <th>Par.</th>
                         <th>CoI</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="statistic : ${statistics.coreActivities}">
-                        <td th:text="${statistic.name}" />
-                        <td th:text="${statistic.totalParticipants}" />
-                        <td th:text="${statistic.communityOfInterest}" />
+                    <tr th:each="coreActivity : ${statistics.coreActivities}">
+                        <td th:text="${coreActivity.name}" />
+                        <td th:text="${coreActivity.quantity}" />
+                        <td th:text="${coreActivity.totalParticipants}" />
+                        <td th:text="${coreActivity.communityOfInterest}" />
                     </tr>
                     </tbody>
                 </table>

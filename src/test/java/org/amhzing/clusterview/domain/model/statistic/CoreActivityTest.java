@@ -19,10 +19,11 @@ public class CoreActivityTest {
     public void test_creation(final Class<? extends Exception> exception,
                               final String id,
                               final String name,
+                              final long quantity,
                               final long total,
                               final long coi) {
         try {
-            CoreActivity.create(CoreActivity.Id.create(id), name, Quantity.create(total), Quantity.create(coi));
+            CoreActivity.create(CoreActivity.Id.create(id), name, Quantity.create(quantity), Quantity.create(total), Quantity.create(coi));
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
@@ -38,9 +39,9 @@ public class CoreActivityTest {
     @SuppressWarnings("unused")
     private Object values() {
         return new Object[][]{
-                { valid(), "sc", "SC", 0L, 0L },
-                { invalidMatching(IllegalArgumentException.class), "sc", "", 0L, 0L },
-                { invalidMatching(NullPointerException.class), null, "SC", 0L, 0L }
+                { valid(), "sc", "SC", 0L, 0L, 0L },
+                { invalidMatching(IllegalArgumentException.class), "sc", "", 0L, 0L, 0L },
+                { invalidMatching(NullPointerException.class), null, "SC", 0L, 0L, 0L }
         };
     }
 }

@@ -17,10 +17,11 @@ public class ParticipantQuantityTest {
     @Test
     @Parameters(method = "values")
     public void test_creation(final Class<? extends Exception> exception,
+                              final long quantity,
                               final long total,
                               final long coi) {
         try {
-            ParticipantQuantity.create(total, coi);
+            ParticipantQuantity.create(quantity, total, coi);
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
@@ -35,8 +36,8 @@ public class ParticipantQuantityTest {
     @SuppressWarnings("unused")
     private Object values() {
         return new Object[][]{
-                { valid(), 0L, 0L },
-                { valid(), 10L, 5L }
+                { valid(), 0L, 0L, 0L },
+                { valid(), 3L, 10L, 5L }
         };
     }
 }

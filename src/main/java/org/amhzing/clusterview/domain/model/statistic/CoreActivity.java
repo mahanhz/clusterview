@@ -9,18 +9,21 @@ public final class CoreActivity {
 
     private Id id;
     private String name;
+    private Quantity quantity;
     private Quantity totalParticipants;
     private Quantity communityOfInterest;
 
-    private CoreActivity(final Id id, final String name, final Quantity totalParticipants, final Quantity communityOfInterest) {
+    private CoreActivity(final Id id, final String name, final Quantity quantity, final Quantity totalParticipants, final Quantity communityOfInterest) {
         this.id = notNull(id);
         this.name = notBlank(name);
+        this.quantity = notNull(quantity);
         this.totalParticipants = notNull(totalParticipants);
         this.communityOfInterest = notNull(communityOfInterest);
     }
 
-    public static CoreActivity create(final Id id, final String name, final Quantity totalParticipants, final Quantity communityOfInterest) {
-        return new CoreActivity(id, name, totalParticipants, communityOfInterest);
+    public static CoreActivity create(final Id id, final String name, final Quantity quantity,
+                                      final Quantity totalParticipants, final Quantity communityOfInterest) {
+        return new CoreActivity(id, name, quantity, totalParticipants, communityOfInterest);
     }
 
     public Id getId() {
@@ -29,6 +32,10 @@ public final class CoreActivity {
 
     public String getName() {
         return name;
+    }
+
+    public Quantity getQuantity() {
+        return quantity;
     }
 
     public Quantity getTotalParticipants() {
@@ -58,6 +65,7 @@ public final class CoreActivity {
         return "CoreActivity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", quantity=" + quantity +
                 ", totalParticipants=" + totalParticipants +
                 ", communityOfInterest=" + communityOfInterest +
                 '}';

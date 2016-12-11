@@ -93,6 +93,7 @@ public final class StatisticFactory {
     private static CoreActivity sumCoreActivities(final CoreActivity a, final CoreActivity b) {
         return CoreActivity.create(a.getId(),
                                    a.getName(),
+                                   Quantity.create(a.getQuantity().getValue() + b.getQuantity().getValue()),
                                    Quantity.create(a.getTotalParticipants().getValue() + b.getTotalParticipants().getValue()),
                                    Quantity.create(a.getCommunityOfInterest().getValue() + b.getCommunityOfInterest().getValue()));
     }

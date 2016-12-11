@@ -40,6 +40,7 @@ public final class GroupFactory {
     private static CoreActivity convertCoreActivity(final CoreActivityModel coreActivityModel) {
         return CoreActivity.create(CoreActivity.Id.create(coreActivityModel.getId()),
                                    coreActivityModel.getName(),
+                                   Quantity.create(coreActivityModel.getQuantity()),
                                    Quantity.create(coreActivityModel.getTotalParticipants()),
                                    Quantity.create(coreActivityModel.getCommunityOfInterest()));
     }
