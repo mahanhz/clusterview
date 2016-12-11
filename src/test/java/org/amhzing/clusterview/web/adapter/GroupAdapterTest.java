@@ -2,6 +2,8 @@ package org.amhzing.clusterview.web.adapter;
 
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.application.GroupService;
+import org.amhzing.clusterview.domain.model.Cluster;
+import org.amhzing.clusterview.domain.model.Group;
 import org.amhzing.clusterview.web.model.GroupModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,8 +59,11 @@ public class GroupAdapterTest {
     @Test
     public void should_delete_group() throws Exception {
 
-        groupAdapter.deleteGroup(group().getId().getId());
+        final Group.Id groupId = group().getId();
+        final Cluster.Id clusterId = cluster().getId();
 
-        verify(groupService, times(1)).deleteGroup(group().getId());
+        groupAdapter.deleteGroup(groupId.getId(), clusterId.getId());
+
+        verify(groupService, times(1)).deleteGroup(groupId, clusterId);
     }
 }

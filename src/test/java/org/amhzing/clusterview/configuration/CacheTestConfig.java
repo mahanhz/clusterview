@@ -37,17 +37,17 @@ public class CacheTestConfig {
 
     @Bean
     public StatisticRepository<Country.Id, ActivityStatistic> cuntryStatisticRepository() {
-        return new CountryStatisticRepository(countryJpaRepository);
+        return new CountryStatisticRepository(countryJpaRepository, groupRepository());
     }
 
     @Bean
     public StatisticRepository<Region.Id, ActivityStatistic> regionStatisticRepository() {
-        return new RegionStatisticRepository(regionJpaRepository);
+        return new RegionStatisticRepository(regionJpaRepository, groupRepository());
     }
 
     @Bean
     public StatisticRepository<Cluster.Id, ActivityStatistic> clusterStatisticRepository() {
-        return new ClusterStatisticRepository(clusterJpaRepository);
+        return new ClusterStatisticRepository(clusterJpaRepository, groupRepository());
     }
 
     @Bean

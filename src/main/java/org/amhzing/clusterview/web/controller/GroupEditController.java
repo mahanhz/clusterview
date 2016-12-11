@@ -1,6 +1,5 @@
 package org.amhzing.clusterview.web.controller;
 
-import org.amhzing.clusterview.cache.CacheEvicter;
 import org.amhzing.clusterview.web.adapter.ActivityAdapter;
 import org.amhzing.clusterview.web.adapter.CoreActivityAdapter;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
@@ -88,8 +87,6 @@ public class GroupEditController extends AbstractEditController {
 
         groupAdapter.createGroup(groupModel, groupPath.getCluster());
 
-        clearCaches();
-
         return redirectToClusterView(groupPath);
     }
 
@@ -105,9 +102,7 @@ public class GroupEditController extends AbstractEditController {
             return groupActionView(groupPath);
         }
 
-        groupAdapter.updateGroup(groupModel);
-
-        clearCaches();
+        groupAdapter.updateGroup(groupModel, groupPath.getCluster());
 
         return redirectToClusterView(groupPath);
     }
@@ -117,9 +112,7 @@ public class GroupEditController extends AbstractEditController {
                               @RequestParam(required = false) final boolean displayConfirmation,
                               final RedirectAttributes redirectAttributes) {
 
-        groupAdapter.deleteGroup(groupPath.getGroupId());
-
-        clearCaches();
+        groupAdapter.deleteGroup(groupPath.getGroupId(), groupPath.getCluster());
 
         return redirectToClusterView(groupPath);
     }
@@ -134,10 +127,5 @@ public class GroupEditController extends AbstractEditController {
 
     private String redirectToEditGroupView(final GroupPath groupPath) {
         return "redirect:/clusteredit/" + groupPath.getCountry() + "/" + groupPath.getRegion() + "/" + groupPath.getCluster() + "/" + groupPath.getGroupId();
-    }
-
-    private void clearCaches() {
-        cacheEvicter.clearStatsCache();
-        cacheEvicter.clearGroupsCache();
     }
 }

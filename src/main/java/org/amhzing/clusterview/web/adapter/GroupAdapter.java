@@ -47,15 +47,18 @@ public class GroupAdapter {
         groupService.createGroup(group, Cluster.Id.create(clusterId));
     }
 
-    public void deleteGroup(final long groupId) {
-        groupService.deleteGroup(Group.Id.create(groupId));
+    public void deleteGroup(final long groupId, final String clusterId) {
+        notBlank(clusterId);
+
+        groupService.deleteGroup(Group.Id.create(groupId), Cluster.Id.create(clusterId));
     }
 
-    public void updateGroup(final GroupModel groupModel) {
+    public void updateGroup(final GroupModel groupModel, final String clusterId) {
         notNull(groupModel);
+        notBlank(clusterId);
 
         final Group group = GroupFactory.convert(groupModel);
 
-        groupService.updateGroup(group);
+        groupService.updateGroup(group, Cluster.Id.create(clusterId));
     }
 }
