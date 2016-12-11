@@ -43,11 +43,11 @@ public class DefaultGroupRepository implements GroupRepository {
 
         final ClusterEntity cluster = clusterJpaRepository.findOne(clusterId.getId());
 
-        if (cluster != null) {
-            return convertTeams(cluster.getTeams());
+        if (cluster == null) {
+            return emptySet();
         }
 
-        return emptySet();
+        return convertTeams(cluster.getTeams());
     }
 
     @Override
@@ -58,6 +58,10 @@ public class DefaultGroupRepository implements GroupRepository {
         notNull(groupId);
 
         final TeamEntity team = teamJpaRepository.findOne(groupId.getId());
+
+        if (team == null) {
+            // TODO - Handle this scenario
+        }
 
         return convertTeam(team);
     }

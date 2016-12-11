@@ -60,8 +60,13 @@ public class GroupEditController extends AbstractEditController {
     }
 
     @GetMapping(path = CLUSTER_PATH + "/{groupId}")
-    public String editGroup(@ModelAttribute final GroupPath groupPath,
+    public String editGroup(@ModelAttribute @Valid final GroupPath groupPath,
+                            final BindingResult bindingResult,
                             final Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return groupActionView(groupPath);
+        }
 
         groupPath.setAction(String.valueOf(groupPath.getGroupId()));
         groupPath.setMethod(HttpMethod.PUT.name());
