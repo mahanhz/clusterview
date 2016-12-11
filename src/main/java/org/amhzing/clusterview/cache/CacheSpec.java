@@ -7,14 +7,17 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public class CacheSpec {
 
-    public static final String DEFAULT_CACHE_KEY = "#root.caches[0].name + '-' + #root.target + '-' + #root.method.name + '-' + #p0";
+    public static final String DEFAULT_CACHE_KEY = "#root.caches[0].name + '_' + #p0";
+    //public static final String DEFAULT_CACHE_KEY = "#root.caches[0].name + '-' + #root.target + '-' + #root.method.name + '-' + #p0";
     public static final String STATS_CACHE_NAME = "statsCache";
     public static final String GROUPS_CACHE_NAME = "groupsCache";
+    public static final String GROUP_CACHE_NAME = "groupCache";
 
     public static enum Cache {
 
         STATS_CACHE(STATS_CACHE_NAME, Duration.ONE_DAY),
-        GROUPS_CACHE(GROUPS_CACHE_NAME, Duration.ONE_DAY);
+        GROUPS_CACHE(GROUPS_CACHE_NAME, Duration.ONE_DAY),
+        GROUP_CACHE(GROUP_CACHE_NAME, Duration.ONE_DAY);
 
         private final String name;
         private final Duration duration;

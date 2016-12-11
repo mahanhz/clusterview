@@ -84,7 +84,7 @@ public class DefaultGroupRepositoryTest {
         given(teamJpaRepository.findOne(any(Long.class))).willReturn(teamEntity());
         given(teamJpaRepository.save(any(TeamEntity.class))).willReturn(teamEntity());
 
-        final TeamEntity teamEntity = defaultGroupRepository.updateGroup(group());
+        final TeamEntity teamEntity = defaultGroupRepository.updateGroup(group(), cluster().getId());
 
         assertThat(teamEntity).isNotNull();
         assertThat(teamEntity.getLocation().getX()).isEqualTo(teamEntity().getLocation().getX());
@@ -96,7 +96,7 @@ public class DefaultGroupRepositoryTest {
 
         given(teamJpaRepository.findOne(any(Long.class))).willReturn(teamEntity());
 
-        defaultGroupRepository.deleteGroup(group().getId());
+        defaultGroupRepository.deleteGroup(group().getId(), cluster().getId());
 
         verify(teamJpaRepository, times(1)).delete(group().getId().getId());
     }

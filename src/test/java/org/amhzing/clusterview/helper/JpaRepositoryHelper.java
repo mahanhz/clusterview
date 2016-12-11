@@ -87,7 +87,7 @@ public final class JpaRepositoryHelper {
     }
 
     public static ParticipantQuantity participantQuantity() {
-        return ParticipantQuantity.create(10, 5);
+        return ParticipantQuantity.create(3, 10, 5);
     }
 
     public static MemberEntity member() {

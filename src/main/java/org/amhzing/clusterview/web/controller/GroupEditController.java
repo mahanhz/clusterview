@@ -1,6 +1,5 @@
 package org.amhzing.clusterview.web.controller;
 
-import org.amhzing.clusterview.cache.CacheEvicter;
 import org.amhzing.clusterview.web.adapter.ActivityAdapter;
 import org.amhzing.clusterview.web.adapter.CoreActivityAdapter;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
@@ -30,17 +29,14 @@ public class GroupEditController extends AbstractEditController {
     private GroupAdapter groupAdapter;
     private ActivityAdapter activityAdapter;
     private CoreActivityAdapter coreActivityAdapter;
-    private CacheEvicter cacheEvicter;
 
     @Autowired
     public GroupEditController(final GroupAdapter groupAdapter,
                                final ActivityAdapter activityAdapter,
-                               final CoreActivityAdapter coreActivityAdapter,
-                               final CacheEvicter cacheEvicter) {
+                               final CoreActivityAdapter coreActivityAdapter) {
         this.groupAdapter = notNull(groupAdapter);
         this.activityAdapter = notNull(activityAdapter);
         this.coreActivityAdapter = notNull(coreActivityAdapter);
-        this.cacheEvicter = notNull(cacheEvicter);
     }
 
     @ModelAttribute
@@ -64,8 +60,13 @@ public class GroupEditController extends AbstractEditController {
     }
 
     @GetMapping(path = CLUSTER_PATH + "/{groupId}")
-    public String editGroup(@ModelAttribute final GroupPath groupPath,
+    public String editGroup(@ModelAttribute @Valid final GroupPath groupPath,
+                            final BindingResult bindingResult,
                             final Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return groupActionView(groupPath);
+        }
 
         groupPath.setAction(String.valueOf(groupPath.getGroupId()));
         groupPath.setMethod(HttpMethod.PUT.name());
@@ -88,8 +89,6 @@ public class GroupEditController extends AbstractEditController {
 
         groupAdapter.createGroup(groupModel, groupPath.getCluster());
 
-        clearCaches();
-
         return redirectToClusterView(groupPath);
     }
 
@@ -105,9 +104,7 @@ public class GroupEditController extends AbstractEditController {
             return groupActionView(groupPath);
         }
 
-        groupAdapter.updateGroup(groupModel);
-
-        clearCaches();
+        groupAdapter.updateGroup(groupModel, groupPath.getCluster());
 
         return redirectToClusterView(groupPath);
     }
@@ -117,9 +114,7 @@ public class GroupEditController extends AbstractEditController {
                               @RequestParam(required = false) final boolean displayConfirmation,
                               final RedirectAttributes redirectAttributes) {
 
-        groupAdapter.deleteGroup(groupPath.getGroupId());
-
-        clearCaches();
+        groupAdapter.deleteGroup(groupPath.getGroupId(), groupPath.getCluster());
 
         return redirectToClusterView(groupPath);
     }
@@ -134,10 +129,5 @@ public class GroupEditController extends AbstractEditController {
 
     private String redirectToEditGroupView(final GroupPath groupPath) {
         return "redirect:/clusteredit/" + groupPath.getCountry() + "/" + groupPath.getRegion() + "/" + groupPath.getCluster() + "/" + groupPath.getGroupId();
-    }
-
-    private void clearCaches() {
-        cacheEvicter.clearStatsCache();
-        cacheEvicter.clearGroupsCache();
     }
 }

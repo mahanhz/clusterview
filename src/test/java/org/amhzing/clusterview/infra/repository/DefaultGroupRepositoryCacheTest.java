@@ -70,7 +70,7 @@ public class DefaultGroupRepositoryCacheTest {
     }
 
     @Test
-    public void should_not_invoke_cache_when_empty() throws Exception {
+    public void should_invoke_cache_when_empty() throws Exception {
 
         final Cluster.Id clusterId = Cluster.Id.create(NON_EXISTING_CLUSTER);
 
@@ -80,6 +80,10 @@ public class DefaultGroupRepositoryCacheTest {
         // Second call
         final Set<Group> secondCall = groupRepository.groups(clusterId);
 
-        verify(clusterJpaRepository, times(2)).findOne(clusterId.getId());
+        assertThat(firstCall).isEmpty();
+        assertThat(secondCall).isEmpty();
+        assertThat(firstCall).isSameAs(secondCall);
+
+        verify(clusterJpaRepository, times(1)).findOne(clusterId.getId());
     }
 }

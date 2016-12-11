@@ -21,7 +21,7 @@ public final class TeamEntity {
     private Set<MemberEntity> members;
 
     @ElementCollection
-    @CollectionTable(name = "teams_coreactivities", joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"))
+    @CollectionTable(name = "teams_core_activities", joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"))
     @MapKeyJoinColumn(name = "core_activity_id", referencedColumnName = "id")
     private Map<CoreActivityEntity, ParticipantQuantity> coreActivities;
 

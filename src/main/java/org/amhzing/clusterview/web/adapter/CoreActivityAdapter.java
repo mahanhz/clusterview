@@ -31,6 +31,6 @@ public class CoreActivityAdapter {
     }
 
     private static CoreActivityModel coreActivityModel(final CoreActivity coreActivity) {
-        return CoreActivityModel.create(coreActivity.getId().getId(), coreActivity.getName(), 0L, 0L);
+        return CoreActivityModel.create(coreActivity.getId().getId(), coreActivity.getName(), 0L, 0L, 0L);
     }
 }

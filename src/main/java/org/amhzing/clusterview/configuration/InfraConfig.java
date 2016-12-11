@@ -47,16 +47,16 @@ public class InfraConfig {
 
     @Bean
     public CountryStatisticRepository countryStatisticRepository() {
-        return new CountryStatisticRepository(countryJpaRepository);
+        return new CountryStatisticRepository(countryJpaRepository, groupRepository());
     }
 
     @Bean
     public RegionStatisticRepository regionStatisticRepository() {
-        return new RegionStatisticRepository(regionJpaRepository);
+        return new RegionStatisticRepository(regionJpaRepository, groupRepository());
     }
 
     @Bean
     public ClusterStatisticRepository clusterStatisticRepository() {
-        return new ClusterStatisticRepository(clusterJpaRepository);
+        return new ClusterStatisticRepository(clusterJpaRepository, groupRepository());
     }
 }

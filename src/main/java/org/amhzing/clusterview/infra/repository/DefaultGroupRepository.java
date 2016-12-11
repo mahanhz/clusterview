@@ -8,13 +8,14 @@ import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.infra.jpa.repository.ActivityJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.TeamJpaRepository;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 
 import java.util.Set;
 
 import static java.util.Collections.emptySet;
-import static org.amhzing.clusterview.cache.CacheSpec.DEFAULT_CACHE_KEY;
-import static org.amhzing.clusterview.cache.CacheSpec.GROUPS_CACHE_NAME;
+import static org.amhzing.clusterview.cache.CacheSpec.*;
 import static org.amhzing.clusterview.infra.repository.GroupFactory.convertTeam;
 import static org.amhzing.clusterview.infra.repository.GroupFactory.convertTeams;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -36,29 +37,38 @@ public class DefaultGroupRepository implements GroupRepository {
     @Override
     @Cacheable(cacheNames = GROUPS_CACHE_NAME,
                key= DEFAULT_CACHE_KEY,
-               unless = "#result == null or #result != null and #result.isEmpty()")
+               unless = "#result == null")
     public Set<Group> groups(final Cluster.Id clusterId) {
         notNull(clusterId);
 
         final ClusterEntity cluster = clusterJpaRepository.findOne(clusterId.getId());
 
-        if (cluster != null) {
-            return convertTeams(cluster.getTeams());
+        if (cluster == null) {
+            return emptySet();
         }
 
-        return emptySet();
+        return convertTeams(cluster.getTeams());
     }
 
     @Override
+    @Cacheable(cacheNames = GROUP_CACHE_NAME,
+               key= DEFAULT_CACHE_KEY,
+               unless = "#result == null")
     public Group group(final Group.Id groupId) {
         notNull(groupId);
 
         final TeamEntity team = teamJpaRepository.findOne(groupId.getId());
 
+        if (team == null) {
+            // TODO - Handle this scenario
+        }
+
         return convertTeam(team);
     }
 
     @Override
+    @Caching(evict = { @CacheEvict(cacheNames = STATS_CACHE_NAME, allEntries = true),
+                       @CacheEvict(cacheNames = GROUPS_CACHE_NAME, key = "#root.caches[0].name + '_' + #p1") })
     public TeamEntity createGroup(final Group group, final Cluster.Id clusterId) {
         notNull(group);
         notNull(clusterId);
@@ -72,8 +82,12 @@ public class DefaultGroupRepository implements GroupRepository {
     }
 
     @Override
-    public TeamEntity updateGroup(final Group group) {
+    @Caching(evict = { @CacheEvict(cacheNames = STATS_CACHE_NAME, allEntries = true),
+                       @CacheEvict(cacheNames = GROUPS_CACHE_NAME, key = "#root.caches[0].name + '_' + #p1"),
+                       @CacheEvict(cacheNames = GROUP_CACHE_NAME, key = "#root.caches[0].name + '_' + #p0.id")})
+    public TeamEntity updateGroup(final Group group, final Cluster.Id clusterId) {
         notNull(group);
+        notNull(clusterId);
 
         final TeamEntity currentTeam = teamJpaRepository.findOne(group.getId().getId());
 
@@ -84,8 +98,12 @@ public class DefaultGroupRepository implements GroupRepository {
     }
 
     @Override
-    public void deleteGroup(final Group.Id groupId) {
+    @Caching(evict = { @CacheEvict(cacheNames = STATS_CACHE_NAME, allEntries = true),
+                       @CacheEvict(cacheNames = GROUPS_CACHE_NAME, key = "#root.caches[0].name + '_' + #p1"),
+                       @CacheEvict(cacheNames = GROUP_CACHE_NAME, key = DEFAULT_CACHE_KEY)})
+    public void deleteGroup(final Group.Id groupId, final Cluster.Id clusterId) {
         notNull(groupId);
+        notNull(clusterId);
 
         teamJpaRepository.delete(groupId.getId());
     }

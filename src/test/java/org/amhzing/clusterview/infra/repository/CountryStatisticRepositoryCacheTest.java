@@ -1,10 +1,12 @@
 package org.amhzing.clusterview.infra.repository;
 
+import org.amhzing.clusterview.configuration.CacheInvalidateRule;
 import org.amhzing.clusterview.configuration.CacheTestConfig;
 import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.repository.StatisticRepository;
 import org.amhzing.clusterview.infra.jpa.repository.CountryJpaRepository;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,10 @@ public class CountryStatisticRepositoryCacheTest {
 
     @Autowired
     private StatisticRepository<Country.Id, ActivityStatistic> statisticRepository;
+
+    @Rule
+    @Autowired
+    public CacheInvalidateRule cacheInvalidatenRule;
 
     @Test
     public void should_invoke_cache() throws Exception {

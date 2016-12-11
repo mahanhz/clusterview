@@ -53,10 +53,10 @@ public class ClientModelHelper {
     }
 
     public static CoreActivityModel coreActivityModel() {
-        return CoreActivityModel.create("sc", "SC", 10, 5);
+        return CoreActivityModel.create("sc", "SC", 2, 10, 5);
     }
 
     public static CoreActivityModel anotherCoreActivityModel() {
-        return CoreActivityModel.create("dm", "DM", 13, 7);
+        return CoreActivityModel.create("dm", "DM", 1, 13, 7);
     }
 }

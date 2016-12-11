@@ -32,6 +32,7 @@ public class DefaultCoreActivityRepository implements CoreActivityRepository {
         return CoreActivity.create(CoreActivity.Id.create(coreActivity.getId()),
                                    coreActivity.getName(),
                                    Quantity.create(0L),
+                                   Quantity.create(0L),
                                    Quantity.create(0L));
     }
 }

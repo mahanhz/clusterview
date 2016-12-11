@@ -100,6 +100,7 @@ public class StatisticAdapter {
     private static CoreActivityModel coreActivityModel(final CoreActivity coreActivity) {
         return CoreActivityModel.create(coreActivity.getId().getId(),
                                         coreActivity.getName(),
+                                        coreActivity.getQuantity().getValue(),
                                         coreActivity.getTotalParticipants().getValue(),
                                         coreActivity.getCommunityOfInterest().getValue());
     }

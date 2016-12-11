@@ -39,16 +39,18 @@ public class DefaultGroupService implements GroupService {
     }
 
     @Override
-    public void updateGroup(final Group group) {
+    public void updateGroup(final Group group, final Cluster.Id clusterId) {
         notNull(group);
+        notNull(clusterId);
 
-        groupRepository.updateGroup(group);
+        groupRepository.updateGroup(group, clusterId);
     }
 
     @Override
-    public void deleteGroup(final Group.Id groupId) {
+    public void deleteGroup(final Group.Id groupId, final Cluster.Id clusterId) {
         notNull(groupId);
+        notNull(clusterId);
 
-        groupRepository.deleteGroup(groupId);
+        groupRepository.deleteGroup(groupId, clusterId);
     }
 }

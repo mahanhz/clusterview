@@ -23,7 +23,7 @@ public class ActivityStatisticModelTest {
                               final long value) {
         try {
             ActivityStatisticModel.create(ImmutableMap.of(key, value),
-                                          ImmutableList.of(CoreActivityModel.create(key, key, value, value)));
+                                          ImmutableList.of(CoreActivityModel.create(key, key, value, value, value)));
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }

@@ -15,13 +15,15 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Total</th>
+                                    <th>No.</th>
+                                    <th>Par.</th>
                                     <th>CoI</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="default">
                                     <td th:text="${coreActivity.name}">Study Circle</td>
+                                    <td th:text="${coreActivity.quantity}">10</td>
                                     <td th:text="${coreActivity.totalParticipants}">10</td>
                                     <td th:text="${coreActivity.communityOfInterest}">5</td>
                                 </tr>

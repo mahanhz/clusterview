@@ -36,18 +36,18 @@ public class CacheTestConfig {
     private ActivityJpaRepository activityJpaRepository;
 
     @Bean
-    public StatisticRepository<Country.Id, ActivityStatistic> cuntryStatisticRepository() {
-        return new CountryStatisticRepository(countryJpaRepository);
+    public StatisticRepository<Country.Id, ActivityStatistic> countryStatisticRepository() {
+        return new CountryStatisticRepository(countryJpaRepository, groupRepository());
     }
 
     @Bean
     public StatisticRepository<Region.Id, ActivityStatistic> regionStatisticRepository() {
-        return new RegionStatisticRepository(regionJpaRepository);
+        return new RegionStatisticRepository(regionJpaRepository, groupRepository());
     }
 
     @Bean
     public StatisticRepository<Cluster.Id, ActivityStatistic> clusterStatisticRepository() {
-        return new ClusterStatisticRepository(clusterJpaRepository);
+        return new ClusterStatisticRepository(clusterJpaRepository, groupRepository());
     }
 
     @Bean
@@ -77,5 +77,10 @@ public class CacheTestConfig {
         final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
         cacheFactoryBean.setName(CacheSpec.STATS_CACHE_NAME);
         return cacheFactoryBean;
+    }
+
+    @Bean
+    public CacheInvalidateRule cacheInvalidationRule() {
+        return new CacheInvalidateRule(cacheManager());
     }
 }

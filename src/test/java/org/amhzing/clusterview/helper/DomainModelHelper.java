@@ -82,11 +82,11 @@ public final class DomainModelHelper {
     }
 
     public static CoreActivity coreActivity() {
-        return CoreActivity.create(CoreActivity.Id.create("sc"), "SC", Quantity.create(5), Quantity.create(3));
+        return CoreActivity.create(CoreActivity.Id.create("sc"), "SC", Quantity.create(1), Quantity.create(5), Quantity.create(3));
     }
 
     public static CoreActivity anotherCoreActivity() {
-        return CoreActivity.create(CoreActivity.Id.create("dm"), "DM", Quantity.create(12), Quantity.create(8));
+        return CoreActivity.create(CoreActivity.Id.create("dm"), "DM", Quantity.create(3), Quantity.create(12), Quantity.create(8));
     }
 
     public static Name name() {

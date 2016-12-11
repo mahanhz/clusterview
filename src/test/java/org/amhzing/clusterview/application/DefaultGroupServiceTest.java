@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.application;
 
 import com.google.common.collect.ImmutableSet;
+import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Group;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
 import org.junit.Test;
@@ -59,16 +60,21 @@ public class DefaultGroupServiceTest {
     public void should_update_group() throws Exception {
 
         final Group group = group();
-        defaultGroupService.updateGroup(group);
+        final Cluster.Id clusterId = cluster().getId();
 
-        verify(groupRepository, times(1)).updateGroup(group);
+        defaultGroupService.updateGroup(group, clusterId);
+
+        verify(groupRepository, times(1)).updateGroup(group, clusterId);
     }
 
     @Test
     public void should_delete_group() throws Exception {
 
-        defaultGroupService.deleteGroup(group().getId());
+        final Group.Id groupId = group().getId();
+        final Cluster.Id clusterId = cluster().getId();
 
-        verify(groupRepository, times(1)).deleteGroup(group().getId());
+        defaultGroupService.deleteGroup(groupId, clusterId);
+
+        verify(groupRepository, times(1)).deleteGroup(groupId, clusterId);
     }
 }

@@ -19,7 +19,10 @@
                             <div class="cluster-group"
                                  th:style="'left: ' + ${group.location.coordX - 10} + 'px; top: ' + ${group.location.coordY - 10} + 'px;'" >
                                 <a th:href="${clusterPath.cluster} + '/' + ${group.id}" class="fancyLightbox" data-fancybox-type="iframe">
-                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                    <th:block th:switch="${group.members.size()}">
+                                        <th:block th:case="1"><i class="fa fa-user" aria-hidden="true" style="color:red"></i></th:block>
+                                        <th:block th:case="*"><i class="fa fa-users" aria-hidden="true"></i></th:block>
+                                    </th:block>
                                 </a>
                             </div>
                         </th:block>

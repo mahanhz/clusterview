@@ -70,7 +70,8 @@ public class TeamEntityFactory {
     }
 
     private ParticipantQuantity convertParticipantQuantity(final CoreActivity coreActivity) {
-        return ParticipantQuantity.create(coreActivity.getTotalParticipants().getValue(),
+        return ParticipantQuantity.create(coreActivity.getQuantity().getValue(),
+                                          coreActivity.getTotalParticipants().getValue(),
                                           coreActivity.getCommunityOfInterest().getValue());
     }
 
