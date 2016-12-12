@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import static org.amhzing.clusterview.configuration.StaticFiles.*;
 import static org.amhzing.clusterview.user.UserRole.SE_ADMIN;
 import static org.amhzing.clusterview.user.UserRole.SE_USER;
 
@@ -42,6 +43,11 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/se/css/**", "/se/js/**", "/se/images/**");
+        web.ignoring().antMatchers(CSS.getResourcePattern(),
+                                   CSS_SE.getResourcePattern(),
+                                   JS.getResourcePattern(),
+                                   JS_SE.getResourcePattern(),
+                                   IMAGES_SE.getResourcePattern(),
+                                   "/webjars/**");
     }
 }
