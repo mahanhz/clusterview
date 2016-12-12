@@ -2,6 +2,8 @@ package org.amhzing.clusterview.infra.repository;
 
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Group;
+import org.amhzing.clusterview.exception.ClusterNotFoundException;
+import org.amhzing.clusterview.exception.GroupNotFoundException;
 import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.infra.jpa.repository.ActivityJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
@@ -19,6 +21,7 @@ import static org.amhzing.clusterview.helper.DomainModelHelper.group;
 import static org.amhzing.clusterview.helper.JpaRepositoryHelper.clusterEntity;
 import static org.amhzing.clusterview.helper.JpaRepositoryHelper.teamEntity;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
@@ -53,6 +56,16 @@ public class DefaultGroupRepositoryTest {
     }
 
     @Test
+    public void should_get_empty_groups() throws Exception {
+
+        given(clusterJpaRepository.findOne(any(String.class))).willReturn(null);
+
+        final Set<Group> groups = defaultGroupRepository.groups(Cluster.Id.create("fake"));
+
+        assertThat(groups).isEmpty();
+    }
+
+    @Test
     public void should_get_group() throws Exception {
 
         given(teamJpaRepository.findOne(any(Long.class))).willReturn(teamEntity());
@@ -62,6 +75,18 @@ public class DefaultGroupRepositoryTest {
         assertThat(group).isNotNull();
         assertThat(group.getLocation().getCoordX()).isEqualTo(teamEntity().getLocation().getX());
         assertThat(group.getLocation().getCoordY()).isEqualTo(teamEntity().getLocation().getY());
+    }
+
+    @Test
+    public void should_get_empty_group() throws Exception {
+
+        given(teamJpaRepository.findOne(any(Long.class))).willReturn(null);
+
+        final Group.Id id = Group.Id.create(1234L);
+        final Group group = defaultGroupRepository.group(id);
+
+        assertThat(group).isNotNull();
+        assertThat(group).isEqualTo(Group.empty(id));
     }
 
     @Test
@@ -78,6 +103,16 @@ public class DefaultGroupRepositoryTest {
         assertThat(teamEntity.getLocation().getX()).isEqualTo(teamEntity().getLocation().getX());
     }
 
+    @Test(expected = ClusterNotFoundException.class)
+    public void should_not_create_group() throws Exception {
+
+        given(clusterJpaRepository.findOne(any(String.class))).willReturn(null);
+
+        defaultGroupRepository.createGroup(group(), cluster().getId());
+
+        fail("How did we get this far?");
+    }
+
     @Test
     public void should_update_group() throws Exception {
 
@@ -89,6 +124,16 @@ public class DefaultGroupRepositoryTest {
         assertThat(teamEntity).isNotNull();
         assertThat(teamEntity.getLocation().getX()).isEqualTo(teamEntity().getLocation().getX());
         assertThat(teamEntity.getLocation().getX()).isEqualTo(teamEntity().getLocation().getX());
+    }
+
+    @Test(expected = GroupNotFoundException.class)
+    public void should_not_update_group() throws Exception {
+
+        given(teamJpaRepository.findOne(any(Long.class))).willReturn(null);
+
+        defaultGroupRepository.updateGroup(group(), cluster().getId());
+
+        fail("How did we get this far?");
     }
 
     @Test
