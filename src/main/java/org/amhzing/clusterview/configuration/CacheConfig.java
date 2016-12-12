@@ -25,7 +25,6 @@ public class CacheConfig {
             cacheManager.createCache(GROUPS_CACHE.getName(),
                                      new MutableConfiguration<>().setExpiryPolicyFactory(factoryOf(GROUPS_CACHE.getDuration()))
                                                                  .setStoreByValue(false));
-
             cacheManager.createCache(GROUP_CACHE.getName(),
                                      new MutableConfiguration<>().setExpiryPolicyFactory(factoryOf(GROUP_CACHE.getDuration()))
                                                                  .setStoreByValue(false));

@@ -30,6 +30,10 @@ public final class ActivityStatistic {
         return new ActivityStatistic(activityQuantity, coreActivities);
     }
 
+    public static ActivityStatistic empty() {
+        return ActivityStatistic.create(emptyMap(), emptySet());
+    }
+
     public Map<Activity, Quantity> getActivityQuantity() {
         return activityQuantity;
     }

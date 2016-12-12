@@ -14,7 +14,7 @@
 
                 <div class="col-xs-6">
                     <div class="cluster-container">
-                        <img th:src="@{'/' + ${clusterPath.country} + '/images/cluster-' + ${clusterPath.cluster} + '.png'}"/>
+                        <img th:src="@{'/' + ${clusterPath.country} + '/images/cluster-' + ${clusterPath.cluster} + '.png'}" onerror="clusterNotFound()"/>
                         <th:block th:each="group : ${groups}">
                             <div class="cluster-group"
                                  th:style="'left: ' + ${group.location.coordX - 10} + 'px; top: ' + ${group.location.coordY - 10} + 'px;'" >

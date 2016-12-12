@@ -8,7 +8,7 @@
             <div class="col-xs-3">
                 <th:block th:replace="se/fragments/quick-links :: quick-links"></th:block>
                 <br/>
-                <div class="list-group">
+                <div class="list-group" id="groupOperations">
                     <a href="#" class="list-group-item disabled">Group operations</a>
                     <div sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN)">
                         <a th:href="@{'/clusteredit/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '/newgroup'}"

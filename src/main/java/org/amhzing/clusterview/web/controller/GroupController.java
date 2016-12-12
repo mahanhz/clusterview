@@ -9,10 +9,12 @@ import org.amhzing.clusterview.web.model.GroupPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Set;
 
 import static org.amhzing.clusterview.web.controller.MainController.CLUSTER_PATH;
@@ -46,10 +48,16 @@ public class GroupController extends AbstractController {
     }
 
     @GetMapping(path = CLUSTER_PATH + "/{groupId}")
-    public ModelAndView group(@ModelAttribute final GroupPath groupPath,
+    public ModelAndView group(@ModelAttribute @Valid final GroupPath groupPath,
+                              final BindingResult bindingResult,
                               final Model model) {
 
-        final GroupModel group = groupAdapter.group(groupPath.getGroupId());
+        GroupModel group = GroupModel.empty(groupPath.getGroupId());
+
+        if (!bindingResult.hasErrors()) {
+            group = groupAdapter.group(groupPath.getGroupId());
+
+        }
 
         model.addAttribute("group", group);
 

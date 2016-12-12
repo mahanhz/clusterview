@@ -32,6 +32,11 @@
                         (When reporting this issue please include the above error id)
                     </p>
 
+                    <br/>
+                    <p th:if="${customMessage}">
+                        <b>Message:</b> <span th:text="${customMessage}">Custom message</span>
+                    </p>
+
                 </div>
             </div>
         </th:block>

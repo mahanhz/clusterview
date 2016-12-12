@@ -3,11 +3,15 @@ package org.amhzing.clusterview.infra.repository;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Group;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
+import org.amhzing.clusterview.exception.ClusterNotFoundException;
+import org.amhzing.clusterview.exception.GroupNotFoundException;
 import org.amhzing.clusterview.infra.jpa.mapping.ClusterEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.infra.jpa.repository.ActivityJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.TeamJpaRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -21,6 +25,8 @@ import static org.amhzing.clusterview.infra.repository.GroupFactory.convertTeams
 import static org.apache.commons.lang3.Validate.notNull;
 
 public class DefaultGroupRepository implements GroupRepository {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultGroupRepository.class);
 
     private ClusterJpaRepository clusterJpaRepository;
     private TeamJpaRepository teamJpaRepository;
@@ -60,7 +66,7 @@ public class DefaultGroupRepository implements GroupRepository {
         final TeamEntity team = teamJpaRepository.findOne(groupId.getId());
 
         if (team == null) {
-            // TODO - Handle this scenario
+            return Group.empty(groupId);
         }
 
         return convertTeam(team);
@@ -73,7 +79,12 @@ public class DefaultGroupRepository implements GroupRepository {
         notNull(group);
         notNull(clusterId);
 
-        final ClusterEntity clusterEntity = clusterJpaRepository.findOne(clusterId.getId());
+        final String id = clusterId.getId();
+        final ClusterEntity clusterEntity = clusterJpaRepository.findOne(id);
+
+        if (clusterEntity == null) {
+            throw new ClusterNotFoundException("Cluster does not exist " + id, id);
+        }
 
         final TeamEntityFactory teamEntityFactory = TeamEntityFactory.create(activityJpaRepository);
         final TeamEntity teamEntity = teamEntityFactory.convertGroupForNewTeam(group, clusterEntity);
@@ -89,7 +100,12 @@ public class DefaultGroupRepository implements GroupRepository {
         notNull(group);
         notNull(clusterId);
 
-        final TeamEntity currentTeam = teamJpaRepository.findOne(group.getId().getId());
+        final long id = group.getId().getId();
+        final TeamEntity currentTeam = teamJpaRepository.findOne(id);
+
+        if (currentTeam == null) {
+            throw new GroupNotFoundException("Group does not exist " + id, clusterId.getId(), "" + id);
+        }
 
         final TeamEntityFactory teamEntityFactory = TeamEntityFactory.create(activityJpaRepository);
         final TeamEntity updatedTeam = teamEntityFactory.convertGroupForExistingTeam(group, currentTeam);

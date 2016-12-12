@@ -70,7 +70,7 @@
             </div>
 
             <div sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN)">
-                <div class="row">
+                <div class="row" th:if="${not group.members.isEmpty()}">
                     <div class="col-xs-6">
                         <div class="pull-left">
                             <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"

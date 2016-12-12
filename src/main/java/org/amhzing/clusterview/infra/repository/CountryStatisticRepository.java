@@ -43,7 +43,7 @@ public class CountryStatisticRepository implements StatisticRepository<Country.I
         final CountryEntity country = countryJpaRepository.findOne(id.getId());
 
         if (country == null) {
-            return new ActivityStatistic();
+            return ActivityStatistic.empty();
         }
 
         final Stream<ClusterEntity> clusterEntityStream = clusterEntities(country);

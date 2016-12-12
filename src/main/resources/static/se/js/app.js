@@ -12,6 +12,10 @@ $(document).ready(function() {
 	});
 });
 
+function clusterNotFound() {
+    $("#groupOperations").css('display', 'none');
+}
+
 $('#small').bind('click',function() {
     $('.adjustableImage').mapster('resize', 245, 0, 1000);
 });

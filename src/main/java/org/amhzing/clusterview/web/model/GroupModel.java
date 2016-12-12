@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.Collections.emptyList;
 import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -38,6 +39,14 @@ public final class GroupModel {
 
     public static GroupModel create(final long id, final List<MemberModel> members, final LocationModel location, final List<CoreActivityModel> coreActivities) {
         return new GroupModel(id, members, location, coreActivities);
+    }
+
+    public static GroupModel empty() {
+        return create(-1L, emptyList(), LocationModel.create(-1, -1), emptyList());
+    }
+
+    public static GroupModel empty(final long id) {
+        return create(id, emptyList(), LocationModel.create(-1, -1), emptyList());
     }
 
     public long getId() {

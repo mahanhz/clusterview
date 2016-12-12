@@ -5,6 +5,7 @@ import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import java.util.Objects;
 import java.util.Set;
 
+import static java.util.Collections.emptySet;
 import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -27,6 +28,15 @@ public final class Group {
 
     public static Group create(final Id id, final Set<Member> members, final Location location, final Set<CoreActivity> coreActivities) {
         return new Group(id, members, location, coreActivities);
+    }
+
+    public static Group empty() {
+        return create(Id.create(-1), emptySet(), Location.create(-1, -1), emptySet());
+    }
+
+    public static Group empty(final Id id) {
+        notNull(id);
+        return create(id, emptySet(), Location.create(-1, -1), emptySet());
     }
 
     public Id getId() {

@@ -42,7 +42,7 @@ public class ClusterStatisticRepository implements StatisticRepository<Cluster.I
         final ClusterEntity cluster = clusterJpaRepository.findOne(id.getId());
 
         if (cluster == null) {
-            return new ActivityStatistic();
+            return ActivityStatistic.empty();
         }
 
         final Set<Group> groups = groupRepository.groups(Cluster.Id.create(cluster.getId()));
