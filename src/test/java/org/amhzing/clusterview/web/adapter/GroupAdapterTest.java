@@ -13,11 +13,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Set;
 
+import static org.amhzing.clusterview.helper.ClientModelHelper.groupModel;
 import static org.amhzing.clusterview.helper.DomainModelHelper.cluster;
 import static org.amhzing.clusterview.helper.DomainModelHelper.group;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -57,6 +59,28 @@ public class GroupAdapterTest {
     }
 
     @Test
+    public void should_create_group() throws Exception {
+
+        final GroupModel groupModel = groupModel();
+        final Cluster.Id clusterId = cluster().getId();
+
+        groupAdapter.createGroup(groupModel, clusterId.getId());
+
+        verify(groupService, times(1)).createGroup(eq(convertModel(groupModel)), eq(clusterId));
+    }
+
+    @Test
+    public void should_update_group() throws Exception {
+
+        final GroupModel groupModel = groupModel();
+        final Cluster.Id clusterId = cluster().getId();
+
+        groupAdapter.updateGroup(groupModel, clusterId.getId());
+
+        verify(groupService, times(1)).updateGroup(eq(convertModel(groupModel)), eq(clusterId));
+    }
+
+    @Test
     public void should_delete_group() throws Exception {
 
         final Group.Id groupId = group().getId();
@@ -65,5 +89,9 @@ public class GroupAdapterTest {
         groupAdapter.deleteGroup(groupId.getId(), clusterId.getId());
 
         verify(groupService, times(1)).deleteGroup(groupId, clusterId);
+    }
+
+    private Group convertModel(final GroupModel groupModel) {
+        return GroupFactory.convert(groupModel);
     }
 }
