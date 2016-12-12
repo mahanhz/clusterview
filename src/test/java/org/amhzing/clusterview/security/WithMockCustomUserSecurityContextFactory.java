@@ -16,17 +16,6 @@ import java.util.List;
 
 public class WithMockCustomUserSecurityContextFactory implements WithSecurityContextFactory<WithMockCustomUser> {
 
-//        @Override
-//        public SecurityContext createSecurityContext(WithMockCustomUser customUser) {
-//            SecurityContext context = SecurityContextHolder.createEmptyContext();
-//
-//            DefaultUserDetails principal = new DefaultUserDetails("test", "test", ImmutableList.of(new SimpleGrantedAuthority("ROLE_USER")), "abc", "def");
-//            Authentication auth =
-//                    new UsernamePasswordAuthenticationToken(principal, "password", principal.getAuthorities());
-//            context.setAuthentication(auth);
-//            return context;
-//        }
-
     public SecurityContext createSecurityContext(WithMockCustomUser withUser) {
         String username = StringUtils.hasLength(withUser.username()) ? withUser
                 .username() : withUser.value();

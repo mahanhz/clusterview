@@ -12,28 +12,28 @@
                         <b>Page:</b> <span th:text="${url}">Page URL</span>
                     </p>
 
-                    <br/>
                     <p th:if="${timestamp}" id='created'>
+                        <br/>
                         <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
                     </p>
 
-                    <br/>
                     <p th:if="${status}">
+                        <br/>
                         <b>There was an error:</b> <span th:text="${status}">status-code</span>
                         <span th:if="${error}" th:text="'('+${error}+')'">error ...</span>
                         <br/>
                         (When reporting this issue please include the above error text)
                     </p>
 
-                    <br/>
                     <p th:if="${errorId}">
+                        <br/>
                         <b>Error Id:</b> <span th:text="${errorId}">Error Id should display here</span>
                         <br/>
                         (When reporting this issue please include the above error id)
                     </p>
 
-                    <br/>
                     <p th:if="${customMessage}">
+                        <br/>
                         <b>Message:</b> <span th:text="${customMessage}">Custom message</span>
                     </p>
 

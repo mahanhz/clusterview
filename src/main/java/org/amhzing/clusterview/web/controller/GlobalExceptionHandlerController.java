@@ -16,7 +16,9 @@ import java.util.UUID;
 public class GlobalExceptionHandlerController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandlerController.class);
-    private static final String ERROR_VIEW = "error";
+    public static final String ERROR_VIEW = "error";
+    public static final String CUSTOM_MESSAGE_KEY = "customMessage";
+    public static final String ERROR_ID_KEY = "errorId";
 
     @ExceptionHandler
     public ModelAndView handleException(final HttpServletRequest request, final Throwable throwable) {
@@ -26,7 +28,7 @@ public class GlobalExceptionHandlerController {
 
         final ModelAndView mav = new ModelAndView();
         mav.addObject("cameFrom", request.getRequestURI());
-        mav.addObject("errorId", errorId);
+        mav.addObject(ERROR_ID_KEY, errorId);
         mav.setViewName(ERROR_VIEW);
 
         return mav;
@@ -44,7 +46,7 @@ public class GlobalExceptionHandlerController {
 
     private ModelAndView customMessage(final String message) {
         final ModelAndView mav = new ModelAndView();
-        mav.addObject("customMessage", message);
+        mav.addObject(CUSTOM_MESSAGE_KEY, message);
         mav.setViewName(ERROR_VIEW);
 
         return mav;
