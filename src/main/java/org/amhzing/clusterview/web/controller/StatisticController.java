@@ -15,10 +15,11 @@ import java.util.List;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
-@RequestMapping(path = "/stats")
-public class StatisticController extends AbstractController {
+@RequestMapping(path = "/statsview")
+public class StatisticController {
 
     public static final String STATS_HISTORY_MODEL_ATTR = "statsHistory";
+    public static final String HISTORY = "/history";
 
     private StatisticAdapter statisticAdapter;
 
@@ -27,13 +28,15 @@ public class StatisticController extends AbstractController {
         this.statisticAdapter = notNull(statisticAdapter);
     }
 
-    @GetMapping(path = "/history/{cluster}")
-    public String clusterHistory(@ModelAttribute @PathVariable final String cluster,
+    @GetMapping(path = HISTORY + "/{country}/{cluster}")
+    public String clusterHistory(@ModelAttribute @PathVariable final String country,
+                                 @ModelAttribute @PathVariable final String cluster,
                                  final Model model) {
 
         final List<DatedActivityStatisticModel> statsHistory = statisticAdapter.statsHistory(cluster);
+
         model.addAttribute(STATS_HISTORY_MODEL_ATTR, statsHistory);
 
-        return "Hello there Mahan";
+        return country + "/stats-history";
     }
 }

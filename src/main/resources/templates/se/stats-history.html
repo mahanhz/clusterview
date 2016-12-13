@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:replace="se/fragments/head :: head"></th:block>
+    </head>
+    <body>
+        <th:block th:replace="se/fragments/navbar :: navbar('Stats history')"></th:block>
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <th:block th:each="stat, rowStat : ${statsHistory}" th:unless="${rowStat.index > 3}">
+                    <div th:class="'col-xs-' + (12 / ${statsHistory.size()})">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th th:text="${#calendars.format(stat.date,'yyyy-MM')}" style="color:red"></th>
+                                    <th>No.</th>
+                                    <th>Par.</th>
+                                    <th>CoI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="coreActivity : ${stat.activityStatisticModel.coreActivities}">
+                                    <td th:text="${coreActivity.name}" />
+                                    <td th:text="${coreActivity.quantity}" />
+                                    <td th:text="${coreActivity.totalParticipants}" />
+                                    <td th:text="${coreActivity.communityOfInterest}" />
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </th:block>
+            </div>
+            <div class="row">
+                <th:block th:each="stat, rowStat : ${statsHistory}" th:unless="${rowStat.index > 3}">
+                    <div th:class="'col-xs-' + (12 / ${statsHistory.size()})">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th th:text="${#calendars.format(stat.date,'yyyy-MM')}" style="color:red"></th>
+                                    <th>No.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="activity : ${stat.activityStatisticModel.activityQuantity}">
+                                    <td th:text="${activity.key}" />
+                                    <td th:text="${activity.value}" />
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </th:block>
+
+            </div>
+        </div>
+
+        <input type="hidden" id="country" name="country" th:value="${country}" />
+        <input type="hidden" id="cluster" name="cluster" th:value="${cluster}" />
+
+        <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+    </body>
+</html>

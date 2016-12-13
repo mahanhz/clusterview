@@ -32,10 +32,10 @@ public final class StatisticHistoryFactory {
 
     private static ImmutableMap<Activity, Quantity> activityStats(final ActivityStats activityStats) {
         return ImmutableMap.of(activity("CC Teacher"), Quantity.create(activityStats.getCcTeacher()),
-                               activity("DM Host"), Quantity.create(activityStats.getCcTeacher()),
-                               activity("Fireside Host"), Quantity.create(activityStats.getCcTeacher()),
-                               activity("JYG Animator"), Quantity.create(activityStats.getCcTeacher()),
-                               activity("SC Tutor"), Quantity.create(activityStats.getCcTeacher()));
+                               activity("DM Host"), Quantity.create(activityStats.getDmHost()),
+                               activity("Fireside Host"), Quantity.create(activityStats.getFiresideHost()),
+                               activity("JYG Animator"), Quantity.create(activityStats.getJygAnimator()),
+                               activity("SC Tutor"), Quantity.create(activityStats.getScTutor()));
     }
 
     private static ImmutableSet<CoreActivity> coreActivityStats(final StatsHistoryEntity statsHistoryEntity) {
