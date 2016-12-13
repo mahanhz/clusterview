@@ -8,8 +8,8 @@
     <th:block th:replace="se/fragments/navbar :: navbar(${groupPath.cluster} + ' cluster')"></th:block>
 
     <div class="container-fluid">
-        <div class="jumbotron">
-            <form action="#" th:action="${groupPath.action}" th:object="${groupModel}" th:method="${groupPath.method}">
+        <div class="jumbotron" th:with="baseUrl=('/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster})">
+            <form action="#" th:action="${baseUrl} + '/' + ${groupPath.action}" th:object="${groupModel}" th:method="${groupPath.method}">
 
                 <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                     <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
