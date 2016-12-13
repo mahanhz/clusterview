@@ -47,7 +47,7 @@ $(function() {
         {
             key: 'vasterbotten-cluster',
             toolTip: 'Vasterbotten',
-            fillColor: 'f78f27',
+            fillColor: '7ac452',
             fillOpacity: 0.3,
             staticState: true,
             stroke: false
@@ -55,7 +55,7 @@ $(function() {
         {
             key: 'malardalen-cluster',
             toolTip: 'Malardalen',
-            fillColor: 'f78f27',
+            fillColor: '7ac452',
             fillOpacity: 0.3,
             staticState: true,
             stroke: false
@@ -63,7 +63,7 @@ $(function() {
         {
             key: 'skane-cluster',
             toolTip: 'Skane',
-            fillColor: 'f78f27',
+            fillColor: '7ac452',
             fillOpacity: 0.3,
             staticState: true,
             stroke: false

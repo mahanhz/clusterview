@@ -3,7 +3,9 @@ package org.amhzing.clusterview.configuration;
 import org.amhzing.clusterview.domain.repository.ActivityRepository;
 import org.amhzing.clusterview.domain.repository.CoreActivityRepository;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
+import org.amhzing.clusterview.domain.repository.StatisticHistoryRepository;
 import org.amhzing.clusterview.infra.jpa.repository.*;
+import org.amhzing.clusterview.infra.jpa.repository.stats.StatsHistoryJpaRepository;
 import org.amhzing.clusterview.infra.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +31,9 @@ public class InfraConfig {
 
     @Autowired
     private CoreActivityJpaRepository coreActivityJpaRepository;
+
+    @Autowired
+    private StatsHistoryJpaRepository statsHistoryJpaRepository;
 
     @Bean
     public GroupRepository groupRepository() {
@@ -58,5 +63,10 @@ public class InfraConfig {
     @Bean
     public ClusterStatisticRepository clusterStatisticRepository() {
         return new ClusterStatisticRepository(clusterJpaRepository, groupRepository());
+    }
+
+    @Bean
+    public StatisticHistoryRepository statisticHistoryRepository() {
+        return new DefaultStatisticHistoryRepository(statsHistoryJpaRepository);
     }
 }

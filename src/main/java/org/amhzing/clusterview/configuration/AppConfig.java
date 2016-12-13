@@ -4,6 +4,7 @@ import org.amhzing.clusterview.application.*;
 import org.amhzing.clusterview.domain.repository.ActivityRepository;
 import org.amhzing.clusterview.domain.repository.CoreActivityRepository;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
+import org.amhzing.clusterview.domain.repository.StatisticHistoryRepository;
 import org.amhzing.clusterview.infra.repository.ClusterStatisticRepository;
 import org.amhzing.clusterview.infra.repository.CountryStatisticRepository;
 import org.amhzing.clusterview.infra.repository.RegionStatisticRepository;
@@ -35,6 +36,9 @@ public class AppConfig {
     @Autowired
     private ClusterStatisticRepository clusterStatisticRepository;
 
+    @Autowired
+    private StatisticHistoryRepository statisticHistoryRepository;
+
     @Bean
     public GroupService groupService() {
         return new DefaultGroupService(groupRepository);
@@ -55,6 +59,11 @@ public class AppConfig {
         return new DefaultStatisticService(countryStatisticRepository,
                                            regionStatisticRepository,
                                            clusterStatisticRepository);
+    }
+
+    @Bean
+    public StatisticHistoryService statisticHistoryService() {
+        return new DefaultStatisticHistoryService(statisticHistoryRepository);
     }
 
     @Bean

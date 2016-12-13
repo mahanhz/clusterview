@@ -2,14 +2,17 @@ package org.amhzing.clusterview.web.adapter;
 
 import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
 import org.amhzing.clusterview.application.ActivityService;
+import org.amhzing.clusterview.application.StatisticHistoryService;
 import org.amhzing.clusterview.application.StatisticService;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.domain.model.Region;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
+import org.amhzing.clusterview.domain.model.statistic.DatedActivityStatistic;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.web.model.CoreActivityModel;
+import org.amhzing.clusterview.web.model.DatedActivityStatisticModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,12 +32,15 @@ public class StatisticAdapter {
     private static final String PARTICIPANT = "participant";
 
     private StatisticService statisticService;
+    private StatisticHistoryService statisticHistoryService;
     private ActivityService activityService;
 
     @Autowired
     public StatisticAdapter(final StatisticService statisticService,
+                            final StatisticHistoryService statisticHistoryService,
                             final ActivityService activityService) {
         this.statisticService = notNull(statisticService);
+        this.statisticHistoryService = notNull(statisticHistoryService);
         this.activityService = notNull(activityService);
     }
 
@@ -66,6 +72,21 @@ public class StatisticAdapter {
                                              coreActivities(statistics));
     }
 
+    public List<DatedActivityStatisticModel> statsHistory(final String clusterId) {
+        notBlank(clusterId);
+
+        final List<DatedActivityStatistic> datedStats = statisticHistoryService.history(Cluster.Id.create(clusterId));
+
+        return datedStats.stream()
+                         .map(stat -> DatedActivityStatisticModel.create(stat.getDate(), activityStatisticModel(stat)))
+                         .collect(Collectors.toList());
+    }
+
+    private ActivityStatisticModel activityStatisticModel(final DatedActivityStatistic stat) {
+        return ActivityStatisticModel.create(activityQuantities(stat.getActivityStatistic()),
+                                             coreActivities(stat.getActivityStatistic()));
+    }
+
     private Map<String, Long> committedActivityQuantities(final ActivityStatistic statistics) {
         return statistics.getActivityQuantity()
                          .entrySet()
@@ -88,7 +109,7 @@ public class StatisticAdapter {
         return new TreeMap<>(committedActivityQuantities);
     }
 
-    public List<CoreActivityModel> coreActivities(final ActivityStatistic statistics) {
+    private List<CoreActivityModel> coreActivities(final ActivityStatistic statistics) {
         final Set<CoreActivity> coreActivities = statistics.getCoreActivities();
 
         return coreActivities.stream()

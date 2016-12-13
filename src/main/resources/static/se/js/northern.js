@@ -17,7 +17,7 @@ $(function() {
             toolTip: 'Vasterbotten',
             selected: true,
             render_select: {
-                fillColor: 'f78f27',
+                fillColor: '7ac452',
                 fillOpacity: 0.3,
                 stroke: false
             }
