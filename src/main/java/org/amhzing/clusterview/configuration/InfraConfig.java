@@ -1,9 +1,6 @@
 package org.amhzing.clusterview.configuration;
 
-import org.amhzing.clusterview.domain.repository.ActivityRepository;
-import org.amhzing.clusterview.domain.repository.CoreActivityRepository;
-import org.amhzing.clusterview.domain.repository.GroupRepository;
-import org.amhzing.clusterview.domain.repository.StatisticHistoryRepository;
+import org.amhzing.clusterview.domain.repository.*;
 import org.amhzing.clusterview.infra.jpa.repository.*;
 import org.amhzing.clusterview.infra.jpa.repository.stats.StatsHistoryJpaRepository;
 import org.amhzing.clusterview.infra.repository.*;
@@ -68,5 +65,10 @@ public class InfraConfig {
     @Bean
     public StatisticHistoryRepository statisticHistoryRepository() {
         return new DefaultStatisticHistoryRepository(statsHistoryJpaRepository);
+    }
+
+    @Bean
+    public ClusterRepository clusterRepository() {
+        return new DefaultClusterRepository(countryJpaRepository);
     }
 }

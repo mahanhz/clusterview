@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <th:block th:replace="se/fragments/head :: head"></th:block>
     </head>
@@ -8,88 +9,33 @@
         <th:block th:replace="se/fragments/navbar :: navbar('Stats history')"></th:block>
 
         <div class="container-fluid">
-            <div class="row">
-                <div th:class="col-xs-3">
-                    <table class="table table-hover" th:each="currentStats, rowStat : ${statistics}">
-                        <thead>
-                            <tr>
-                                <th style="color:red">Current</th>
-                                <th>No.</th>
-                                <th>Par.</th>
-                                <th>CoI</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="currentCoreActivityStat : ${currentStats.coreActivities}">
-                                <td th:text="${currentCoreActivityStat.name}" />
-                                <td th:text="${currentCoreActivityStat.quantity}" />
-                                <td th:text="${currentCoreActivityStat.totalParticipants}" />
-                                <td th:text="${currentCoreActivityStat.communityOfInterest}" />
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="jumbotron">
+                <div class="row">
+                    <form action="#" th:action="test" th:method="post">
+                        <select class="clustersMultiSelect" name="clusters">
+                            <option value="">None selected</option>
+                            <option th:each="cluster : ${clusters}"
+                                    th:value="${cluster.name}"
+                                    th:text="${cluster.name}">Stockholm</option>
+                        </select>
+                        <button type="button" id="viewHistory" class="btn btn-primary" onclick="viewClusterHistory('/statsview/history/se/')">View History</button>
+                        <button type="submit" class="btn btn-default" sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN)">
+                            Save History
+                        </button>
+                    </form>
                 </div>
-                <div th:class="col-xs-3" th:each="statsHistory, rowStat : ${statsHistory}">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th th:text="${#calendars.format(statsHistory.date,'yyyy-MM')}" style="color:red"></th>
-                                <th>No.</th>
-                                <th>Par.</th>
-                                <th>CoI</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="coreActivityStatHistory : ${statsHistory.activityStatisticModel.coreActivities}">
-                                <td th:text="${coreActivityStatHistory.name}" />
-                                <td th:text="${coreActivityStatHistory.quantity}" />
-                                <td th:text="${coreActivityStatHistory.totalParticipants}" />
-                                <td th:text="${coreActivityStatHistory.communityOfInterest}" />
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="row">
-                <div th:class="col-xs-3">
-                    <table class="table table-hover" th:each="currentStats, rowStat : ${statistics}">
-                        <thead>
-                            <tr>
-                                <th style="color:red">Current</th>
-                                <th>No.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="currentActivityStat : ${currentStats.activityQuantity}">
-                                <td th:text="${currentActivityStat.key}" />
-                                <td th:text="${currentActivityStat.value}" />
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div th:class="col-xs-3" th:each="statsHistory, rowStat : ${statsHistory}">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th th:text="${#calendars.format(statsHistory.date,'yyyy-MM')}" style="color:red"></th>
-                                <th>No.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="activityStatHistory : ${statsHistory.activityStatisticModel.activityQuantity}">
-                                <td th:text="${activityStatHistory.key}" />
-                                <td th:text="${activityStatHistory.value}" />
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="row">
+                    <ul id="errorMessages" class="alert alert-danger" style="display: none">
+                        <li>Must select a single cluster to view history</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <input type="hidden" id="country" name="country" th:value="${country}" />
-        <input type="hidden" id="cluster" name="cluster" th:value="${cluster}" />
 
         <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+        <script th:src="@{/se/js/stats.js}"></script>
+
     </body>
 </html>

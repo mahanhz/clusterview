@@ -39,6 +39,7 @@ public class CountryStatisticRepository implements StatisticRepository<Country.I
     @Override
     @Cacheable(key= DEFAULT_CACHE_KEY, unless = "#result == null")
     public ActivityStatistic statistics(final Country.Id id) {
+        notNull(id);
 
         final CountryEntity country = countryJpaRepository.findOne(id.getId());
 

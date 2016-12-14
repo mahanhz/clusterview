@@ -2,6 +2,7 @@ package org.amhzing.clusterview.web.adapter;
 
 import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
 import org.amhzing.clusterview.application.ActivityService;
+import org.amhzing.clusterview.application.ClusterService;
 import org.amhzing.clusterview.application.StatisticHistoryService;
 import org.amhzing.clusterview.application.StatisticService;
 import org.amhzing.clusterview.domain.model.Cluster;
@@ -11,6 +12,7 @@ import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.domain.model.statistic.DatedActivityStatistic;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
+import org.amhzing.clusterview.web.model.ClusterNameModel;
 import org.amhzing.clusterview.web.model.CoreActivityModel;
 import org.amhzing.clusterview.web.model.DatedActivityStatisticModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +33,17 @@ public class StatisticAdapter {
     private StatisticService statisticService;
     private StatisticHistoryService statisticHistoryService;
     private ActivityService activityService;
+    private ClusterService clusterService;
 
     @Autowired
     public StatisticAdapter(final StatisticService statisticService,
                             final StatisticHistoryService statisticHistoryService,
-                            final ActivityService activityService) {
+                            final ActivityService activityService,
+                            final ClusterService clusterService) {
         this.statisticService = notNull(statisticService);
         this.statisticHistoryService = notNull(statisticHistoryService);
         this.activityService = notNull(activityService);
+        this.clusterService = notNull(clusterService);
     }
 
     public ActivityStatisticModel countryStats(final String countryId) {
@@ -67,6 +72,17 @@ public class StatisticAdapter {
 
         return ActivityStatisticModel.create(activityQuantities(statistics),
                                              coreActivities(statistics));
+    }
+
+    public List<ClusterNameModel> clusters(final String countryId) {
+        notBlank(countryId);
+
+        final List<Cluster.Id> clusters = clusterService.clusters(Country.Id.create(countryId));
+
+        return clusters.stream()
+                       .map(cluster -> ClusterNameModel.create(cluster.getId()))
+                       .sorted((a,b) -> a.getName().compareTo(b.getName()))
+                       .collect(Collectors.toList());
     }
 
     public List<DatedActivityStatisticModel> statsHistory(final String clusterId) {

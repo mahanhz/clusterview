@@ -9,6 +9,7 @@ import org.amhzing.clusterview.infra.jpa.repository.stats.StatsHistoryJpaReposit
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Collections.emptyList;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public class DefaultStatisticHistoryRepository implements StatisticHistoryRepository {
@@ -22,6 +23,10 @@ public class DefaultStatisticHistoryRepository implements StatisticHistoryReposi
     @Override
     public List<DatedActivityStatistic> history(final Cluster.Id clusterId) {
         final List<StatsHistoryEntity> statsHistory = statsHistoryJpaRepository.findByStatsHistoryPkClusterId(clusterId.getId());
+
+        if (statsHistory == null) {
+            return emptyList();
+        }
 
         return statsHistory.stream()
                            .map(StatisticHistoryFactory::datedActivityStatistic)

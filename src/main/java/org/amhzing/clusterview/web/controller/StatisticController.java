@@ -2,6 +2,7 @@ package org.amhzing.clusterview.web.controller;
 
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
+import org.amhzing.clusterview.web.model.ClusterNameModel;
 import org.amhzing.clusterview.web.model.DatedActivityStatisticModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import static org.apache.commons.lang3.Validate.notNull;
 @RequestMapping(path = "/statsview")
 public class StatisticController {
 
+    public static final String CLUSTERS_MODEL_ATTR = "clusters";
     public static final String STATS_HISTORY_MODEL_ATTR = "statsHistory";
     public static final String HISTORY = "/history";
 
@@ -28,6 +30,16 @@ public class StatisticController {
     @Autowired
     public StatisticController(final StatisticAdapter statisticAdapter) {
         this.statisticAdapter = notNull(statisticAdapter);
+    }
+
+    @GetMapping(path = HISTORY + "/{country}")
+    public String clusters(@ModelAttribute @PathVariable final String country,
+                           final Model model) {
+
+        final List<ClusterNameModel> clusters = statisticAdapter.clusters(country);
+        model.addAttribute(CLUSTERS_MODEL_ATTR, clusters);
+
+        return country + "/stats-history";
     }
 
     @GetMapping(path = HISTORY + "/{country}/{cluster}")
@@ -41,6 +53,6 @@ public class StatisticController {
         final List<DatedActivityStatisticModel> statsHistory = statisticAdapter.statsHistory(cluster);
         model.addAttribute(STATS_HISTORY_MODEL_ATTR, statsHistory);
 
-        return country + "/stats-history";
+        return country + "/stats-history-cluster";
     }
 }
