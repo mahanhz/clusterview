@@ -68,7 +68,7 @@ public class GroupEditControllerTest {
         assertThat(forms).hasSize(1);
         final Element form = forms.get(0);
 
-        assertThat(form.attr("action")).isEqualTo("creategroup");
+        assertThat(form.attr("action")).endsWith("creategroup");
         assertThat(form.attr("method")).isEqualToIgnoringCase("post");
     }
 
@@ -108,7 +108,7 @@ public class GroupEditControllerTest {
         assertThat(forms).hasSize(1);
         final Element form = forms.get(0);
 
-        assertThat(form.attr("action")).isEqualTo("1");
+        assertThat(form.attr("action")).endsWith("1");
         assertThat(form.attr("method")).isEqualToIgnoringCase("post");
 
         final Elements hiddenMethodElements = form.getElementsByAttributeValueMatching("name", "_method");

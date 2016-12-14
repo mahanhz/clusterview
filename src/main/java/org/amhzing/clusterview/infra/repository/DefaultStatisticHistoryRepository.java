@@ -14,12 +14,12 @@ import org.amhzing.clusterview.infra.jpa.mapping.stats.StatsHistoryPk;
 import org.amhzing.clusterview.infra.jpa.repository.stats.StatsHistoryJpaRepository;
 
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
@@ -36,6 +36,8 @@ public class DefaultStatisticHistoryRepository implements StatisticHistoryReposi
 
     @Override
     public List<DatedActivityStatistic> history(final Cluster.Id clusterId) {
+        notNull(clusterId);
+
         final List<StatsHistoryEntity> statsHistory = statsHistoryJpaRepository.findByStatsHistoryPkClusterId(clusterId.getId());
 
         if (statsHistory == null) {
@@ -54,70 +56,86 @@ public class DefaultStatisticHistoryRepository implements StatisticHistoryReposi
 
         final StatsHistoryPk statsHistoryPk = StatsHistoryPk.create(clusterId.getId(), thisMonth());
 
-        // TODO - Need to refactor this!!!
         final CoreActivityStats cc = new CoreActivityStats();
         final CoreActivityStats dm = new CoreActivityStats();
         final CoreActivityStats jyg = new CoreActivityStats();
         final CoreActivityStats sc = new CoreActivityStats();
-        final Set<CoreActivity> coreActivities = activityStatistic.getCoreActivities();
-        coreActivities.stream()
-                      .forEach(coreActivity -> {
-                          if (coreActivity.getId().getId().equalsIgnoreCase(CC)) {
-                              cc.setQuantity((int) coreActivity.getQuantity().getValue());
-                              cc.setTotalParticipants((int) coreActivity.getTotalParticipants().getValue());
-                              cc.setCoi((int) coreActivity.getCommunityOfInterest().getValue());
-                          } else if (coreActivity.getId().getId().equalsIgnoreCase(DM)) {
-                              dm.setQuantity((int) coreActivity.getQuantity().getValue());
-                              dm.setTotalParticipants((int) coreActivity.getTotalParticipants().getValue());
-                              dm.setCoi((int) coreActivity.getCommunityOfInterest().getValue());
-                          } else if (coreActivity.getId().getId().equalsIgnoreCase(JYG)) {
-                              jyg.setQuantity((int) coreActivity.getQuantity().getValue());
-                              jyg.setTotalParticipants((int) coreActivity.getTotalParticipants().getValue());
-                              jyg.setCoi((int) coreActivity.getCommunityOfInterest().getValue());
-                          } else if (coreActivity.getId().getId().equalsIgnoreCase(SC)) {
-                              sc.setQuantity((int) coreActivity.getQuantity().getValue());
-                              sc.setTotalParticipants((int) coreActivity.getTotalParticipants().getValue());
-                              sc.setCoi((int) coreActivity.getCommunityOfInterest().getValue());
-                          }
-                      });
+
+        populateCoreActivitiesStats(activityStatistic, cc, dm, jyg, sc);
 
         final Map<Activity, Quantity> activityQuantity = activityStatistic.getActivityQuantity();
 
-        final StatsHistoryEntity statsHistoryEntity = StatsHistoryEntity.create(statsHistoryPk, cc, dm, jyg, sc, activityStats(activityQuantity));
+        final StatsHistoryEntity statsHistoryEntity = StatsHistoryEntity.create(statsHistoryPk,
+                                                                                cc, dm, jyg, sc,
+                                                                                activityStats(activityQuantity));
 
         return statsHistoryJpaRepository.save(statsHistoryEntity);
     }
 
+    private void populateCoreActivitiesStats(final ActivityStatistic activityStatistic,
+                                             final CoreActivityStats cc,
+                                             final CoreActivityStats dm,
+                                             final CoreActivityStats jyg,
+                                             final CoreActivityStats sc) {
+        activityStatistic.getCoreActivities()
+                         .stream()
+                         .forEach(coreActivity -> {
+                             if (coreActivity.getId().getId().equalsIgnoreCase(CC)) {
+                                 coreActivityStats(cc, coreActivity);
+                             } else if (coreActivity.getId().getId().equalsIgnoreCase(DM)) {
+                                 coreActivityStats(dm, coreActivity);
+                             } else if (coreActivity.getId().getId().equalsIgnoreCase(JYG)) {
+                                 coreActivityStats(jyg, coreActivity);
+                             } else if (coreActivity.getId().getId().equalsIgnoreCase(SC)) {
+                                 coreActivityStats(sc, coreActivity);
+                             }
+                         });
+    }
+
+    private void coreActivityStats(final CoreActivityStats coreActivityStats, final CoreActivity coreActivity) {
+        coreActivityStats.setQuantity((int) coreActivity.getQuantity().getValue());
+        coreActivityStats.setTotalParticipants((int) coreActivity.getTotalParticipants().getValue());
+        coreActivityStats.setCoi((int) coreActivity.getCommunityOfInterest().getValue());
+    }
+
     private ActivityStats activityStats(final Map<Activity, Quantity> activityQuantity) {
-        // TODO - Need to refactor this!!!
+
         final ActivityStats activityStats = new ActivityStats();
         activityQuantity.entrySet().stream()
                         .forEach(entry -> {
-                            if (entry.getKey().getName().equalsIgnoreCase(CC_TEACHER)) {
-                                activityStats.setCcTeacher((int) entry.getValue().getValue());
-                            } else if (entry.getKey().getName().equalsIgnoreCase(DM_HOST)) {
-                                activityStats.setDmHost((int) entry.getValue().getValue());
-                            } else if (entry.getKey().getName().equalsIgnoreCase(FIRESIDE_HOST)) {
-                                activityStats.setFiresideHost((int) entry.getValue().getValue());
-                            } else if (entry.getKey().getName().equalsIgnoreCase(JYG_ANIMATOR)) {
-                                activityStats.setJygAnimator((int) entry.getValue().getValue());
-                            } else if (entry.getKey().getName().equalsIgnoreCase(SC_TUTOR)) {
-                                activityStats.setScTutor((int) entry.getValue().getValue());
+                            if (activityName(entry).equalsIgnoreCase(CC_TEACHER)) {
+                                activityStats.setCcTeacher(activityValue(entry));
+                            } else if (activityName(entry).equalsIgnoreCase(DM_HOST)) {
+                                activityStats.setDmHost(activityValue(entry));
+                            } else if (activityName(entry).equalsIgnoreCase(FIRESIDE_HOST)) {
+                                activityStats.setFiresideHost(activityValue(entry));
+                            } else if (activityName(entry).equalsIgnoreCase(JYG_ANIMATOR)) {
+                                activityStats.setJygAnimator(activityValue(entry));
+                            } else if (activityName(entry).equalsIgnoreCase(SC_TUTOR)) {
+                                activityStats.setScTutor(activityValue(entry));
                             }
                         });
 
         return  activityStats;
     }
 
+    private String activityName(final Map.Entry<Activity, Quantity> entry) {
+        return entry.getKey().getName();
+    }
+
+    private int activityValue(final Map.Entry<Activity, Quantity> entry) {
+        return (int) entry.getValue().getValue();
+    }
+
     private Date thisMonth() {
         final SimpleDateFormat yyyyMMFormat = new SimpleDateFormat("yyyy-MM");
         final ZonedDateTime utc = ZonedDateTime.now(ZoneOffset.UTC);
         Date date = Date.from(utc.toInstant());
+
         try {
             date = yyyyMMFormat.parse(yyyyMMFormat.format(date));
         } catch (Exception ex) {
-            // TODO - handle this
-            return null;
+            throw new DateTimeException("Could not construct this months date from " + date , ex);
         }
 
         return date;

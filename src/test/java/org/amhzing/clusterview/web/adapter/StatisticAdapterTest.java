@@ -3,6 +3,8 @@ package org.amhzing.clusterview.web.adapter;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.application.ActivityService;
+import org.amhzing.clusterview.application.ClusterService;
+import org.amhzing.clusterview.application.StatisticHistoryService;
 import org.amhzing.clusterview.application.StatisticService;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Country;
@@ -10,9 +12,9 @@ import org.amhzing.clusterview.domain.model.Region;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -27,10 +29,18 @@ public class StatisticAdapterTest {
     @Mock
     private StatisticService statisticService;
     @Mock
+    private StatisticHistoryService statisticHistoryService;
+    @Mock
     private ActivityService activityService;
+    @Mock
+    private ClusterService clusterService;
 
-    @InjectMocks
     private StatisticAdapter statisticAdapter;
+
+    @Before
+    public void setUp() throws Exception {
+        statisticAdapter = new StatisticAdapter(statisticService, statisticHistoryService, activityService, clusterService);
+    }
 
     @Test
     public void should_get_country_stats() throws Exception {
