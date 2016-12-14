@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.web.controller;
 
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.web.model.DatedActivityStatisticModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+import static org.amhzing.clusterview.web.controller.MainController.STATISTICS_MODEL_ATTR;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
@@ -33,8 +35,10 @@ public class StatisticController {
                                  @ModelAttribute @PathVariable final String cluster,
                                  final Model model) {
 
-        final List<DatedActivityStatisticModel> statsHistory = statisticAdapter.statsHistory(cluster);
+        final ActivityStatisticModel currentStats = statisticAdapter.clusterStats(cluster);
+        model.addAttribute(STATISTICS_MODEL_ATTR, currentStats);
 
+        final List<DatedActivityStatisticModel> statsHistory = statisticAdapter.statsHistory(cluster);
         model.addAttribute(STATS_HISTORY_MODEL_ATTR, statsHistory);
 
         return country + "/stats-history";

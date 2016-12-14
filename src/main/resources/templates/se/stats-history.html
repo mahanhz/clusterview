@@ -9,50 +9,81 @@
 
         <div class="container-fluid">
             <div class="row">
-
-                <th:block th:each="stat, rowStat : ${statsHistory}" th:unless="${rowStat.index > 3}">
-                    <div th:class="'col-xs-' + (12 / ${statsHistory.size()})">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th th:text="${#calendars.format(stat.date,'yyyy-MM')}" style="color:red"></th>
-                                    <th>No.</th>
-                                    <th>Par.</th>
-                                    <th>CoI</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="coreActivity : ${stat.activityStatisticModel.coreActivities}">
-                                    <td th:text="${coreActivity.name}" />
-                                    <td th:text="${coreActivity.quantity}" />
-                                    <td th:text="${coreActivity.totalParticipants}" />
-                                    <td th:text="${coreActivity.communityOfInterest}" />
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </th:block>
+                <div th:class="col-xs-3">
+                    <table class="table table-hover" th:each="currentStats, rowStat : ${statistics}">
+                        <thead>
+                            <tr>
+                                <th style="color:red">Current</th>
+                                <th>No.</th>
+                                <th>Par.</th>
+                                <th>CoI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="currentCoreActivityStat : ${currentStats.coreActivities}">
+                                <td th:text="${currentCoreActivityStat.name}" />
+                                <td th:text="${currentCoreActivityStat.quantity}" />
+                                <td th:text="${currentCoreActivityStat.totalParticipants}" />
+                                <td th:text="${currentCoreActivityStat.communityOfInterest}" />
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:class="col-xs-3" th:each="statsHistory, rowStat : ${statsHistory}">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th th:text="${#calendars.format(statsHistory.date,'yyyy-MM')}" style="color:red"></th>
+                                <th>No.</th>
+                                <th>Par.</th>
+                                <th>CoI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="coreActivityStatHistory : ${statsHistory.activityStatisticModel.coreActivities}">
+                                <td th:text="${coreActivityStatHistory.name}" />
+                                <td th:text="${coreActivityStatHistory.quantity}" />
+                                <td th:text="${coreActivityStatHistory.totalParticipants}" />
+                                <td th:text="${coreActivityStatHistory.communityOfInterest}" />
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="row">
-                <th:block th:each="stat, rowStat : ${statsHistory}" th:unless="${rowStat.index > 3}">
-                    <div th:class="'col-xs-' + (12 / ${statsHistory.size()})">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th th:text="${#calendars.format(stat.date,'yyyy-MM')}" style="color:red"></th>
-                                    <th>No.</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="activity : ${stat.activityStatisticModel.activityQuantity}">
-                                    <td th:text="${activity.key}" />
-                                    <td th:text="${activity.value}" />
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </th:block>
 
+            <div class="row">
+                <div th:class="col-xs-3">
+                    <table class="table table-hover" th:each="currentStats, rowStat : ${statistics}">
+                        <thead>
+                            <tr>
+                                <th style="color:red">Current</th>
+                                <th>No.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="currentActivityStat : ${currentStats.activityQuantity}">
+                                <td th:text="${currentActivityStat.key}" />
+                                <td th:text="${currentActivityStat.value}" />
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:class="col-xs-3" th:each="statsHistory, rowStat : ${statsHistory}">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th th:text="${#calendars.format(statsHistory.date,'yyyy-MM')}" style="color:red"></th>
+                                <th>No.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="activityStatHistory : ${statsHistory.activityStatisticModel.activityQuantity}">
+                                <td th:text="${activityStatHistory.key}" />
+                                <td th:text="${activityStatHistory.value}" />
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 

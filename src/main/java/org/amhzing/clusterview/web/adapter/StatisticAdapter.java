@@ -16,8 +16,6 @@ import org.amhzing.clusterview.web.model.DatedActivityStatisticModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -76,16 +74,14 @@ public class StatisticAdapter {
 
         final List<DatedActivityStatistic> datedStats = statisticHistoryService.history(Cluster.Id.create(clusterId));
 
-        final List<DatedActivityStatisticModel> collectedStats =
+        final List<DatedActivityStatisticModel> collectedHistoryStats =
                 datedStats.stream()
                           .map(stat -> DatedActivityStatisticModel.create(stat.getDate(), activityStatisticModel(stat)))
                           .collect(Collectors.toList());
 
-        collectedStats.add(DatedActivityStatisticModel.create(now(), clusterStats(clusterId)));
+        collectedHistoryStats.sort(Comparator.comparing(DatedActivityStatisticModel::getDate).reversed());
 
-        collectedStats.sort(Comparator.comparing(DatedActivityStatisticModel::getDate).reversed());
-
-        return collectedStats;
+        return collectedHistoryStats;
     }
 
     private ActivityStatisticModel activityStatisticModel(final DatedActivityStatistic stat) {
@@ -130,10 +126,5 @@ public class StatisticAdapter {
                                         coreActivity.getQuantity().getValue(),
                                         coreActivity.getTotalParticipants().getValue(),
                                         coreActivity.getCommunityOfInterest().getValue());
-    }
-
-    private Date now() {
-        final ZonedDateTime utc = ZonedDateTime.now(ZoneOffset.UTC);
-        return Date.from(utc.toInstant());
     }
 }
