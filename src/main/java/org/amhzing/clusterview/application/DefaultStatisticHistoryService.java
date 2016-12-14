@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.application;
 
 import org.amhzing.clusterview.domain.model.Cluster;
+import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.DatedActivityStatistic;
 import org.amhzing.clusterview.domain.repository.StatisticHistoryRepository;
 
@@ -18,11 +19,16 @@ public class DefaultStatisticHistoryService implements StatisticHistoryService {
 
     @Override
     public List<DatedActivityStatistic> history(final Cluster.Id clusterId) {
+        notNull(clusterId);
+
         return statisticHistoryRepository.history(clusterId);
     }
 
     @Override
-    public void saveHistory(final Cluster.Id clusterId, final DatedActivityStatistic datedActivityStatistic) {
-        // TODO - implement this
+    public void saveHistory(final Cluster.Id clusterId, final ActivityStatistic activityStatistic) {
+        notNull(clusterId);
+        notNull(activityStatistic);
+
+        statisticHistoryRepository.saveHistory(clusterId, activityStatistic);
     }
 }

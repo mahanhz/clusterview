@@ -1,11 +1,14 @@
 package org.amhzing.clusterview.web.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.notBlank;
 
 public final class ClusterNameModel {
 
+    @NotEmpty(message = "A cluster must be selected")
     private String name;
 
     public ClusterNameModel() {

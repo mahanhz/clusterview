@@ -10,9 +10,9 @@
 
         <div class="container-fluid">
             <div class="jumbotron">
-                <div class="row">
-                    <form action="#" th:action="test" th:method="post">
-                        <select class="clustersMultiSelect" name="clusters">
+                <form action="#" th:action="'/statsedit/history/' + ${country}" th:object="${clusterNameModel}" th:method="post">
+                    <div class="row">
+                        <select class="clustersMultiSelect" name="name" th:field="*{name}">
                             <option value="">None selected</option>
                             <option th:each="cluster : ${clusters}"
                                     th:value="${cluster.name}"
@@ -22,13 +22,19 @@
                         <button type="submit" class="btn btn-default" sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN)">
                             Save History
                         </button>
-                    </form>
-                </div>
-                <div class="row">
-                    <ul id="errorMessages" class="alert alert-danger" style="display: none">
-                        <li>Must select a single cluster to view history</li>
-                    </ul>
-                </div>
+                    </div>
+                    <div class="row">
+                        <div id="statsHistoryMessage" th:if="${statsHistoryMessage}" class="alert alert-success" th:text="${statsHistoryMessage}">Stats history message</div>
+
+                        <ul id="errorMessage" class="alert alert-danger" style="display: none">
+                            <li>Must select a single cluster to view history</li>
+                        </ul>
+
+                        <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                        </ul>
+                    </div>
+                </form>
             </div>
         </div>
 

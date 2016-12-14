@@ -32,6 +32,11 @@ public class StatisticController {
         this.statisticAdapter = notNull(statisticAdapter);
     }
 
+    @ModelAttribute
+    public ClusterNameModel clusterNameModel() {
+        return new ClusterNameModel();
+    }
+
     @GetMapping(path = HISTORY + "/{country}")
     public String clusters(@ModelAttribute @PathVariable final String country,
                            final Model model) {

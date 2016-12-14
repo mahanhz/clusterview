@@ -12,6 +12,21 @@ public final class ActivityStats {
     private int jygAnimator;
     private int scTutor;
 
+    public ActivityStats() {
+    }
+
+    private ActivityStats(final int ccTeacher, final int dmHost, final int firesideHost, final int jygAnimator, final int scTutor) {
+        this.ccTeacher = ccTeacher;
+        this.dmHost = dmHost;
+        this.firesideHost = firesideHost;
+        this.jygAnimator = jygAnimator;
+        this.scTutor = scTutor;
+    }
+
+    public static ActivityStats create(final int ccTeacher, final int dmHost, final int firesideHost, final int jygAnimator, final int scTutor) {
+        return new ActivityStats(ccTeacher, dmHost, firesideHost, jygAnimator, scTutor);
+    }
+
     public int getCcTeacher() {
         return ccTeacher;
     }

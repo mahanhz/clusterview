@@ -16,6 +16,16 @@ import static org.apache.commons.lang3.StringUtils.upperCase;
 
 public final class StatisticHistoryFactory {
 
+    public static final String CC = "cc";
+    public static final String DM = "dm";
+    public static final String JYG = "jyg";
+    public static final String SC = "sc";
+    public static final String CC_TEACHER = "CC Teacher";
+    public static final String DM_HOST = "DM Host";
+    public static final String FIRESIDE_HOST = "Fireside Host";
+    public static final String JYG_ANIMATOR = "JYG Animator";
+    public static final String SC_TUTOR = "SC Tutor";
+
     private StatisticHistoryFactory() {
         // To prevent instantiation
     }
@@ -31,18 +41,18 @@ public final class StatisticHistoryFactory {
     }
 
     private static ImmutableMap<Activity, Quantity> activityStats(final ActivityStats activityStats) {
-        return ImmutableMap.of(activity("CC Teacher"), Quantity.create(activityStats.getCcTeacher()),
-                               activity("DM Host"), Quantity.create(activityStats.getDmHost()),
-                               activity("Fireside Host"), Quantity.create(activityStats.getFiresideHost()),
-                               activity("JYG Animator"), Quantity.create(activityStats.getJygAnimator()),
-                               activity("SC Tutor"), Quantity.create(activityStats.getScTutor()));
+        return ImmutableMap.of(activity(CC_TEACHER), Quantity.create(activityStats.getCcTeacher()),
+                               activity(DM_HOST), Quantity.create(activityStats.getDmHost()),
+                               activity(FIRESIDE_HOST), Quantity.create(activityStats.getFiresideHost()),
+                               activity(JYG_ANIMATOR), Quantity.create(activityStats.getJygAnimator()),
+                               activity(SC_TUTOR), Quantity.create(activityStats.getScTutor()));
     }
 
     private static ImmutableSet<CoreActivity> coreActivityStats(final StatsHistoryEntity statsHistoryEntity) {
-        return ImmutableSet.of(coreActivity(statsHistoryEntity.getCc(), "cc"),
-                               coreActivity(statsHistoryEntity.getDm(), "dm"),
-                               coreActivity(statsHistoryEntity.getJyg(), "jyg"),
-                               coreActivity(statsHistoryEntity.getSc(), "sc"));
+        return ImmutableSet.of(coreActivity(statsHistoryEntity.getCc(), CC),
+                               coreActivity(statsHistoryEntity.getDm(), DM),
+                               coreActivity(statsHistoryEntity.getJyg(), JYG),
+                               coreActivity(statsHistoryEntity.getSc(), SC));
     }
 
     private static CoreActivity coreActivity(final CoreActivityStats coreActivityStats, final String type) {

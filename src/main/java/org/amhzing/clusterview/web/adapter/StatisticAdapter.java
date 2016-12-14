@@ -9,11 +9,9 @@ import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.domain.model.Region;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
-import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.domain.model.statistic.DatedActivityStatistic;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.web.model.ClusterNameModel;
-import org.amhzing.clusterview.web.model.CoreActivityModel;
 import org.amhzing.clusterview.web.model.DatedActivityStatisticModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,14 +19,12 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toMap;
+import static org.amhzing.clusterview.web.adapter.StatisticFactory.*;
 import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Service
 public class StatisticAdapter {
-
-    private static final String PARTICIPANT = "participant";
 
     private StatisticService statisticService;
     private StatisticHistoryService statisticHistoryService;
@@ -100,18 +96,16 @@ public class StatisticAdapter {
         return collectedHistoryStats;
     }
 
+    public void saveStatsHistory(final String clusterId, final ActivityStatisticModel activityStatisticModel) {
+        notBlank(clusterId);
+        notNull(activityStatisticModel);
+
+        statisticHistoryService.saveHistory(Cluster.Id.create(clusterId), activityStatistic(activityStatisticModel));
+    }
+
     private ActivityStatisticModel activityStatisticModel(final DatedActivityStatistic stat) {
         return ActivityStatisticModel.create(activityQuantities(stat.getActivityStatistic()),
                                              coreActivities(stat.getActivityStatistic()));
-    }
-
-    private Map<String, Long> committedActivityQuantities(final ActivityStatistic statistics) {
-        return statistics.getActivityQuantity()
-                         .entrySet()
-                         .stream()
-                         .filter(entry -> !StringUtils.containsIgnoreCase(entry.getKey().getName(), PARTICIPANT))
-                         .collect(toMap(entry -> entry.getKey().getName(),
-                                        entry -> entry.getValue().getValue()));
     }
 
     private Map<String, Long> activityQuantities(final ActivityStatistic statistics) {
@@ -125,22 +119,5 @@ public class StatisticAdapter {
 
         // return a sorted map
         return new TreeMap<>(committedActivityQuantities);
-    }
-
-    private List<CoreActivityModel> coreActivities(final ActivityStatistic statistics) {
-        final Set<CoreActivity> coreActivities = statistics.getCoreActivities();
-
-        return coreActivities.stream()
-                             .map(coreActivity -> coreActivityModel(coreActivity))
-                             .sorted((a1, a2) -> a1.getName().compareTo(a2.getName()))
-                             .collect(Collectors.toList());
-    }
-
-    private static CoreActivityModel coreActivityModel(final CoreActivity coreActivity) {
-        return CoreActivityModel.create(coreActivity.getId().getId(),
-                                        coreActivity.getName(),
-                                        coreActivity.getQuantity().getValue(),
-                                        coreActivity.getTotalParticipants().getValue(),
-                                        coreActivity.getCommunityOfInterest().getValue());
     }
 }

@@ -20,7 +20,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/clusterview/se/**").hasAuthority(SE_USER.getRole())
+                .antMatchers("/statsview/history/se/**").hasAuthority(SE_USER.getRole())
                 .antMatchers("/clusteredit/se/**").hasAuthority(SE_ADMIN.getRole())
+                .antMatchers("/statsedit/history/se/**").hasAuthority(SE_ADMIN.getRole())
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
