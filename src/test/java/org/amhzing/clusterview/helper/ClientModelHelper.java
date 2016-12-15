@@ -1,5 +1,7 @@
 package org.amhzing.clusterview.helper;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import org.amhzing.clusterview.web.model.*;
 
 import static com.google.common.collect.ImmutableList.of;
@@ -26,6 +28,11 @@ public class ClientModelHelper {
                                   anotherNameModel(),
                                   CapabilityModel.create(of(activityModel())),
                                   CommitmentModel.create(of(anotherActivityModel())));
+    }
+
+    public static ActivityStatisticModel activityStatisticModel() {
+        return ActivityStatisticModel.create(ImmutableMap.of("Study Circle", 10L),
+                                             ImmutableList.of(CoreActivityModel.create("sc", "SC", 1L, 5L, 3L)));
     }
 
     public static NameModel nameModel() {

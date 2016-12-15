@@ -1,7 +1,6 @@
 package org.amhzing.clusterview.web.adapter;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import org.amhzing.clusterview.application.ActivityService;
 import org.amhzing.clusterview.application.ClusterService;
 import org.amhzing.clusterview.application.StatisticHistoryService;
@@ -12,7 +11,6 @@ import org.amhzing.clusterview.domain.model.Region;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.web.model.ClusterNameModel;
-import org.amhzing.clusterview.web.model.CoreActivityModel;
 import org.amhzing.clusterview.web.model.DatedActivityStatisticModel;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 
+import static org.amhzing.clusterview.helper.ClientModelHelper.activityStatisticModel;
 import static org.amhzing.clusterview.helper.DomainModelHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -117,10 +116,5 @@ public class StatisticAdapterTest {
         statisticAdapter.saveStatsHistory(clusterId.getId(), activityStatisticModel());
 
         verify(statisticHistoryService, times(1)).saveHistory(eq(clusterId), any(ActivityStatistic.class));
-    }
-
-    private ActivityStatisticModel activityStatisticModel() {
-        return ActivityStatisticModel.create(ImmutableMap.of("Study Circle", 10L),
-                                             ImmutableList.of(CoreActivityModel.create("sc", "SC", 1L, 5L, 3L)));
     }
 }
