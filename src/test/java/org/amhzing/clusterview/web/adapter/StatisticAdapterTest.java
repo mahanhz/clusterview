@@ -118,4 +118,9 @@ public class StatisticAdapterTest {
 
         verify(statisticHistoryService, times(1)).saveHistory(eq(clusterId), any(ActivityStatistic.class));
     }
+
+    private ActivityStatisticModel activityStatisticModel() {
+        return ActivityStatisticModel.create(ImmutableMap.of("Study Circle", 10L),
+                                             ImmutableList.of(CoreActivityModel.create("sc", "SC", 1L, 5L, 3L)));
+    }
 }
