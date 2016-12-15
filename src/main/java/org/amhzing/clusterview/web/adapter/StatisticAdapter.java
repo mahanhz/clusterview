@@ -91,7 +91,7 @@ public class StatisticAdapter {
                           .map(stat -> DatedActivityStatisticModel.create(stat.getDate(), activityStatisticModel(stat)))
                           .collect(Collectors.toList());
 
-        collectedHistoryStats.sort(Comparator.comparing(DatedActivityStatisticModel::getDate).reversed());
+        collectedHistoryStats.sort(Comparator.comparing(DatedActivityStatisticModel::getDate));
 
         return collectedHistoryStats;
     }

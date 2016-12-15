@@ -57,7 +57,7 @@ public class DefaultStatisticHistoryServiceTest {
 
         final Cluster.Id clusterId = clusterId();
         final ActivityStatistic activityStatistic = activityStatistic();
-        
+
         defaultStatisticHistoryService.saveHistory(clusterId, activityStatistic);
 
         verify(statisticHistoryRepository, times(1)).saveHistory(eq(clusterId), eq(activityStatistic));

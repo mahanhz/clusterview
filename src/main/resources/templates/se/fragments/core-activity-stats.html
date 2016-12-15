@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <body>
+        <th:block th:fragment="core-activity-stats(coreActivity)">
+            <div th:class="col-xs-3">
+                <table class="table table-hover highchart"
+                       data-graph-container-before="1"
+                       data-graph-type="line">
+                    <caption th:text="${coreActivity}">this is a title</caption>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>No.</th>
+                            <th>Par.</th>
+                            <th>CoI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="statsHistory, rowStat : ${statsHistory}">
+                            <td th:text="${#calendars.format(statsHistory.date,'yyyy-MM')}" style="color:red"></td>
+                            <th:block th:each="coreActivityStatHistory : ${statsHistory.activityStatisticModel.coreActivities}">
+                                <th:block th:if="${coreActivityStatHistory.name} == ${coreActivity}">
+                                    <td th:text="${coreActivityStatHistory.quantity}" />
+                                    <td th:text="${coreActivityStatHistory.totalParticipants}" />
+                                    <td th:text="${coreActivityStatHistory.communityOfInterest}" />
+                                </th:block>
+                            </th:block>
+                        </tr>
+                        <tr th:each="currentStats, rowStat : ${statistics}">
+                            <td style="color:red">Current</td>
+                            <th:block th:each="currentCoreActivityStat : ${currentStats.coreActivities}">
+                                <th:block th:if="${currentCoreActivityStat.name} == ${coreActivity}">
+                                    <td th:text="${currentCoreActivityStat.quantity}" />
+                                    <td th:text="${currentCoreActivityStat.totalParticipants}" />
+                                    <td th:text="${currentCoreActivityStat.communityOfInterest}" />
+                                </th:block>
+                            </th:block>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </th:block>
+    </body>
+</html>

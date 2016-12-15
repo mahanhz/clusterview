@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     $('.clustersMultiSelect').multiselect({
         numberDisplayed: 1,
         buttonWidth: '300px',

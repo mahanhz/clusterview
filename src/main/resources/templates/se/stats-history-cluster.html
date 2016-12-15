@@ -9,81 +9,10 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div th:class="col-xs-3">
-                    <table class="table table-hover" th:each="currentStats, rowStat : ${statistics}">
-                        <thead>
-                            <tr>
-                                <th style="color:red">Current</th>
-                                <th>No.</th>
-                                <th>Par.</th>
-                                <th>CoI</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="currentCoreActivityStat : ${currentStats.coreActivities}">
-                                <td th:text="${currentCoreActivityStat.name}" />
-                                <td th:text="${currentCoreActivityStat.quantity}" />
-                                <td th:text="${currentCoreActivityStat.totalParticipants}" />
-                                <td th:text="${currentCoreActivityStat.communityOfInterest}" />
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div th:class="col-xs-3" th:each="statsHistory, rowStat : ${statsHistory}">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th th:text="${#calendars.format(statsHistory.date,'yyyy-MM')}" style="color:red"></th>
-                                <th>No.</th>
-                                <th>Par.</th>
-                                <th>CoI</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="coreActivityStatHistory : ${statsHistory.activityStatisticModel.coreActivities}">
-                                <td th:text="${coreActivityStatHistory.name}" />
-                                <td th:text="${coreActivityStatHistory.quantity}" />
-                                <td th:text="${coreActivityStatHistory.totalParticipants}" />
-                                <td th:text="${coreActivityStatHistory.communityOfInterest}" />
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="row">
-                <div th:class="col-xs-3">
-                    <table class="table table-hover" th:each="currentStats, rowStat : ${statistics}">
-                        <thead>
-                            <tr>
-                                <th style="color:red">Current</th>
-                                <th>No.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="currentActivityStat : ${currentStats.activityQuantity}">
-                                <td th:text="${currentActivityStat.key}" />
-                                <td th:text="${currentActivityStat.value}" />
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div th:class="col-xs-3" th:each="statsHistory, rowStat : ${statsHistory}">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th th:text="${#calendars.format(statsHistory.date,'yyyy-MM')}" style="color:red"></th>
-                                <th>No.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="activityStatHistory : ${statsHistory.activityStatisticModel.activityQuantity}">
-                                <td th:text="${activityStatHistory.key}" />
-                                <td th:text="${activityStatHistory.value}" />
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <th:block th:replace="se/fragments/core-activity-stats :: core-activity-stats('CC')"></th:block>
+                <th:block th:replace="se/fragments/core-activity-stats :: core-activity-stats('DM')"></th:block>
+                <th:block th:replace="se/fragments/core-activity-stats :: core-activity-stats('JYG')"></th:block>
+                <th:block th:replace="se/fragments/core-activity-stats :: core-activity-stats('SC')"></th:block>
             </div>
         </div>
 
@@ -91,5 +20,9 @@
         <input type="hidden" id="cluster" name="cluster" th:value="${cluster}" />
 
         <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+        <script th:src="@{/se/js/highcharts.js}"></script>
+        <script th:src="@{/se/js/jquery.highchartTable.js}"></script>
+        <script th:src="@{/se/js/chart.js}"></script>
+
     </body>
 </html>
