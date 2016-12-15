@@ -12,6 +12,13 @@ import org.amhzing.clusterview.infra.jpa.mapping.stats.CoreActivityStats;
 import org.amhzing.clusterview.infra.jpa.mapping.stats.StatsHistoryEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.stats.StatsHistoryPk;
 
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.util.Date;
+import java.util.Map;
+
 import static org.apache.commons.lang3.StringUtils.upperCase;
 
 public final class StatisticHistoryFactory {
@@ -40,6 +47,61 @@ public final class StatisticHistoryFactory {
                                                                       coreActivityStats(statsHistoryEntity)));
     }
 
+    public static Date thisMonth() {
+        final SimpleDateFormat yyyyMMFormat = new SimpleDateFormat("yyyy-MM");
+        final ZonedDateTime utc = ZonedDateTime.now(ZoneOffset.UTC);
+        Date date = Date.from(utc.toInstant());
+
+        try {
+            date = yyyyMMFormat.parse(yyyyMMFormat.format(date));
+        } catch (Exception ex) {
+            throw new DateTimeException("Could not construct this months date from " + date , ex);
+        }
+
+        return date;
+    }
+
+    public static void populateCoreActivitiesStats(final ActivityStatistic activityStatistic,
+                                                   final CoreActivityStats cc,
+                                                   final CoreActivityStats dm,
+                                                   final CoreActivityStats jyg,
+                                                   final CoreActivityStats sc) {
+        activityStatistic.getCoreActivities()
+                         .stream()
+                         .forEach(coreActivity -> {
+                             if (coreActivity.getId().getId().equalsIgnoreCase(CC)) {
+                                 coreActivityStats(cc, coreActivity);
+                             } else if (coreActivity.getId().getId().equalsIgnoreCase(DM)) {
+                                 coreActivityStats(dm, coreActivity);
+                             } else if (coreActivity.getId().getId().equalsIgnoreCase(JYG)) {
+                                 coreActivityStats(jyg, coreActivity);
+                             } else if (coreActivity.getId().getId().equalsIgnoreCase(SC)) {
+                                 coreActivityStats(sc, coreActivity);
+                             }
+                         });
+    }
+
+    public static ActivityStats activityStats(final Map<Activity, Quantity> activityQuantity) {
+
+        final ActivityStats activityStats = new ActivityStats();
+        activityQuantity.entrySet().stream()
+                        .forEach(entry -> {
+                            if (activityName(entry).equalsIgnoreCase(CC_TEACHER)) {
+                                activityStats.setCcTeacher(activityValue(entry));
+                            } else if (activityName(entry).equalsIgnoreCase(DM_HOST)) {
+                                activityStats.setDmHost(activityValue(entry));
+                            } else if (activityName(entry).equalsIgnoreCase(FIRESIDE_HOST)) {
+                                activityStats.setFiresideHost(activityValue(entry));
+                            } else if (activityName(entry).equalsIgnoreCase(JYG_ANIMATOR)) {
+                                activityStats.setJygAnimator(activityValue(entry));
+                            } else if (activityName(entry).equalsIgnoreCase(SC_TUTOR)) {
+                                activityStats.setScTutor(activityValue(entry));
+                            }
+                        });
+
+        return  activityStats;
+    }
+
     private static ImmutableMap<Activity, Quantity> activityStats(final ActivityStats activityStats) {
         return ImmutableMap.of(activity(CC_TEACHER), Quantity.create(activityStats.getCcTeacher()),
                                activity(DM_HOST), Quantity.create(activityStats.getDmHost()),
@@ -65,5 +127,19 @@ public final class StatisticHistoryFactory {
 
     private static Activity activity(final String type) {
         return Activity.create(Activity.Id.create(type), type);
+    }
+
+    private static void coreActivityStats(final CoreActivityStats coreActivityStats, final CoreActivity coreActivity) {
+        coreActivityStats.setQuantity((int) coreActivity.getQuantity().getValue());
+        coreActivityStats.setTotalParticipants((int) coreActivity.getTotalParticipants().getValue());
+        coreActivityStats.setCoi((int) coreActivity.getCommunityOfInterest().getValue());
+    }
+
+    private static String activityName(final Map.Entry<Activity, Quantity> entry) {
+        return entry.getKey().getName();
+    }
+
+    private static int activityValue(final Map.Entry<Activity, Quantity> entry) {
+        return (int) entry.getValue().getValue();
     }
 }

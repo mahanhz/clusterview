@@ -3,7 +3,12 @@ package org.amhzing.clusterview.helper;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import org.amhzing.clusterview.infra.jpa.mapping.*;
+import org.amhzing.clusterview.infra.jpa.mapping.stats.ActivityStats;
+import org.amhzing.clusterview.infra.jpa.mapping.stats.CoreActivityStats;
+import org.amhzing.clusterview.infra.jpa.mapping.stats.StatsHistoryEntity;
+import org.amhzing.clusterview.infra.jpa.mapping.stats.StatsHistoryPk;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -20,6 +25,19 @@ public final class JpaRepositoryHelper {
 
     private JpaRepositoryHelper() {
         // To prevent instantiation
+    }
+
+    public static StatsHistoryEntity statsHistoryEntity() {
+        final StatsHistoryEntity statsHistoryEntity = new StatsHistoryEntity();
+
+        statsHistoryEntity.setStatsHistoryPk(StatsHistoryPk.create("stockholm", new Date()));
+        statsHistoryEntity.setCc(coreActivityStats());
+        statsHistoryEntity.setDm(coreActivityStats());
+        statsHistoryEntity.setJyg(coreActivityStats());
+        statsHistoryEntity.setSc(coreActivityStats());
+        statsHistoryEntity.setActivityStats(activityStats());
+
+        return statsHistoryEntity;
     }
 
     public static CountryEntity countryEntity() {
@@ -134,5 +152,13 @@ public final class JpaRepositoryHelper {
 
     public static Name nameFor111() {
         return Name.create("John", "M", "Doe", "I");
+    }
+
+    private static CoreActivityStats coreActivityStats() {
+        return CoreActivityStats.create(1, 10, 5);
+    }
+
+    private static ActivityStats activityStats() {
+        return ActivityStats.create(1, 2, 3, 4, 5);
     }
 }

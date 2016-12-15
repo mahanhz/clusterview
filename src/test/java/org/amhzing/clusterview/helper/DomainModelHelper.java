@@ -1,6 +1,9 @@
 package org.amhzing.clusterview.helper;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.domain.model.*;
+import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.domain.model.statistic.Quantity;
 
@@ -71,6 +74,14 @@ public final class DomainModelHelper {
                              anotherName(),
                              Capability.create(of(activity())),
                              Commitment.create(of(anotherActivity())));
+    }
+
+    public static ActivityStatistic activityStatistic() {
+        return ActivityStatistic.create(ImmutableMap.of(activity(), quantity()), ImmutableSet.of(coreActivity()));
+    }
+
+    public static Quantity quantity() {
+        return Quantity.create(10);
     }
 
     public static Activity activity() {
