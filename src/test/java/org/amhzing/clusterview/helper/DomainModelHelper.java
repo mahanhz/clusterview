@@ -5,7 +5,10 @@ import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.domain.model.*;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
+import org.amhzing.clusterview.domain.model.statistic.DatedActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.Quantity;
+
+import java.util.Date;
 
 import static com.google.common.collect.ImmutableSet.of;
 
@@ -74,6 +77,10 @@ public final class DomainModelHelper {
                              anotherName(),
                              Capability.create(of(activity())),
                              Commitment.create(of(anotherActivity())));
+    }
+
+    public static DatedActivityStatistic datedActivityStatistic() {
+        return DatedActivityStatistic.create(new Date(), activityStatistic());
     }
 
     public static ActivityStatistic activityStatistic() {
