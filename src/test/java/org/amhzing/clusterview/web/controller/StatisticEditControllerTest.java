@@ -31,6 +31,9 @@ public class StatisticEditControllerTest {
     @MockBean
     private StatisticAdapter statisticAdapter;
 
+    @MockBean
+    private CommonModelController commonModelController;
+
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_save_history() throws Exception {

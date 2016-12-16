@@ -52,6 +52,9 @@ public class GroupEditControllerTest {
     @MockBean
     private CoreActivityAdapter coreActivityAdapter;
 
+    @MockBean
+    private CommonModelController commonModelController;
+
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_be_able_to_create_new_group() throws Exception {

@@ -41,9 +41,6 @@ public class StatisticController {
     public String clusters(@ModelAttribute @PathVariable final String country,
                            final Model model) {
 
-        final List<ClusterNameModel> clusters = statisticAdapter.clusters(country);
-        model.addAttribute(CLUSTERS_MODEL_ATTR, clusters);
-
         return country + "/stats-history";
     }
 

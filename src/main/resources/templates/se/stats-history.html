@@ -14,7 +14,7 @@
                     <div class="row">
                         <select class="clustersMultiSelect" name="name" th:field="*{name}">
                             <option value="">None selected</option>
-                            <option th:each="cluster : ${clusters}"
+                            <option th:each="cluster : ${clusterValues}"
                                     th:value="${cluster.name}"
                                     th:text="${cluster.name}">Stockholm</option>
                         </select>

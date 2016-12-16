@@ -3,7 +3,6 @@ package org.amhzing.clusterview.web.controller;
 import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
-import org.amhzing.clusterview.web.controller.RegionController;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -30,6 +29,9 @@ public class RegionControllerTest {
 
     @MockBean
     private StatisticAdapter statisticAdapter;
+
+    @MockBean
+    private CommonModelController commonModelController;
 
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")

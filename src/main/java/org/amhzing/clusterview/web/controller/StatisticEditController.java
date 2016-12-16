@@ -35,7 +35,7 @@ public class StatisticEditController {
                               final RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            return redirectToStatsView(country);
+            return statsView(country);
         }
 
         final String cluster = clusterNameModel.getName();

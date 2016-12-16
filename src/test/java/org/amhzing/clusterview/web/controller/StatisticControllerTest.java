@@ -28,6 +28,9 @@ public class StatisticControllerTest {
     private MockMvc mvc;
 
     @MockBean
+    private CommonModelController commonModelController;
+
+    @MockBean
     private StatisticAdapter statisticAdapter;
 
     @Test

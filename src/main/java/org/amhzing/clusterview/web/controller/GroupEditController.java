@@ -3,8 +3,6 @@ package org.amhzing.clusterview.web.controller;
 import org.amhzing.clusterview.web.adapter.ActivityAdapter;
 import org.amhzing.clusterview.web.adapter.CoreActivityAdapter;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
-import org.amhzing.clusterview.web.model.ActivityModel;
-import org.amhzing.clusterview.web.model.CoreActivityModel;
 import org.amhzing.clusterview.web.model.GroupModel;
 import org.amhzing.clusterview.web.model.GroupPath;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 
 import static org.amhzing.clusterview.web.controller.MainController.CLUSTER_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -42,16 +39,6 @@ public class GroupEditController extends AbstractEditController {
     @ModelAttribute
     public GroupModel groupModel() {
         return new GroupModel();
-    }
-
-    @ModelAttribute("activityValues")
-    public List<ActivityModel> activityModel() {
-        return activityAdapter.activities();
-    }
-
-    @ModelAttribute("coreActivityValues")
-    public List<CoreActivityModel> coreActivityModel() {
-        return coreActivityAdapter.coreActivities();
     }
 
     @GetMapping(path = CLUSTER_PATH + "/newgroup")

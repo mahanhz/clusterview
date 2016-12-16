@@ -37,6 +37,9 @@ public class GroupControllerTest {
 
     @MockBean
     private StatisticAdapter statisticAdapter;
+
+    @MockBean
+    private CommonModelController commonModelController;
     
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")

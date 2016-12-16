@@ -30,6 +30,9 @@ public class MainControllerTest {
     @MockBean
     private StatisticAdapter statisticAdapter;
 
+    @MockBean
+    private CommonModelController commonModelController;
+
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_country() throws Exception {
