@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head>
+        <th:block th:replace="se/fragments/head :: head"></th:block>
+    </head>
+    <body>
+        <th:block th:replace="se/fragments/navbar :: navbar('Stats history')"></th:block>
+
+        <div class="container-fluid">
+            <div class="jumbotron">
+                <form action="#" th:action="@{/manage/caches/clear}" th:object="${cacheNamesModel}" th:method="delete">
+                    <div class="row">
+                        <select class="cachesMultiSelect" name="cacheNames" th:field="*{cacheNames}" multiple="multiple">
+                            <option th:each="cache : ${cacheValues}"
+                                    th:value="${cache}"
+                                    th:text="${cache}">cache</option>
+                        </select>
+                        <button type="submit" id="clearCache" class="btn btn-primary"
+                                sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_SUPER_ADMIN.getRole())">Clear Cache</button>
+
+                    </div>
+                    <div class="row" th:if="${clearCacheResponse}">
+                        <div class="alert alert-success">
+                            <ul th:each=" response : ${clearCacheResponse}">
+                                <li th:text="${response}">response</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <input type="hidden" id="country" name="country" th:value="${country}" />
+
+        <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+        <script th:src="@{/se/js/cache.js}"></script>
+
+    </body>
+</html>

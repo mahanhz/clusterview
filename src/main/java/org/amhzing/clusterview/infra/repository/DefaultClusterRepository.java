@@ -6,15 +6,19 @@ import org.amhzing.clusterview.domain.repository.ClusterRepository;
 import org.amhzing.clusterview.infra.jpa.mapping.ClusterEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.CountryEntity;
 import org.amhzing.clusterview.infra.jpa.repository.CountryJpaRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.Collections.emptyList;
+import static org.amhzing.clusterview.cache.CacheSpec.CLUSTERS_CACHE_NAME;
 import static org.amhzing.clusterview.infra.repository.StatisticFactory.clusterEntities;
 import static org.apache.commons.lang3.Validate.notNull;
 
+@CacheConfig(cacheNames = CLUSTERS_CACHE_NAME)
 public class DefaultClusterRepository implements ClusterRepository {
 
     private CountryJpaRepository countryJpaRepository;
@@ -24,6 +28,7 @@ public class DefaultClusterRepository implements ClusterRepository {
     }
 
     @Override
+    @Cacheable(key= "#root.caches[0].name", unless = "#result == null or #result.isEmpty()")
     public List<Cluster.Id> clusters(final Country.Id id) {
         notNull(id);
 

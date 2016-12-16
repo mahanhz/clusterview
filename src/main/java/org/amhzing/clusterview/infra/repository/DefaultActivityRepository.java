@@ -4,12 +4,16 @@ import org.amhzing.clusterview.domain.model.Activity;
 import org.amhzing.clusterview.domain.repository.ActivityRepository;
 import org.amhzing.clusterview.infra.jpa.mapping.ActivityEntity;
 import org.amhzing.clusterview.infra.jpa.repository.ActivityJpaRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.amhzing.clusterview.cache.CacheSpec.ACTIVITIES_CACHE_NAME;
 import static org.apache.commons.lang3.Validate.notNull;
 
+@CacheConfig(cacheNames = ACTIVITIES_CACHE_NAME)
 public class DefaultActivityRepository implements ActivityRepository {
 
     private ActivityJpaRepository activityJpaRepository;
@@ -19,6 +23,7 @@ public class DefaultActivityRepository implements ActivityRepository {
     }
 
     @Override
+    @Cacheable(key= "#root.caches[0].name", unless = "#result == null or #result.isEmpty()")
     public List<Activity> activities() {
         final List<ActivityEntity> activityEntities = activityJpaRepository.findAll();
 

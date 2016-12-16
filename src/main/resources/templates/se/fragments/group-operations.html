@@ -10,7 +10,7 @@
                 <br/>
                 <div class="list-group" id="groupOperations">
                     <a href="#" class="list-group-item disabled">Group operations</a>
-                    <div sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN)">
+                    <div sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN.getRole())">
                         <a th:href="@{'/clusteredit/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '/newgroup'}"
                            id="addNewGroup"
                            class="list-group-item list-group-item-info">

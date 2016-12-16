@@ -1,24 +1,26 @@
 package org.amhzing.clusterview.infra.repository;
 
-import org.amhzing.clusterview.domain.model.Activity;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.DatedActivityStatistic;
-import org.amhzing.clusterview.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.domain.repository.StatisticHistoryRepository;
 import org.amhzing.clusterview.infra.jpa.mapping.stats.CoreActivityStats;
 import org.amhzing.clusterview.infra.jpa.mapping.stats.StatsHistoryEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.stats.StatsHistoryPk;
 import org.amhzing.clusterview.infra.jpa.repository.stats.StatsHistoryJpaRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
+import static org.amhzing.clusterview.cache.CacheSpec.*;
 import static org.amhzing.clusterview.infra.repository.StatisticHistoryFactory.*;
 import static org.apache.commons.lang3.Validate.notNull;
 
+@CacheConfig(cacheNames = STATS_HISTORY_CACHE_NAME)
 public class DefaultStatisticHistoryRepository implements StatisticHistoryRepository {
 
     private StatsHistoryJpaRepository statsHistoryJpaRepository;
@@ -28,6 +30,7 @@ public class DefaultStatisticHistoryRepository implements StatisticHistoryReposi
     }
 
     @Override
+    @Cacheable(key= DEFAULT_CACHE_KEY, unless = "#result == null")
     public List<DatedActivityStatistic> history(final Cluster.Id clusterId) {
         notNull(clusterId);
 
@@ -43,6 +46,7 @@ public class DefaultStatisticHistoryRepository implements StatisticHistoryReposi
     }
 
     @Override
+    @CacheEvict(cacheNames = STATS_HISTORY_CACHE_NAME, key = DEFAULT_CACHE_KEY)
     public StatsHistoryEntity saveHistory(final Cluster.Id clusterId, final ActivityStatistic activityStatistic) {
         notNull(clusterId);
         notNull(activityStatistic);
@@ -56,11 +60,9 @@ public class DefaultStatisticHistoryRepository implements StatisticHistoryReposi
 
         populateCoreActivitiesStats(activityStatistic, cc, dm, jyg, sc);
 
-        final Map<Activity, Quantity> activityQuantity = activityStatistic.getActivityQuantity();
-
         final StatsHistoryEntity statsHistoryEntity = StatsHistoryEntity.create(statsHistoryPk,
                                                                                 cc, dm, jyg, sc,
-                                                                                activityStats(activityQuantity));
+                                                                                activityStats(activityStatistic.getActivityQuantity()));
 
         return statsHistoryJpaRepository.save(statsHistoryEntity);
     }

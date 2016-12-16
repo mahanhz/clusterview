@@ -69,7 +69,7 @@
                 </table>
             </div>
 
-            <div sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN)">
+            <div sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN.getRole())">
                 <div class="row" th:if="${not group.members.isEmpty()}">
                     <div class="col-xs-6">
                         <div class="pull-left">
