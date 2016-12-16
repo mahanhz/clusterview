@@ -206,7 +206,10 @@
                 <div class="modal-body">
                     <div class="cluster-container">
                         <img class="map" th:src="@{'/se/images/cluster-' + ${groupPath.cluster} + '.png'}" />
-                        <div class="cluster-group" style="display:none">
+                        <div class="cluster-group"
+                             th:style="${groupModel.location.coordX} &gt; 0
+                                       ? 'left: ' + ${groupModel.location.coordX - 10} + 'px; top: ' + ${groupModel.location.coordY - 10} + 'px;'
+                                       : 'display:none'">
                             <i class="fa fa-users" aria-hidden="true"></i>
                         </div>
                     </div>
