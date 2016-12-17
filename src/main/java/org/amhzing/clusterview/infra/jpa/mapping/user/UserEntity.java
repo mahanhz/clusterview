@@ -1,8 +1,10 @@
 package org.amhzing.clusterview.infra.jpa.mapping.user;
 
+import org.amhzing.clusterview.infra.jpa.mapping.CountryEntity;
+
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -28,7 +30,13 @@ public class UserEntity {
     @JoinTable(name = "users_roles",
                joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Collection<RoleEntity> roles;
+    private Set<RoleEntity> roles;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_countries",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "country_id", referencedColumnName = "id"))
+    private Set<CountryEntity> countries;
 
     public UserEntity() {
     }
@@ -81,12 +89,20 @@ public class UserEntity {
         this.enabled = enabled;
     }
 
-    public Collection<RoleEntity> getRoles() {
+    public Set<RoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(final Collection<RoleEntity> roles) {
+    public void setRoles(final Set<RoleEntity> roles) {
         this.roles = roles;
+    }
+
+    public Set<CountryEntity> getCountries() {
+        return countries;
+    }
+
+    public void setCountries(final Set<CountryEntity> countries) {
+        this.countries = countries;
     }
 
     @Override
@@ -112,6 +128,7 @@ public class UserEntity {
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
+                ", countries=" + countries +
                 '}';
     }
 }

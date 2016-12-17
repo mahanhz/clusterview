@@ -1,9 +1,9 @@
 package org.amhzing.clusterview.infra.jpa.mapping;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.amhzing.clusterview.infra.jpa.mapping.user.UserEntity;
+
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,6 +15,9 @@ public final class CountryEntity {
 
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RegionEntity> regions;
+
+    @ManyToMany(mappedBy = "countries")
+    private Collection<UserEntity> users;
 
     public String getId() {
         return id;
@@ -32,18 +35,27 @@ public final class CountryEntity {
         this.regions = regions;
     }
 
+    public Collection<UserEntity> getUsers() {
+        return users;
+    }
+
+    public void setUsers(final Collection<UserEntity> users) {
+        this.users = users;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof CountryEntity)) return false;
         final CountryEntity that = (CountryEntity) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(regions, that.regions);
+                Objects.equals(regions, that.regions) &&
+                Objects.equals(users, that.users);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, regions);
+        return Objects.hash(id, regions, users);
     }
 
     @Override
@@ -51,6 +63,7 @@ public final class CountryEntity {
         return "CountryEntity{" +
                 "id='" + id + '\'' +
                 ", regions=" + regions +
+                ", users=" + users +
                 '}';
     }
 }

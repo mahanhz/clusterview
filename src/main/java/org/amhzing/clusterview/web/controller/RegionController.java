@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.web.controller;
 
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.web.controller.base.AbstractController;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.web.model.RegionPath;
 import org.springframework.beans.factory.annotation.Autowired;

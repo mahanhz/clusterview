@@ -10,8 +10,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import static org.amhzing.clusterview.user.UserRole.SE_SUPER_ADMIN;
-
 @Configuration
 @EnableConfigurationProperties(ManagementProperties.class)
 @Order(ManagementServerProperties.ACCESS_OVERRIDE_ORDER)
@@ -27,7 +25,7 @@ public class ManagementSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .authorizeRequests()
                 .antMatchers(managementProperties.getContextPath() + "/health").permitAll()
-                .anyRequest().hasAuthority(SE_SUPER_ADMIN.getRole())
+                .anyRequest().hasAuthority("ROLE_SUPER_ADMIN")
                 .and()
             .httpBasic();
     }

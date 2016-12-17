@@ -1,5 +1,8 @@
 package org.amhzing.clusterview.configuration.handler;
 
+import org.amhzing.clusterview.domain.model.Country;
+import org.amhzing.clusterview.user.DefaultUserDetails;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -15,13 +18,13 @@ import java.io.IOException;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static org.amhzing.clusterview.user.UserRole.SE_USER;
+import static org.amhzing.clusterview.user.UserRole.USER;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.replace;
 
 public class RedirectAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
-    public static final String SE_URI = "/clusterview/se";
+    public static final String URI = "/clusterview/";
 
     private RequestCache requestCache = new HttpSessionRequestCache();
 
@@ -49,11 +52,17 @@ public class RedirectAuthenticationSuccessHandler extends SavedRequestAwareAuthe
                                                  .map(GrantedAuthority::getAuthority)
                                                  .collect(toList());
 
-        if (roles.contains(SE_USER.getRole())) {
-            return SE_URI;
+        if (roles.contains(USER.getRole())) {
+            final DefaultUserDetails userDetails = (DefaultUserDetails) authentication.getPrincipal();
+            final List<Country.Id> countries = userDetails.getCountries();
+
+            if (CollectionUtils.isNotEmpty(countries)) {
+                final Country.Id countryId = countries.iterator().next();
+                return URI + countryId.getId();
+            }
         }
 
-        return null;
+        return "/error";
     }
 
     private boolean useSavedUri(final SavedRequest savedRequest, final HttpServletRequest request) {

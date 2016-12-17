@@ -1,8 +1,9 @@
-package org.amhzing.clusterview.web.controller;
+package org.amhzing.clusterview.web.controller.cache;
 
 import com.google.common.collect.ImmutableList;
 import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.security.WithMockCustomUser;
+import org.amhzing.clusterview.web.controller.CommonModelController;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

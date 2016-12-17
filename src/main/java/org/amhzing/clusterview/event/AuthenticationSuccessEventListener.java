@@ -12,7 +12,7 @@ public class AuthenticationSuccessEventListener implements ApplicationListener<A
 
     @Override
     public void onApplicationEvent(final AuthenticationSuccessEvent event) {
-        DefaultUserDetails userDetails = (DefaultUserDetails) event.getAuthentication().getPrincipal();
+        final DefaultUserDetails userDetails = (DefaultUserDetails) event.getAuthentication().getPrincipal();
         LOGGER.info("Successful login for: " + userDetails.getUsername() + ", " + userDetails.getFirstName() + " " + userDetails.getLastName());
     }
 }

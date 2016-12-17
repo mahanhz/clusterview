@@ -1,5 +1,7 @@
 package org.amhzing.clusterview.security;
 
+import com.google.common.collect.ImmutableList;
+import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.user.DefaultUserDetails;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -44,7 +46,8 @@ public class WithMockCustomUserSecurityContextFactory implements WithSecurityCon
         DefaultUserDetails principal = new DefaultUserDetails(username, withUser.password(), true, true, true, true,
                                                               grantedAuthorities,
                                                               withUser.firstName(),
-                                                              withUser.lastName());
+                                                              withUser.lastName(),
+                                                              countries());
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 principal, principal.getPassword(), principal.getAuthorities());
@@ -52,5 +55,9 @@ public class WithMockCustomUserSecurityContextFactory implements WithSecurityCon
         context.setAuthentication(authentication);
 
         return context;
+    }
+
+    private List<Country.Id> countries() {
+        return ImmutableList.of(Country.Id.create("se"));
     }
 }

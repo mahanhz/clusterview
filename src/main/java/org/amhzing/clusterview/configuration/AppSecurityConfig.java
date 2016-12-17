@@ -1,16 +1,15 @@
 package org.amhzing.clusterview.configuration;
 
 import org.amhzing.clusterview.configuration.handler.RedirectAuthenticationSuccessHandler;
+import org.amhzing.clusterview.user.WebSecurity;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import static org.amhzing.clusterview.configuration.StaticFiles.*;
-import static org.amhzing.clusterview.user.UserRole.SE_ADMIN;
-import static org.amhzing.clusterview.user.UserRole.SE_USER;
 
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
@@ -19,10 +18,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/clusterview/se/**").hasAuthority(SE_USER.getRole())
-                .antMatchers("/statsview/history/se/**").hasAuthority(SE_USER.getRole())
-                .antMatchers("/clusteredit/se/**").hasAuthority(SE_ADMIN.getRole())
-                .antMatchers("/statsedit/history/se/**").hasAuthority(SE_ADMIN.getRole())
+                .antMatchers("/clusterview/{country}/**").access("hasRole('USER') and @webSecurity.checkCountry(authentication, #country)")
+                .antMatchers("/statsview/history/{country}/**").access("hasRole('USER') and @webSecurity.checkCountry(authentication, #country)")
+                .antMatchers("/clusteredit/{country}/**").access("hasRole('ADMIN') and @webSecurity.checkCountry(authentication, #country)")
+                .antMatchers("/statsedit/history/{country}/**").access("hasRole('ADMIN') and @webSecurity.checkCountry(authentication, #country)")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -44,12 +43,17 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(org.springframework.security.config.annotation.web.builders.WebSecurity web) throws Exception {
         web.ignoring().antMatchers(CSS.getResourcePattern(),
                                    CSS_SE.getResourcePattern(),
                                    JS.getResourcePattern(),
                                    JS_SE.getResourcePattern(),
                                    IMAGES_SE.getResourcePattern(),
                                    "/webjars/**");
+    }
+
+    @Bean
+    public WebSecurity webSecurity() {
+        return new WebSecurity();
     }
 }

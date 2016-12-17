@@ -1,12 +1,15 @@
 package org.amhzing.clusterview.web.controller;
 
+import org.amhzing.clusterview.user.DefaultUserDetails;
 import org.amhzing.clusterview.web.adapter.ActivityAdapter;
 import org.amhzing.clusterview.web.adapter.CoreActivityAdapter;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.web.model.ActivityModel;
 import org.amhzing.clusterview.web.model.ClusterNameModel;
 import org.amhzing.clusterview.web.model.CoreActivityModel;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -28,6 +31,20 @@ public class CommonModelController {
         this.statisticAdapter = notNull(statisticAdapter);
         this.activityAdapter = notNull(activityAdapter);
         this.coreActivityAdapter = notNull(coreActivityAdapter);
+    }
+
+    @ModelAttribute("userCountry")
+    public String userCountry(final Authentication authentication) {
+        if (authentication != null) {
+            final DefaultUserDetails userDetails = (DefaultUserDetails) authentication.getPrincipal();
+
+            // TODO - this assumes that every user belongs to only one country
+            if (userDetails != null && CollectionUtils.isNotEmpty(userDetails.getCountries())) {
+                return userDetails.getCountries().iterator().next().getId();
+            }
+        }
+
+        return "XX";
     }
 
     @ModelAttribute("activityValues")

@@ -1,25 +1,32 @@
 package org.amhzing.clusterview.user;
 
+import com.google.common.collect.ImmutableList;
+import org.amhzing.clusterview.domain.model.Country;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
+import java.util.List;
 
+import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notBlank;
 
 public class DefaultUserDetails extends User {
 
     private String firstName;
     private String lastName;
+    private List<Country.Id> countries;
 
     public DefaultUserDetails(final String username,
                               final String password,
                               final Collection<? extends GrantedAuthority> authorities,
                               final String firstName,
-                              final String lastName) {
+                              final String lastName,
+                              final List<Country.Id> countries) {
         super(username, password, authorities);
         this.firstName = notBlank(firstName);
         this.lastName = notBlank(lastName);
+        this.countries = noNullElements(countries);
     }
 
     public DefaultUserDetails(final String username,
@@ -30,10 +37,12 @@ public class DefaultUserDetails extends User {
                               final boolean accountNonLocked,
                               final Collection<? extends GrantedAuthority> authorities,
                               final String firstName,
-                              final String lastName) {
+                              final String lastName,
+                              final List<Country.Id> countries) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = notBlank(firstName);
+        this.lastName = notBlank(lastName);
+        this.countries = noNullElements(countries);
     }
 
     public String getFirstName() {
@@ -44,11 +53,16 @@ public class DefaultUserDetails extends User {
         return lastName;
     }
 
+    public List<Country.Id> getCountries() {
+        return ImmutableList.copyOf(countries);
+    }
+
     @Override
     public String toString() {
         return "DefaultUserDetails{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", countries=" + countries +
                 "} " + super.toString();
     }
 }

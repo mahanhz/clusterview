@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.web.controller;
+package org.amhzing.clusterview.web.controller.exception;
 
 import com.fasterxml.uuid.Generators;
 import org.amhzing.clusterview.exception.ClusterNotFoundException;

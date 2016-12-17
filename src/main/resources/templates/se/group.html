@@ -69,27 +69,31 @@
                 </table>
             </div>
 
-            <div sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN.getRole())">
-                <div class="row" th:if="${not group.members.isEmpty()}">
-                    <div class="col-xs-6">
-                        <div class="pull-left">
-                            <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
-                                  th:method="delete" target="_top">
-                                <button id="deleteGroup" type="submit" class="btn btn-danger btn-md">Delete Group</button>
-                            </form>
+            <th:block th:with="adminCluster=('ADMIN_' + ${userCountry} + '_' + ${groupPath.cluster})">
+                <div th:if="${#authorization.expression('hasAnyRole(T(org.amhzing.clusterview.user.UserRole).SUPER_ADMIN.getRole(),
+                                                                            ''ADMIN_'+#strings.toUpperCase(userCountry)+'_ALL'',
+                                                                            '''+#strings.toUpperCase(adminCluster)+''')')}">
+                    <div class="row" th:if="${not group.members.isEmpty()}">
+                        <div class="col-xs-6">
+                            <div class="pull-left">
+                                <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
+                                      th:method="delete" target="_top">
+                                    <button id="deleteGroup" type="submit" class="btn btn-danger btn-md">Delete Group</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-xs-6">
-                        <div class="pull-right">
-                            <a th:href="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
-                               target="_top">
-                                <button id="editGroup" type="submit" class="btn btn-primary btn-md">Edit Group</button>
-                            </a>
+                        <div class="col-xs-6">
+                            <div class="pull-right">
+                                <a th:href="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
+                                   target="_top">
+                                    <button id="editGroup" type="submit" class="btn btn-primary btn-md">Edit Group</button>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </th:block>
         </div>
 
         <input type="hidden" id="country" name="country" th:value="${groupPath.country}" />

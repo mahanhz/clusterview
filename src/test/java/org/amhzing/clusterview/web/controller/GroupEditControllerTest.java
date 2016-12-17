@@ -24,9 +24,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.amhzing.clusterview.helper.ClientModelHelper.groupModel;
-import static org.amhzing.clusterview.web.controller.GlobalExceptionHandlerController.CUSTOM_MESSAGE_KEY;
-import static org.amhzing.clusterview.web.controller.GlobalExceptionHandlerController.ERROR_ID_KEY;
-import static org.amhzing.clusterview.web.controller.GlobalExceptionHandlerController.ERROR_VIEW;
+import static org.amhzing.clusterview.web.controller.exception.GlobalExceptionHandlerController.CUSTOM_MESSAGE_KEY;
+import static org.amhzing.clusterview.web.controller.exception.GlobalExceptionHandlerController.ERROR_ID_KEY;
+import static org.amhzing.clusterview.web.controller.exception.GlobalExceptionHandlerController.ERROR_VIEW;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;

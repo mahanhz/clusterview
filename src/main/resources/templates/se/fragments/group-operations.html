@@ -8,9 +8,12 @@
             <div class="col-xs-3">
                 <th:block th:replace="se/fragments/quick-links :: quick-links"></th:block>
                 <br/>
-                <div class="list-group" id="groupOperations">
+                <div class="list-group" id="groupOperations"
+                     th:with="adminCluster=('ADMIN_' + ${userCountry} + '_' + ${clusterPath.cluster})">
                     <a href="#" class="list-group-item disabled">Group operations</a>
-                    <div sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SE_ADMIN.getRole())">
+                    <div th:if="${#authorization.expression('hasAnyRole(T(org.amhzing.clusterview.user.UserRole).SUPER_ADMIN.getRole(),
+                                                                        ''ADMIN_'+#strings.toUpperCase(userCountry)+'_ALL'',
+                                                                        '''+#strings.toUpperCase(adminCluster)+''')')}">
                         <a th:href="@{'/clusteredit/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '/newgroup'}"
                            id="addNewGroup"
                            class="list-group-item list-group-item-info">

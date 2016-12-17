@@ -6,9 +6,9 @@ import static org.apache.commons.lang3.Validate.notBlank;
 
 public enum UserRole {
 
-    SE_USER("ROLE_SE_USER"),
-    SE_ADMIN("ROLE_SE_ADMIN"),
-    SE_SUPER_ADMIN("ROLE_SUPER_ADMIN");
+    USER("ROLE_USER"),
+    ADMIN("ROLE_ADMIN"),
+    SUPER_ADMIN("ROLE_SUPER_ADMIN");
 
     private final String role;
 
