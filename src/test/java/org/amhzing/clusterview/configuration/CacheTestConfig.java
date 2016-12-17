@@ -6,13 +6,10 @@ import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.domain.model.Region;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
-import org.amhzing.clusterview.domain.repository.GroupRepository;
-import org.amhzing.clusterview.domain.repository.StatisticRepository;
+import org.amhzing.clusterview.domain.repository.*;
 import org.amhzing.clusterview.infra.jpa.repository.*;
-import org.amhzing.clusterview.infra.repository.ClusterStatisticRepository;
-import org.amhzing.clusterview.infra.repository.CountryStatisticRepository;
-import org.amhzing.clusterview.infra.repository.DefaultGroupRepository;
-import org.amhzing.clusterview.infra.repository.RegionStatisticRepository;
+import org.amhzing.clusterview.infra.jpa.repository.stats.StatsHistoryJpaRepository;
+import org.amhzing.clusterview.infra.repository.*;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cache.annotation.EnableCaching;
@@ -34,6 +31,10 @@ public class CacheTestConfig {
     private TeamJpaRepository teamJpaRepository;
     @MockBean
     private ActivityJpaRepository activityJpaRepository;
+    @MockBean
+    private StatsHistoryJpaRepository statsHistoryJpaRepository;
+    @MockBean
+    private CoreActivityJpaRepository coreActivityJpaRepository;
 
     @Bean
     public StatisticRepository<Country.Id, ActivityStatistic> countryStatisticRepository() {
@@ -51,6 +52,26 @@ public class CacheTestConfig {
     }
 
     @Bean
+    public StatisticHistoryRepository statisticHistoryRepository() {
+        return new DefaultStatisticHistoryRepository(statsHistoryJpaRepository);
+    }
+
+    @Bean
+    public ClusterRepository clusterRepository() {
+        return new DefaultClusterRepository(countryJpaRepository);
+    }
+
+    @Bean
+    public ActivityRepository activityRepository() {
+        return new DefaultActivityRepository(activityJpaRepository);
+    }
+
+    @Bean
+    public CoreActivityRepository coreActivityRepository() {
+        return new DefaultCoreActivityRepository(coreActivityJpaRepository);
+    }
+
+    @Bean
     public GroupRepository groupRepository() {
         return new DefaultGroupRepository(clusterJpaRepository, teamJpaRepository, activityJpaRepository);
     }
@@ -60,22 +81,62 @@ public class CacheTestConfig {
         final SimpleCacheManager cacheManager = new SimpleCacheManager();
 
         cacheManager.setCaches(ImmutableList.of(groupsCache().getObject(),
-                                                statsCache().getObject()));
+                                                groupCache().getObject(),
+                                                statsCache().getObject(),
+                                                statsHistoryCache().getObject(),
+                                                activitiesCache().getObject(),
+                                                coreActivitiesCache().getObject(),
+                                                clustersCache().getObject()));
 
         return cacheManager;
     }
 
     @Bean
-    public ConcurrentMapCacheFactoryBean groupsCache(){
+    public ConcurrentMapCacheFactoryBean groupsCache() {
         final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
         cacheFactoryBean.setName(CacheSpec.GROUPS_CACHE_NAME);
         return cacheFactoryBean;
     }
 
     @Bean
-    public ConcurrentMapCacheFactoryBean statsCache(){
+    public ConcurrentMapCacheFactoryBean statsCache() {
         final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
         cacheFactoryBean.setName(CacheSpec.STATS_CACHE_NAME);
+        return cacheFactoryBean;
+    }
+
+    @Bean
+    public ConcurrentMapCacheFactoryBean statsHistoryCache() {
+        final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
+        cacheFactoryBean.setName(CacheSpec.STATS_HISTORY_CACHE_NAME);
+        return cacheFactoryBean;
+    }
+
+    @Bean
+    public ConcurrentMapCacheFactoryBean activitiesCache() {
+        final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
+        cacheFactoryBean.setName(CacheSpec.ACTIVITIES_CACHE_NAME);
+        return cacheFactoryBean;
+    }
+
+    @Bean
+    public ConcurrentMapCacheFactoryBean coreActivitiesCache() {
+        final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
+        cacheFactoryBean.setName(CacheSpec.CORE_ACTIVITIES_CACHE_NAME);
+        return cacheFactoryBean;
+    }
+
+    @Bean
+    public ConcurrentMapCacheFactoryBean clustersCache() {
+        final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
+        cacheFactoryBean.setName(CacheSpec.CLUSTERS_CACHE_NAME);
+        return cacheFactoryBean;
+    }
+
+    @Bean
+    public ConcurrentMapCacheFactoryBean groupCache() {
+        final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
+        cacheFactoryBean.setName(CacheSpec.GROUP_CACHE_NAME);
         return cacheFactoryBean;
     }
 
