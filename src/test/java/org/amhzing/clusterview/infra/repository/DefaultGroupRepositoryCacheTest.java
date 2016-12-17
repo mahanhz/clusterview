@@ -128,7 +128,7 @@ public class DefaultGroupRepositoryCacheTest {
         // stats cache is cleared
         assertThat(cacheValue(STATS_CACHE_NAME, CACHE_TEST_KEY)).isNull();
 
-        // Only the cluster for the created group in cleared
+        // Only the cluster for the created group is cleared
         assertThat(cacheValue(GROUPS_CACHE_NAME, groupsCacheKey())).isNull();
         assertThat(cacheValue(GROUPS_CACHE_NAME, groupsCacheKey2())).isEqualTo(CACHE_TEST_VALUE_2);
 
@@ -148,7 +148,7 @@ public class DefaultGroupRepositoryCacheTest {
         assertThat(cacheValue(GROUPS_CACHE_NAME, groupsCacheKey())).isNull();
         assertThat(cacheValue(GROUPS_CACHE_NAME, groupsCacheKey2())).isEqualTo(CACHE_TEST_VALUE_2);
 
-        // Only the group for the updated group in cleared
+        // Only the group for the updated group is cleared
         assertThat(cacheValue(GROUP_CACHE_NAME, groupCacheKey())).isNull();
         assertThat(cacheValue(GROUP_CACHE_NAME, groupCacheKey2())).isEqualTo(CACHE_TEST_VALUE_2);
     }
@@ -167,7 +167,7 @@ public class DefaultGroupRepositoryCacheTest {
         assertThat(cacheValue(GROUPS_CACHE_NAME, groupsCacheKey())).isNull();
         assertThat(cacheValue(GROUPS_CACHE_NAME, groupsCacheKey2())).isEqualTo(CACHE_TEST_VALUE_2);
 
-        // Only the group for the updated group in cleared
+        // Only the group for the updated group is cleared
         assertThat(cacheValue(GROUP_CACHE_NAME, groupCacheKey())).isNull();
         assertThat(cacheValue(GROUP_CACHE_NAME, groupCacheKey2())).isEqualTo(CACHE_TEST_VALUE_2);
     }
