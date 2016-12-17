@@ -4,6 +4,7 @@ import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.statistic.DatedActivityStatistic;
 import org.amhzing.clusterview.domain.repository.StatisticHistoryRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class DefaultStatisticHistoryService implements StatisticHistoryService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') and @webSecurity.checkAdmin(authentication, #clusterId.id)")
     public void saveHistory(final Cluster.Id clusterId, final ActivityStatistic activityStatistic) {
         notNull(clusterId);
         notNull(activityStatistic);

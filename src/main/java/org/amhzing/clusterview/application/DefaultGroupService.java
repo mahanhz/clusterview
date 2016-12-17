@@ -3,6 +3,7 @@ package org.amhzing.clusterview.application;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Group;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.Set;
 
@@ -31,6 +32,7 @@ public class DefaultGroupService implements GroupService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') and @webSecurity.checkAdmin(authentication, #clusterId.id)")
     public void createGroup(final Group group, final Cluster.Id clusterId) {
         notNull(group);
         notNull(clusterId);
@@ -39,6 +41,7 @@ public class DefaultGroupService implements GroupService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') and @webSecurity.checkAdmin(authentication, #clusterId.id)")
     public void updateGroup(final Group group, final Cluster.Id clusterId) {
         notNull(group);
         notNull(clusterId);
@@ -47,6 +50,7 @@ public class DefaultGroupService implements GroupService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') and @webSecurity.checkAdmin(authentication, #clusterId.id)")
     public void deleteGroup(final Group.Id groupId, final Cluster.Id clusterId) {
         notNull(groupId);
         notNull(clusterId);

@@ -5,6 +5,7 @@ import org.amhzing.clusterview.exception.ClusterNotFoundException;
 import org.amhzing.clusterview.exception.GroupNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,6 +33,12 @@ public class GlobalExceptionHandlerController {
         mav.setViewName(ERROR_VIEW);
 
         return mav;
+    }
+
+    // This is here if a method fails @PreAuthorize
+    @ExceptionHandler(AccessDeniedException.class)
+    public ModelAndView accessDenied() {
+        return new ModelAndView("error/403");
     }
 
     @ExceptionHandler(ClusterNotFoundException.class)
