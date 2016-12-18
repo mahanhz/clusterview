@@ -6,6 +6,7 @@ import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.web.servlet.ModelAndView;
 
+import static org.amhzing.clusterview.web.controller.CommonModelController.CLUSTER_VALUES_MODEL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,12 +42,15 @@ public class StatisticControllerTest {
         final ResultActions result = this.mvc.perform(get("/statsview/history/se"))
                                              .andExpect(status().isOk());
 
+        final ModelAndView modelAndView = result.andReturn().getModelAndView();
+        assertThat(modelAndView.getModel()).containsKey(CLUSTER_VALUES_MODEL);
+
         final String content = result.andReturn().getResponse().getContentAsString();
 
         Document doc = Jsoup.parse(content);
-        final Element country = doc.getElementById("country");
+        final Element clustersSelect = doc.getElementById("name");
 
-        assertThat(country.val()).isEqualToIgnoringCase("se");
+        assertThat(clustersSelect.firstElementSibling().text()).isEqualToIgnoringCase("None selected");
     }
 
     @Test
@@ -56,10 +62,8 @@ public class StatisticControllerTest {
         final String content = result.andReturn().getResponse().getContentAsString();
 
         Document doc = Jsoup.parse(content);
-        final Element country = doc.getElementById("country");
-        final Element cluster = doc.getElementById("cluster");
+        final Elements highchartTables = doc.getElementsByClass("highchart");
 
-        assertThat(country.val()).isEqualToIgnoringCase("se");
-        assertThat(cluster.val()).isEqualToIgnoringCase("stockholm");
+        assertThat(highchartTables).hasSize(4);
     }
 }

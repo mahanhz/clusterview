@@ -20,6 +20,11 @@ import static org.apache.commons.lang3.Validate.notNull;
 @ControllerAdvice(basePackages = { "org.amhzing.clusterview.web.controller" })
 public class CommonModelController {
 
+    public static final String USER_COUNTRY_MODEL = "userCountry";
+    public static final String ACTIVITY_VALUES_MODEL = "activityValues";
+    public static final String CORE_ACTIVITY_VALUES_MODEL = "coreActivityValues";
+    public static final String CLUSTER_VALUES_MODEL = "clusterValues";
+
     private StatisticAdapter statisticAdapter;
     private ActivityAdapter activityAdapter;
     private CoreActivityAdapter coreActivityAdapter;
@@ -33,7 +38,7 @@ public class CommonModelController {
         this.coreActivityAdapter = notNull(coreActivityAdapter);
     }
 
-    @ModelAttribute("userCountry")
+    @ModelAttribute(USER_COUNTRY_MODEL)
     public String userCountry(final Authentication authentication) {
         if (authentication != null) {
             final DefaultUserDetails userDetails = (DefaultUserDetails) authentication.getPrincipal();
@@ -47,17 +52,17 @@ public class CommonModelController {
         return "XX";
     }
 
-    @ModelAttribute("activityValues")
+    @ModelAttribute(ACTIVITY_VALUES_MODEL)
     public List<ActivityModel> activityModel() {
         return activityAdapter.activities();
     }
 
-    @ModelAttribute("coreActivityValues")
+    @ModelAttribute(CORE_ACTIVITY_VALUES_MODEL)
     public List<CoreActivityModel> coreActivityModel() {
         return coreActivityAdapter.coreActivities();
     }
 
-    @ModelAttribute("clusterValues")
+    @ModelAttribute(CLUSTER_VALUES_MODEL)
     public List<ClusterNameModel> clusters() {
         // TODO - currently hardcoded
         return statisticAdapter.clusters("se");

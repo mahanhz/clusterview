@@ -5,7 +5,7 @@ import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +43,10 @@ public class MainControllerTest {
         final String content = result.andReturn().getResponse().getContentAsString();
 
         Document doc = Jsoup.parse(content);
-        final Element country = doc.getElementById("country");
+        final Elements maps = doc.getElementsByTag("map");
 
-        assertThat(country.val()).isEqualToIgnoringCase("se");
+        assertThat(maps).hasSize(1);
+        assertThat(maps.first().attr("name")).isEqualTo("regionsMap");
+        assertThat(maps.first().children()).isNotEmpty();
     }
 }

@@ -52,9 +52,9 @@ public class GroupControllerTest {
         final String content = result.andReturn().getResponse().getContentAsString();
 
         Document doc = Jsoup.parse(content);
-        final Element cluster = doc.getElementById("cluster");
+        final String imgSrc = doc.getElementsByTag("img").first().attr("src");
 
-        assertThat(cluster.val()).isEqualToIgnoringCase("stockholm");
+        assertThat(imgSrc).contains("cluster-stockholm");
     }
 
     @Test
