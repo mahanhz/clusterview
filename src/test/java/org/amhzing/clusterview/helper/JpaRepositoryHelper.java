@@ -21,6 +21,7 @@ public final class JpaRepositoryHelper {
     public static final int INITIAL_MEMBERS_SIZE = 4;
     public static final int INITIAL_CAPABILITIES_SIZE = 6;
     public static final int INITIAL_COMMITMENTS_SIZE = 8;
+    public static final int INITIAL_STATS_HISTORY_STOCKHOLM_SIZE = 3;
 
 
     private JpaRepositoryHelper() {
