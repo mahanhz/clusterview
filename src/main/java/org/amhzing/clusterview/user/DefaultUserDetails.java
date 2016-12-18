@@ -19,18 +19,6 @@ public class DefaultUserDetails extends User {
 
     public DefaultUserDetails(final String username,
                               final String password,
-                              final Collection<? extends GrantedAuthority> authorities,
-                              final String firstName,
-                              final String lastName,
-                              final List<Country.Id> countries) {
-        super(username, password, authorities);
-        this.firstName = notBlank(firstName);
-        this.lastName = notBlank(lastName);
-        this.countries = noNullElements(countries);
-    }
-
-    public DefaultUserDetails(final String username,
-                              final String password,
                               final boolean enabled,
                               final boolean accountNonExpired,
                               final boolean credentialsNonExpired,

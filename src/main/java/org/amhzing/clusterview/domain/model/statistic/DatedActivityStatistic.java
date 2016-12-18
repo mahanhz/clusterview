@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class DatedActivityStatistic {
+public final class DatedActivityStatistic {
 
     private Date date;
     private ActivityStatistic activityStatistic;
