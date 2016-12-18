@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.web.controller;
+package org.amhzing.clusterview.web.controller.appnav;
 
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-import static org.amhzing.clusterview.web.controller.MainController.STATISTICS_MODEL_ATTR;
+import static org.amhzing.clusterview.web.controller.appnav.CountryController.STATISTICS_MODEL_ATTR;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller

@@ -1,8 +1,9 @@
-package org.amhzing.clusterview.web.controller;
+package org.amhzing.clusterview.web.controller.appnav;
 
 import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.web.controller.CommonModelController;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -20,9 +21,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(MainController.class)
+@WebMvcTest(CountryController.class)
 @TestOffline
-public class MainControllerTest {
+public class CountryControllerTest {
 
     @Autowired
     private MockMvc mvc;

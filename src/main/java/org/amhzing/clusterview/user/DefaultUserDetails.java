@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 import java.util.List;
 
-import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notBlank;
+import static org.apache.commons.lang3.Validate.notEmpty;
 
 public class DefaultUserDetails extends User {
 
@@ -29,7 +29,7 @@ public class DefaultUserDetails extends User {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.firstName = notBlank(firstName);
         this.lastName = notBlank(lastName);
-        this.countries = noNullElements(countries);
+        this.countries = notEmpty(countries);
     }
 
     public String getFirstName() {

@@ -2,7 +2,7 @@ package org.amhzing.clusterview.web.model;
 
 import org.springframework.http.HttpMethod;
 
-import static org.amhzing.clusterview.web.controller.GroupEditController.CREATE_GROUP;
+import static org.amhzing.clusterview.web.controller.appnav.GroupEditController.CREATE_GROUP;
 
 public class GroupPath extends ClusterPath {
 

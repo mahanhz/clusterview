@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.web.controller;
+package org.amhzing.clusterview.web.controller.appnav;
 
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.controller.base.AbstractEditController;
@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-import static org.amhzing.clusterview.web.controller.MainController.CLUSTER_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
@@ -34,12 +33,12 @@ public class GroupEditController extends AbstractEditController {
         return new GroupModel();
     }
 
-    @GetMapping(path = CLUSTER_PATH + "/newgroup")
+    @GetMapping(path = CountryController.CLUSTER_PATH + "/newgroup")
     public String newGroup(@ModelAttribute final GroupPath groupPath) {
         return groupActionView(groupPath);
     }
 
-    @GetMapping(path = CLUSTER_PATH + "/{groupId}")
+    @GetMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
     public String editGroup(@ModelAttribute @Valid final GroupPath groupPath,
                             final BindingResult bindingResult,
                             final Model model) {
@@ -58,7 +57,7 @@ public class GroupEditController extends AbstractEditController {
         return groupActionView(groupPath);
     }
 
-    @PostMapping(path = CLUSTER_PATH + "/" + CREATE_GROUP)
+    @PostMapping(path = CountryController.CLUSTER_PATH + "/" + CREATE_GROUP)
     public String createGroup(@ModelAttribute final GroupPath groupPath,
                               @ModelAttribute @Valid final GroupModel groupModel,
                               final BindingResult bindingResult) {
@@ -72,7 +71,7 @@ public class GroupEditController extends AbstractEditController {
         return redirectToClusterView(groupPath);
     }
 
-    @PutMapping(path = CLUSTER_PATH + "/{groupId}")
+    @PutMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
     public String updateGroup(@ModelAttribute final GroupPath groupPath,
                               @ModelAttribute @Valid final GroupModel groupModel,
                               final BindingResult bindingResult) {
@@ -89,7 +88,7 @@ public class GroupEditController extends AbstractEditController {
         return redirectToClusterView(groupPath);
     }
 
-    @DeleteMapping(path = CLUSTER_PATH + "/{groupId}")
+    @DeleteMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
     public String deleteGroup(@ModelAttribute final GroupPath groupPath,
                               @RequestParam(required = false) final boolean displayConfirmation,
                               final RedirectAttributes redirectAttributes) {

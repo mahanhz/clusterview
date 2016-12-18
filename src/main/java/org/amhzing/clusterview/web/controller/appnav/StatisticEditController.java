@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.web.controller;
+package org.amhzing.clusterview.web.controller.appnav;
 
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-import static org.amhzing.clusterview.web.controller.StatisticController.HISTORY;
+import static org.amhzing.clusterview.web.controller.appnav.StatisticController.HISTORY;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller

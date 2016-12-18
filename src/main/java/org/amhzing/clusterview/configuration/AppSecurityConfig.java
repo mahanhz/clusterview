@@ -35,10 +35,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .permitAll() // Logout success page is accessible to anybody
                 .and()
-            .sessionManagement()
-                .sessionFixation()
-                .newSession() // Create completely new session
-                .and()
             .headers()
                 .frameOptions()
                 .sameOrigin(); // To allow pages from the same domain inside an iframe (e.g. inside a lightbox)

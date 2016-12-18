@@ -1,9 +1,7 @@
 package org.amhzing.clusterview.configuration.handler;
 
 import org.amhzing.clusterview.user.DefaultUserDetails;
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.DefaultSavedRequest;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -16,8 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 import static org.amhzing.clusterview.user.UserRole.USER;
+import static org.amhzing.clusterview.user.UserUtil.isSingleCountry;
+import static org.amhzing.clusterview.user.UserUtil.roles;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.replace;
 
@@ -46,19 +45,17 @@ public class RedirectAuthenticationSuccessHandler extends SavedRequestAwareAuthe
     }
 
     protected String uri(final Authentication authentication) {
-        final List<String> roles = authentication.getAuthorities()
-                                                 .stream()
-                                                 .map(GrantedAuthority::getAuthority)
-                                                 .collect(toList());
+        final List<String> roles = roles(authentication);
 
         if (roles.contains(USER.getRole())) {
             final DefaultUserDetails userDetails = (DefaultUserDetails) authentication.getPrincipal();
             final List<String> countries = userDetails.getCountries();
 
-            if (CollectionUtils.isNotEmpty(countries)) {
-                // TODO - this will take the first country it finds
+            if (isSingleCountry(countries)) {
                 final String countryId = countries.iterator().next();
                 return URI + countryId;
+            } else {
+                // TODO - should maybe redirect to a page where the user can choose which country from a list
             }
         }
 

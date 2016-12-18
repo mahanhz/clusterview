@@ -1,36 +1,38 @@
-package org.amhzing.clusterview.web.controller;
+package org.amhzing.clusterview.web.controller.appnav;
 
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.web.controller.base.AbstractController;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
-import org.amhzing.clusterview.web.model.RegionPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
-import static org.amhzing.clusterview.web.controller.MainController.STATISTICS_MODEL_ATTR;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
-public class RegionController extends AbstractController {
+public class CountryController extends AbstractController {
+
+    public static final String CLUSTER_PATH = "/{country}/{region}/{cluster}";
+    public static final String STATISTICS_MODEL_ATTR = "statistics";
 
     private StatisticAdapter statisticAdapter;
 
     @Autowired
-    public RegionController(final StatisticAdapter statisticAdapter) {
+    public CountryController(final StatisticAdapter statisticAdapter) {
         this.statisticAdapter = notNull(statisticAdapter);
     }
 
-    @GetMapping(path = "/{country}/{region}")
-    public ModelAndView region(@ModelAttribute final RegionPath regionPath,
-                               final Model model) {
+    @GetMapping(path = "/{country}")
+    public ModelAndView country(@ModelAttribute @PathVariable final String country,
+                                final Model model) {
 
-        final ActivityStatisticModel statistics = statisticAdapter.regionStats(regionPath.getRegion());
+        final ActivityStatisticModel statistics = statisticAdapter.countryStats(country);
         model.addAttribute(STATISTICS_MODEL_ATTR, statistics);
 
-        return new ModelAndView(regionPath.getCountry() + "/" + regionPath.getRegion());
+        return new ModelAndView(country + "/index");
     }
 }

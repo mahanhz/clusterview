@@ -1,10 +1,12 @@
-package org.amhzing.clusterview.web.controller;
+package org.amhzing.clusterview.web.controller.appnav;
 
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.web.controller.CommonModelController;
+import org.amhzing.clusterview.web.controller.appnav.GroupController;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

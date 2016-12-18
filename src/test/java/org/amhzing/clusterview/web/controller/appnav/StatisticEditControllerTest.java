@@ -1,8 +1,10 @@
-package org.amhzing.clusterview.web.controller;
+package org.amhzing.clusterview.web.controller.appnav;
 
 import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.web.controller.CommonModelController;
+import org.amhzing.clusterview.web.controller.appnav.StatisticEditController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
