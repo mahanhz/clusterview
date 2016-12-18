@@ -9,7 +9,7 @@ import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Embeddable
-public class StatsHistoryPk implements Serializable {
+public final class StatsHistoryPk implements Serializable {
 
     private String clusterId;
     private Date date;
