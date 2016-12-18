@@ -1,7 +1,5 @@
 package org.amhzing.clusterview.web.controller;
 
-import org.amhzing.clusterview.web.adapter.ActivityAdapter;
-import org.amhzing.clusterview.web.adapter.CoreActivityAdapter;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.controller.base.AbstractEditController;
 import org.amhzing.clusterview.web.model.GroupModel;
@@ -25,16 +23,10 @@ public class GroupEditController extends AbstractEditController {
     public static final String CREATE_GROUP = "creategroup";
 
     private GroupAdapter groupAdapter;
-    private ActivityAdapter activityAdapter;
-    private CoreActivityAdapter coreActivityAdapter;
 
     @Autowired
-    public GroupEditController(final GroupAdapter groupAdapter,
-                               final ActivityAdapter activityAdapter,
-                               final CoreActivityAdapter coreActivityAdapter) {
+    public GroupEditController(final GroupAdapter groupAdapter) {
         this.groupAdapter = notNull(groupAdapter);
-        this.activityAdapter = notNull(activityAdapter);
-        this.coreActivityAdapter = notNull(coreActivityAdapter);
     }
 
     @ModelAttribute

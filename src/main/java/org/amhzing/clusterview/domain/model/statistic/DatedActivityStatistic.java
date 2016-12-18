@@ -20,7 +20,7 @@ public final class DatedActivityStatistic {
     }
 
     public Date getDate() {
-        return date;
+        return new Date(date.getTime());
     }
 
     public ActivityStatistic getActivityStatistic() {

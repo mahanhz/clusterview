@@ -45,7 +45,8 @@ public class CommonModelController {
 
             // TODO - this assumes that every user belongs to only one country
             if (userDetails != null && CollectionUtils.isNotEmpty(userDetails.getCountries())) {
-                return userDetails.getCountries().iterator().next().getId();
+                final List<String> countries = userDetails.getCountries();
+                return countries.iterator().next();
             }
         }
 

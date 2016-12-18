@@ -1,7 +1,6 @@
 package org.amhzing.clusterview.security;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.user.DefaultUserDetails;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -57,7 +56,7 @@ public class WithMockCustomUserSecurityContextFactory implements WithSecurityCon
         return context;
     }
 
-    private List<Country.Id> countries() {
-        return ImmutableList.of(Country.Id.create("se"));
+    private List<String> countries() {
+        return ImmutableList.of("se");
     }
 }

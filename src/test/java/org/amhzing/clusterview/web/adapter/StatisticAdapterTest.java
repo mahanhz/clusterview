@@ -110,7 +110,6 @@ public class StatisticAdapterTest {
     @Test
     public void should_save_history() throws Exception {
 
-        final ActivityStatistic activityStatistic = activityStatistic();
         final Cluster.Id clusterId = cluster().getId();
 
         statisticAdapter.saveStatsHistory(clusterId.getId(), activityStatisticModel());

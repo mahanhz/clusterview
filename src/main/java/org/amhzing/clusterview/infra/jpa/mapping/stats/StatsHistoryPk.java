@@ -35,11 +35,11 @@ public final class StatsHistoryPk implements Serializable {
     }
 
     public Date getDate() {
-        return date;
+        return new Date(date.getTime());
     }
 
     public void setDate(final Date date) {
-        this.date = date;
+        this.date = new Date(date.getTime());
     }
 
     @Override

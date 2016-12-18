@@ -5,8 +5,6 @@ import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.exception.ClusterNotFoundException;
 import org.amhzing.clusterview.exception.GroupNotFoundException;
 import org.amhzing.clusterview.security.WithMockCustomUser;
-import org.amhzing.clusterview.web.adapter.ActivityAdapter;
-import org.amhzing.clusterview.web.adapter.CoreActivityAdapter;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -24,15 +22,11 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.amhzing.clusterview.helper.ClientModelHelper.groupModel;
-import static org.amhzing.clusterview.web.controller.exception.GlobalExceptionHandlerController.CUSTOM_MESSAGE_KEY;
-import static org.amhzing.clusterview.web.controller.exception.GlobalExceptionHandlerController.ERROR_ID_KEY;
-import static org.amhzing.clusterview.web.controller.exception.GlobalExceptionHandlerController.ERROR_VIEW;
+import static org.amhzing.clusterview.web.controller.exception.GlobalExceptionHandlerController.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -45,12 +39,6 @@ public class GroupEditControllerTest {
 
     @MockBean
     private GroupAdapter groupAdapter;
-
-    @MockBean
-    private ActivityAdapter activityAdapter;
-
-    @MockBean
-    private CoreActivityAdapter coreActivityAdapter;
 
     @MockBean
     private CommonModelController commonModelController;

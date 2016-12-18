@@ -1,6 +1,5 @@
 package org.amhzing.clusterview.configuration.handler;
 
-import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.user.DefaultUserDetails;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.security.core.Authentication;
@@ -54,11 +53,12 @@ public class RedirectAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 
         if (roles.contains(USER.getRole())) {
             final DefaultUserDetails userDetails = (DefaultUserDetails) authentication.getPrincipal();
-            final List<Country.Id> countries = userDetails.getCountries();
+            final List<String> countries = userDetails.getCountries();
 
             if (CollectionUtils.isNotEmpty(countries)) {
-                final Country.Id countryId = countries.iterator().next();
-                return URI + countryId.getId();
+                // TODO - this will take the first country it finds
+                final String countryId = countries.iterator().next();
+                return URI + countryId;
             }
         }
 

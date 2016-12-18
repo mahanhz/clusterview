@@ -1,6 +1,5 @@
 package org.amhzing.clusterview.user;
 
-import org.amhzing.clusterview.domain.model.Country;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -22,9 +21,7 @@ public class WebSecurity {
 
         final DefaultUserDetails userDetails = (DefaultUserDetails) authentication.getPrincipal();
 
-        final Country.Id countryId = Country.Id.create(country);
-
-        return userDetails.getCountries().contains(countryId);
+        return userDetails.getCountries().contains(country);
     }
 
     public boolean checkAdmin(final Authentication authentication, final String cluster) {
@@ -36,7 +33,7 @@ public class WebSecurity {
 
         return userDetails.getCountries()
                           .stream()
-                          .anyMatch(country -> isRoleAdmin(authorities, country.getId(), cluster));
+                          .anyMatch(country -> isRoleAdmin(authorities, country, cluster));
     }
 
     private boolean isRoleAdmin(final Collection<GrantedAuthority> authorities, final String country, final String cluster) {

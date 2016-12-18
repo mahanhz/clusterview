@@ -1,7 +1,6 @@
 package org.amhzing.clusterview.user;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.domain.model.Country;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -15,7 +14,7 @@ public class DefaultUserDetails extends User {
 
     private String firstName;
     private String lastName;
-    private List<Country.Id> countries;
+    private List<String> countries;
 
     public DefaultUserDetails(final String username,
                               final String password,
@@ -26,7 +25,7 @@ public class DefaultUserDetails extends User {
                               final Collection<? extends GrantedAuthority> authorities,
                               final String firstName,
                               final String lastName,
-                              final List<Country.Id> countries) {
+                              final List<String> countries) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.firstName = notBlank(firstName);
         this.lastName = notBlank(lastName);
@@ -41,7 +40,7 @@ public class DefaultUserDetails extends User {
         return lastName;
     }
 
-    public List<Country.Id> getCountries() {
+    public List<String> getCountries() {
         return ImmutableList.copyOf(countries);
     }
 

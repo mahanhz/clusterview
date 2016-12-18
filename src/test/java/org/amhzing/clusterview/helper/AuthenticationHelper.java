@@ -2,7 +2,6 @@ package org.amhzing.clusterview.helper;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.user.DefaultUserDetails;
 import org.amhzing.clusterview.user.UserRole;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,7 +30,7 @@ public final class AuthenticationHelper {
                                new SimpleGrantedAuthority("ROLE_ADMIN_SE_STOCKHOLM"));
     }
 
-    public static List<Country.Id> countries() {
-        return ImmutableList.of(Country.Id.create(AUTHENTICATION_COUNTRY));
+    public static List<String> countries() {
+        return ImmutableList.of(AUTHENTICATION_COUNTRY);
     }
 }

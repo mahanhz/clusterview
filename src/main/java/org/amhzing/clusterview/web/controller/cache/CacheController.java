@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,23 +58,24 @@ public class CacheController {
             return manageCacheView();
         }
 
-        final List<String> responses = new ArrayList<>();
-        cacheNamesModel.getCacheNames()
-                       .stream()
-                       .forEach(name -> clearCache(responses, name));
+        final List<String> responses = cacheNamesModel.getCacheNames()
+                                                      .stream()
+                                                      .map(this::clearCache)
+                                                      .collect(Collectors.toList());
 
         redirectAttributes.addFlashAttribute("clearCacheResponse", responses);
 
         return redirectToManageCacheView();
     }
 
-    private void clearCache(final List<String> responses, final String name) {
+    private String clearCache(final String name) {
         final Cache cache = cacheManager.getCache(name);
         if (cache == null) {
-            responses.add("No cache found with name " + name);
+            return "No cache found with name " + name;
         }
         cache.clear();
-        responses.add("Cleared cache " + name);
+
+        return "Cleared cache " + name;
     }
 
     private String manageCacheView() {

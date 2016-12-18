@@ -1,6 +1,5 @@
 package org.amhzing.clusterview.user;
 
-import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.infra.jpa.mapping.CountryEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.user.RoleEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.user.UserEntity;
@@ -50,9 +49,9 @@ public class DefaultUserDetailsService implements UserDetailsService {
                 .collect(toList());
     }
 
-    private List<Country.Id> countries(final Collection<CountryEntity> countryEntities) {
+    private List<String> countries(final Collection<CountryEntity> countryEntities) {
         return countryEntities.stream()
-                              .map(country -> Country.Id.create(country.getId()))
+                              .map(CountryEntity::getId)
                               .collect(Collectors.toList());
     }
 }
