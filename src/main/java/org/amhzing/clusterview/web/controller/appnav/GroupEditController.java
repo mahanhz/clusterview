@@ -99,7 +99,7 @@ public class GroupEditController extends AbstractEditController {
     }
 
     private String groupActionView(final GroupPath groupPath) {
-        return groupPath.getCountry() + "/groupaction";
+        return "/groupaction";
     }
 
     private String redirectToClusterView(final GroupPath groupPath) {

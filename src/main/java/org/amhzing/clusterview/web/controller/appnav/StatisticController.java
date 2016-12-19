@@ -41,7 +41,7 @@ public class StatisticController {
     public String clusters(@ModelAttribute @PathVariable final String country,
                            final Model model) {
 
-        return country + "/stats-history";
+        return "/stats-history";
     }
 
     @GetMapping(path = HISTORY + "/{country}/{cluster}")
@@ -55,6 +55,6 @@ public class StatisticController {
         final List<DatedActivityStatisticModel> statsHistory = statisticAdapter.statsHistory(cluster);
         model.addAttribute(STATS_HISTORY_MODEL_ATTR, statsHistory);
 
-        return country + "/stats-history-cluster";
+        return "/stats-history-cluster";
     }
 }

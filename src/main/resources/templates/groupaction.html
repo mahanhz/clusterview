@@ -205,7 +205,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="cluster-container">
-                        <img class="map" th:src="@{'/se/images/cluster-' + ${groupPath.cluster} + '.png'}" />
+                        <img class="map" th:src="@{'/' + ${groupPath.country} + '/images/cluster-' + ${groupPath.cluster} + '.png'}" />
                         <div class="cluster-group"
                              th:style="${groupModel.location.coordX} &gt; 0
                                        ? 'left: ' + ${groupModel.location.coordX - 10} + 'px; top: ' + ${groupModel.location.coordY - 10} + 'px;'

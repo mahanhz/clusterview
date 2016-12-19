@@ -49,7 +49,7 @@ public class StatisticEditController {
     }
 
     private String statsView(final String country) {
-        return country + "/stats-history";
+        return "/stats-history";
     }
 
     private String redirectToStatsView(final String country) {

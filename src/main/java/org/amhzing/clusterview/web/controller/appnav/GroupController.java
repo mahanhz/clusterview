@@ -43,7 +43,7 @@ public class GroupController extends AbstractController {
         final ActivityStatisticModel statistics = statisticAdapter.clusterStats(clusterPath.getCluster());
         model.addAttribute(CountryController.STATISTICS_MODEL_ATTR, statistics);
 
-        return new ModelAndView(clusterPath.getCountry() + "/cluster");
+        return new ModelAndView("/cluster");
     }
 
     @GetMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
@@ -60,6 +60,6 @@ public class GroupController extends AbstractController {
 
         model.addAttribute("group", group);
 
-        return new ModelAndView(groupPath.getCountry() + "/group");
+        return new ModelAndView("/group");
     }
 }
