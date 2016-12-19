@@ -2,6 +2,12 @@
     <!-- always a good idea to add an on console status listener -->
     <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
 
+    <turboFilter class="org.amhzing.clusterview.log.TimeBasedDuplicateMessageFilter">
+        <allowedRepetitions>5</allowedRepetitions>
+        <cacheSize>200</cacheSize>
+        <expireAfterWriteSeconds>60</expireAfterWriteSeconds>
+    </turboFilter>
+
     <!-- added this as recommended by spring-boot-admin -->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <jmxConfigurator/>
