@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.web.controller.appnav;
 
+import org.amhzing.clusterview.annotation.LogExecutionTime;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.web.model.ClusterNameModel;
@@ -37,6 +38,7 @@ public class StatisticController {
         return new ClusterNameModel();
     }
 
+    @LogExecutionTime
     @GetMapping(path = HISTORY + "/{country}")
     public String clusters(@ModelAttribute @PathVariable final String country,
                            final Model model) {
@@ -44,6 +46,7 @@ public class StatisticController {
         return "/stats-history";
     }
 
+    @LogExecutionTime
     @GetMapping(path = HISTORY + "/{country}/{cluster}")
     public String clusterHistory(@ModelAttribute @PathVariable final String country,
                                  @ModelAttribute @PathVariable final String cluster,

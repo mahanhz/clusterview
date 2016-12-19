@@ -10,7 +10,7 @@ public class CacheEventLogger implements CacheEventListener<Object, Object> {
     private static final Logger LOGGER = LoggerFactory.getLogger(CacheEventLogger.class);
 
     @Override
-    public void onEvent(final CacheEvent<Object, Object> event) {
+    public void onEvent(final CacheEvent<?, ?> event) {
         //LOGGER.info("Event: {} Key: {} old value: {} new value: {}", event.getType(), event.getKey(), event.getOldValue(), event.getNewValue());
         LOGGER.debug("Cache {} with key: {}", event.getType(), event.getKey());
     }

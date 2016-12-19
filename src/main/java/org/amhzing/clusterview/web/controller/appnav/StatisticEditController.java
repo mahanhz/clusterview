@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.web.controller.appnav;
 
+import org.amhzing.clusterview.annotation.LogExecutionTime;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.web.model.ClusterNameModel;
@@ -28,6 +29,7 @@ public class StatisticEditController {
         this.statisticAdapter = notNull(statisticAdapter);
     }
 
+    @LogExecutionTime
     @PostMapping(path = HISTORY + "/{country}")
     public String saveHistory(@ModelAttribute @PathVariable final String country,
                               @ModelAttribute @Valid final ClusterNameModel clusterNameModel,

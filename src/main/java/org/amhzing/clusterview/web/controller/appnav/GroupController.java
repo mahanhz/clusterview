@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.web.controller.appnav;
 
+import org.amhzing.clusterview.annotation.LogExecutionTime;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.web.controller.base.AbstractController;
@@ -33,6 +34,7 @@ public class GroupController extends AbstractController {
         this.statisticAdapter = notNull(statisticAdapter);
     }
 
+    @LogExecutionTime
     @GetMapping(path = CountryController.CLUSTER_PATH)
     public ModelAndView groups(@ModelAttribute final ClusterPath clusterPath,
                                final Model model) {
@@ -46,6 +48,7 @@ public class GroupController extends AbstractController {
         return new ModelAndView("/cluster");
     }
 
+    @LogExecutionTime
     @GetMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
     public ModelAndView group(@ModelAttribute @Valid final GroupPath groupPath,
                               final BindingResult bindingResult,

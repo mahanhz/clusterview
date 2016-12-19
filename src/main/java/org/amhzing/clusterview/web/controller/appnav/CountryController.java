@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.web.controller.appnav;
 
+import org.amhzing.clusterview.annotation.LogExecutionTime;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.web.controller.base.AbstractController;
 import org.amhzing.clusterview.web.model.ActivityStatisticModel;
@@ -26,6 +27,7 @@ public class CountryController extends AbstractController {
         this.statisticAdapter = notNull(statisticAdapter);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/{country}")
     public ModelAndView country(@ModelAttribute @PathVariable final String country,
                                 final Model model) {

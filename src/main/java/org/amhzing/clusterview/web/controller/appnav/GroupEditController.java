@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.web.controller.appnav;
 
+import org.amhzing.clusterview.annotation.LogExecutionTime;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.controller.base.AbstractEditController;
 import org.amhzing.clusterview.web.model.GroupModel;
@@ -33,11 +34,13 @@ public class GroupEditController extends AbstractEditController {
         return new GroupModel();
     }
 
+    @LogExecutionTime
     @GetMapping(path = CountryController.CLUSTER_PATH + "/newgroup")
     public String newGroup(@ModelAttribute final GroupPath groupPath) {
         return groupActionView(groupPath);
     }
 
+    @LogExecutionTime
     @GetMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
     public String editGroup(@ModelAttribute @Valid final GroupPath groupPath,
                             final BindingResult bindingResult,
@@ -57,6 +60,7 @@ public class GroupEditController extends AbstractEditController {
         return groupActionView(groupPath);
     }
 
+    @LogExecutionTime
     @PostMapping(path = CountryController.CLUSTER_PATH + "/" + CREATE_GROUP)
     public String createGroup(@ModelAttribute final GroupPath groupPath,
                               @ModelAttribute @Valid final GroupModel groupModel,
@@ -71,6 +75,7 @@ public class GroupEditController extends AbstractEditController {
         return redirectToClusterView(groupPath);
     }
 
+    @LogExecutionTime
     @PutMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
     public String updateGroup(@ModelAttribute final GroupPath groupPath,
                               @ModelAttribute @Valid final GroupModel groupModel,
@@ -88,6 +93,7 @@ public class GroupEditController extends AbstractEditController {
         return redirectToClusterView(groupPath);
     }
 
+    @LogExecutionTime
     @DeleteMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
     public String deleteGroup(@ModelAttribute final GroupPath groupPath,
                               @RequestParam(required = false) final boolean displayConfirmation,
