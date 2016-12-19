@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="se/fragments/head :: head"></th:block>
+    <th:block th:replace="fragments/head :: head"></th:block>
 </head>
 <body>
-    <th:block th:replace="se/fragments/navbar :: navbar(${groupPath.cluster} + ' cluster')"></th:block>
+    <th:block th:replace="fragments/navbar :: navbar(${groupPath.cluster} + ' cluster')"></th:block>
 
     <div class="container-fluid">
         <div class="jumbotron" th:with="baseUrl=('/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster})">
@@ -222,7 +222,7 @@
     <input type="hidden" id="region" name="region" th:value="${groupPath.region}" />
     <input type="hidden" id="cluster" name="cluster" th:value="${groupPath.cluster}" />
 
-    <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+    <th:block th:replace="fragments/javascript :: javascript"></th:block>
     <script th:src="@{/js/group.js}"></script>
 
 </body>

@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
-        <th:block th:replace="se/fragments/head :: head"></th:block>
+        <th:block th:replace="fragments/head :: head"></th:block>
     </head>
     <body class="excludes-header">
 
@@ -97,7 +97,7 @@
         <input type="hidden" id="cluster" name="cluster" th:value="${groupPath.cluster}" />
         <input type="hidden" id="groupId" name="region" th:value="${groupPath.groupId}" />
 
-        <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+        <th:block th:replace="fragments/javascript :: javascript"></th:block>
 
     </body>
 </html>

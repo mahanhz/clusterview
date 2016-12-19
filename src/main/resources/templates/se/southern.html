@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
-        <th:block th:replace="se/fragments/head :: head"></th:block>
+        <th:block th:replace="fragments/head :: head"></th:block>
     </head>
     <body>
-        <th:block th:replace="se/fragments/navbar :: navbar('Please select a cluster')"></th:block>
+        <th:block th:replace="fragments/navbar :: navbar('Please select a cluster')"></th:block>
 
         <div class="container-fluid">
             <div class="row">
-                <th:block th:replace="se/fragments/adjust-map-size :: adjust-map-size"></th:block>
+                <th:block th:replace="fragments/adjust-map-size :: adjust-map-size"></th:block>
                 <div class="col-xs-6">
                     <img class="southernRegionImage adjustableImage" th:src="@{/se/images/regions.png}" usemap="#southernRegionMap" />
 
@@ -30,14 +30,14 @@
                         <area data-group="skane-cluster" th:href="@{${baseUrl} + '/skane'}" shape="poly" coords="44,468,42,469,40,469,42,475,39,475,35,474,39,482,42,489,45,496,43,505,50,510,56,507,63,504,68,508,72,506,73,504,72,497,71,494,71,490,74,487,77,484,79,480,78,478,75,475,77,472,77,470,76,468,70,465,67,467,63,469,57,467,52,468,51,471" />
                     </map>
                 </div>
-                <th:block th:replace="se/fragments/statistics :: statistics"></th:block>
+                <th:block th:replace="fragments/statistics :: statistics"></th:block>
             </div>
         </div>
 
         <input type="hidden" id="country" name="country" th:value="${regionPath.country}" />
         <input type="hidden" id="region" name="region" th:value="${regionPath.region}" />
 
-        <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+        <th:block th:replace="fragments/javascript :: javascript"></th:block>
         <script th:src="@{/se/js/southern.js}"></script>
     </body>
 </html>

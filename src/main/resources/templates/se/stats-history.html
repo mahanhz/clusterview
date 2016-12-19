@@ -3,10 +3,10 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
-        <th:block th:replace="se/fragments/head :: head"></th:block>
+        <th:block th:replace="fragments/head :: head"></th:block>
     </head>
     <body>
-        <th:block th:replace="se/fragments/navbar :: navbar('Stats history')"></th:block>
+        <th:block th:replace="fragments/navbar :: navbar('Stats history')"></th:block>
 
         <div class="container-fluid">
             <div class="jumbotron">
@@ -41,7 +41,7 @@
 
         <input type="hidden" id="country" name="country" th:value="${country}" />
 
-        <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+        <th:block th:replace="fragments/javascript :: javascript"></th:block>
         <script th:src="@{/js/stats.js}"></script>
 
     </body>

@@ -4,14 +4,14 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
     <head>
-        <th:block th:replace="se/fragments/head :: head"></th:block>
+        <th:block th:replace="fragments/head :: head"></th:block>
     </head>
     <body>
-        <th:block th:replace="se/fragments/navbar :: navbar('Please select a region')"></th:block>
+        <th:block th:replace="fragments/navbar :: navbar('Please select a region')"></th:block>
 
         <div class="container-fluid">
             <div class="row">
-                <th:block th:replace="se/fragments/adjust-map-size :: adjust-map-size"></th:block>
+                <th:block th:replace="fragments/adjust-map-size :: adjust-map-size"></th:block>
                 <div class="col-xs-6">
                     <img class="regionsImage adjustableImage" th:src="@{/se/images/regions.png}" usemap="#regionsMap" />
 
@@ -34,13 +34,13 @@
 
                     </map>
                 </div>
-                <th:block th:replace="se/fragments/statistics :: statistics"></th:block>
+                <th:block th:replace="fragments/statistics :: statistics"></th:block>
             </div>
         </div>
 
         <input type="hidden" id="country" name="country" th:value="${country}" />
 
-        <th:block th:replace="se/fragments/javascript :: javascript"></th:block>
+        <th:block th:replace="fragments/javascript :: javascript"></th:block>
         <script th:src="@{/se/js/regions.js}"></script>
     </body>
 </html>
