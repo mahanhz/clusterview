@@ -43,8 +43,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(org.springframework.security.config.annotation.web.builders.WebSecurity web) throws Exception {
         web.ignoring().antMatchers(CSS.getResourcePattern(),
-                                   CSS_SE.getResourcePattern(),
                                    JS.getResourcePattern(),
+                                   IMAGES.getResourcePattern(),
+                                   CSS_SE.getResourcePattern(),
                                    JS_SE.getResourcePattern(),
                                    IMAGES_SE.getResourcePattern(),
                                    "/webjars/**");

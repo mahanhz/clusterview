@@ -5,8 +5,9 @@ import static org.apache.commons.lang3.Validate.notBlank;
 public enum StaticFiles {
 
     CSS("/css/", "/css/**"),
-    CSS_SE("/se/css/", "/se/css/**"),
     JS("/js/", "/js/**"),
+    IMAGES("/images/", "/images/**"),
+    CSS_SE("/se/css/", "/se/css/**"),
     JS_SE("/se/js/", "/se/js/**"),
     IMAGES_SE("/se/images/", "/se/images/**");
 
