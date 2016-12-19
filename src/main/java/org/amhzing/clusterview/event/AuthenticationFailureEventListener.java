@@ -15,6 +15,6 @@ public class AuthenticationFailureEventListener implements ApplicationListener<A
         final WebAuthenticationDetails auth = (WebAuthenticationDetails) event.getAuthentication().getDetails();
         final Object principal = event.getAuthentication().getPrincipal();
 
-        LOGGER.info("Failed login for: " + principal + ", from: " + auth.getRemoteAddress());
+        LOGGER.info("Failed login for: {}, from: {}", principal, auth.getRemoteAddress());
     }
 }

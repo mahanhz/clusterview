@@ -27,7 +27,7 @@ public class AuthenticationSuccessEventListener implements ApplicationListener<A
     @Override
     public void onApplicationEvent(final AuthenticationSuccessEvent event) {
         final DefaultUserDetails userDetails = (DefaultUserDetails) event.getAuthentication().getPrincipal();
-        LOGGER.info("Successful login for: " + userDetails.getUsername() + ", " + userDetails.getFirstName() + " " + userDetails.getLastName());
+        LOGGER.info("Successful login for: {}, {} {}", userDetails.getUsername(), userDetails.getFirstName(), userDetails.getLastName());
 
         setUserCountryIntoSession(userDetails);
     }
