@@ -1,9 +1,9 @@
-spring:
-  cache:
-    jcache:
-      config: ehcache.xml
-  jpa:
-    generate-ddl: true
+endpoints:
+  hypermedia:
+    enabled: true
+
+management:
+  context-path: /manage
 
 server:
   error:
@@ -12,5 +12,9 @@ server:
   session:
     timeout: 600 # 10 minutes
 
-management:
-  context-path: /manage
+spring:
+  cache:
+    jcache:
+      config: ehcache.xml
+  jpa:
+    generate-ddl: true
