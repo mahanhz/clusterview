@@ -73,7 +73,6 @@ if (isMasterBranch()) {
 
                 gradle 'acceptanceTest'
 
-                
                 step([$class: 'CucumberTestResultArchiver', testResults: '**/build/reports/cucumber/*.json'])
 
                 // Doesn't work with cucumber > 2.0.0 - See https://issues.jenkins-ci.org/browse/JENKINS-29328
