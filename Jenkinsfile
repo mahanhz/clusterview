@@ -73,7 +73,8 @@ if (isMasterBranch()) {
 
                 gradle 'acceptanceTest'
 
-                step([$class: 'CucumberTestResultArchiver', testResults: '**/build/reports/cucumber/*.json'])
+                // Doesn't work with cucumber > 2.0.0 - See https://issues.jenkins-ci.org/browse/JENKINS-29328
+                // step([$class: 'CucumberTestResultArchiver', testResults: '**/build/reports/cucumber/*.json'])
 
                 step([$class: 'CucumberReportPublisher', fileIncludePattern: '**/cucumber.json'])
             }
@@ -97,12 +98,16 @@ if (isMasterBranch()) {
 
     stage ('Approve RC?') {
         timeout(time: 1, unit: 'DAYS') {
-            SELECTED_SEMANTIC_VERSION_UPDATE =
-                    input message: 'Publish release candidate?',
-                            parameters: [[$class: 'ChoiceParameterDefinition',
-                                          choices: 'patch\nminor\nmajor',
-                                          description: 'Determine the semantic version to release',
-                                          name: '']]
+            try {
+                SELECTED_SEMANTIC_VERSION_UPDATE =
+                        input message: 'Publish release candidate?',
+                                parameters: [[$class: 'ChoiceParameterDefinition',
+                                              choices: 'patch\nminor\nmajor',
+                                              description: 'Determine the semantic version to release',
+                                              name: '']]
+            } catch(err) {
+                step([$class: 'WsCleanup'])
+            }
         }
     }
 
