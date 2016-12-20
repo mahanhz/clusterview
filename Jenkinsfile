@@ -20,7 +20,7 @@ stage ('Build') {
             try {
                 checkout scm
 
-                gradle 'clean test assemble'
+                gradle 'clean assemble'
 
                 stash excludes: 'build/', includes: '**', name: 'source'
 
@@ -41,62 +41,8 @@ stage ('Build') {
     }
 }
 
-if (!isMasterBranch()) {
-    // one at a time!
-    lock('lock-merge') {
-        stage ('Merge') {
-            node {
-                timeout(time: 1, unit: 'MINUTES') {
-                    checkout scm: [$class: 'GitSCM',
-                                   branches: [[name: '*/master']],
-                                   doGenerateSubmoduleConfigurations: false,
-                                   extensions: [[$class: 'LocalBranch', localBranch: 'master'], [$class: 'WipeWorkspace']],
-                                   submoduleCfg: [],
-                                   userRemoteConfigs: [[url: REPOSITORY_URL]]]
-
-                    sh "git merge ${COMMIT_ID}"
-                    sh "git push origin master"
-
-                    deleteDir() // Wipe out the workspace
-                }
-            }
-        }
-    }
-}
 
 if (isMasterBranch()) {
-
-    stage ('Acceptance test') {
-        node {
-            timeout(time: 10, unit: 'MINUTES') {
-                try {
-                    unstash 'source'
-
-                    grantExecutePermission 'gradlew'
-
-                    gradle 'acceptanceTest'
-                } catch(err) {
-                    junit '**/build/test-results/*.xml'
-                    throw err
-                }
-            }
-        }
-    }
-
-    // one at a time!
-    lock('lock-publish-snapshot') {
-        stage ('Publish snapshot') {
-            node {
-                timeout(time: 5, unit: 'MINUTES') {
-                    unstash 'source'
-
-                    grantExecutePermission 'gradlew'
-
-                    gradle 'assemble uploadArchives'
-                }
-            }
-        }
-    }
 
     stage ('Approve RC?') {
         timeout(time: 1, unit: 'DAYS') {
