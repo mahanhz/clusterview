@@ -56,8 +56,6 @@ if (!isMasterBranch()) {
 
                     sh "git merge ${COMMIT_ID}"
                     sh "git push origin master"
-
-                    deleteDir() // Wipe out the workspace
                 }
             }
         }
@@ -69,16 +67,15 @@ if (isMasterBranch()) {
     stage ('Acceptance test') {
         node {
             timeout(time: 10, unit: 'MINUTES') {
-                try {
-                    unstash 'source'
+                unstash 'source'
 
-                    grantExecutePermission 'gradlew'
+                grantExecutePermission 'gradlew'
 
-                    gradle 'acceptanceTest'
-                } catch(err) {
-                    junit '**/build/test-results/*.xml'
-                    throw err
-                }
+                gradle 'acceptanceTest'
+
+                step([$class: 'CucumberTestResultArchiver', testResults: '**/build/reports/cucumber/*.json'])
+
+                step([$class: 'CucumberReportPublisher', fileIncludePattern: '**/cucumber.json'])
             }
         }
     }
@@ -135,9 +132,15 @@ if (isMasterBranch()) {
 
                     sh "./" + script + " ${SELECTED_SEMANTIC_VERSION_UPDATE} ${FALLBACK_RELEASE_VERSION}"
                 }
-
-                deleteDir() // Wipe out the workspace
             }
+        }
+    }
+}
+
+stage ('Clean up') {
+    node {
+        timeout(time: 2, unit: 'MINUTES') {
+            step([$class: 'WsCleanup', cleanWhenFailure: false, cleanWhenUnstable: false, notFailBuild: true])
         }
     }
 }

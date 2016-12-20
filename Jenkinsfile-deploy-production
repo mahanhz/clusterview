@@ -69,8 +69,14 @@ stage ('Health check') {
 
                 sh 'SPRING_PROFILES_ACTIVE=production ./gradlew smokeTest'
             }
+        }
+    }
+}
 
-            deleteDir() // Wipe out the workspace
+stage ('Clean up') {
+    node {
+        timeout(time: 2, unit: 'MINUTES') {
+            step([$class: 'WsCleanup', cleanWhenFailure: false, cleanWhenUnstable: false, notFailBuild: true])
         }
     }
 }
