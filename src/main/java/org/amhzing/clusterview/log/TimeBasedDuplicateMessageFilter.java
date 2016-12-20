@@ -17,7 +17,7 @@ import static org.thymeleaf.util.StringUtils.abbreviate;
 
 public class TimeBasedDuplicateMessageFilter extends TurboFilter {
 
-    private static final int MAX_KEY_SIZE = 100;
+    private static final int MAX_KEY_LENGTH = 100;
     public static final int DEFAULT_CACHE_SIZE = 100;
     public static final int DEFAULT_ALLOWED_REPETITIONS = 5;
     public static final int DEFAULT_EXPIRE_AFTER_WRITE_SECONDS = 60;
@@ -50,7 +50,7 @@ public class TimeBasedDuplicateMessageFilter extends TurboFilter {
         int count = 0;
 
         if (isNotBlank(format)) {
-            final String key = abbreviate(format + paramsAsString(params), MAX_KEY_SIZE);
+            final String key = abbreviate(format + paramsAsString(params), MAX_KEY_LENGTH);
 
             final Integer msgCount = msgCache.getIfPresent(key);
 
