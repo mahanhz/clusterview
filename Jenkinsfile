@@ -67,16 +67,21 @@ if (isMasterBranch()) {
     stage ('Acceptance test') {
         node {
             timeout(time: 10, unit: 'MINUTES') {
-                unstash 'source'
+                try {
+                    unstash 'source'
 
-                grantExecutePermission 'gradlew'
+                    grantExecutePermission 'gradlew'
 
-                gradle 'acceptanceTest'
+                    gradle 'acceptanceTest'
 
-                step([$class: 'CucumberTestResultArchiver', testResults: '**/build/reports/cucumber/*.json'])
+                    step([$class: 'CucumberTestResultArchiver', testResults: '**/build/reports/cucumber/*.json'])
 
-                // Doesn't work with cucumber > 2.0.0 - See https://issues.jenkins-ci.org/browse/JENKINS-29328
-                // step([$class: 'CucumberReportPublisher', fileIncludePattern: '**/cucumber.json'])
+                    // Doesn't work with cucumber > 2.0.0 - See https://issues.jenkins-ci.org/browse/JENKINS-29328
+                    // step([$class: 'CucumberReportPublisher', fileIncludePattern: '**/cucumber.json'])
+                } catch(err) {
+                    step([$class: 'CucumberTestResultArchiver', testResults: '**/build/reports/cucumber/*.json'])
+                    throw err
+                }
             }
         }
     }
@@ -106,7 +111,11 @@ if (isMasterBranch()) {
                                               description: 'Determine the semantic version to release',
                                               name: '']]
             } catch(err) {
-                step([$class: 'WsCleanup'])
+                node {
+                    timeout(time: 2, unit: 'MINUTES') {
+                        step([$class: 'WsCleanup'])
+                    }
+                }
             }
         }
     }
