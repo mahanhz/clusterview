@@ -18,10 +18,10 @@ public class LoginDisplayedSteps extends SpringSteps implements En {
     private ResponseEntity<String> entity;
 
     @Autowired
-    public LoginDisplayedSteps(TestRestTemplate testRestTemplate) {
+    public LoginDisplayedSteps(final TestRestTemplate testRestTemplate) {
 
         Given("^valid url$", () -> {
-            url = "http://localhost:" + super.getPort() + "/clusterview/se";
+            url = "http://localhost:" + super.getPort() + "/";
         });
 
         When("^accessing the url$", () -> {
@@ -32,9 +32,12 @@ public class LoginDisplayedSteps extends SpringSteps implements En {
             assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
             final Document doc = Jsoup.parse(entity.getBody());
+
+            final Elements csrfField = doc.getElementsByAttributeValueContaining("name", "_csrf");
             final Elements usernameField = doc.getElementsByAttributeValueContaining("name", "username");
             final Elements passswordField = doc.getElementsByAttributeValueContaining("name", "password");
 
+            assertThat(csrfField).hasSize(1);
             assertThat(usernameField).hasSize(1);
             assertThat(passswordField).hasSize(1);
         });

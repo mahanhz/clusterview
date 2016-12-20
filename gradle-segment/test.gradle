@@ -8,6 +8,7 @@ test {
 
 task acceptanceTest(type:Test) {
     include acceptanceTests
+    systemProperties['spring.profiles.active'] = 'acceptancetest'
 }
 
 task smokeTest(type:Test) {
