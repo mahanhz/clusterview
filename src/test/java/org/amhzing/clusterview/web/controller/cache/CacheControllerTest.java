@@ -52,7 +52,7 @@ public class CacheControllerTest {
         given(cacheManager.getCacheNames()).willReturn(ImmutableList.of(CACHE_TEST_NAME));
         given(cacheManager.getCache(any())).willReturn(testCache());
 
-        final ResultActions result = this.mvc.perform(get("/manage/caches/list"))
+        final ResultActions result = this.mvc.perform(get("/manage/caches/list").sessionAttr("userCountry", "se"))
                                              .andExpect(status().isOk());
 
         final String content = result.andReturn().getResponse().getContentAsString();

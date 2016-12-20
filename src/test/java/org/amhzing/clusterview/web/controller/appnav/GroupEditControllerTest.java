@@ -7,7 +7,6 @@ import org.amhzing.clusterview.exception.GroupNotFoundException;
 import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.controller.CommonModelController;
-import org.amhzing.clusterview.web.controller.appnav.GroupEditController;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -58,8 +57,8 @@ public class GroupEditControllerTest {
         Document doc = Jsoup.parse(content);
         final Elements forms = doc.getElementsByTag("form");
 
-        assertThat(forms).hasSize(1);
-        final Element form = forms.get(0);
+        assertThat(forms).hasSize(2);
+        final Element form = forms.get(1);
 
         assertThat(form.attr("action")).endsWith("creategroup");
         assertThat(form.attr("method")).isEqualToIgnoringCase("post");
@@ -98,8 +97,8 @@ public class GroupEditControllerTest {
         Document doc = Jsoup.parse(content);
         final Elements forms = doc.getElementsByTag("form");
 
-        assertThat(forms).hasSize(1);
-        final Element form = forms.get(0);
+        assertThat(forms).hasSize(2);
+        final Element form = forms.get(1);
 
         assertThat(form.attr("action")).endsWith("1");
         assertThat(form.attr("method")).isEqualToIgnoringCase("post");
