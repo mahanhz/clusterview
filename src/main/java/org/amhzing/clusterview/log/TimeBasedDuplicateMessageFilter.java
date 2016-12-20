@@ -13,16 +13,18 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.thymeleaf.util.StringUtils.abbreviate;
 
 public class TimeBasedDuplicateMessageFilter extends TurboFilter {
 
+    private static final int MAX_KEY_SIZE = 100;
     public static final int DEFAULT_CACHE_SIZE = 100;
-
     public static final int DEFAULT_ALLOWED_REPETITIONS = 5;
+    public static final int DEFAULT_EXPIRE_AFTER_WRITE_SECONDS = 60;
 
     public int allowedRepetitions = DEFAULT_ALLOWED_REPETITIONS;
     public int cacheSize = DEFAULT_CACHE_SIZE;
-    public int expireAfterWriteSeconds = 60;
+    public int expireAfterWriteSeconds = DEFAULT_EXPIRE_AFTER_WRITE_SECONDS;
 
     private Cache<String, Integer> msgCache;
 
@@ -48,7 +50,7 @@ public class TimeBasedDuplicateMessageFilter extends TurboFilter {
         int count = 0;
 
         if (isNotBlank(format)) {
-            final String key = format + paramsAsString(params);
+            final String key = abbreviate(format + paramsAsString(params), MAX_KEY_SIZE);
 
             final Integer msgCount = msgCache.getIfPresent(key);
 
