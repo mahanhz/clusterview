@@ -107,46 +107,46 @@ if (isMasterBranch()) {
                 SELECTED_SEMANTIC_VERSION_UPDATE =
                         input message: 'Publish release candidate?',
                                 parameters: [[$class: 'ChoiceParameterDefinition',
-                                              choices: 'patch\nminor\nmajor',
-                                              description: 'Determine the semantic version to release',
+                                              choices: 'patch\nminor\nmajor\nignore',
+                                              description: 'Determine the semantic version to release or ignore',
                                               name: '']]
             } catch(err) {
                 node {
                     timeout(time: 2, unit: 'MINUTES') {
                         step([$class: 'WsCleanup', notFailBuild: true])
-
-                        currentBuild.result = 'SUCCESS'
                     }
                 }
             }
         }
     }
 
-    // one at a time!
-    lock('lock-publish-release-candidate') {
-        stage ('Publish RC') {
-            node {
-                timeout(time: 10, unit: 'MINUTES') {
-                    sh "git branch -a -v --no-abbrev"
+    if(SELECTED_SEMANTIC_VERSION_UPDATE != "ignore") {
+        // one at a time!
+        lock('lock-publish-release-candidate') {
+            stage ('Publish RC') {
+                node {
+                    timeout(time: 10, unit: 'MINUTES') {
+                        sh "git branch -a -v --no-abbrev"
 
-                    checkout scm: [$class: 'GitSCM',
-                                   branches: [[name: '*/master']],
-                                   doGenerateSubmoduleConfigurations: false,
-                                   extensions: [[$class: 'LocalBranch', localBranch: 'master'], [$class: 'WipeWorkspace']],
-                                   submoduleCfg: [],
-                                   userRemoteConfigs: [[url: REPOSITORY_URL]]]
+                        checkout scm: [$class: 'GitSCM',
+                                       branches: [[name: '*/master']],
+                                       doGenerateSubmoduleConfigurations: false,
+                                       extensions: [[$class: 'LocalBranch', localBranch: 'master'], [$class: 'WipeWorkspace']],
+                                       submoduleCfg: [],
+                                       userRemoteConfigs: [[url: REPOSITORY_URL]]]
 
-                    stash includes: 'gradle.properties', name: 'masterProperties'
+                        stash includes: 'gradle.properties', name: 'masterProperties'
 
-                    unstash 'source'
-                    unstash 'masterProperties'
+                        unstash 'source'
+                        unstash 'masterProperties'
 
-                    grantExecutePermission 'gradlew'
+                        grantExecutePermission 'gradlew'
 
-                    def script = "scripts/release/clusterview_release.sh"
-                    grantExecutePermission script
+                        def script = "scripts/release/clusterview_release.sh"
+                        grantExecutePermission script
 
-                    sh "./" + script + " ${SELECTED_SEMANTIC_VERSION_UPDATE} ${FALLBACK_RELEASE_VERSION}"
+                        sh "./" + script + " ${SELECTED_SEMANTIC_VERSION_UPDATE} ${FALLBACK_RELEASE_VERSION}"
+                    }
                 }
             }
         }
