@@ -15,10 +15,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginInvalidSteps extends SpringSteps implements En {
 
-    private ResponseEntity<String> entity;
+    private ResponseEntity<String> response;
     private String username;
     private String password;
-    private String url = "http://localhost:" + super.getPort() + "/clusterview/se";
 
     @Autowired
     public LoginInvalidSteps(final TestRestTemplate testRestTemplate) {
@@ -29,7 +28,7 @@ public class LoginInvalidSteps extends SpringSteps implements En {
         });
 
         When("^attempt to login$", () -> {
-            final HttpHeaders headers = getHeaders(testRestTemplate);
+            final HttpHeaders headers = getHeaders(testRestTemplate, "/login");
             headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
@@ -37,14 +36,14 @@ public class LoginInvalidSteps extends SpringSteps implements En {
             form.set("username", username);
             form.set("password", password);
 
-            entity = testRestTemplate.postForEntity("/login",
-                                                    new HttpEntity<>(form, headers),
-                                                    String.class);
+            response = testRestTemplate.postForEntity("/login",
+                                                      new HttpEntity<>(form, headers),
+                                                      String.class);
         });
 
         Then("^login is invalid$", () -> {
-            assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.FOUND);
-            assertThat(entity.getHeaders().getLocation().toString()).isEqualTo("http://localhost:" + super.getPort() + "/login?error");
+            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND);
+            assertThat(response.getHeaders().getLocation().toString()).isEqualTo("http://localhost:" + super.getPort() + "/login?error");
         });
     }
 }

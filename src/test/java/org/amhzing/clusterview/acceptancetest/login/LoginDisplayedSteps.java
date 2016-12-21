@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LoginDisplayedSteps extends SpringSteps implements En {
 
     private String url;
-    private ResponseEntity<String> entity;
+    private ResponseEntity<String> response;
 
     @Autowired
     public LoginDisplayedSteps(final TestRestTemplate testRestTemplate) {
@@ -25,13 +25,13 @@ public class LoginDisplayedSteps extends SpringSteps implements En {
         });
 
         When("^accessing the url$", () -> {
-            entity = testRestTemplate.getForEntity(url, String.class);
+            response = testRestTemplate.getForEntity(url, String.class);
         });
 
         Then("^login is displayed$", () -> {
-            assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-            final Document doc = Jsoup.parse(entity.getBody());
+            final Document doc = Jsoup.parse(response.getBody());
 
             final Elements csrfField = doc.getElementsByAttributeValueContaining("name", "_csrf");
             final Elements usernameField = doc.getElementsByAttributeValueContaining("name", "username");
