@@ -113,7 +113,9 @@ if (isMasterBranch()) {
             } catch(err) {
                 node {
                     timeout(time: 2, unit: 'MINUTES') {
-                        step([$class: 'WsCleanup'])
+                        step([$class: 'WsCleanup', notFailBuild: true])
+
+                        currentBuild.result = 'SUCCESS'
                     }
                 }
             }
