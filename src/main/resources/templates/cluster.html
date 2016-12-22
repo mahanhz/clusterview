@@ -12,20 +12,31 @@
             <div class="row">
                 <th:block th:replace="fragments/group-operations :: group-operations"></th:block>
 
-                <div class="col-xs-6">
+                <div class="col-sm-6">
                     <div class="cluster-container">
                         <img th:src="@{'/' + ${clusterPath.country} + '/images/cluster-' + ${clusterPath.cluster} + '.png'}" onerror="clusterNotFound()"/>
                         <th:block th:each="group : ${groups}">
                             <div class="cluster-group"
                                  th:style="'left: ' + ${group.location.coordX - 10} + 'px; top: ' + ${group.location.coordY - 10} + 'px;'"
                                  th:with="baseUrl=('/clusterview/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '/')">
-                                <a th:href="${baseUrl} + ${group.id}" class="fancyLightbox" data-fancybox-type="iframe">
-                                    <th:block th:switch="${group.members.size()}">
-                                        <th:block th:case="1"><i class="fa fa-user" aria-hidden="true" style="color:red"></i></th:block>
-                                        <th:block th:case="2"><i class="fa fa-user" aria-hidden="true" style="color:red"></i></th:block>
-                                        <th:block th:case="*"><i class="fa fa-users" aria-hidden="true"></i></th:block>
-                                    </th:block>
-                                </a>
+                                <div class="hidden-xs">
+                                    <a th:href="${baseUrl} + ${group.id}" class="fancyLightbox" data-fancybox-type="iframe">
+                                        <th:block th:switch="${group.members.size()}">
+                                            <th:block th:case="1"><i class="fa fa-user" aria-hidden="true" style="color:red"></i></th:block>
+                                            <th:block th:case="2"><i class="fa fa-user" aria-hidden="true" style="color:red"></i></th:block>
+                                            <th:block th:case="*"><i class="fa fa-users" aria-hidden="true"></i></th:block>
+                                        </th:block>
+                                    </a>
+                                </div>
+                                <div class="visible-xs">
+                                    <a th:href="${baseUrl} + ${group.id}">
+                                        <th:block th:switch="${group.members.size()}">
+                                            <th:block th:case="1"><i class="fa fa-user" aria-hidden="true" style="color:red"></i></th:block>
+                                            <th:block th:case="2"><i class="fa fa-user" aria-hidden="true" style="color:red"></i></th:block>
+                                            <th:block th:case="*"><i class="fa fa-users" aria-hidden="true"></i></th:block>
+                                        </th:block>
+                                    </a>
+                                </div>
                             </div>
                         </th:block>
                     </div>

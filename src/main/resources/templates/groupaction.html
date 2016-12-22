@@ -33,7 +33,7 @@
                 <div class="row"><br/></div>
                 <div class="row">
                     <th:block th:each="coreActivity, rowStat : *{coreActivities}">
-                        <div th:class="'col-xs-' + (12 / *{coreActivities.size()})">
+                        <div th:class="'col-sm-' + (12 / *{coreActivities.size()})">
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="row" th:if="${groupModel.coreActivities == null or #lists.isEmpty(groupModel.coreActivities)}">
                     <th:block th:each="coreActivity, rowStat : ${coreActivityValues}">
-                        <div th:class="'col-xs-' + (12 / ${coreActivityValues.size()})">
+                        <div th:class="'col-sm-' + (12 / ${coreActivityValues.size()})">
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -179,8 +179,8 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-6">
-                        <a id="delete_row" class="btn btn-default">Delete Row</a>
-                        <a id="add_row" class="btn btn-default">Add Row</a>
+                        <a id="delete_row" class="btn btn-default" title="delete row">- Row</a>
+                        <a id="add_row" class="btn btn-default" title="add row">+ Row</a>
                     </div>
                     <div class="col-xs-6">
                         <div class="pull-right">

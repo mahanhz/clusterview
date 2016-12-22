@@ -5,18 +5,17 @@
 
     <body>
         <th:block th:fragment="group-operations">
-            <div class="col-xs-3">
+            <div class="col-sm-3">
                 <th:block th:replace="fragments/quick-links :: quick-links"></th:block>
                 <br/>
-                <div class="list-group" id="groupOperations">
+                <div class="list-group" id="groupOperations"
+                     th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') and @webSecurity.checkAdmin(authentication, '''+#strings.toUpperCase(clusterPath.cluster)+''')')}">
                     <a href="#" class="list-group-item disabled">Group operations</a>
-                    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') and @webSecurity.checkAdmin(authentication, '''+#strings.toUpperCase(clusterPath.cluster)+''')')}">
-                        <a th:href="@{'/clusteredit/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '/newgroup'}"
-                           id="addNewGroup"
-                           class="list-group-item list-group-item-info">
-                            Add new group
-                        </a>
-                    </div>
+                    <a th:href="@{'/clusteredit/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '/newgroup'}"
+                       id="addNewGroup"
+                       class="list-group-item list-group-item-info">
+                        Add new group
+                    </a>
                 </div>
             </div>
         </th:block>

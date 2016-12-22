@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="row">
                 <th:block th:each="coreActivity : ${group.coreActivities}">
-                    <div th:class="'col-xs-' + (12 / ${group.coreActivities.size()})">
+                    <div th:class="'col-sm-' + (12 / ${group.coreActivities.size()})">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -69,24 +69,32 @@
                 </table>
             </div>
 
-            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') and @webSecurity.checkAdmin(authentication, '''+#strings.toUpperCase(groupPath.cluster)+''')')}">
-                <div class="row" th:if="${not group.members.isEmpty()}">
-                    <div class="col-xs-6">
-                        <div class="pull-left">
-                            <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
-                                  th:method="delete" target="_top">
-                                <button id="deleteGroup" type="submit" class="btn btn-danger btn-md">Delete Group</button>
-                            </form>
-                        </div>
+            <div class="row" th:if="${not group.members.isEmpty()}">
+                <div class="col-xs-4">
+                    <div class="pull-left"
+                         th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') and @webSecurity.checkAdmin(authentication, '''+#strings.toUpperCase(groupPath.cluster)+''')')}">
+                        <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
+                              th:method="delete" target="_top">
+                            <button id="deleteGroup" type="submit" class="btn btn-danger btn-md">Delete Group</button>
+                        </form>
                     </div>
+                </div>
 
-                    <div class="col-xs-6">
-                        <div class="pull-right">
-                            <a th:href="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
-                               target="_top">
-                                <button id="editGroup" type="submit" class="btn btn-primary btn-md">Edit Group</button>
-                            </a>
-                        </div>
+                <div class="col-xs-4">
+                    <div class="text-center visible-xs">
+                        <a th:href="'/clusterview/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster}" class="btn btn-default" target="_top">
+                            Close
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="pull-right"
+                         th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') and @webSecurity.checkAdmin(authentication, '''+#strings.toUpperCase(groupPath.cluster)+''')')}">
+                        <a th:href="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
+                           target="_top">
+                            <button id="editGroup" type="submit" class="btn btn-primary btn-md">Edit Group</button>
+                        </a>
                     </div>
                 </div>
             </div>
