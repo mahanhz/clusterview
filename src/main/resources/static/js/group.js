@@ -51,9 +51,9 @@ $('.map').click(function(e) {
     var relativeX = (e.pageX - offset.left);
     var relativeY = (e.pageY - offset.top);
 
-    $("#groupLocationModal .cluster-group").css('display','block');
-    $("#groupLocationModal .cluster-group").css('left', relativeX - 10);
-    $("#groupLocationModal .cluster-group").css('top', relativeY - 10);
+    $("#groupLocation .cluster-group").css('display','block');
+    $("#groupLocation .cluster-group").css('left', relativeX - 10);
+    $("#groupLocation .cluster-group").css('top', relativeY - 10);
 
     $("#location\\.coordX").val(relativeX);
     $("#location\\.coordY").val(relativeY);

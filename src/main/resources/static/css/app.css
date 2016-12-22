@@ -4,6 +4,7 @@ body:not(.excludes-header) {
 
 .cluster-container {
    position: relative;
+   background-color: #ffffff;
 }
 
 .cluster-group {
