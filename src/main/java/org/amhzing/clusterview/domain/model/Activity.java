@@ -7,8 +7,8 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public final class Activity {
 
-    private Id id;
-    private String name;
+    private final Id id;
+    private final String name;
 
     private Activity(final Id id, final String name) {
         this.id = notNull(id);

@@ -8,7 +8,7 @@ public final class Quantity {
 
     public static final int MIN_QUANTITY = 0;
 
-    private long value;
+    private final long value;
 
     private Quantity(final long value) {
         isTrue(value >= MIN_QUANTITY);

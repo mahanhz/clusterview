@@ -10,7 +10,7 @@ public final class MiddleName {
 
     protected static final int MAX_LENGTH = 25;
 
-    private String value;
+    private final String value;
 
     private MiddleName(final String value) {
         isValid(value);

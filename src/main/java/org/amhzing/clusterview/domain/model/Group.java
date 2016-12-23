@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.domain.model;
 
+import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 
 import java.util.Objects;
@@ -11,19 +12,19 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public final class Group {
 
-    private Id id;
-    private Set<Member> members;
-    private Location location;
-    private Set<CoreActivity> coreActivities;
-
-    public Group() {
-    }
+    private final Id id;
+    private final Set<Member> members;
+    private final Location location;
+    private final Set<CoreActivity> coreActivities;
 
     private Group(final Id id, final Set<Member> members, final Location location, final Set<CoreActivity> coreActivities) {
+        noNullElements(members);
+        noNullElements(coreActivities);
+
         this.id = notNull(id);
-        this.members = noNullElements(members);
+        this.members = ImmutableSet.copyOf(members);
         this.location = notNull(location);
-        this.coreActivities = noNullElements(coreActivities);
+        this.coreActivities = ImmutableSet.copyOf(coreActivities);
     }
 
     public static Group create(final Id id, final Set<Member> members, final Location location, final Set<CoreActivity> coreActivities) {
@@ -44,7 +45,7 @@ public final class Group {
     }
 
     public Set<Member> getMembers() {
-        return members;
+        return ImmutableSet.copyOf(members);
     }
 
     public Location getLocation() {
@@ -52,7 +53,7 @@ public final class Group {
     }
 
     public Set<CoreActivity> getCoreActivities() {
-        return coreActivities;
+        return ImmutableSet.copyOf(coreActivities);
     }
 
     @Override

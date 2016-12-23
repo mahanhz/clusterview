@@ -6,16 +6,10 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public final class Member {
 
-    private Id id;
-    private Name name;
-    private Capability capability;
-    private Commitment commitment;
-
-    private Member(final Name name, final Capability capability, final Commitment commitment) {
-        this.name = name;
-        this.capability = capability;
-        this.commitment = commitment;
-    }
+    private final Id id;
+    private final Name name;
+    private final Capability capability;
+    private final Commitment commitment;
 
     private Member(final Id id, final Name name, final Capability capability, final Commitment commitment) {
         this.id = notNull(id);
@@ -26,10 +20,6 @@ public final class Member {
 
     public static Member create(final Id id, final Name name, final Capability capability, final Commitment commitment) {
         return new Member(id, name, capability, commitment);
-    }
-
-    public static Member create(final Name name, final Capability capability, final Commitment commitment) {
-        return new Member(name, capability, commitment);
     }
 
     public Id getId() {

@@ -1,20 +1,22 @@
 package org.amhzing.clusterview.domain.model;
 
+import com.google.common.collect.ImmutableSet;
+
 import java.util.Objects;
 import java.util.Set;
 
-import static org.apache.commons.lang3.Validate.noNullElements;
-import static org.apache.commons.lang3.Validate.notBlank;
-import static org.apache.commons.lang3.Validate.notNull;
+import static org.apache.commons.lang3.Validate.*;
 
 public final class Cluster {
 
-    private Id id;
-    private Set<Group> groups;
+    private final Id id;
+    private final Set<Group> groups;
 
     private Cluster(final Id id, final Set<Group> groups) {
+        noNullElements(groups);
+
         this.id = notNull(id);
-        this.groups = noNullElements(groups);
+        this.groups = ImmutableSet.copyOf(groups);
     }
 
     public static Cluster create(final Id id, final Set<Group> groups) {
@@ -26,7 +28,7 @@ public final class Cluster {
     }
 
     public Set<Group> getGroups() {
-        return groups;
+        return ImmutableSet.copyOf(groups);
     }
 
     @Override

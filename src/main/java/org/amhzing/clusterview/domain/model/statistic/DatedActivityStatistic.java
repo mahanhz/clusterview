@@ -7,11 +7,12 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public final class DatedActivityStatistic {
 
-    private Date date;
-    private ActivityStatistic activityStatistic;
+    private final Date date;
+    private final ActivityStatistic activityStatistic;
 
     private DatedActivityStatistic(final Date date, final ActivityStatistic activityStatistic) {
-        this.date = notNull(date);
+        notNull(date);
+        this.date = new Date(date.getTime());
         this.activityStatistic = notNull(activityStatistic);
     }
 

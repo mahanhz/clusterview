@@ -1,5 +1,7 @@
 package org.amhzing.clusterview.domain.model.statistic;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.domain.model.Activity;
 
 import java.util.Map;
@@ -13,8 +15,8 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public final class ActivityStatistic {
 
-    private Map<Activity, Quantity> activityQuantity;
-    private Set<CoreActivity> coreActivities;
+    private final Map<Activity, Quantity> activityQuantity;
+    private final Set<CoreActivity> coreActivities;
 
     public ActivityStatistic() {
         activityQuantity = emptyMap();
@@ -22,8 +24,11 @@ public final class ActivityStatistic {
     }
 
     private ActivityStatistic(final Map<Activity, Quantity> activityQuantity, final Set<CoreActivity> coreActivities) {
-        this.activityQuantity = notNull(activityQuantity);
-        this.coreActivities = noNullElements(coreActivities);
+        notNull(activityQuantity);
+        noNullElements(coreActivities);
+
+        this.activityQuantity = ImmutableMap.copyOf(activityQuantity);
+        this.coreActivities = ImmutableSet.copyOf(coreActivities);
     }
 
     public static ActivityStatistic create(final Map<Activity, Quantity> activityQuantity, final Set<CoreActivity> coreActivities) {
@@ -35,11 +40,11 @@ public final class ActivityStatistic {
     }
 
     public Map<Activity, Quantity> getActivityQuantity() {
-        return activityQuantity;
+        return ImmutableMap.copyOf(activityQuantity);
     }
 
     public Set<CoreActivity> getCoreActivities() {
-        return coreActivities;
+        return ImmutableSet.copyOf(coreActivities);
     }
 
     @Override

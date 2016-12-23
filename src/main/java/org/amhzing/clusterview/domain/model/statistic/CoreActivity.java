@@ -7,11 +7,11 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public final class CoreActivity {
 
-    private Id id;
-    private String name;
-    private Quantity quantity;
-    private Quantity totalParticipants;
-    private Quantity communityOfInterest;
+    private final Id id;
+    private final String name;
+    private final Quantity quantity;
+    private final Quantity totalParticipants;
+    private final Quantity communityOfInterest;
 
     private CoreActivity(final Id id, final String name, final Quantity quantity, final Quantity totalParticipants, final Quantity communityOfInterest) {
         this.id = notNull(id);

@@ -6,10 +6,10 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public final class Name {
 
-    private FirstName firstName;
-    private MiddleName middleName;
-    private LastName lastName;
-    private Suffix suffix;
+    private final FirstName firstName;
+    private final MiddleName middleName;
+    private final LastName lastName;
+    private final Suffix suffix;
 
     private Name(final FirstName firstName, final MiddleName middleName, final LastName lastName, final Suffix suffix) {
         this.firstName = notNull(firstName);

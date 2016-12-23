@@ -10,7 +10,7 @@ public final class Suffix {
 
     protected static final int MAX_LENGTH = 10;
 
-    private String value;
+    private final String value;
 
     private Suffix(final String value) {
         isValid(value);

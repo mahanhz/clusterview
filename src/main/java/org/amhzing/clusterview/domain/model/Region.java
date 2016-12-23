@@ -1,5 +1,7 @@
 package org.amhzing.clusterview.domain.model;
 
+import com.google.common.collect.ImmutableSet;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -7,12 +9,14 @@ import static org.apache.commons.lang3.Validate.*;
 
 public final class Region {
 
-    private Id id;
-    private Set<Cluster> clusters;
+    private final Id id;
+    private final Set<Cluster> clusters;
 
     private Region(final Id id, final Set<Cluster> clusters) {
+        noNullElements(clusters);
+
         this.id = notNull(id);
-        this.clusters = noNullElements(clusters);
+        this.clusters = ImmutableSet.copyOf(clusters);
     }
 
     public static Region create(final Id id, final Set<Cluster> clusters) {
@@ -24,7 +28,7 @@ public final class Region {
     }
 
     public Set<Cluster> getClusters() {
-        return clusters;
+        return ImmutableSet.copyOf(clusters);
     }
 
     @Override

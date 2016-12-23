@@ -1,5 +1,7 @@
 package org.amhzing.clusterview.domain.model;
 
+import com.google.common.collect.ImmutableSet;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,16 +13,17 @@ public final class Country {
 
     private static final int MAX_NAME_LENGTH = 100;
 
-    private Id id;
-    private String name;
-    private Set<Region> regions;
+    private final Id id;
+    private final String name;
+    private final Set<Region> regions;
 
     private Country(final Id id, final String name, final Set<Region> regions) {
         isValidName(name);
+        noNullElements(regions);
 
         this.id = notNull(id);
         this.name = trim(name);
-        this.regions = noNullElements(regions);
+        this.regions = ImmutableSet.copyOf(regions);
     }
 
     public static Country create(final Id id, final String name, final Set<Region> regions) {
@@ -36,7 +39,7 @@ public final class Country {
     }
 
     public Set<Region> getRegions() {
-        return regions;
+        return ImmutableSet.copyOf(regions);
     }
 
     @Override

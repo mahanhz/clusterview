@@ -9,10 +9,12 @@ import static org.apache.commons.lang3.Validate.noNullElements;
 
 public final class Commitment {
 
-    private Set<Activity> activities;
+    private final Set<Activity> activities;
 
     private Commitment(final Set<Activity> activities) {
-        this.activities = noNullElements(activities);
+        noNullElements(activities);
+
+        this.activities = ImmutableSet.copyOf(activities);
     }
 
     public static Commitment create(final Set<Activity> activities) {

@@ -9,10 +9,11 @@ import static org.apache.commons.lang3.Validate.noNullElements;
 
 public final class Capability {
 
-    private Set<Activity> activities;
+    private final Set<Activity> activities;
 
     private Capability(final Set<Activity> activities) {
-        this.activities = noNullElements(activities);
+        noNullElements(activities);
+        this.activities = ImmutableSet.copyOf(activities);
     }
 
     public static Capability create(final Set<Activity> activities) {

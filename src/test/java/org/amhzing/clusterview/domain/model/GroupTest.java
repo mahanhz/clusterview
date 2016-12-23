@@ -7,7 +7,6 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.meanbean.test.BeanTester;
 
 import static java.util.Collections.emptySet;
 import static org.amhzing.clusterview.helper.DomainModelHelper.location;
@@ -30,11 +29,6 @@ public class GroupTest {
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
-    }
-
-    @Test
-    public void getterAndSetterCorrectness() throws Exception {
-        new BeanTester().testBean(Group.class);
     }
 
     @Test
