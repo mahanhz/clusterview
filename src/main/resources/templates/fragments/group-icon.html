@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <th:block th:fragment="group-icon(switchValue)">
+        <th:block th:switch="${switchValue}">
+            <th:block th:case="1">
+                <i class="fa fa-user" aria-hidden="true" th:classappend="${group.highlight} ? 'group-highlight' : 'group-single'"></i>
+            </th:block>
+            <th:block th:case="2">
+                <i class="fa fa-user-plus" aria-hidden="true" th:classappend="${group.highlight} ? 'group-highlight' : 'group-couple'"></i>
+            </th:block>
+            <th:block th:case="*">
+                <i class="fa fa-users" aria-hidden="true" th:classappend="${group.highlight} ? 'group-highlight' : 'group-many'"></i>
+            </th:block>
+        </th:block>
+    </th:block>
+
+</html>

@@ -32,7 +32,12 @@
                     </thead>
                     <tbody>
                         <tr th:each="statistic : ${statistics.activityQuantity}">
-                            <td th:text="${statistic.key}" />
+                            <td th:text="${statistic.key}" th:if="not ${clusterPath}"/>
+                            <td th:if="${clusterPath}">
+                                <a th:href="@{'/clusterview/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '?highlight=' + ${statistic.key}}"
+                                   th:text="${statistic.key}"
+                                   th:class="${param.highlight != null and (param.highlight[0] == statistic.key)} ? 'statistic-highlight' : ''"></a>
+                            </td>
                             <td th:text="${statistic.value}" />
                         </tr>
                     </tbody>

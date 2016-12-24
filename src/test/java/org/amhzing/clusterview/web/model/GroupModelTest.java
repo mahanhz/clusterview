@@ -33,7 +33,9 @@ public class GroupModelTest {
 
     @Test
     public void equalsAndHashCodeContract() throws Exception {
-        EqualsVerifier.forClass(GroupModel.class).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
+        EqualsVerifier.forClass(GroupModel.class).suppress(Warning.STRICT_INHERITANCE,
+                                                           Warning.NONFINAL_FIELDS,
+                                                           Warning.ALL_FIELDS_SHOULD_BE_USED).verify();
     }
 
     @SuppressWarnings("unused")

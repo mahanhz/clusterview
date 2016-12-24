@@ -12,3 +12,24 @@ body:not(.excludes-header) {
    color: #337ab7;
    font-size: 15px;
 }
+
+.group-single {
+    color: #CC0000;
+}
+
+.group-couple {
+    color: #CC0000;
+}
+
+.group-many {
+    color: #337ab7;
+}
+
+.group-highlight {
+    color: #a200f9;
+}
+
+.statistic-highlight {
+    text-decoration:underline;
+    color:#a200f9;
+}

@@ -6,10 +6,10 @@ import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.web.controller.CommonModelController;
-import org.amhzing.clusterview.web.controller.appnav.GroupController;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import static org.amhzing.clusterview.helper.ClientModelHelper.anotherActivityModel;
 import static org.amhzing.clusterview.helper.ClientModelHelper.groupModel;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -57,6 +58,23 @@ public class GroupControllerTest {
         final String imgSrc = doc.getElementsByTag("img").first().attr("src");
 
         assertThat(imgSrc).contains("cluster-stockholm");
+    }
+
+    @Test
+    @WithMockCustomUser(username = "testU", password = "NotSaying")
+    public void should_highlight_groups() throws Exception {
+        given(groupAdapter.groups(any())).willReturn(ImmutableSet.of(groupModel()));
+
+        final ResultActions result = this.mvc.perform(get("/clusterview/se/central/stockholm")
+                                                              .param("highlight", anotherActivityModel().getName()))
+                                             .andExpect(status().isOk());
+
+        final String content = result.andReturn().getResponse().getContentAsString();
+
+        Document doc = Jsoup.parse(content);
+        final Elements icons = doc.getElementsByTag("i");
+
+        assertThat(icons.hasClass("group-highlight")).isTrue();
     }
 
     @Test

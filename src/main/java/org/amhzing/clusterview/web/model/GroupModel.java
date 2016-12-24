@@ -24,6 +24,8 @@ public final class GroupModel {
 
     private List<CoreActivityModel> coreActivities;
 
+    private boolean highlight;
+
     public GroupModel() {
         members = new ArrayList<>();
         location = new LocationModel();
@@ -81,6 +83,14 @@ public final class GroupModel {
         this.coreActivities = coreActivities;
     }
 
+    public boolean isHighlight() {
+        return highlight;
+    }
+
+    public void setHighlight(final boolean highlight) {
+        this.highlight = highlight;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -104,6 +114,7 @@ public final class GroupModel {
                 ", members=" + members +
                 ", location=" + location +
                 ", coreActivities=" + coreActivities +
+                ", highlight=" + highlight +
                 '}';
     }
 }
