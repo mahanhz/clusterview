@@ -1,8 +1,7 @@
-package org.amhzing.clusterview.acceptancetest.group.create;
+package org.amhzing.clusterview.acceptancetest.steps.group;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
-import org.amhzing.clusterview.infra.jpa.repository.TeamJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
@@ -12,29 +11,24 @@ import org.springframework.util.MultiValueMap;
 import java.util.Arrays;
 
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
-import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.login;
+import static org.amhzing.clusterview.acceptancetest.steps.userlogin.UserLoginSteps.getInitialGroupsSize;
+import static org.amhzing.clusterview.acceptancetest.steps.userlogin.UserLoginSteps.getLoginHeaders;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AdminCreateGroupSteps extends SpringSteps implements En {
 
     public static final String CLUSTER = "stockholm";
 
-    private HttpHeaders loginHeaders;
     private ResponseEntity<String> response;
     private long initialGroupsSize;
 
     @Autowired
     public AdminCreateGroupSteps(final TestRestTemplate testRestTemplate) {
 
-        Given("^a logged in admin user$", () -> {
-            initialGroupsSize = groupsSize(getTeamJpaRepository());
-            loginHeaders = login("admin@example.com", "admin123", testRestTemplate);
-        });
-
         When("^attempting to create a group$", () -> {
             final HttpHeaders headers = getHeaders(testRestTemplate,
                                                    "/clusteredit/se/central/" + CLUSTER + "/newgroup",
-                                                   loginHeaders);
+                                                   getLoginHeaders());
             headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
@@ -77,11 +71,7 @@ public class AdminCreateGroupSteps extends SpringSteps implements En {
                                                                                  super.getPort() +
                                                                                  "/clusterview/se/central/" + CLUSTER);
 
-            assertThat(groupsSize(getTeamJpaRepository())).isGreaterThan(initialGroupsSize);
+            assertThat(getInitialGroupsSize()).isGreaterThan(initialGroupsSize);
         });
-    }
-
-    private long groupsSize(final TeamJpaRepository teamJpaRepository) {
-        return teamJpaRepository.count();
     }
 }

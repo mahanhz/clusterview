@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.acceptancetest.login;
+package org.amhzing.clusterview.acceptancetest.steps.login;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
