@@ -33,4 +33,8 @@ public class SpringSteps {
     public TeamJpaRepository getTeamJpaRepository() {
         return teamJpaRepository;
     }
+
+    public long groupsSize(final TeamJpaRepository teamJpaRepository) {
+        return teamJpaRepository.count();
+    }
 }

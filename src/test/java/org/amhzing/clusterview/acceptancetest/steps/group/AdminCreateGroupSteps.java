@@ -20,7 +20,6 @@ public class AdminCreateGroupSteps extends SpringSteps implements En {
     public static final String CLUSTER = "stockholm";
 
     private ResponseEntity<String> response;
-    private long initialGroupsSize;
 
     @Autowired
     public AdminCreateGroupSteps(final TestRestTemplate testRestTemplate) {
@@ -71,7 +70,7 @@ public class AdminCreateGroupSteps extends SpringSteps implements En {
                                                                                  super.getPort() +
                                                                                  "/clusterview/se/central/" + CLUSTER);
 
-            assertThat(getInitialGroupsSize()).isGreaterThan(initialGroupsSize);
+            assertThat(groupsSize(getTeamJpaRepository())).isGreaterThan(getInitialGroupsSize());
         });
     }
 }
