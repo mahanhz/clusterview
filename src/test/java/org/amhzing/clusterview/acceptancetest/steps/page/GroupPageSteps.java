@@ -12,6 +12,7 @@ import static org.amhzing.clusterview.acceptancetest.steps.userlogin.UserLoginSt
 public class GroupPageSteps extends SpringSteps implements En {
 
     public static final String CLUSTER = "stockholm";
+    public static final int GROUP_ID = 901;
 
     private static ResponseEntity<String> response;
 
@@ -23,7 +24,7 @@ public class GroupPageSteps extends SpringSteps implements En {
             final String cookie = getLoginHeaders().getFirst("Set-Cookie");
             headers.set("Cookie", cookie);
 
-            response = getTestRestTemplate().exchange("/clusterview/se/central/" + CLUSTER + "/901",
+            response = getTestRestTemplate().exchange("/clusterview/se/central/" + CLUSTER + "/" + GROUP_ID,
                                                       HttpMethod.GET,
                                                       new HttpEntity<>(headers),
                                                       String.class);
