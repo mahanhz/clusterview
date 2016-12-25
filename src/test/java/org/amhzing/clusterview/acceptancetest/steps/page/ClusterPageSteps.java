@@ -2,8 +2,6 @@ package org.amhzing.clusterview.acceptancetest.steps.page;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,8 +15,7 @@ public class ClusterPageSteps extends SpringSteps implements En {
 
     private static ResponseEntity<String> response;
 
-    @Autowired
-    public ClusterPageSteps(final TestRestTemplate testRestTemplate) {
+    public ClusterPageSteps() {
 
         When("^in the cluster page$", () -> {
             final HttpHeaders headers = new HttpHeaders();
@@ -26,14 +23,14 @@ public class ClusterPageSteps extends SpringSteps implements En {
             final String cookie = getLoginHeaders().getFirst("Set-Cookie");
             headers.set("Cookie", cookie);
 
-            response = testRestTemplate.exchange("/clusterview/se/central/" + CLUSTER,
-                                                 HttpMethod.GET,
-                                                 new HttpEntity<>(headers),
-                                                 String.class);
+            response = getTestRestTemplate().exchange("/clusterview/se/central/" + CLUSTER,
+                                                      HttpMethod.GET,
+                                                      new HttpEntity<>(headers),
+                                                      String.class);
         });
     }
 
-    public static ResponseEntity<String> getResponse() {
+    public static ResponseEntity<String> getClusterPageResponse() {
         return response;
     }
 }

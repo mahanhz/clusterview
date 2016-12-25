@@ -2,8 +2,6 @@ package org.amhzing.clusterview.acceptancetest.steps.userlogin;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpHeaders;
 
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.login;
@@ -15,16 +13,15 @@ public class UserLoginSteps extends SpringSteps implements En {
     private static HttpHeaders loginHeaders;
     private static long initialGroupsSize;
 
-    @Autowired
-    public UserLoginSteps(final TestRestTemplate testRestTemplate) {
+    public UserLoginSteps() {
 
         Given("^a logged in admin user$", () -> {
             initialGroupsSize = groupsSize(getTeamJpaRepository());
-            loginHeaders = login(adminUser().getLeft(), adminUser().getRight(), testRestTemplate);
+            loginHeaders = login(adminUser().getLeft(), adminUser().getRight(), getTestRestTemplate());
         });
 
         Given("^a logged in user$", () -> {
-            loginHeaders = login(user().getLeft(), user().getRight(), testRestTemplate);
+            loginHeaders = login(user().getLeft(), user().getRight(), getTestRestTemplate());
         });
     }
 

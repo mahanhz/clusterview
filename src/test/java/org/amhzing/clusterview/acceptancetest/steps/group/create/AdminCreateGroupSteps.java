@@ -2,8 +2,6 @@ package org.amhzing.clusterview.acceptancetest.steps.group.create;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -21,11 +19,10 @@ public class AdminCreateGroupSteps extends SpringSteps implements En {
 
     private ResponseEntity<String> response;
 
-    @Autowired
-    public AdminCreateGroupSteps(final TestRestTemplate testRestTemplate) {
+    public AdminCreateGroupSteps() {
 
         When("^attempting to create a group$", () -> {
-            final HttpHeaders headers = getHeaders(testRestTemplate,
+            final HttpHeaders headers = getHeaders(getTestRestTemplate(),
                                                    "/clusteredit/se/central/" + CLUSTER + "/newgroup",
                                                    getLoginHeaders());
             headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
@@ -58,10 +55,10 @@ public class AdminCreateGroupSteps extends SpringSteps implements En {
             form.set("members[0].name.firstName", "testF");
             form.set("members[0].name.lastName", "testL");
 
-            response = testRestTemplate.exchange("/clusteredit/se/central/" + CLUSTER + "/creategroup",
-                                                 HttpMethod.POST,
-                                                 new HttpEntity<>(form, headers),
-                                                 String.class);
+            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/creategroup",
+                                                      HttpMethod.POST,
+                                                      new HttpEntity<>(form, headers),
+                                                      String.class);
         });
 
         Then("^the group is created$", () -> {
