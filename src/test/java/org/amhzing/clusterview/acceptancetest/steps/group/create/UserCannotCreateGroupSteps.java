@@ -4,7 +4,7 @@ import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
 import org.springframework.http.*;
 
-import static org.amhzing.clusterview.acceptancetest.steps.userlogin.UserLoginSteps.getLoginHeaders;
+import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserCannotCreateGroupSteps extends SpringSteps implements En {
@@ -27,7 +27,7 @@ public class UserCannotCreateGroupSteps extends SpringSteps implements En {
                                                       String.class);
         });
 
-        Then("^the user is forbidden", () -> {
+        Then("^the user is forbidden from creating the group$", () -> {
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
         });
     }

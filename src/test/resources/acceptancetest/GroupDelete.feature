@@ -14,3 +14,8 @@ Feature: Delete group
     Given a logged in user
     When in the group page
     Then delete button is not available
+
+  Scenario: Users cannot delete groups
+    Given a logged in user
+    When attempting to delete a group X
+    Then the user is forbidden from deleting the group

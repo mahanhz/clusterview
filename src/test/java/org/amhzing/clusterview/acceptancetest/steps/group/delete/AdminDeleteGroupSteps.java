@@ -7,10 +7,10 @@ import org.springframework.http.*;
 import java.util.Arrays;
 
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
+import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
+import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.CLUSTER;
 import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.GROUP_ID;
-import static org.amhzing.clusterview.acceptancetest.steps.userlogin.UserLoginSteps.getInitialGroupsSize;
-import static org.amhzing.clusterview.acceptancetest.steps.userlogin.UserLoginSteps.getLoginHeaders;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AdminDeleteGroupSteps extends SpringSteps implements En {
@@ -27,9 +27,9 @@ public class AdminDeleteGroupSteps extends SpringSteps implements En {
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
             response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + GROUP_ID,
-                                                      HttpMethod.DELETE,
-                                                      new HttpEntity<>(headers),
-                                                      String.class);
+                                                                 HttpMethod.DELETE,
+                                                                 new HttpEntity<>(headers),
+                                                                 String.class);
         });
 
         Then("^the group is deleted$", () -> {

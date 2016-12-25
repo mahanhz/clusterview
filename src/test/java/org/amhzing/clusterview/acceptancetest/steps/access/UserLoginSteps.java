@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.acceptancetest.steps.userlogin;
+package org.amhzing.clusterview.acceptancetest.steps.access;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
@@ -21,6 +21,7 @@ public class UserLoginSteps extends SpringSteps implements En {
         });
 
         Given("^a logged in user$", () -> {
+            initialGroupsSize = groupsSize(getTeamJpaRepository());
             loginHeaders = login(user().getLeft(), user().getRight(), getTestRestTemplate());
         });
     }

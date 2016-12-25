@@ -18,4 +18,4 @@ Feature: Create group
   Scenario: Users cannot create groups
     Given a logged in user
     When attempting to access the new group page
-    Then the user is forbidden
+    Then the user is forbidden from creating the group

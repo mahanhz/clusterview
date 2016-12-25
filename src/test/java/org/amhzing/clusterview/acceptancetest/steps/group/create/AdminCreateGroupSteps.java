@@ -9,8 +9,8 @@ import org.springframework.util.MultiValueMap;
 import java.util.Arrays;
 
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
-import static org.amhzing.clusterview.acceptancetest.steps.userlogin.UserLoginSteps.getInitialGroupsSize;
-import static org.amhzing.clusterview.acceptancetest.steps.userlogin.UserLoginSteps.getLoginHeaders;
+import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
+import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AdminCreateGroupSteps extends SpringSteps implements En {
