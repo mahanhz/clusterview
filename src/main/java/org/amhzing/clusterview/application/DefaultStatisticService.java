@@ -1,24 +1,22 @@
 package org.amhzing.clusterview.application;
 
-import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Country;
 import org.amhzing.clusterview.domain.model.Region;
-import org.amhzing.clusterview.infra.repository.ClusterStatisticRepository;
-import org.amhzing.clusterview.infra.repository.CountryStatisticRepository;
-import org.amhzing.clusterview.infra.repository.RegionStatisticRepository;
+import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
+import org.amhzing.clusterview.domain.repository.StatisticRepository;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
 public class DefaultStatisticService implements StatisticService {
 
-    private CountryStatisticRepository countryStatisticRepository;
-    private RegionStatisticRepository regionStatisticRepository;
-    private ClusterStatisticRepository clusterStatisticRepository;
+    private StatisticRepository<Country.Id, ActivityStatistic> countryStatisticRepository;
+    private StatisticRepository<Region.Id, ActivityStatistic> regionStatisticRepository;
+    private StatisticRepository<Cluster.Id, ActivityStatistic> clusterStatisticRepository;
 
-    public DefaultStatisticService(final CountryStatisticRepository countryStatisticRepository,
-                                   final RegionStatisticRepository regionStatisticRepository,
-                                   final ClusterStatisticRepository clusterStatisticRepository) {
+    public DefaultStatisticService(final StatisticRepository<Country.Id, ActivityStatistic> countryStatisticRepository,
+                                   final StatisticRepository<Region.Id, ActivityStatistic> regionStatisticRepository,
+                                   final StatisticRepository<Cluster.Id, ActivityStatistic> clusterStatisticRepository) {
         this.countryStatisticRepository = notNull(countryStatisticRepository);
         this.regionStatisticRepository = notNull(regionStatisticRepository);
         this.clusterStatisticRepository = notNull(clusterStatisticRepository);

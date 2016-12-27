@@ -1,9 +1,12 @@
 package org.amhzing.clusterview.configuration;
 
 import org.amhzing.clusterview.application.*;
+import org.amhzing.clusterview.domain.model.Cluster;
+import org.amhzing.clusterview.domain.model.Country;
+import org.amhzing.clusterview.domain.model.Region;
+import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.domain.repository.*;
 import org.amhzing.clusterview.infra.repository.ClusterStatisticRepository;
-import org.amhzing.clusterview.infra.repository.CountryStatisticRepository;
 import org.amhzing.clusterview.infra.repository.RegionStatisticRepository;
 import org.amhzing.clusterview.user.UserServletFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +28,13 @@ public class AppConfig {
     private CoreActivityRepository coreActivityRepository;
 
     @Autowired
-    private CountryStatisticRepository countryStatisticRepository;
+    private StatisticRepository<Country.Id, ActivityStatistic> countryStatisticRepository;
 
     @Autowired
-    private RegionStatisticRepository regionStatisticRepository;
+    private StatisticRepository<Region.Id, ActivityStatistic> regionStatisticRepository;
 
     @Autowired
-    private ClusterStatisticRepository clusterStatisticRepository;
+    private StatisticRepository<Cluster.Id, ActivityStatistic> clusterStatisticRepository;
 
     @Autowired
     private StatisticHistoryRepository statisticHistoryRepository;

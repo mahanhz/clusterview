@@ -7,9 +7,9 @@ import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.infra.repository.ClusterStatisticRepository;
 import org.amhzing.clusterview.infra.repository.CountryStatisticRepository;
 import org.amhzing.clusterview.infra.repository.RegionStatisticRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -28,8 +28,14 @@ public class DefaultStatisticServiceTest {
     @Mock
     private ClusterStatisticRepository clusterStatisticRepository;
 
-    @InjectMocks
     private DefaultStatisticService defaultStatisticService;
+
+    @Before
+    public void setUp() throws Exception {
+        defaultStatisticService = new DefaultStatisticService(countryStatisticRepository,
+                                                              regionStatisticRepository,
+                                                              clusterStatisticRepository);
+    }
 
     @Test
     public void should_get_country_stats() throws Exception {
