@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
+import static org.amhzing.clusterview.web.controller.appnav.GroupController.CLUSTER_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
@@ -35,13 +36,13 @@ public class GroupEditController extends AbstractEditController {
     }
 
     @LogExecutionTime
-    @GetMapping(path = CountryController.CLUSTER_PATH + "/newgroup")
+    @GetMapping(path = CLUSTER_PATH + "/newgroup")
     public String newGroup(@ModelAttribute final GroupPath groupPath) {
         return groupActionView(groupPath);
     }
 
     @LogExecutionTime
-    @GetMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
+    @GetMapping(path = CLUSTER_PATH + "/{groupId}")
     public String editGroup(@ModelAttribute @Valid final GroupPath groupPath,
                             final BindingResult bindingResult,
                             final Model model) {
@@ -61,7 +62,7 @@ public class GroupEditController extends AbstractEditController {
     }
 
     @LogExecutionTime
-    @PostMapping(path = CountryController.CLUSTER_PATH + "/" + CREATE_GROUP)
+    @PostMapping(path = CLUSTER_PATH + "/" + CREATE_GROUP)
     public String createGroup(@ModelAttribute final GroupPath groupPath,
                               @ModelAttribute @Valid final GroupModel groupModel,
                               final BindingResult bindingResult) {
@@ -76,7 +77,7 @@ public class GroupEditController extends AbstractEditController {
     }
 
     @LogExecutionTime
-    @PutMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
+    @PutMapping(path = CLUSTER_PATH + "/{groupId}")
     public String updateGroup(@ModelAttribute final GroupPath groupPath,
                               @ModelAttribute @Valid final GroupModel groupModel,
                               final BindingResult bindingResult) {
@@ -94,7 +95,7 @@ public class GroupEditController extends AbstractEditController {
     }
 
     @LogExecutionTime
-    @DeleteMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
+    @DeleteMapping(path = CLUSTER_PATH + "/{groupId}")
     public String deleteGroup(@ModelAttribute final GroupPath groupPath,
                               @RequestParam(required = false) final boolean displayConfirmation,
                               final RedirectAttributes redirectAttributes) {

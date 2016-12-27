@@ -17,7 +17,6 @@ import static org.apache.commons.lang3.Validate.notNull;
 @Controller
 public class CountryController extends AbstractController {
 
-    public static final String CLUSTER_PATH = "/{country}/{region}/{cluster}";
     public static final String STATISTICS_MODEL_ATTR = "statistics";
 
     private StatisticAdapter statisticAdapter;

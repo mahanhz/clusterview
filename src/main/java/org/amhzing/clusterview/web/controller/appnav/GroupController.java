@@ -26,6 +26,7 @@ import static org.apache.commons.lang3.Validate.notNull;
 @Controller
 public class GroupController extends AbstractController {
 
+    public static final String CLUSTER_PATH = "/{country}/{region}/{cluster}";
     public static final String GROUPS_MODEL_ATTR = "groups";
     private GroupAdapter groupAdapter;
     private StatisticAdapter statisticAdapter;
@@ -38,7 +39,7 @@ public class GroupController extends AbstractController {
     }
 
     @LogExecutionTime
-    @GetMapping(path = CountryController.CLUSTER_PATH)
+    @GetMapping(path = CLUSTER_PATH)
     public ModelAndView groups(@ModelAttribute final ClusterPath clusterPath,
                                @RequestParam(value = "highlight", required = false) final String activityName,
                                final Model model) {
@@ -53,7 +54,7 @@ public class GroupController extends AbstractController {
     }
 
     @LogExecutionTime
-    @GetMapping(path = CountryController.CLUSTER_PATH + "/{groupId}")
+    @GetMapping(path = CLUSTER_PATH + "/{groupId}")
     public ModelAndView group(@ModelAttribute @Valid final GroupPath groupPath,
                               final BindingResult bindingResult,
                               final Model model) {
