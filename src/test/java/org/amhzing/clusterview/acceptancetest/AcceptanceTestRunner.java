@@ -6,7 +6,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = { "src/test/resources/acceptancetest" },
-                 tags = { "~@ignored" },
+                 glue = { "org.amhzing.clusterview.acceptancetest.steps",
+                          "cucumber.api.spring" },
                  format = { "json:build/reports/cucumber/cucumber.json",
                             "html:build/reports/cucumber/cucumber.html",
                             "pretty" })

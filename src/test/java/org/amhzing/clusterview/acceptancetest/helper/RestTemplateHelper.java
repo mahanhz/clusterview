@@ -16,6 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public final class RestTemplateHelper {
 
+    public static final String SET_COOKIE = "Set-Cookie";
+    public static final String COOKIE = "Cookie";
+    public static final String CSRF = "_csrf";
+    public static final String X_CSRF_TOKEN = "X-CSRF-TOKEN";
+
     private RestTemplateHelper() {
         // to prevent instantiation
     }
@@ -30,14 +35,14 @@ public final class RestTemplateHelper {
         final ResponseEntity<String> response = testRestTemplate.getForEntity(uri, String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-        final String cookie = response.getHeaders().getFirst("Set-Cookie");
-        headers.set("Cookie", cookie);
+        final String cookie = response.getHeaders().getFirst(SET_COOKIE);
+        headers.set(COOKIE, cookie);
 
         final Document doc = Jsoup.parse(response.getBody());
-        final Elements csrfField = doc.getElementsByAttributeValueContaining("name", "_csrf");
+        final Elements csrfField = doc.getElementsByAttributeValueContaining("name", CSRF);
         assertThat(csrfField).hasSize(1);
 
-        headers.set("X-CSRF-TOKEN", csrfField.get(0).val());
+        headers.set(X_CSRF_TOKEN, csrfField.get(0).val());
 
         return headers;
     }
@@ -51,8 +56,8 @@ public final class RestTemplateHelper {
 
         final HttpHeaders headers = new HttpHeaders();
 
-        final String cookie = loginHeaders.getFirst("Set-Cookie");
-        headers.set("Cookie", cookie);
+        final String cookie = loginHeaders.getFirst(SET_COOKIE);
+        headers.set(COOKIE, cookie);
 
         final ResponseEntity<String> response = testRestTemplate.exchange(uri,
                                                                           HttpMethod.GET,
@@ -61,10 +66,10 @@ public final class RestTemplateHelper {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         final Document doc = Jsoup.parse(response.getBody());
-        final Elements csrfField = doc.getElementsByAttributeValueContaining("name", "_csrf");
+        final Elements csrfField = doc.getElementsByAttributeValueContaining("name", CSRF);
         assertThat(csrfField).isNotEmpty();
 
-        headers.set("X-CSRF-TOKEN", csrfField.get(0).val());
+        headers.set(X_CSRF_TOKEN, csrfField.get(0).val());
 
         return headers;
     }

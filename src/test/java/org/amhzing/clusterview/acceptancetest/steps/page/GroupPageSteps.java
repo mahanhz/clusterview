@@ -12,19 +12,18 @@ import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps
 public class GroupPageSteps extends SpringSteps implements En {
 
     public static final String CLUSTER = "stockholm";
-    public static final int GROUP_ID = 901;
 
     private static ResponseEntity<String> groupPageResponse;
 
     public GroupPageSteps() {
 
-        When("^in the group page$", () -> {
+        When("^in the group page for group (\\d+)$", (String groupId) -> {
             final HttpHeaders headers = new HttpHeaders();
 
             final String cookie = getLoginHeaders().getFirst("Set-Cookie");
             headers.set("Cookie", cookie);
 
-            groupPageResponse = getTestRestTemplate().exchange("/clusterview/se/central/" + CLUSTER + "/" + GROUP_ID,
+            groupPageResponse = getTestRestTemplate().exchange("/clusterview/se/central/" + CLUSTER + "/" + groupId,
                                                                HttpMethod.GET,
                                                                new HttpEntity<>(headers),
                                                                String.class);

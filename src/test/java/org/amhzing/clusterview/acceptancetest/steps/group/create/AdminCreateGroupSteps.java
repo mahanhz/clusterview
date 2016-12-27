@@ -11,11 +11,10 @@ import java.util.Arrays;
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
+import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.CLUSTER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AdminCreateGroupSteps extends SpringSteps implements En {
-
-    public static final String CLUSTER = "stockholm";
 
     private ResponseEntity<String> response;
 

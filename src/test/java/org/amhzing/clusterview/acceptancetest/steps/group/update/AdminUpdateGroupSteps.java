@@ -1,43 +1,49 @@
-package org.amhzing.clusterview.acceptancetest.steps.group.delete;
+package org.amhzing.clusterview.acceptancetest.steps.group.update;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
 import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.Arrays;
 
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
-import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.CLUSTER;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AdminDeleteGroupSteps extends SpringSteps implements En {
+public class AdminUpdateGroupSteps extends SpringSteps implements En {
 
     private ResponseEntity<String> response;
 
-    public AdminDeleteGroupSteps() {
+    public AdminUpdateGroupSteps() {
 
-        When("^attempting to delete group (\\d+)$", (Long groupId) -> {
+        When("^attempting to update group (\\d+)$", (Long groupId) -> {
             final HttpHeaders headers = getHeaders(getTestRestTemplate(),
-                                                   "/clusterview/se/central/" + CLUSTER + "/" + groupId,
+                                                   "/clusteredit/se/central/" + CLUSTER + "/" + groupId,
                                                    getLoginHeaders());
             headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
+            final MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
+            form.set("id", "" + groupId);
+            form.set("location.coordX", "100");
+            form.set("location.coordY", "100");
+            form.set("members[0].name.firstName", "updatedFirstname");
+            form.set("members[0].name.lastName", "updatedLastname");
+
             response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + groupId,
-                                                                 HttpMethod.DELETE,
-                                                                 new HttpEntity<>(headers),
-                                                                 String.class);
+                                                      HttpMethod.PUT,
+                                                      new HttpEntity<>(form, headers),
+                                                      String.class);
         });
 
-        Then("^the group is deleted$", () -> {
+        Then("^the group is updated", () -> {
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND);
             assertThat(response.getHeaders().getLocation().toString()).isEqualTo("http://localhost:" +
                                                                                  super.getPort() +
                                                                                  "/clusterview/se/central/" + CLUSTER);
-
-            assertThat(groupsSize(getTeamJpaRepository())).isLessThan(getInitialGroupsSize());
         });
     }
 }

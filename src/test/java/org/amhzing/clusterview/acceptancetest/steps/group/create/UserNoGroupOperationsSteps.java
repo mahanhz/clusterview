@@ -12,8 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserNoGroupOperationsSteps extends SpringSteps implements En {
 
-    public static final String CLUSTER = "stockholm";
-
     public UserNoGroupOperationsSteps() {
 
         Then("^group operations are not available$", () -> {
