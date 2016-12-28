@@ -22,5 +22,5 @@ Feature: Create group
 
   Scenario: Cluster users cannot create groups outside their cluster
     Given a logged in stockholm cluster user
-    When attempting to create a group in uppsala
+    When attempting to create a group in "uppsala"
     Then the cluster user is forbidden from creating the group

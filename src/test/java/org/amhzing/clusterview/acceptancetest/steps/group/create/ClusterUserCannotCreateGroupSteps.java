@@ -15,12 +15,12 @@ public class ClusterUserCannotCreateGroupSteps extends SpringSteps implements En
 
     public ClusterUserCannotCreateGroupSteps() {
 
-        When("^attempting to create a group in uppsala$", () -> {
+        When("^attempting to create a group in \"([^\"]*)\"$", (String cluster) -> {
             final HttpHeaders headers = getHeaders(getTestRestTemplate(),
-                                                   "/clusteredit/se/central/uppsala/newgroup",
+                                                   "/clusteredit/se/central/" + cluster + "/newgroup",
                                                    getLoginHeaders());
 
-            response = getTestRestTemplate().exchange("/clusteredit/se/central/uppsala/creategroup",
+            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + cluster + "/creategroup",
                                                       HttpMethod.POST,
                                                       new HttpEntity<>(createGroupForm(), headers),
                                                       String.class);
