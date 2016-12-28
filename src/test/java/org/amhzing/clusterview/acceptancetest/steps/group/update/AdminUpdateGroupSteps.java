@@ -6,8 +6,6 @@ import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import java.util.Arrays;
-
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
@@ -25,8 +23,6 @@ public class AdminUpdateGroupSteps extends SpringSteps implements En {
             final HttpHeaders headers = getHeaders(getTestRestTemplate(),
                                                    "/clusteredit/se/central/" + CLUSTER + "/" + getGroupId(),
                                                    getLoginHeaders());
-            headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
             final MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
             form.set("id", "" + getGroupId());

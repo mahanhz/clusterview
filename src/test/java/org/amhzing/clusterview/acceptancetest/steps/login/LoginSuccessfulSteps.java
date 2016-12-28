@@ -8,8 +8,6 @@ import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import java.util.Arrays;
-
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,8 +27,6 @@ public class LoginSuccessfulSteps extends SpringSteps implements En {
 
         When("^login is attempted$", () -> {
             final HttpHeaders headers = getHeaders(testRestTemplate, "/login");
-            headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
             final MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
             form.set("username", username);

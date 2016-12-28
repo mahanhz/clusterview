@@ -44,6 +44,9 @@ public final class RestTemplateHelper {
 
         headers.set(X_CSRF_TOKEN, csrfField.get(0).val());
 
+        headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
         return headers;
     }
 
@@ -70,6 +73,9 @@ public final class RestTemplateHelper {
         assertThat(csrfField).isNotEmpty();
 
         headers.set(X_CSRF_TOKEN, csrfField.get(0).val());
+
+        headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         return headers;
     }

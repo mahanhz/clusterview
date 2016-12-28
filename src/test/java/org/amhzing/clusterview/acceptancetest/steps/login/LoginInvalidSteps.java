@@ -4,11 +4,12 @@ import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
-import java.util.Arrays;
 
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,8 +30,6 @@ public class LoginInvalidSteps extends SpringSteps implements En {
 
         When("^attempt to login$", () -> {
             final HttpHeaders headers = getHeaders(testRestTemplate, "/login");
-            headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
             final MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
             form.set("username", username);

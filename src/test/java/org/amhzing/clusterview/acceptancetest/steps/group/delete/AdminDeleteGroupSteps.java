@@ -4,8 +4,6 @@ import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
 import org.springframework.http.*;
 
-import java.util.Arrays;
-
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
@@ -23,8 +21,6 @@ public class AdminDeleteGroupSteps extends SpringSteps implements En {
             final HttpHeaders headers = getHeaders(getTestRestTemplate(),
                                                    "/clusterview/se/central/" + CLUSTER + "/" + getGroupId(),
                                                    getLoginHeaders());
-            headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
             response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + getGroupId(),
                                                                  HttpMethod.DELETE,

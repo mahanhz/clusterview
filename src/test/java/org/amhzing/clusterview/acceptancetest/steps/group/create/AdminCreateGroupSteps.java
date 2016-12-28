@@ -3,11 +3,8 @@ package org.amhzing.clusterview.acceptancetest.steps.group.create;
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
 import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
-import java.util.Arrays;
-
+import static org.amhzing.clusterview.acceptancetest.helper.GroupHelper.createGroupForm;
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
@@ -24,39 +21,10 @@ public class AdminCreateGroupSteps extends SpringSteps implements En {
             final HttpHeaders headers = getHeaders(getTestRestTemplate(),
                                                    "/clusteredit/se/central/" + CLUSTER + "/newgroup",
                                                    getLoginHeaders());
-            headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-            final MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
-            form.set("id", "0");
-            form.set("location.coordX", "100");
-            form.set("location.coordY", "100");
-            form.set("coreActivities[0].id", "cc");
-            form.set("coreActivities[0].name", "CC");
-            form.set("coreActivities[0].quantity", "0");
-            form.set("coreActivities[0].totalParticipants", "0");
-            form.set("coreActivities[0].communityOfInterest", "0");
-            form.set("coreActivities[1].id", "dm");
-            form.set("coreActivities[1].name", "DM");
-            form.set("coreActivities[1].quantity", "0");
-            form.set("coreActivities[1].totalParticipants", "0");
-            form.set("coreActivities[1].communityOfInterest", "0");
-            form.set("coreActivities[2].id", "jyg");
-            form.set("coreActivities[2].name", "JYG");
-            form.set("coreActivities[2].quantity", "0");
-            form.set("coreActivities[2].totalParticipants", "0");
-            form.set("coreActivities[2].communityOfInterest", "0");
-            form.set("coreActivities[3].id", "sc");
-            form.set("coreActivities[3].name", "SC");
-            form.set("coreActivities[3].quantity", "0");
-            form.set("coreActivities[3].totalParticipants", "0");
-            form.set("coreActivities[3].communityOfInterest", "0");
-            form.set("members[0].name.firstName", "testF");
-            form.set("members[0].name.lastName", "testL");
 
             response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/creategroup",
                                                       HttpMethod.POST,
-                                                      new HttpEntity<>(form, headers),
+                                                      new HttpEntity<>(createGroupForm(), headers),
                                                       String.class);
         });
 
