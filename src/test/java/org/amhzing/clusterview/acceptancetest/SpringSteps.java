@@ -1,14 +1,13 @@
 package org.amhzing.clusterview.acceptancetest;
 
 import org.amhzing.clusterview.ClusterviewApplication;
+import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.TeamJpaRepository;
-import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
 
 @ContextConfiguration
 @SpringBootTest(classes = ClusterviewApplication.class,
@@ -22,13 +21,10 @@ public class SpringSteps {
     private TestRestTemplate testRestTemplate;
 
     @Autowired
-    private TeamJpaRepository teamJpaRepository;
+    private ClusterJpaRepository clusterJpaRepository;
 
-    @Before
-    @Sql({"data-h2.sql"})
-    public void setUp() throws Exception {
-        System.out.println("Hello");
-    }
+    @Autowired
+    private TeamJpaRepository teamJpaRepository;
 
     public int getPort() {
         return port;
@@ -36,6 +32,10 @@ public class SpringSteps {
 
     public TestRestTemplate getTestRestTemplate() {
         return testRestTemplate;
+    }
+
+    public ClusterJpaRepository getClusterJpaRepository() {
+        return clusterJpaRepository;
     }
 
     public TeamJpaRepository getTeamJpaRepository() {

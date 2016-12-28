@@ -8,6 +8,7 @@ import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.C
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.SET_COOKIE;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.CLUSTER;
+import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.getGroupId;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserCannotUpdateGroupSteps extends SpringSteps implements En {
@@ -16,13 +17,13 @@ public class UserCannotUpdateGroupSteps extends SpringSteps implements En {
 
     public UserCannotUpdateGroupSteps() {
 
-        When("^attempting to access the edit group page for group (\\d+)$", (Long groupId) -> {
+        When("^attempting to access the edit group page for the group$", () -> {
             final HttpHeaders headers = new HttpHeaders();
 
             final String cookie = getLoginHeaders().getFirst(SET_COOKIE);
             headers.set(COOKIE, cookie);
 
-            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + groupId,
+            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + getGroupId(),
                                                       HttpMethod.GET,
                                                       new HttpEntity<>(headers),
                                                       String.class);

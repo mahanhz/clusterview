@@ -9,6 +9,7 @@ import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.S
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.CLUSTER;
+import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.getGroupId;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserCannotDeleteGroupSteps extends SpringSteps implements En {
@@ -17,13 +18,13 @@ public class UserCannotDeleteGroupSteps extends SpringSteps implements En {
 
     public UserCannotDeleteGroupSteps() {
 
-        When("^attempting to manually delete group (\\d+)$", (Long groupId) -> {
+        When("^attempting to manually delete the group$", () -> {
             final HttpHeaders headers = new HttpHeaders();
 
             final String cookie = getLoginHeaders().getFirst(SET_COOKIE);
             headers.set(COOKIE, cookie);
 
-            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + groupId,
+            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + getGroupId(),
                                                       HttpMethod.DELETE,
                                                       new HttpEntity<>(headers),
                                                       String.class);

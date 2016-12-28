@@ -9,8 +9,10 @@ import org.springframework.util.MultiValueMap;
 import java.util.Arrays;
 
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
+import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.CLUSTER;
+import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.getGroupId;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AdminUpdateGroupSteps extends SpringSteps implements En {
@@ -19,21 +21,21 @@ public class AdminUpdateGroupSteps extends SpringSteps implements En {
 
     public AdminUpdateGroupSteps() {
 
-        When("^attempting to update group (\\d+)$", (Long groupId) -> {
+        When("^attempting to update the group$", () -> {
             final HttpHeaders headers = getHeaders(getTestRestTemplate(),
-                                                   "/clusteredit/se/central/" + CLUSTER + "/" + groupId,
+                                                   "/clusteredit/se/central/" + CLUSTER + "/" + getGroupId(),
                                                    getLoginHeaders());
             headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
             final MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
-            form.set("id", "" + groupId);
+            form.set("id", "" + getGroupId());
             form.set("location.coordX", "100");
             form.set("location.coordY", "100");
             form.set("members[0].name.firstName", "updatedFirstname");
             form.set("members[0].name.lastName", "updatedLastname");
 
-            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + groupId,
+            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + getGroupId(),
                                                       HttpMethod.PUT,
                                                       new HttpEntity<>(form, headers),
                                                       String.class);
@@ -44,6 +46,8 @@ public class AdminUpdateGroupSteps extends SpringSteps implements En {
             assertThat(response.getHeaders().getLocation().toString()).isEqualTo("http://localhost:" +
                                                                                  super.getPort() +
                                                                                  "/clusterview/se/central/" + CLUSTER);
+
+            assertThat(groupsSize(getTeamJpaRepository())).isEqualTo(getInitialGroupsSize());
         });
     }
 }
