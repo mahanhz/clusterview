@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.login;
 import static org.amhzing.clusterview.acceptancetest.helper.UserHelper.adminUser;
+import static org.amhzing.clusterview.acceptancetest.helper.UserHelper.stockholmUser;
 import static org.amhzing.clusterview.acceptancetest.helper.UserHelper.user;
 
 public class UserLoginSteps extends SpringSteps implements En {
@@ -23,6 +24,11 @@ public class UserLoginSteps extends SpringSteps implements En {
         Given("^a logged in user$", () -> {
             initialGroupsSize = groupsSize(getTeamJpaRepository());
             loginHeaders = login(user().getLeft(), user().getRight(), getTestRestTemplate());
+        });
+
+        Given("^a logged in stockholm cluster user$", () -> {
+            initialGroupsSize = groupsSize(getTeamJpaRepository());
+            loginHeaders = login(stockholmUser().getLeft(), stockholmUser().getRight(), getTestRestTemplate());
         });
     }
 

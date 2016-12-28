@@ -20,4 +20,8 @@ public final class UserHelper {
     public static ImmutablePair<String, String>superAdminUser() {
         return ImmutablePair.of("superadmin@example.com", "superadmin123");
     }
+
+    public static ImmutablePair<String, String> stockholmUser() {
+        return ImmutablePair.of("stockholm@example.com", "stockholm123");
+    }
 }

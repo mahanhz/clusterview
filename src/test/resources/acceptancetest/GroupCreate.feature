@@ -19,3 +19,8 @@ Feature: Create group
     Given a logged in user
     When attempting to access the new group page
     Then the user is forbidden from creating the group
+
+  Scenario: Cluster users cannot create groups outside their cluster
+    Given a logged in stockholm cluster user
+    When attempting to create a group in uppsala
+    Then the cluster user is forbidden from creating the group
