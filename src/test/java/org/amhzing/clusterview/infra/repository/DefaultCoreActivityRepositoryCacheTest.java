@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.infra.repository;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.configuration.CacheInvalidateRule;
-import org.amhzing.clusterview.configuration.CacheTestConfig;
+import org.amhzing.clusterview.testconfig.CacheInvalidateRule;
+import org.amhzing.clusterview.testconfig.CacheTestConfig;
 import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.domain.repository.CoreActivityRepository;
 import org.amhzing.clusterview.infra.jpa.repository.CoreActivityJpaRepository;

@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.configuration;
+package org.amhzing.clusterview.testconfig;
 
 import org.junit.rules.ExternalResource;
 import org.springframework.cache.Cache;

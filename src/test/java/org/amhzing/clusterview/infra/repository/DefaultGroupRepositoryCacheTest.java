@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.infra.repository;
 
-import org.amhzing.clusterview.configuration.CacheInvalidateRule;
-import org.amhzing.clusterview.configuration.CacheTestConfig;
+import org.amhzing.clusterview.testconfig.CacheInvalidateRule;
+import org.amhzing.clusterview.testconfig.CacheTestConfig;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Group;
 import org.amhzing.clusterview.domain.repository.GroupRepository;

@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.configuration;
+package org.amhzing.clusterview.testconfig;
 
 import com.google.common.collect.ImmutableList;
 import org.amhzing.clusterview.cache.CacheSpec;
