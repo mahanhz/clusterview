@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.web.controller;
+package org.amhzing.clusterview.web.controller.appnav;
 
 import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
 import org.amhzing.clusterview.web.adapter.ActivityAdapter;
@@ -17,7 +17,7 @@ import java.util.List;
 import static java.util.Collections.emptyList;
 import static org.apache.commons.lang3.Validate.notNull;
 
-@ControllerAdvice(basePackages = { "org.amhzing.clusterview.web.controller.appnav" })
+@ControllerAdvice(basePackageClasses = { CommonModelController.class })
 public class CommonModelController {
 
     public static final String USER_COUNTRY = "userCountry";
@@ -50,7 +50,6 @@ public class CommonModelController {
 
     @ModelAttribute(CLUSTER_VALUES_MODEL)
     public List<ClusterNameModel> clusters(final HttpSession httpSession) {
-
         final String userCountry = (String) httpSession.getAttribute(USER_COUNTRY);
 
         return StringUtils.isNotBlank(userCountry) ? statisticAdapter.clusters(userCountry) : emptyList();

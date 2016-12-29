@@ -3,7 +3,6 @@ package org.amhzing.clusterview.web.controller.appnav;
 import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
-import org.amhzing.clusterview.web.controller.CommonModelController;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;

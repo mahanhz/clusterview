@@ -3,8 +3,6 @@ package org.amhzing.clusterview.web.controller.appnav;
 import org.amhzing.clusterview.annotation.TestOffline;
 import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.StatisticAdapter;
-import org.amhzing.clusterview.web.controller.CommonModelController;
-import org.amhzing.clusterview.web.controller.appnav.StatisticController;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.servlet.ModelAndView;
 
-import static org.amhzing.clusterview.web.controller.CommonModelController.CLUSTER_VALUES_MODEL;
+import static org.amhzing.clusterview.web.controller.appnav.CommonModelController.CLUSTER_VALUES_MODEL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

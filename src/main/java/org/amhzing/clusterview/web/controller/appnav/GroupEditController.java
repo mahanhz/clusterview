@@ -16,12 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 import static org.amhzing.clusterview.web.controller.appnav.GroupController.CLUSTER_PATH;
+import static org.amhzing.clusterview.web.model.GroupPath.CREATE_GROUP;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
 public class GroupEditController extends AbstractEditController {
-
-    public static final String CREATE_GROUP = "creategroup";
 
     private GroupAdapter groupAdapter;
 
