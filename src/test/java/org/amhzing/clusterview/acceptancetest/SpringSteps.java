@@ -3,6 +3,7 @@ package org.amhzing.clusterview.acceptancetest;
 import org.amhzing.clusterview.ClusterviewApplication;
 import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.TeamJpaRepository;
+import org.amhzing.clusterview.infra.jpa.repository.stats.StatsHistoryJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +27,9 @@ public class SpringSteps {
     @Autowired
     private TeamJpaRepository teamJpaRepository;
 
+    @Autowired
+    private StatsHistoryJpaRepository statsHistoryJpaRepository;
+
     public int getPort() {
         return port;
     }
@@ -40,6 +44,10 @@ public class SpringSteps {
 
     public TeamJpaRepository getTeamJpaRepository() {
         return teamJpaRepository;
+    }
+
+    public StatsHistoryJpaRepository getStatsHistoryJpaRepository() {
+        return statsHistoryJpaRepository;
     }
 
     public long groupsSize(final TeamJpaRepository teamJpaRepository) {

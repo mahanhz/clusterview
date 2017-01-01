@@ -55,6 +55,6 @@ public class StatisticEditController {
     }
 
     private String redirectToStatsView(final String country) {
-        return "redirect:/statsview/" + HISTORY + "/" + country;
+        return "redirect:/statsview" + HISTORY + "/" + country;
     }
 }
