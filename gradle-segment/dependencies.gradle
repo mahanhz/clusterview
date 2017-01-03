@@ -26,6 +26,8 @@ ext {
     togglzVersion = '2.3.0.Final'
     togglzThymeleafVersion = '2.0.0.RELEASE'
 
+    stageMonitorVersion = '0.31.0'
+
     junitParamsVersion = '1.0.5'
     springSecurityTestVersion = '4.1.3.RELEASE'
     cucumberVersion = '1.2.5'
@@ -81,6 +83,9 @@ dependencies {
     compile ("io.springfox:springfox-swagger-ui:${springfoxSwagger2Version}")
 
     compile ("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:${thymeleafSpringSecurityVersion}")
+
+    compile ("org.stagemonitor:stagemonitor-web:${stageMonitorVersion}")
+    compile ("org.stagemonitor:stagemonitor-logging:${stageMonitorVersion}")
 
     testCompile ('org.springframework.boot:spring-boot-starter-test')
     testCompile ("org.springframework.security:spring-security-test:${springSecurityTestVersion}")

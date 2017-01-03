@@ -6,6 +6,7 @@ import ch.qos.logback.classic.turbo.TurboFilter;
 import ch.qos.logback.core.spi.FilterReply;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import org.amhzing.clusterview.ClusterviewApplication;
 import org.slf4j.Marker;
 
 import java.util.Arrays;
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.startsWith;
 import static org.thymeleaf.util.StringUtils.abbreviate;
 
 public class TimeBasedDuplicateMessageFilter extends TurboFilter {
@@ -50,7 +52,7 @@ public class TimeBasedDuplicateMessageFilter extends TurboFilter {
         int count = 0;
 
         if (isNotBlank(format)) {
-            final String key = abbreviate(format + paramsAsString(params), MAX_KEY_LENGTH);
+            final String key = abbreviate(format + paramsAsString(params, logger), MAX_KEY_LENGTH);
 
             final Integer msgCount = msgCache.getIfPresent(key);
 
@@ -88,8 +90,8 @@ public class TimeBasedDuplicateMessageFilter extends TurboFilter {
         this.expireAfterWriteSeconds = expireAfterWriteSeconds;
     }
 
-    private String paramsAsString(final Object[] params) {
-        if (params != null) {
+    private String paramsAsString(final Object[] params, final Logger logger) {
+        if (params != null && startsWith(logger.getName(), ClusterviewApplication.class.getPackage().getName())) {
             return Arrays.stream(params).map(Object::toString).collect(Collectors.joining("_"));
         }
 

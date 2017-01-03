@@ -30,7 +30,7 @@
             </listener>
         </listeners>
         <resources>
-            <heap unit="entries">200</heap>
+            <heap unit="MB">10</heap>
         </resources>
     </cache-template>
 

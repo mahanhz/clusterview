@@ -17,8 +17,7 @@ import java.util.List;
 import static org.amhzing.clusterview.user.UserRole.USER;
 import static org.amhzing.clusterview.user.UserUtil.isSingleCountry;
 import static org.amhzing.clusterview.user.UserUtil.roles;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.replace;
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class RedirectAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
@@ -66,10 +65,12 @@ public class RedirectAuthenticationSuccessHandler extends SavedRequestAwareAuthe
         if (savedRequest == null) {
             return false;
         } else if (savedRequest instanceof DefaultSavedRequest) {
-            final String strippedSavedRequestURI = replace(((DefaultSavedRequest) savedRequest).getRequestURI(), "/", "");
+            final String savedRequestURI = ((DefaultSavedRequest) savedRequest).getRequestURI();
+            final String strippedSavedRequestURI = replace(savedRequestURI, "/", "");
             final String strippedRequestContextPath = replace(request.getContextPath(), "/", "");
 
-            if (strippedSavedRequestURI.equalsIgnoreCase(strippedRequestContextPath)) {
+            if (startsWithIgnoreCase(savedRequestURI, "/stagemonitor")
+                    || strippedSavedRequestURI.equalsIgnoreCase(strippedRequestContextPath)) {
                 return false;
             }
         }
