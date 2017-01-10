@@ -13,9 +13,7 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.commons.lang3.StringUtils.startsWith;
-import static org.thymeleaf.util.StringUtils.abbreviate;
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class TimeBasedDuplicateMessageFilter extends TurboFilter {
 
