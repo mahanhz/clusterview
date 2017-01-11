@@ -34,8 +34,8 @@ public class TeamEntityFactoryTest {
 
         assertThat(teamEntity).isNotNull();
         assertThat(teamEntity.getCluster()).isEqualTo(clusterEntity());
-        assertThat(teamEntity.getLocation().getX()).isEqualTo(group().getLocation().getCoordX());
-        assertThat(teamEntity.getLocation().getY()).isEqualTo(group().getLocation().getCoordY());
+        assertThat(teamEntity.getLocation().getX()).isEqualTo(group().getLocation().coordX());
+        assertThat(teamEntity.getLocation().getY()).isEqualTo(group().getLocation().coordY());
     }
 
     @Test
@@ -45,7 +45,7 @@ public class TeamEntityFactoryTest {
 
         assertThat(teamEntity).isNotNull();
         assertThat(teamEntity).isNotEqualTo(teamEntity());
-        assertThat(teamEntity.getLocation().getX()).isEqualTo(anotherGroup().getLocation().getCoordX());
-        assertThat(teamEntity.getLocation().getY()).isEqualTo(anotherGroup().getLocation().getCoordY());
+        assertThat(teamEntity.getLocation().getX()).isEqualTo(anotherGroup().getLocation().coordX());
+        assertThat(teamEntity.getLocation().getY()).isEqualTo(anotherGroup().getLocation().coordY());
     }
 }

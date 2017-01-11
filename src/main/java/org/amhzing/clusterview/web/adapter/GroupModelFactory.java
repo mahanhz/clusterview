@@ -35,7 +35,7 @@ public final class GroupModelFactory {
     }
 
     private static LocationModel convertLocation(final Location location) {
-        return LocationModel.create(location.getCoordX(), location.getCoordY());
+        return LocationModel.create(location.coordX(), location.coordY());
     }
 
     private static List<CoreActivityModel> coreActivities(final Set<CoreActivity> coreActivities) {

@@ -12,7 +12,7 @@
             <div class="row">
                 <th:block th:replace="fragments/group-operations :: group-operations"></th:block>
 
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     <div class="cluster-container">
                         <img th:src="@{'/' + ${clusterPath.country} + '/images/cluster-' + ${clusterPath.cluster} + '.png'}" onerror="clusterNotFound()" />
                         <th:block th:each="group : ${groups}">

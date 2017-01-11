@@ -14,7 +14,7 @@ public class GroupFactoryTest {
         final Group group = GroupFactory.convert(groupModel());
 
         assertThat(group).isNotNull();
-        assertThat(group.getLocation().getCoordX()).isEqualTo(groupModel().getLocation().getCoordX());
-        assertThat(group.getLocation().getCoordY()).isEqualTo(groupModel().getLocation().getCoordY());
+        assertThat(group.getLocation().coordX()).isEqualTo(groupModel().getLocation().getCoordX());
+        assertThat(group.getLocation().coordY()).isEqualTo(groupModel().getLocation().getCoordY());
     }
 }

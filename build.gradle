@@ -3,6 +3,7 @@ buildscript {
 		NEXUS_REPO_URL = 'http://192.168.1.31:8082/nexus/content/repositories'
 
 		springBootVersion = '1.4.3.RELEASE'
+		propDepsVersion = '0.0.7'
 	}
 	repositories {
 		mavenCentral()
@@ -10,13 +11,20 @@ buildscript {
 		maven {
 			url 'https://plugins.gradle.org/m2/'
 		}
+		maven {
+			url 'http://repo.spring.io/plugins-release'
+		}
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath ("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath ("org.springframework.build.gradle:propdeps-plugin:${propDepsVersion}")
 	}
 }
 
 plugins {
+	// Build scan should be first
+	id 'com.gradle.build-scan' version '1.4'
+
 	id 'java'
 	id 'maven'
 	id 'jacoco'
@@ -36,11 +44,23 @@ plugins {
 
 apply plugin: 'org.springframework.boot'
 
+configure(allprojects) {
+	apply plugin: 'propdeps'
+	apply plugin: 'propdeps-maven'
+	apply plugin: 'propdeps-idea'
+	apply plugin: 'propdeps-eclipse'
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.14'
+}
+
+buildScan {
+	licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+	licenseAgree = 'yes'
 }
 
 // Dependencies

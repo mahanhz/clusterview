@@ -28,7 +28,7 @@ public final class GroupFactory {
     }
 
     private static Location convertLocation(final LocationModel location) {
-        return org.amhzing.clusterview.domain.model.Location.create(location.getCoordX(), location.getCoordY());
+        return ImmutableLocation.builder().coordX(location.getCoordX()).coordY(location.getCoordY()).build();
     }
 
     private static Set<CoreActivity> convertCoreActivities(final List<CoreActivityModel> coreActivityQuantities) {

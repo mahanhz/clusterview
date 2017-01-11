@@ -32,12 +32,12 @@ public final class Group {
     }
 
     public static Group empty() {
-        return create(Id.create(-1), emptySet(), Location.create(-1, -1), emptySet());
+        return create(Id.create(-1), emptySet(), nonExistingLocation(), emptySet());
     }
 
     public static Group empty(final Id id) {
         notNull(id);
-        return create(id, emptySet(), Location.create(-1, -1), emptySet());
+        return create(id, emptySet(), nonExistingLocation(), emptySet());
     }
 
     public Id getId() {
@@ -117,5 +117,9 @@ public final class Group {
                     "id='" + id + '\'' +
                     '}';
         }
+
+    }
+    private static Location nonExistingLocation() {
+        return ImmutableLocation.builder().coordX(-1).coordY(-1).build();
     }
 }

@@ -51,8 +51,8 @@ public class DefaultGroupRepositoryTest {
 
         final Group group = groups.iterator().next();
         final TeamEntity teamEntity = clusterEntity().getTeams().iterator().next();
-        assertThat(group.getLocation().getCoordX()).isEqualTo(teamEntity.getLocation().getX());
-        assertThat(group.getLocation().getCoordY()).isEqualTo(teamEntity.getLocation().getY());
+        assertThat(group.getLocation().coordX()).isEqualTo(teamEntity.getLocation().getX());
+        assertThat(group.getLocation().coordY()).isEqualTo(teamEntity.getLocation().getY());
     }
 
     @Test
@@ -73,8 +73,8 @@ public class DefaultGroupRepositoryTest {
         final Group group = defaultGroupRepository.group(Group.Id.create(teamEntity().getId()));
 
         assertThat(group).isNotNull();
-        assertThat(group.getLocation().getCoordX()).isEqualTo(teamEntity().getLocation().getX());
-        assertThat(group.getLocation().getCoordY()).isEqualTo(teamEntity().getLocation().getY());
+        assertThat(group.getLocation().coordX()).isEqualTo(teamEntity().getLocation().getX());
+        assertThat(group.getLocation().coordY()).isEqualTo(teamEntity().getLocation().getY());
     }
 
     @Test

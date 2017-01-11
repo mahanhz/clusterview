@@ -19,7 +19,7 @@ public class GroupModelFactoryTest {
         assertThat(groupModels).isNotEmpty();
 
         final GroupModel groupModel = groupModels.iterator().next();
-        assertThat(groupModel.getLocation().getCoordX()).isEqualTo(group().getLocation().getCoordX());
-        assertThat(groupModel.getLocation().getCoordY()).isEqualTo(group().getLocation().getCoordY());
+        assertThat(groupModel.getLocation().getCoordX()).isEqualTo(group().getLocation().coordX());
+        assertThat(groupModel.getLocation().getCoordY()).isEqualTo(group().getLocation().coordY());
     }
 }

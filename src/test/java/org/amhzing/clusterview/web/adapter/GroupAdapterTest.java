@@ -42,8 +42,8 @@ public class GroupAdapterTest {
         assertThat(groups).isNotEmpty();
 
         final GroupModel groupModel = groups.iterator().next();
-        assertThat(groupModel.getLocation().getCoordX()).isEqualTo(group().getLocation().getCoordX());
-        assertThat(groupModel.getLocation().getCoordY()).isEqualTo(group().getLocation().getCoordY());
+        assertThat(groupModel.getLocation().getCoordX()).isEqualTo(group().getLocation().coordX());
+        assertThat(groupModel.getLocation().getCoordY()).isEqualTo(group().getLocation().coordY());
     }
 
     @Test
@@ -54,8 +54,8 @@ public class GroupAdapterTest {
         final GroupModel groupModel = groupAdapter.group(group().getId().getId());
 
         assertThat(groupModel).isNotNull();
-        assertThat(groupModel.getLocation().getCoordX()).isEqualTo(group().getLocation().getCoordX());
-        assertThat(groupModel.getLocation().getCoordY()).isEqualTo(group().getLocation().getCoordY());
+        assertThat(groupModel.getLocation().getCoordX()).isEqualTo(group().getLocation().coordX());
+        assertThat(groupModel.getLocation().getCoordY()).isEqualTo(group().getLocation().coordY());
     }
 
     @Test

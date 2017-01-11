@@ -55,7 +55,7 @@ public class TeamEntityFactory {
     }
 
     private Location convertLocation(final org.amhzing.clusterview.domain.model.Location location) {
-        return Location.create(location.getCoordX(), location.getCoordY());
+        return Location.create(location.coordX(), location.coordY());
     }
 
     private Set<MemberEntity> convertMembers(final Set<Member> members, final TeamEntity teamEntity) {

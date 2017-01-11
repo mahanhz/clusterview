@@ -40,8 +40,8 @@ public class DefaultGroupServiceTest {
 
         final Group group = groups.iterator().next();
         final Group clusterGroup = cluster().getGroups().iterator().next();
-        assertThat(group.getLocation().getCoordX()).isEqualTo(clusterGroup.getLocation().getCoordX());
-        assertThat(group.getLocation().getCoordY()).isEqualTo(clusterGroup.getLocation().getCoordY());
+        assertThat(group.getLocation().coordX()).isEqualTo(clusterGroup.getLocation().coordX());
+        assertThat(group.getLocation().coordY()).isEqualTo(clusterGroup.getLocation().coordY());
     }
 
     @Test
@@ -52,8 +52,8 @@ public class DefaultGroupServiceTest {
         final Group group = defaultGroupService.group(group().getId());
 
         assertThat(group).isNotNull();
-        assertThat(group.getLocation().getCoordX()).isEqualTo(group().getLocation().getCoordX());
-        assertThat(group.getLocation().getCoordY()).isEqualTo(group().getLocation().getCoordY());
+        assertThat(group.getLocation().coordX()).isEqualTo(group().getLocation().coordX());
+        assertThat(group.getLocation().coordY()).isEqualTo(group().getLocation().coordY());
     }
 
     @Test

@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="row">
                 <th:block th:replace="fragments/adjust-map-size :: adjust-map-size"></th:block>
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     <img class="northernRegionImage adjustableImage" th:src="@{/se/images/regions.png}" usemap="#northernRegionMap" />
 
                     <map name="northernRegionMap" th:with="baseUrl=('/clusterview/' + ${regionPath.country} + '/' + ${regionPath.region})">

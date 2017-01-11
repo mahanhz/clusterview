@@ -19,7 +19,7 @@ public class GroupFactoryTest {
         assertThat(groups).isNotEmpty();
 
         final Group group = groups.iterator().next();
-        assertThat(group.getLocation().getCoordX()).isEqualTo(teamEntity().getLocation().getX());
-        assertThat(group.getLocation().getCoordY()).isEqualTo(teamEntity().getLocation().getY());
+        assertThat(group.getLocation().coordX()).isEqualTo(teamEntity().getLocation().getX());
+        assertThat(group.getLocation().coordY()).isEqualTo(teamEntity().getLocation().getY());
     }
 }

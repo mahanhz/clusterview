@@ -58,11 +58,11 @@ public final class DomainModelHelper {
     }
 
     public static Location location() {
-        return Location.create(100,50);
+        return ImmutableLocation.builder().coordX(100).coordY(50).build();
     }
 
     public static Location anotherLocation() {
-        return Location.create(75, 220);
+        return ImmutableLocation.builder().coordX(75).coordY(220).build();
     }
 
     public static Member member() {
