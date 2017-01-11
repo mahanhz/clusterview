@@ -1,55 +1,27 @@
 package org.amhzing.clusterview.domain.model;
 
-import java.util.Objects;
+import org.apache.commons.lang3.StringUtils;
+import org.immutables.value.Value;
 
 import static org.apache.commons.lang3.StringUtils.trim;
 import static org.apache.commons.lang3.Validate.isTrue;
-import static org.apache.commons.lang3.Validate.notBlank;
 
-public final class Suffix {
+@Value.Immutable
+public interface Suffix {
+    static final int MAX_LENGTH = 10;
 
-    protected static final int MAX_LENGTH = 10;
+    @Value.Parameter
+    String value();
 
-    private final String value;
+    @Value.Check
+    default Suffix check() {
+        final String trimmed = trim(value());
+        isTrue(trimmed.length() <= MAX_LENGTH);
 
-    private Suffix(final String value) {
-        isValid(value);
+        if (!StringUtils.equals(value(), trimmed)) {
+            return ImmutableSuffix.of(trimmed);
+        }
 
-        this.value = trim(value);
-    }
-
-    public static Suffix create(final String value) {
-        return new Suffix(value);
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Suffix suffix = (Suffix) o;
-        return Objects.equals(value, suffix.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
-    @Override
-    public String toString() {
-        return "Suffix{" +
-                "value='" + value + '\'' +
-                '}';
-    }
-
-    private boolean isValid(final String value) {
-        notBlank(value);
-        isTrue(trim(value).length() <= MAX_LENGTH);
-
-        return true;
+        return this;
     }
 }

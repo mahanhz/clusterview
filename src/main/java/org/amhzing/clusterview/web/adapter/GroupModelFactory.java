@@ -77,7 +77,7 @@ public final class GroupModelFactory {
         return NameModel.create(firstName == null ? "" : firstName.getValue(),
                                 middleName == null ? "" : middleName.getValue(),
                                 lastName == null ? "" : lastName.getValue(),
-                                suffix == null ? "" : suffix.getValue());
+                                suffix == null ? "" : suffix.value());
     }
 
     private static CapabilityModel convertCapabilities(final Capability capability) {

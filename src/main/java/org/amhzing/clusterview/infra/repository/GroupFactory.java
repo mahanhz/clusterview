@@ -39,7 +39,7 @@ public final class GroupFactory {
     }
 
     private static org.amhzing.clusterview.domain.model.Location convertLocation(final Location location) {
-        return ImmutableLocation.builder().coordX(location.getX()).coordY(location.getY()).build();
+        return ImmutableLocation.of(location.getX(), location.getY());
     }
 
     private static Set<CoreActivity> convertCoreActivities(final Map<CoreActivityEntity, ParticipantQuantity> coreActivityQuantities) {
@@ -81,7 +81,7 @@ public final class GroupFactory {
         return org.amhzing.clusterview.domain.model.Name.create(isBlank(firstName) ? null : FirstName.create(firstName),
                                                                 isBlank(middleName) ? null : MiddleName.create(middleName),
                                                                 isBlank(lastName) ? null : LastName.create(lastName),
-                                                                isBlank(suffix) ? null : Suffix.create(suffix));
+                                                                isBlank(suffix) ? null : ImmutableSuffix.of(suffix));
     }
 
     private static Capability convertCapabilities(final Set<CapabilityEntity> capabilities) {

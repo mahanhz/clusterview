@@ -31,10 +31,6 @@ public final class Group {
         return new Group(id, members, location, coreActivities);
     }
 
-    public static Group empty() {
-        return create(Id.create(-1), emptySet(), nonExistingLocation(), emptySet());
-    }
-
     public static Group empty(final Id id) {
         notNull(id);
         return create(id, emptySet(), nonExistingLocation(), emptySet());
@@ -120,6 +116,6 @@ public final class Group {
 
     }
     private static Location nonExistingLocation() {
-        return ImmutableLocation.builder().coordX(-1).coordY(-1).build();
+        return ImmutableLocation.of(-1, -1);
     }
 }

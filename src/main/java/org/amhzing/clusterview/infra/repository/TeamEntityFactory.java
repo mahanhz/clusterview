@@ -102,7 +102,7 @@ public class TeamEntityFactory {
         return Name.create(firstName == null ? "" : firstName.getValue(),
                            middleName == null ? "" : middleName.getValue(),
                            lastName == null ? "" : lastName.getValue(),
-                           suffix == null ? "" : suffix.getValue());
+                           suffix == null ? "" : suffix.value());
     }
 
     private Set<CapabilityEntity> convertCapabilities(final Capability capability, final MemberEntity memberEntity) {

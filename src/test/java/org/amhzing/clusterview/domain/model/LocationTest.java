@@ -19,7 +19,7 @@ public class LocationTest {
                               final int x,
                               final int y) {
         try {
-            ImmutableLocation.builder().coordX(x).coordY(y).build();
+            ImmutableLocation.of(x, y);
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }

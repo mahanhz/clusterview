@@ -58,11 +58,11 @@ public final class DomainModelHelper {
     }
 
     public static Location location() {
-        return ImmutableLocation.builder().coordX(100).coordY(50).build();
+        return ImmutableLocation.of(100, 50);
     }
 
     public static Location anotherLocation() {
-        return ImmutableLocation.builder().coordX(75).coordY(220).build();
+        return ImmutableLocation.of(75, 220);
     }
 
     public static Member member() {
@@ -112,7 +112,7 @@ public final class DomainModelHelper {
     }
 
     public static Name anotherName() {
-        return Name.create(FirstName.create("Jane"), MiddleName.create("D"), LastName.create("Doe"), Suffix.create("I"));
+        return Name.create(FirstName.create("Jane"), MiddleName.create("D"), LastName.create("Doe"), ImmutableSuffix.of("I"));
     }
 
     public static FirstName firstName() {
@@ -128,7 +128,7 @@ public final class DomainModelHelper {
     }
 
     public static Suffix suffix() {
-        return Suffix.create("suffix");
+        return ImmutableSuffix.of("suffix");
     }
 
     public static Member.Id memberId() {
