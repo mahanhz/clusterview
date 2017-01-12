@@ -101,7 +101,7 @@ public class TeamEntityFactory {
 
         return Name.create(firstName == null ? "" : firstName.value(),
                            middleName == null ? "" : middleName.value(),
-                           lastName == null ? "" : lastName.getValue(),
+                           lastName == null ? "" : lastName.value(),
                            suffix == null ? "" : suffix.value());
     }
 
