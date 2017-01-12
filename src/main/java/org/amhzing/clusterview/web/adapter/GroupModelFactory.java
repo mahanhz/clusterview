@@ -75,7 +75,7 @@ public final class GroupModelFactory {
         final Suffix suffix = name.getSuffix();
 
         return NameModel.create(firstName == null ? "" : firstName.getValue(),
-                                middleName == null ? "" : middleName.getValue(),
+                                middleName == null ? "" : middleName.value(),
                                 lastName == null ? "" : lastName.getValue(),
                                 suffix == null ? "" : suffix.value());
     }

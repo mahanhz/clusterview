@@ -112,7 +112,7 @@ public final class DomainModelHelper {
     }
 
     public static Name anotherName() {
-        return Name.create(FirstName.create("Jane"), MiddleName.create("D"), LastName.create("Doe"), ImmutableSuffix.of("I"));
+        return Name.create(FirstName.create("Jane"), ImmutableMiddleName.of("D"), LastName.create("Doe"), ImmutableSuffix.of("I"));
     }
 
     public static FirstName firstName() {
@@ -120,7 +120,7 @@ public final class DomainModelHelper {
     }
 
     public static MiddleName middleName() {
-        return MiddleName.create("middleName");
+        return ImmutableMiddleName.of("middleName");
     }
 
     public static LastName lastName() {
