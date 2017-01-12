@@ -99,7 +99,7 @@ public class TeamEntityFactory {
         final LastName lastName = name.getLastName();
         final Suffix suffix = name.getSuffix();
 
-        return Name.create(firstName == null ? "" : firstName.getValue(),
+        return Name.create(firstName == null ? "" : firstName.value(),
                            middleName == null ? "" : middleName.value(),
                            lastName == null ? "" : lastName.getValue(),
                            suffix == null ? "" : suffix.value());

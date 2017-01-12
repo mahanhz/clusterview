@@ -78,7 +78,7 @@ public final class GroupFactory {
         final String lastName = name.getLastName();
         final String suffix = name.getSuffix();
 
-        return org.amhzing.clusterview.domain.model.Name.create(isBlank(firstName) ? null : FirstName.create(firstName),
+        return org.amhzing.clusterview.domain.model.Name.create(isBlank(firstName) ? null : ImmutableFirstName.of(firstName),
                                                                 isBlank(middleName) ? null : ImmutableMiddleName.of(middleName),
                                                                 isBlank(lastName) ? null : LastName.create(lastName),
                                                                 isBlank(suffix) ? null : ImmutableSuffix.of(suffix));

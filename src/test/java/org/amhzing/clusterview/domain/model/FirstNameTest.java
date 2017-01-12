@@ -2,8 +2,6 @@ package org.amhzing.clusterview.domain.model;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -11,25 +9,30 @@ import static org.amhzing.clusterview.domain.model.FirstName.MAX_LENGTH;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.invalidMatching;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.valid;
 import static org.apache.commons.lang3.StringUtils.repeat;
+import static org.apache.commons.lang3.StringUtils.trim;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
 public class FirstNameTest {
+
+    private static final String VALUE_WITH_WHITE_SPACE = "  Arnold  ";
 
     @Test
     @Parameters(method = "values")
     public void test_creation(final Class<? extends Exception> exception,
                               final String value) {
         try {
-            FirstName.create(value);
+            ImmutableFirstName.of(value);
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
     }
 
     @Test
-    public void equalsAndHashCodeContract() throws Exception {
-        EqualsVerifier.forClass(FirstName.class).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
+    public void should_trim_value() {
+        final ImmutableFirstName firstName = ImmutableFirstName.of(VALUE_WITH_WHITE_SPACE);
+
+        assertThat(firstName.value()).isEqualTo(trim(VALUE_WITH_WHITE_SPACE));
     }
 
     @SuppressWarnings("unused")

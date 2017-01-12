@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(JUnitParamsRunner.class)
 public class SuffixTest {
 
-    public static final String VALUE_WITH_WHITE_SPACE = "  JR  ";
+    private static final String VALUE_WITH_WHITE_SPACE = "  JR  ";
 
     @Test
     @Parameters(method = "values")

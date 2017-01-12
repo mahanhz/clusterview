@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(JUnitParamsRunner.class)
 public class MiddleNameTest {
 
-    public static final String VALUE_WITH_WHITE_SPACE = "  Sinjon  ";
+    private static final String VALUE_WITH_WHITE_SPACE = "  Sinjon  ";
 
     @Test
     @Parameters(method = "values")
