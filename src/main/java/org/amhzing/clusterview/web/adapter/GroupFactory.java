@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.web.adapter;
 
+import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
 import org.amhzing.clusterview.domain.model.*;
 import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.domain.model.statistic.Quantity;
@@ -9,7 +10,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public final class GroupFactory {
@@ -60,14 +60,16 @@ public final class GroupFactory {
 
     private static Name convertName(final NameModel name) {
         final String firstName = name.getFirstName();
-        final String middleName = name.getMiddleName();
+        final String middleName = StringUtils.defaultIfBlank(name.getMiddleName(), "");
         final String lastName = name.getLastName();
-        final String suffix = name.getSuffix();
+        final String suffix = StringUtils.defaultIfBlank(name.getSuffix(), "");
 
-        return org.amhzing.clusterview.domain.model.Name.create(isBlank(firstName) ? null : ImmutableFirstName.of(firstName),
-                                                                isBlank(middleName) ? null : ImmutableMiddleName.of(middleName),
-                                                                isBlank(lastName) ? null : ImmutableLastName.of(lastName),
-                                                                isBlank(suffix) ? null : ImmutableSuffix.of(suffix));
+        return ImmutableName.builder()
+                            .firstName(ImmutableFirstName.of(firstName))
+                            .middleName(ImmutableMiddleName.of(middleName))
+                            .lastName(ImmutableLastName.of(lastName))
+                            .suffix(ImmutableSuffix.of(suffix))
+                            .build();
     }
 
     private static Capability convertCapabilities(final CapabilityModel capability) {

@@ -94,10 +94,10 @@ public class TeamEntityFactory {
     }
 
     private Name convertName(final org.amhzing.clusterview.domain.model.Name name) {
-        final FirstName firstName = name.getFirstName();
-        final MiddleName middleName = name.getMiddleName();
-        final LastName lastName = name.getLastName();
-        final Suffix suffix = name.getSuffix();
+        final FirstName firstName = name.firstName();
+        final MiddleName middleName = name.middleName();
+        final LastName lastName = name.lastName();
+        final Suffix suffix = name.suffix();
 
         return Name.create(firstName == null ? "" : firstName.value(),
                            middleName == null ? "" : middleName.value(),

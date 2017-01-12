@@ -8,7 +8,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static com.google.common.collect.ImmutableSet.of;
-import static org.amhzing.clusterview.helper.DomainModelHelper.*;
+import static org.amhzing.clusterview.helper.DomainModelHelper.activity;
+import static org.amhzing.clusterview.helper.DomainModelHelper.name;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.invalidMatching;
 import static org.amhzing.clusterview.helper.JUnitParamHelper.valid;
 import static org.assertj.core.api.Assertions.assertThat;

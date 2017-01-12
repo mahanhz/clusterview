@@ -69,10 +69,10 @@ public final class GroupModelFactory {
 
     private static NameModel convertName(final Name name) {
 
-        final FirstName firstName = name.getFirstName();
-        final MiddleName middleName = name.getMiddleName();
-        final LastName lastName = name.getLastName();
-        final Suffix suffix = name.getSuffix();
+        final FirstName firstName = name.firstName();
+        final MiddleName middleName = name.middleName();
+        final LastName lastName = name.lastName();
+        final Suffix suffix = name.suffix();
 
         return NameModel.create(firstName == null ? "" : firstName.value(),
                                 middleName == null ? "" : middleName.value(),
