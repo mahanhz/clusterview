@@ -21,7 +21,7 @@
                             th:text="${activity.name}">Study circle</option>
                 </div>
 
-                <input type="hidden" th:field="*{id}" />
+                <input type="hidden" th:field="*{obfuscatedId}" />
                 <input type="hidden" id="location.coordX" name="location.coordX" th:value="${groupModel.location.coordX}"/>
                 <input type="hidden" id="location.coordY" name="location.coordY" th:value="${groupModel.location.coordY}"/>
 

@@ -11,6 +11,7 @@ import java.util.Set;
 
 import static org.amhzing.clusterview.web.adapter.GroupModelFactory.convertGroup;
 import static org.amhzing.clusterview.web.adapter.GroupModelFactory.convertGroups;
+import static org.amhzing.clusterview.web.adapter.Obfuscator.*;
 import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -32,7 +33,10 @@ public class GroupAdapter {
         return convertGroups(groups);
     }
 
-    public GroupModel group(final long groupId) {
+    public GroupModel group(final String obfuscatedId) {
+        notBlank(obfuscatedId);
+
+        final long groupId = deobfuscate(obfuscatedId);
         final Group group = groupService.group(Group.Id.create(groupId));
 
         return convertGroup(group);
@@ -47,9 +51,11 @@ public class GroupAdapter {
         groupService.createGroup(group, Cluster.Id.create(clusterId));
     }
 
-    public void deleteGroup(final long groupId, final String clusterId) {
+    public void deleteGroup(final String obfuscatedId, final String clusterId) {
+        notBlank(obfuscatedId);
         notBlank(clusterId);
 
+        final long groupId = deobfuscate(obfuscatedId);
         groupService.deleteGroup(Group.Id.create(groupId), Cluster.Id.create(clusterId));
     }
 

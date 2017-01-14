@@ -30,6 +30,8 @@ ext {
 
     immutablesVersion = '2.4.0'
 
+    hashidsVersion = '1.0.1'
+
     junitParamsVersion = '1.0.5'
     springSecurityTestVersion = '4.1.3.RELEASE'
     cucumberVersion = '1.2.5'
@@ -87,6 +89,8 @@ dependencies {
 
     compile ("org.stagemonitor:stagemonitor-web:${stageMonitorVersion}")
     compile ("org.stagemonitor:stagemonitor-logging:${stageMonitorVersion}")
+
+    compile ("org.hashids:hashids:${hashidsVersion}")
 
     provided ("org.immutables:value:${immutablesVersion}")
 

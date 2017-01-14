@@ -73,7 +73,7 @@
                 <div class="col-xs-4">
                     <div class="pull-left"
                          th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') and @webSecurity.checkAdmin(authentication, '''+#strings.toUpperCase(groupPath.cluster)+''')')}">
-                        <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
+                        <form th:action="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.obfuscatedId}"
                               th:method="delete" target="_top">
                             <button id="deleteGroup" type="submit" class="btn btn-danger btn-md">Delete Group</button>
                         </form>
@@ -91,7 +91,7 @@
                 <div class="col-xs-4">
                     <div class="pull-right"
                          th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') and @webSecurity.checkAdmin(authentication, '''+#strings.toUpperCase(groupPath.cluster)+''')')}">
-                        <a th:href="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.groupId}"
+                        <a th:href="'/clusteredit/' + ${groupPath.country} + '/' + ${groupPath.region} + '/' + ${groupPath.cluster} + '/' + ${groupPath.obfuscatedId}"
                            target="_top">
                             <button id="editGroup" type="submit" class="btn btn-primary btn-md">Edit Group</button>
                         </a>
@@ -103,7 +103,7 @@
         <input type="hidden" id="country" name="country" th:value="${groupPath.country}" />
         <input type="hidden" id="region" name="region" th:value="${groupPath.region}" />
         <input type="hidden" id="cluster" name="cluster" th:value="${groupPath.cluster}" />
-        <input type="hidden" id="groupId" name="region" th:value="${groupPath.groupId}" />
+        <input type="hidden" id="obfuscatedId" name="region" th:value="${groupPath.obfuscatedId}" />
 
         <th:block th:replace="fragments/javascript :: javascript"></th:block>
 

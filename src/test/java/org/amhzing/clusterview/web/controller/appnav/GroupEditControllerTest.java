@@ -34,6 +34,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestOffline
 public class GroupEditControllerTest {
 
+    public static final String OBFUSCATED_GROUP_ID = "3o97MmbN";
+
     @Autowired
     private MockMvc mvc;
 
@@ -86,9 +88,9 @@ public class GroupEditControllerTest {
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_be_able_to_edit_group() throws Exception {
-        given(groupAdapter.group(1L)).willReturn(groupModel());
+        given(groupAdapter.group(OBFUSCATED_GROUP_ID)).willReturn(groupModel());
 
-        final ResultActions result = this.mvc.perform(get("/clusteredit/se/central/stockholm/1"))
+        final ResultActions result = this.mvc.perform(get("/clusteredit/se/central/stockholm/" + OBFUSCATED_GROUP_ID))
                                              .andExpect(status().isOk());
 
         final String content = result.andReturn().getResponse().getContentAsString();
@@ -99,7 +101,7 @@ public class GroupEditControllerTest {
         assertThat(forms).hasSize(2);
         final Element form = forms.get(1);
 
-        assertThat(form.attr("action")).endsWith("1");
+        assertThat(form.attr("action")).endsWith(OBFUSCATED_GROUP_ID);
         assertThat(form.attr("method")).isEqualToIgnoringCase("post");
 
         final Elements hiddenMethodElements = form.getElementsByAttributeValueMatching("name", "_method");
@@ -131,9 +133,9 @@ public class GroupEditControllerTest {
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_catch_unexpected_error() throws Exception {
-        given(groupAdapter.group(123L)).willThrow(new RuntimeException("Something unexpected happened"));
+        given(groupAdapter.group(OBFUSCATED_GROUP_ID)).willThrow(new RuntimeException("Something unexpected happened"));
 
-        final ResultActions result = this.mvc.perform(get("/clusteredit/se/central/stockholm/123"))
+        final ResultActions result = this.mvc.perform(get("/clusteredit/se/central/stockholm/" + OBFUSCATED_GROUP_ID))
                                              .andExpect(status().isOk());
 
         final ModelAndView mav = result.andReturn().getModelAndView();

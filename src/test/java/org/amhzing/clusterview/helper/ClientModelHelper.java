@@ -13,7 +13,11 @@ public class ClientModelHelper {
     }
 
     public static GroupModel groupModel() {
-        return GroupModel.create(1L, of(memberModel()), locationModel(), of(coreActivityModel()));
+        return GroupModel.create("3o97MmbN", of(memberModel()), locationModel(), of(coreActivityModel()));
+    }
+
+    public static GroupModel groupModel(final String obfuscatedId) {
+        return GroupModel.create(obfuscatedId, of(memberModel()), locationModel(), of(coreActivityModel()));
     }
 
     public static MemberModel memberModel() {

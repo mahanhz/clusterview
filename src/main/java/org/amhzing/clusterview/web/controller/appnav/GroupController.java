@@ -54,15 +54,15 @@ public class GroupController extends AbstractController {
     }
 
     @LogExecutionTime
-    @GetMapping(path = CLUSTER_PATH + "/{groupId}")
+    @GetMapping(path = CLUSTER_PATH + "/{obfuscatedId}")
     public ModelAndView group(@ModelAttribute @Valid final GroupPath groupPath,
                               final BindingResult bindingResult,
                               final Model model) {
 
-        GroupModel group = GroupModel.empty(groupPath.getGroupId());
+        GroupModel group = GroupModel.empty(groupPath.getObfuscatedId());
 
         if (!bindingResult.hasErrors()) {
-            group = groupAdapter.group(groupPath.getGroupId());
+            group = groupAdapter.group(groupPath.getObfuscatedId());
         }
 
         model.addAttribute("group", group);
@@ -81,18 +81,18 @@ public class GroupController extends AbstractController {
     }
 
     private void highlightGroups(final Set<GroupModel> groups, final String activityName) {
-        final Set<Long> highlightGroups = groupsWithActivity(groups, activityName);
+        final Set<String> highlightGroups = groupsWithActivity(groups, activityName);
 
         if (CollectionUtils.isNotEmpty(highlightGroups)) {
             groups.stream()
-                  .forEach(group -> group.setHighlight(highlightGroups.contains(group.getId())));
+                  .forEach(group -> group.setHighlight(highlightGroups.contains(group.getObfuscatedId())));
         }
     }
 
-    private Set<Long> groupsWithActivity(final Set<GroupModel> groups, final String activityName) {
+    private Set<String> groupsWithActivity(final Set<GroupModel> groups, final String activityName) {
         return groups.stream()
                      .filter(group -> membersWithActivity(group.getMembers(), activityName))
-                     .map(GroupModel::getId)
+                     .map(GroupModel::getObfuscatedId)
                      .collect(Collectors.toSet());
     }
 

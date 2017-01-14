@@ -5,14 +5,19 @@ import org.amhzing.clusterview.application.GroupService;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Group;
 import org.amhzing.clusterview.web.model.GroupModel;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.Set;
 
+import static java.util.Collections.emptyList;
 import static org.amhzing.clusterview.helper.ClientModelHelper.groupModel;
 import static org.amhzing.clusterview.helper.DomainModelHelper.cluster;
 import static org.amhzing.clusterview.helper.DomainModelHelper.group;
@@ -29,8 +34,16 @@ public class GroupAdapterTest {
     @Mock
     private GroupService groupService;
 
-    @InjectMocks
     private GroupAdapter groupAdapter;
+
+    @Before
+    public void setUp() throws Exception {
+        groupAdapter = new GroupAdapter(groupService);
+
+        User user = new User("me@example.com", "Nopass" , emptyList());
+        Authentication auth = new UsernamePasswordAuthenticationToken(user, null);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+    }
 
     @Test
     public void should_get_groups() throws Exception {
@@ -51,7 +64,9 @@ public class GroupAdapterTest {
 
         given(groupService.group(any())).willReturn(group());
 
-        final GroupModel groupModel = groupAdapter.group(group().getId().getId());
+        final String obfuscatedGroupId = Obfuscator.obfuscate(group().getId().getId());
+
+        final GroupModel groupModel = groupAdapter.group(obfuscatedGroupId);
 
         assertThat(groupModel).isNotNull();
         assertThat(groupModel.getLocation().getCoordX()).isEqualTo(group().getLocation().coordX());
@@ -61,7 +76,8 @@ public class GroupAdapterTest {
     @Test
     public void should_create_group() throws Exception {
 
-        final GroupModel groupModel = groupModel();
+        final String obfuscatedId = Obfuscator.obfuscate(1234L);
+        final GroupModel groupModel = groupModel(obfuscatedId);
         final Cluster.Id clusterId = cluster().getId();
 
         groupAdapter.createGroup(groupModel, clusterId.getId());
@@ -72,7 +88,8 @@ public class GroupAdapterTest {
     @Test
     public void should_update_group() throws Exception {
 
-        final GroupModel groupModel = groupModel();
+        final String obfuscatedId = Obfuscator.obfuscate(1234L);
+        final GroupModel groupModel = groupModel(obfuscatedId);
         final Cluster.Id clusterId = cluster().getId();
 
         groupAdapter.updateGroup(groupModel, clusterId.getId());
@@ -86,7 +103,9 @@ public class GroupAdapterTest {
         final Group.Id groupId = group().getId();
         final Cluster.Id clusterId = cluster().getId();
 
-        groupAdapter.deleteGroup(groupId.getId(), clusterId.getId());
+        final String obfuscatedGroupId = Obfuscator.obfuscate(groupId.getId());
+
+        groupAdapter.deleteGroup(obfuscatedGroupId, clusterId.getId());
 
         verify(groupService, times(1)).deleteGroup(groupId, clusterId);
     }

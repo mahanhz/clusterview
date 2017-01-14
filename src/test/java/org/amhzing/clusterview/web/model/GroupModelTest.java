@@ -21,11 +21,11 @@ public class GroupModelTest {
     @Test
     @Parameters(method = "values")
     public void test_creation(final Class<? extends Exception> exception,
-                              final long id,
+                              final String obfuscatedId,
                               final LocationModel location,
                               final MemberModel... members) {
         try {
-            GroupModel.create(id, ImmutableList.copyOf(members), location, emptyList());
+            GroupModel.create(obfuscatedId, ImmutableList.copyOf(members), location, emptyList());
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(exception);
         }
@@ -41,9 +41,11 @@ public class GroupModelTest {
     @SuppressWarnings("unused")
     private Object values() {
         return new Object[][]{
-                { valid(), 123L, locationModel(), memberModel() },
-                { invalidMatching(NullPointerException.class), 123L, locationModel(), null },
-                { invalidMatching(NullPointerException.class), 123L, null, memberModel() }
+                { valid(), "3o97MmbN", locationModel(), memberModel() },
+                { invalidMatching(IllegalArgumentException.class), "", locationModel(), memberModel() },
+                { invalidMatching(NullPointerException.class), null, locationModel(), memberModel() },
+                { invalidMatching(NullPointerException.class), "3o97MmbN", locationModel(), null },
+                { invalidMatching(NullPointerException.class), "3o97MmbN", null, memberModel() }
         };
     }
 }

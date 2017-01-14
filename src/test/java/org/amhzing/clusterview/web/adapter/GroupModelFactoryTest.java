@@ -2,15 +2,28 @@ package org.amhzing.clusterview.web.adapter;
 
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.web.model.GroupModel;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.Set;
 
+import static java.util.Collections.emptyList;
 import static org.amhzing.clusterview.helper.DomainModelHelper.group;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GroupModelFactoryTest {
 
+    @Before
+    public void setUp() throws Exception {
+        User user = new User("me@example.com", "Nopass" , emptyList());
+        Authentication auth = new UsernamePasswordAuthenticationToken(user, null);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+    }
+    
     @Test
     public void should_convert_group() throws Exception {
 

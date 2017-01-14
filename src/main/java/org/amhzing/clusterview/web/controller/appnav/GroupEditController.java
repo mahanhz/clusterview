@@ -37,27 +37,27 @@ public class GroupEditController extends AbstractEditController {
     @LogExecutionTime
     @GetMapping(path = CLUSTER_PATH + "/newgroup")
     public String newGroup(@ModelAttribute final GroupPath groupPath) {
-        return groupActionView(groupPath);
+        return groupActionView();
     }
 
     @LogExecutionTime
-    @GetMapping(path = CLUSTER_PATH + "/{groupId}")
+    @GetMapping(path = CLUSTER_PATH + "/{obfuscatedId}")
     public String editGroup(@ModelAttribute @Valid final GroupPath groupPath,
                             final BindingResult bindingResult,
                             final Model model) {
 
         if (bindingResult.hasErrors()) {
-            return groupActionView(groupPath);
+            return groupActionView();
         }
 
-        groupPath.setAction(String.valueOf(groupPath.getGroupId()));
+        groupPath.setAction(groupPath.getObfuscatedId());
         groupPath.setMethod(HttpMethod.PUT.name());
 
-        final GroupModel group = groupAdapter.group(groupPath.getGroupId());
+        final GroupModel group = groupAdapter.group(groupPath.getObfuscatedId());
 
         model.addAttribute("groupModel", group);
 
-        return groupActionView(groupPath);
+        return groupActionView();
     }
 
     @LogExecutionTime
@@ -67,7 +67,7 @@ public class GroupEditController extends AbstractEditController {
                               final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return groupActionView(groupPath);
+            return groupActionView();
         }
 
         groupAdapter.createGroup(groupModel, groupPath.getCluster());
@@ -76,16 +76,16 @@ public class GroupEditController extends AbstractEditController {
     }
 
     @LogExecutionTime
-    @PutMapping(path = CLUSTER_PATH + "/{groupId}")
+    @PutMapping(path = CLUSTER_PATH + "/{obfuscatedId}")
     public String updateGroup(@ModelAttribute final GroupPath groupPath,
                               @ModelAttribute @Valid final GroupModel groupModel,
                               final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            groupPath.setAction(String.valueOf(groupPath.getGroupId()));
+            groupPath.setAction(groupPath.getObfuscatedId());
             groupPath.setMethod(HttpMethod.PUT.name());
 
-            return groupActionView(groupPath);
+            return groupActionView();
         }
 
         groupAdapter.updateGroup(groupModel, groupPath.getCluster());
@@ -94,25 +94,21 @@ public class GroupEditController extends AbstractEditController {
     }
 
     @LogExecutionTime
-    @DeleteMapping(path = CLUSTER_PATH + "/{groupId}")
+    @DeleteMapping(path = CLUSTER_PATH + "/{obfuscatedId}")
     public String deleteGroup(@ModelAttribute final GroupPath groupPath,
                               @RequestParam(required = false) final boolean displayConfirmation,
                               final RedirectAttributes redirectAttributes) {
 
-        groupAdapter.deleteGroup(groupPath.getGroupId(), groupPath.getCluster());
+        groupAdapter.deleteGroup(groupPath.getObfuscatedId(), groupPath.getCluster());
 
         return redirectToClusterView(groupPath);
     }
 
-    private String groupActionView(final GroupPath groupPath) {
+    private String groupActionView() {
         return "/groupaction";
     }
 
     private String redirectToClusterView(final GroupPath groupPath) {
         return "redirect:/clusterview/" + groupPath.getCountry() + "/" + groupPath.getRegion() + "/" + groupPath.getCluster();
-    }
-
-    private String redirectToEditGroupView(final GroupPath groupPath) {
-        return "redirect:/clusteredit/" + groupPath.getCountry() + "/" + groupPath.getRegion() + "/" + groupPath.getCluster() + "/" + groupPath.getGroupId();
     }
 }

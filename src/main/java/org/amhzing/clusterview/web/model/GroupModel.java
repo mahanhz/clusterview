@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Objects;
 
 import static java.util.Collections.emptyList;
-import static org.apache.commons.lang3.Validate.noNullElements;
-import static org.apache.commons.lang3.Validate.notNull;
+import static org.apache.commons.lang3.Validate.*;
 
 public final class GroupModel {
 
-    private long id;
+    private String obfuscatedId;
 
-    @NotEmpty(message = "Group must have at least one member") @Valid
+    @NotEmpty(message = "Group must have at least one member")
+    @Valid
     private List<MemberModel> members;
 
     @NotNull @Valid
@@ -32,31 +32,27 @@ public final class GroupModel {
         coreActivities = new ArrayList<>();
     }
 
-    private GroupModel(final long id, final List<MemberModel> members, final LocationModel location, final List<CoreActivityModel> coreActivities) {
-        this.id = id;
+    private GroupModel(final String obfuscatedId, final List<MemberModel> members, final LocationModel location, final List<CoreActivityModel> coreActivities) {
+        this.obfuscatedId = notBlank(obfuscatedId);
         this.members = noNullElements(members);
         this.location = notNull(location);
         this.coreActivities = noNullElements(coreActivities);
     }
 
-    public static GroupModel create(final long id, final List<MemberModel> members, final LocationModel location, final List<CoreActivityModel> coreActivities) {
-        return new GroupModel(id, members, location, coreActivities);
+    public static GroupModel create(final String obfuscatedId, final List<MemberModel> members, final LocationModel location, final List<CoreActivityModel> coreActivities) {
+        return new GroupModel(obfuscatedId, members, location, coreActivities);
     }
 
-    public static GroupModel empty() {
-        return create(-1L, emptyList(), LocationModel.create(-1, -1), emptyList());
+    public static GroupModel empty(final String obfuscatedId) {
+        return create(obfuscatedId, emptyList(), LocationModel.create(-1, -1), emptyList());
     }
 
-    public static GroupModel empty(final long id) {
-        return create(id, emptyList(), LocationModel.create(-1, -1), emptyList());
+    public String getObfuscatedId() {
+        return obfuscatedId;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
+    public void setObfuscatedId(final String obfuscatedId) {
+        this.obfuscatedId = obfuscatedId;
     }
 
     public List<MemberModel> getMembers() {
@@ -94,9 +90,10 @@ public final class GroupModel {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof GroupModel)) return false;
         final GroupModel that = (GroupModel) o;
-        return id == that.id &&
+        return highlight == that.highlight &&
+                Objects.equals(obfuscatedId, that.obfuscatedId) &&
                 Objects.equals(members, that.members) &&
                 Objects.equals(location, that.location) &&
                 Objects.equals(coreActivities, that.coreActivities);
@@ -104,13 +101,13 @@ public final class GroupModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, members, location, coreActivities);
+        return Objects.hash(obfuscatedId, members, location, coreActivities, highlight);
     }
 
     @Override
     public String toString() {
         return "GroupModel{" +
-                "id=" + id +
+                "obfuscatedId='" + obfuscatedId + '\'' +
                 ", members=" + members +
                 ", location=" + location +
                 ", coreActivities=" + coreActivities +

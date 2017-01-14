@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.amhzing.clusterview.web.adapter.Obfuscator.*;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public final class GroupFactory {
@@ -21,7 +22,9 @@ public final class GroupFactory {
     public static Group convert(final GroupModel groupModel) {
         notNull(groupModel);
 
-        return Group.create(Group.Id.create(groupModel.getId()),
+        final long groupId = deobfuscate(groupModel.getObfuscatedId());
+
+        return Group.create(Group.Id.create(groupId),
                             convertMembers(groupModel.getMembers()),
                             convertLocation(groupModel.getLocation()),
                             convertCoreActivities(groupModel.getCoreActivities()));

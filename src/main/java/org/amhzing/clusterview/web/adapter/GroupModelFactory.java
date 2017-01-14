@@ -28,10 +28,12 @@ public final class GroupModelFactory {
     public static GroupModel convertGroup(final Group group) {
         notNull(group);
 
-        return GroupModel.create(group.getId().getId(),
-                                 convertMembers(group.getMembers()),
-                                 convertLocation(group.getLocation()),
-                                 coreActivities(group.getCoreActivities()));
+        final String obfuscatedId = Obfuscator.obfuscate(group.getId().getId());
+
+        return GroupModel.create(obfuscatedId,
+                          convertMembers(group.getMembers()),
+                          convertLocation(group.getLocation()),
+                          coreActivities(group.getCoreActivities()));
     }
 
     private static LocationModel convertLocation(final Location location) {

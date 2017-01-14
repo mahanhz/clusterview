@@ -31,6 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestOffline
 public class GroupControllerTest {
 
+    public static final String OBFUSCATED_GROUP_ID = "3o97MmbN";
+
     @Autowired
     private MockMvc mvc;
 
@@ -79,16 +81,16 @@ public class GroupControllerTest {
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_group() throws Exception {
-        given(groupAdapter.group(1L)).willReturn(groupModel());
+        given(groupAdapter.group(OBFUSCATED_GROUP_ID)).willReturn(groupModel());
 
-        final ResultActions result = this.mvc.perform(get("/clusterview/se/central/stockholm/1"))
+        final ResultActions result = this.mvc.perform(get("/clusterview/se/central/stockholm/" + OBFUSCATED_GROUP_ID))
                                              .andExpect(status().isOk());
 
         final String content = result.andReturn().getResponse().getContentAsString();
 
         Document doc = Jsoup.parse(content);
-        final Element groupId = doc.getElementById("groupId");
+        final Element groupId = doc.getElementById("obfuscatedId");
 
-        assertThat(groupId.val()).isEqualToIgnoringCase("1");
+        assertThat(groupId.val()).isEqualToIgnoringCase(OBFUSCATED_GROUP_ID);
     }
 }
