@@ -19,7 +19,6 @@ public final class GroupHelper {
 
     public static MultiValueMap<String, String> createGroupForm() {
         final MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
-        form.set("id", "0");
         form.set("location.coordX", "100");
         form.set("location.coordY", "100");
         form.set("coreActivities[0].id", "cc");

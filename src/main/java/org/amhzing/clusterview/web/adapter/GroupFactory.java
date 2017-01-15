@@ -22,12 +22,20 @@ public final class GroupFactory {
     public static Group convert(final GroupModel groupModel) {
         notNull(groupModel);
 
-        final long groupId = deobfuscate(groupModel.getObfuscatedId());
+        final long id = groupId(groupModel.getObfuscatedId());
 
-        return Group.create(Group.Id.create(groupId),
+        return Group.create(Group.Id.create(id),
                             convertMembers(groupModel.getMembers()),
                             convertLocation(groupModel.getLocation()),
                             convertCoreActivities(groupModel.getCoreActivities()));
+    }
+
+    private static long groupId(final String obfuscatedId) {
+        if (StringUtils.isNotBlank(obfuscatedId)){
+            return deobfuscate(obfuscatedId);
+        }
+
+        return 0;
     }
 
     private static Location convertLocation(final LocationModel location) {
