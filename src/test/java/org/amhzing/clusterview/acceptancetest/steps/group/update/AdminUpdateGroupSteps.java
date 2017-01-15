@@ -10,7 +10,7 @@ import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.g
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.CLUSTER;
-import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.getGroupId;
+import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.getObfuscatedId;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AdminUpdateGroupSteps extends SpringSteps implements En {
@@ -21,17 +21,17 @@ public class AdminUpdateGroupSteps extends SpringSteps implements En {
 
         When("^attempting to update the group$", () -> {
             final HttpHeaders headers = getHeaders(getTestRestTemplate(),
-                                                   "/clusteredit/se/central/" + CLUSTER + "/" + getGroupId(),
+                                                   "/clusteredit/se/central/" + CLUSTER + "/" + getObfuscatedId(),
                                                    getLoginHeaders());
 
             final MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
-            form.set("id", "" + getGroupId());
+            form.set("obfuscatedId", getObfuscatedId());
             form.set("location.coordX", "100");
             form.set("location.coordY", "100");
             form.set("members[0].name.firstName", "updatedFirstname");
             form.set("members[0].name.lastName", "updatedLastname");
 
-            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + getGroupId(),
+            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + getObfuscatedId(),
                                                       HttpMethod.PUT,
                                                       new HttpEntity<>(form, headers),
                                                       String.class);
