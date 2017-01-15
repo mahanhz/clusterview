@@ -16,8 +16,8 @@ public class GroupFactoryTest {
 
     @Before
     public void setUp() throws Exception {
-        User user = new User("me@example.com", "Nopass" , emptyList());
-        Authentication auth = new UsernamePasswordAuthenticationToken(user, null);
+        final User user = new User("me@example.com", "Nopass" , emptyList());
+        final Authentication auth = new UsernamePasswordAuthenticationToken(user, null);
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
 

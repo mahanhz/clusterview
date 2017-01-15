@@ -4,6 +4,7 @@ import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
 import org.amhzing.clusterview.domain.model.Group;
 import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
+import org.amhzing.clusterview.web.adapter.Obfuscator;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,8 @@ public class GroupPageSteps extends SpringSteps implements En {
 
     private static Group group;
 
+    private static String obfuscatedId;
+
     public GroupPageSteps() {
 
         Given("^a group$", () -> {
@@ -34,7 +37,8 @@ public class GroupPageSteps extends SpringSteps implements En {
             final String cookie = getLoginHeaders().getFirst("Set-Cookie");
             headers.set("Cookie", cookie);
 
-            groupPageResponse = getTestRestTemplate().exchange("/clusterview/se/central/" + CLUSTER + "/" + getGroupId(),
+            obfuscatedId = Obfuscator.obfuscate(getGroupId());
+            groupPageResponse = getTestRestTemplate().exchange("/clusterview/se/central/" + CLUSTER + "/" + obfuscatedId,
                                                                HttpMethod.GET,
                                                                new HttpEntity<>(headers),
                                                                String.class);
@@ -47,5 +51,9 @@ public class GroupPageSteps extends SpringSteps implements En {
 
     public static long getGroupId() {
         return group.getId().getId();
+    }
+
+    public static String getObfuscatedId() {
+        return obfuscatedId;
     }
 }

@@ -8,7 +8,7 @@ import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.g
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.CLUSTER;
-import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.getGroupId;
+import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.getObfuscatedId;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AdminDeleteGroupSteps extends SpringSteps implements En {
@@ -19,10 +19,10 @@ public class AdminDeleteGroupSteps extends SpringSteps implements En {
 
         When("^attempting to delete the group$", () -> {
             final HttpHeaders headers = getHeaders(getTestRestTemplate(),
-                                                   "/clusterview/se/central/" + CLUSTER + "/" + getGroupId(),
+                                                   "/clusterview/se/central/" + CLUSTER + "/" + getObfuscatedId(),
                                                    getLoginHeaders());
 
-            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + getGroupId(),
+            response = getTestRestTemplate().exchange("/clusteredit/se/central/" + CLUSTER + "/" + getObfuscatedId(),
                                                                  HttpMethod.DELETE,
                                                                  new HttpEntity<>(headers),
                                                                  String.class);
