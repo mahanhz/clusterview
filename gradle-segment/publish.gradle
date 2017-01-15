@@ -6,6 +6,7 @@ jar {
 	// Do not include environment specific properties in the built jar
 	exclude 'application-*'
 	exclude 'bootstrap-*'
+	exclude 'stagemonitor-*'
 	exclude '*.sql'
 }
 
