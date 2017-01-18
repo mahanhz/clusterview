@@ -2,3 +2,4 @@
 applications:
 - name: clusterview-test
   path: clusterview.jar
+  timeout: 180
