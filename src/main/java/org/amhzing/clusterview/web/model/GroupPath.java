@@ -6,17 +6,17 @@ public class GroupPath extends ClusterPath {
 
     public static final String CREATE_GROUP = "creategroup";
 
-    private String obfuscatedId;
+    private String obfuscatedGroupId;
     private String action = CREATE_GROUP;  // default to create a new group
     private String method = HttpMethod.POST.name(); // default to post
 
 
-    public String getObfuscatedId() {
-        return obfuscatedId;
+    public String getObfuscatedGroupId() {
+        return obfuscatedGroupId;
     }
 
-    public void setObfuscatedId(final String obfuscatedId) {
-        this.obfuscatedId = obfuscatedId;
+    public void setObfuscatedGroupId(final String obfuscatedGroupId) {
+        this.obfuscatedGroupId = obfuscatedGroupId;
     }
 
     public String getAction() {
@@ -38,7 +38,7 @@ public class GroupPath extends ClusterPath {
     @Override
     public String toString() {
         return "GroupPath{" +
-                "obfuscatedId='" + obfuscatedId + '\'' +
+                "obfuscatedGroupId='" + obfuscatedGroupId + '\'' +
                 ", action='" + action + '\'' +
                 ", method='" + method + '\'' +
                 "} " + super.toString();

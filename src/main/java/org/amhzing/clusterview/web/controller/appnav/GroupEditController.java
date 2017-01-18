@@ -41,7 +41,7 @@ public class GroupEditController extends AbstractEditController {
     }
 
     @LogExecutionTime
-    @GetMapping(path = CLUSTER_PATH + "/{obfuscatedId}")
+    @GetMapping(path = CLUSTER_PATH + "/{obfuscatedGroupId}")
     public String editGroup(@ModelAttribute @Valid final GroupPath groupPath,
                             final BindingResult bindingResult,
                             final Model model) {
@@ -50,10 +50,10 @@ public class GroupEditController extends AbstractEditController {
             return groupActionView();
         }
 
-        groupPath.setAction(groupPath.getObfuscatedId());
+        groupPath.setAction(groupPath.getObfuscatedGroupId());
         groupPath.setMethod(HttpMethod.PUT.name());
 
-        final GroupModel group = groupAdapter.group(groupPath.getObfuscatedId());
+        final GroupModel group = groupAdapter.group(groupPath.getObfuscatedGroupId());
 
         model.addAttribute("groupModel", group);
 
@@ -76,13 +76,13 @@ public class GroupEditController extends AbstractEditController {
     }
 
     @LogExecutionTime
-    @PutMapping(path = CLUSTER_PATH + "/{obfuscatedId}")
+    @PutMapping(path = CLUSTER_PATH + "/{obfuscatedGroupId}")
     public String updateGroup(@ModelAttribute final GroupPath groupPath,
                               @ModelAttribute @Valid final GroupModel groupModel,
                               final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            groupPath.setAction(groupPath.getObfuscatedId());
+            groupPath.setAction(groupPath.getObfuscatedGroupId());
             groupPath.setMethod(HttpMethod.PUT.name());
 
             return groupActionView();
@@ -94,12 +94,12 @@ public class GroupEditController extends AbstractEditController {
     }
 
     @LogExecutionTime
-    @DeleteMapping(path = CLUSTER_PATH + "/{obfuscatedId}")
+    @DeleteMapping(path = CLUSTER_PATH + "/{obfuscatedGroupId}")
     public String deleteGroup(@ModelAttribute final GroupPath groupPath,
                               @RequestParam(required = false) final boolean displayConfirmation,
                               final RedirectAttributes redirectAttributes) {
 
-        groupAdapter.deleteGroup(groupPath.getObfuscatedId(), groupPath.getCluster());
+        groupAdapter.deleteGroup(groupPath.getObfuscatedGroupId(), groupPath.getCluster());
 
         return redirectToClusterView(groupPath);
     }

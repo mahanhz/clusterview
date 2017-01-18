@@ -54,15 +54,15 @@ public class GroupController extends AbstractController {
     }
 
     @LogExecutionTime
-    @GetMapping(path = CLUSTER_PATH + "/{obfuscatedId}")
+    @GetMapping(path = CLUSTER_PATH + "/{obfuscatedGroupId}")
     public ModelAndView group(@ModelAttribute @Valid final GroupPath groupPath,
                               final BindingResult bindingResult,
                               final Model model) {
 
-        GroupModel group = GroupModel.empty(groupPath.getObfuscatedId());
+        GroupModel group = GroupModel.empty(groupPath.getObfuscatedGroupId());
 
         if (!bindingResult.hasErrors()) {
-            group = groupAdapter.group(groupPath.getObfuscatedId());
+            group = groupAdapter.group(groupPath.getObfuscatedGroupId());
         }
 
         model.addAttribute("group", group);
