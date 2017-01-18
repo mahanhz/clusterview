@@ -31,7 +31,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll() // Login page is accessible to anybody
                 .and()
             .logout()
-                .logoutUrl("/logout")
+                .logoutUrl("/logout").permitAll()
                 .logoutSuccessUrl("/login?logout")
                 .invalidateHttpSession(true)
                 .permitAll() // Logout success page is accessible to anybody
