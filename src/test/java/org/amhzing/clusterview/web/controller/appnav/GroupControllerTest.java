@@ -89,7 +89,7 @@ public class GroupControllerTest {
         final String content = result.andReturn().getResponse().getContentAsString();
 
         Document doc = Jsoup.parse(content);
-        final Element groupId = doc.getElementById("obfuscatedId");
+        final Element groupId = doc.getElementById("obfuscatedGroupId");
 
         assertThat(groupId.val()).isEqualToIgnoringCase(OBFUSCATED_GROUP_ID);
     }
