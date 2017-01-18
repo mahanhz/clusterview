@@ -1,14 +1,14 @@
-INSERT INTO ROLE VALUES(1, 'ROLE_USER');
-INSERT INTO ROLE VALUES(2, 'ROLE_ADMIN');
-INSERT INTO ROLE VALUES(3, 'ROLE_SUPER_ADMIN');
-INSERT INTO ROLE VALUES(4, 'ROLE_ADMIN_SE_ALL');
-INSERT INTO ROLE VALUES(5, 'ROLE_ADMIN_SE_STOCKHOLM');
+INSERT INTO ROLE VALUES(1, 0, 'ROLE_USER');
+INSERT INTO ROLE VALUES(2, 0, 'ROLE_ADMIN');
+INSERT INTO ROLE VALUES(3, 0, 'ROLE_SUPER_ADMIN');
+INSERT INTO ROLE VALUES(4, 0, 'ROLE_ADMIN_SE_ALL');
+INSERT INTO ROLE VALUES(5, 0, 'ROLE_ADMIN_SE_STOCKHOLM');
 
-INSERT INTO USERLOGIN VALUES(23, 'guest@example.com',      true,  'Guest',       'Guser',  '$2a$11$nKUdgHqDrh1lQS6h/TDR7.cROw8D68Rclw1MvtGX6dMwP4m5Uzk5i');
-INSERT INTO USERLOGIN VALUES(24, 'admin@example.com',      true,  'Admin',       'Auser',  '$2a$11$T8IGfNuQqHTPViGXHMkMH./8zjK.mlVBm5I6BSM30IQPNbcbSgWV6');
-INSERT INTO USERLOGIN VALUES(25, 'superadmin@example.com', true,  'Super-Admin', 'Sauser', '$2a$11$SncbA3RmlTQpX4PQZtlyguKIkHVUOhybty/kiz7e0TvKXxIIad39C');
-INSERT INTO USERLOGIN VALUES(26, 'inactive@example.com',   false, 'Inactive',    'Iuser',  '$2a$11$JOYH1fSWj/C59GfwuEK96eanbXVf1qPv5cQozC7oNBeuqZyI0bSWy');
-INSERT INTO USERLOGIN VALUES(27, 'stockholm@example.com',  true, 'Stockholm',    'Suser',  '$2a$11$YUTPYVXMHjJNzK5T7unvF.HfFAQ4HgRoKp96wpqt2JAYFMMtI7y.y');
+INSERT INTO USERLOGIN VALUES(23, 0, 'guest@example.com',      true,  'Guest',       'Guser',  '$2a$11$nKUdgHqDrh1lQS6h/TDR7.cROw8D68Rclw1MvtGX6dMwP4m5Uzk5i');
+INSERT INTO USERLOGIN VALUES(24, 0, 'admin@example.com',      true,  'Admin',       'Auser',  '$2a$11$T8IGfNuQqHTPViGXHMkMH./8zjK.mlVBm5I6BSM30IQPNbcbSgWV6');
+INSERT INTO USERLOGIN VALUES(25, 0, 'superadmin@example.com', true,  'Super-Admin', 'Sauser', '$2a$11$SncbA3RmlTQpX4PQZtlyguKIkHVUOhybty/kiz7e0TvKXxIIad39C');
+INSERT INTO USERLOGIN VALUES(26, 0, 'inactive@example.com',   false, 'Inactive',    'Iuser',  '$2a$11$JOYH1fSWj/C59GfwuEK96eanbXVf1qPv5cQozC7oNBeuqZyI0bSWy');
+INSERT INTO USERLOGIN VALUES(27, 0, 'stockholm@example.com',  true, 'Stockholm',    'Suser',  '$2a$11$YUTPYVXMHjJNzK5T7unvF.HfFAQ4HgRoKp96wpqt2JAYFMMtI7y.y');
 
 
 INSERT INTO USERS_ROLES  VALUES(23, 1);
@@ -24,24 +24,24 @@ INSERT INTO USERS_ROLES  VALUES(27, 2);
 INSERT INTO USERS_ROLES  VALUES(27, 5);
 
 
-INSERT INTO ACTIVITY VALUES('jyga', 'JYG Animator');
-INSERT INTO ACTIVITY VALUES('jygp', 'JYG Participant');
-INSERT INTO ACTIVITY VALUES('sct', 'SC Tutor');
-INSERT INTO ACTIVITY VALUES('scp', 'SC Participant');
-INSERT INTO ACTIVITY VALUES('dmh', 'DM Host');
-INSERT INTO ACTIVITY VALUES('dmp', 'DM Participant');
-INSERT INTO ACTIVITY VALUES('cct', 'CC Teacher');
-INSERT INTO ACTIVITY VALUES('ccp', 'CC Participant');
-INSERT INTO ACTIVITY VALUES('fh', 'Fireside Host');
-INSERT INTO ACTIVITY VALUES('fp', 'Fireside Participant');
+INSERT INTO ACTIVITY VALUES('jyga', 0, 'JYG Animator');
+INSERT INTO ACTIVITY VALUES('jygp', 0, 'JYG Participant');
+INSERT INTO ACTIVITY VALUES('sct', 0, 'SC Tutor');
+INSERT INTO ACTIVITY VALUES('scp', 0, 'SC Participant');
+INSERT INTO ACTIVITY VALUES('dmh', 0, 'DM Host');
+INSERT INTO ACTIVITY VALUES('dmp', 0, 'DM Participant');
+INSERT INTO ACTIVITY VALUES('cct', 0, 'CC Teacher');
+INSERT INTO ACTIVITY VALUES('ccp', 0, 'CC Participant');
+INSERT INTO ACTIVITY VALUES('fh', 0, 'Fireside Host');
+INSERT INTO ACTIVITY VALUES('fp', 0, 'Fireside Participant');
 
-INSERT INTO COREACTIVITY VALUES('sc', 'SC');
-INSERT INTO COREACTIVITY VALUES('jyg', 'JYG');
-INSERT INTO COREACTIVITY VALUES('dm', 'DM');
-INSERT INTO COREACTIVITY VALUES('cc', 'CC');
+INSERT INTO COREACTIVITY VALUES('sc', 0, 'SC');
+INSERT INTO COREACTIVITY VALUES('jyg', 0, 'JYG');
+INSERT INTO COREACTIVITY VALUES('dm', 0, 'DM');
+INSERT INTO COREACTIVITY VALUES('cc', 0, 'CC');
 
-INSERT INTO COUNTRY VALUES('se');
-INSERT INTO COUNTRY VALUES('dk');
+INSERT INTO COUNTRY VALUES('se', 0);
+INSERT INTO COUNTRY VALUES('dk', 0);
 
 INSERT INTO USERS_COUNTRIES  VALUES(23, 'se');
 INSERT INTO USERS_COUNTRIES  VALUES(24, 'se');
@@ -49,33 +49,33 @@ INSERT INTO USERS_COUNTRIES  VALUES(25, 'se');
 INSERT INTO USERS_COUNTRIES  VALUES(26, 'se');
 INSERT INTO USERS_COUNTRIES  VALUES(27, 'se');
 
-INSERT INTO REGION VALUES('northern', '', 'se');
-INSERT INTO REGION VALUES('central', '', 'se');
-INSERT INTO REGION VALUES('southern', '', 'se');
+INSERT INTO REGION VALUES('northern', 0, '', 'se');
+INSERT INTO REGION VALUES('central', 0, '', 'se');
+INSERT INTO REGION VALUES('southern', 0, '', 'se');
 
-INSERT INTO CLUSTER VALUES('norrbotten', '', 'northern');
-INSERT INTO CLUSTER VALUES('vasterbotten', '', 'northern');
-INSERT INTO CLUSTER VALUES('jamtland', '', 'northern');
-INSERT INTO CLUSTER VALUES('vasternorrland', '', 'northern');
-INSERT INTO CLUSTER VALUES('stockholm', '', 'central');
-INSERT INTO CLUSTER VALUES('uppsala', '', 'central');
-INSERT INTO CLUSTER VALUES('malardalen', '', 'central');
-INSERT INTO CLUSTER VALUES('gavleborg', '', 'central');
-INSERT INTO CLUSTER VALUES('dalarna', '', 'central');
-INSERT INTO CLUSTER VALUES('varmland', '', 'central');
-INSERT INTO CLUSTER VALUES('gotland', '', 'central');
-INSERT INTO CLUSTER VALUES('vastragotaland', '', 'southern');
-INSERT INTO CLUSTER VALUES('ostergotland', '', 'southern');
-INSERT INTO CLUSTER VALUES('kalmarlan', '', 'southern');
-INSERT INTO CLUSTER VALUES('jonkoping', '', 'southern');
-INSERT INTO CLUSTER VALUES('halland', '', 'southern');
-INSERT INTO CLUSTER VALUES('kronoberg', '', 'southern');
-INSERT INTO CLUSTER VALUES('blekinge', '', 'southern');
-INSERT INTO CLUSTER VALUES('skane', '', 'southern');
+INSERT INTO CLUSTER VALUES('norrbotten', 0, '', 'northern');
+INSERT INTO CLUSTER VALUES('vasterbotten', 0, '', 'northern');
+INSERT INTO CLUSTER VALUES('jamtland', 0, '', 'northern');
+INSERT INTO CLUSTER VALUES('vasternorrland', 0, '', 'northern');
+INSERT INTO CLUSTER VALUES('stockholm', 0, '', 'central');
+INSERT INTO CLUSTER VALUES('uppsala', 0, '', 'central');
+INSERT INTO CLUSTER VALUES('malardalen', 0, '', 'central');
+INSERT INTO CLUSTER VALUES('gavleborg', 0, '', 'central');
+INSERT INTO CLUSTER VALUES('dalarna', 0, '', 'central');
+INSERT INTO CLUSTER VALUES('varmland', 0, '', 'central');
+INSERT INTO CLUSTER VALUES('gotland', 0, '', 'central');
+INSERT INTO CLUSTER VALUES('vastragotaland', 0, '', 'southern');
+INSERT INTO CLUSTER VALUES('ostergotland', 0, '', 'southern');
+INSERT INTO CLUSTER VALUES('kalmarlan', 0, '', 'southern');
+INSERT INTO CLUSTER VALUES('jonkoping', 0, '', 'southern');
+INSERT INTO CLUSTER VALUES('halland', 0, '', 'southern');
+INSERT INTO CLUSTER VALUES('kronoberg', 0, '', 'southern');
+INSERT INTO CLUSTER VALUES('blekinge', 0, '', 'southern');
+INSERT INTO CLUSTER VALUES('skane', 0, '', 'southern');
 
-INSERT INTO TEAM VALUES(901, 262, 413.125, 'stockholm');
-INSERT INTO TEAM VALUES(902, 189, 443.125, 'stockholm');
-INSERT INTO TEAM VALUES(903, 58, 69, 'uppsala');
+INSERT INTO TEAM VALUES(901, 0, 262, 413.125, 'stockholm');
+INSERT INTO TEAM VALUES(902, 0, 189, 443.125, 'stockholm');
+INSERT INTO TEAM VALUES(903, 0, 58, 69, 'uppsala');
 
 INSERT INTO TEAMS_CORE_ACTIVITIES  VALUES(901, 5, 1, 12, 'sc');
 INSERT INTO TEAMS_CORE_ACTIVITIES  VALUES(901, 8, 1, 9, 'jyg');
@@ -86,28 +86,28 @@ INSERT INTO TEAMS_CORE_ACTIVITIES  VALUES(903, 6, 1, 10, 'jyg');
 INSERT INTO TEAMS_CORE_ACTIVITIES  VALUES(903, 0, 0, 0, 'dm');
 INSERT INTO TEAMS_CORE_ACTIVITIES  VALUES(903, 3, 1, 4, 'cc');
 
-/* Hibernate generates columns in alphabetic order */
-INSERT INTO MEMBER VALUES(111, 'John', 'Doe', 'M', 'I', 901);
-INSERT INTO MEMBER VALUES(222, 'Jane', 'Die', 'O', 'II', 901);
-INSERT INTO MEMBER VALUES(333, 'Michael', 'Rie', 'T', 'III', 902);
-INSERT INTO MEMBER VALUES(444, 'Joss', 'Alright', '', '', 903);
+/* Hibernate generates columns in alphabetic order (primary key and version come first) */
+INSERT INTO MEMBER VALUES(111, 0, 'John', 'Doe', 'M', 'I', 901);
+INSERT INTO MEMBER VALUES(222, 0, 'Jane', 'Die', 'O', 'II', 901);
+INSERT INTO MEMBER VALUES(333, 0, 'Michael', 'Rie', 'T', 'III', 902);
+INSERT INTO MEMBER VALUES(444, 0, 'Joss', 'Alright', '', '', 903);
 
-INSERT INTO CAPABILITY VALUES(1, 'sct', 111);
-INSERT INTO CAPABILITY VALUES(2, 'cct', 111);
-INSERT INTO CAPABILITY VALUES(3, 'jyga', 111);
-INSERT INTO CAPABILITY VALUES(4, 'dmh', 222);
-INSERT INTO CAPABILITY VALUES(5, 'fh', 333);
-INSERT INTO CAPABILITY VALUES(6, 'jyga', 333);
+INSERT INTO CAPABILITY VALUES(1, 0, 'sct', 111);
+INSERT INTO CAPABILITY VALUES(2, 0, 'cct', 111);
+INSERT INTO CAPABILITY VALUES(3, 0, 'jyga', 111);
+INSERT INTO CAPABILITY VALUES(4, 0, 'dmh', 222);
+INSERT INTO CAPABILITY VALUES(5, 0, 'fh', 333);
+INSERT INTO CAPABILITY VALUES(6, 0, 'jyga', 333);
 
-INSERT INTO COMMITMENT VALUES(12, 'sct', 111);
-INSERT INTO COMMITMENT VALUES(13, 'dmh', 111);
-INSERT INTO COMMITMENT VALUES(14, 'dmh', 222);
-INSERT INTO COMMITMENT VALUES(15, 'fh', 333);
-INSERT INTO COMMITMENT VALUES(16, 'jyga', 333);
-INSERT INTO COMMITMENT VALUES(17, 'sct', 333);
-INSERT INTO COMMITMENT VALUES(18, 'jyga', 444);
-INSERT INTO COMMITMENT VALUES(19, 'sct', 444);
+INSERT INTO COMMITMENT VALUES(12, 0, 'sct', 111);
+INSERT INTO COMMITMENT VALUES(13, 0, 'dmh', 111);
+INSERT INTO COMMITMENT VALUES(14, 0, 'dmh', 222);
+INSERT INTO COMMITMENT VALUES(15, 0, 'fh', 333);
+INSERT INTO COMMITMENT VALUES(16, 0, 'jyga', 333);
+INSERT INTO COMMITMENT VALUES(17, 0, 'sct', 333);
+INSERT INTO COMMITMENT VALUES(18, 0, 'jyga', 444);
+INSERT INTO COMMITMENT VALUES(19, 0, 'sct', 444);
 
-INSERT INTO STATSHISTORY VALUES('stockholm', '2016-05-01', 1, 22, 1, 11, 4,   13, 1, 20,   25, 1, 36,   33, 1, 42,   0, 0, 0);
-INSERT INTO STATSHISTORY VALUES('stockholm', '2016-08-01', 1, 22, 1, 11, 4,   13, 1, 20,   20, 2, 40,   40, 3, 60,   12, 2, 12);
-INSERT INTO STATSHISTORY VALUES('stockholm', '2016-11-01', 2, 20, 1, 10, 5,   0, 0, 0,     30, 5, 44,   55, 6, 80,   50, 4, 50);
+INSERT INTO STATSHISTORY VALUES('stockholm', '2016-05-01', 0,  1, 22, 1, 11, 4,   13, 1, 20,   25, 1, 36,   33, 1, 42,   0, 0, 0);
+INSERT INTO STATSHISTORY VALUES('stockholm', '2016-08-01', 0,  1, 22, 1, 11, 4,   13, 1, 20,   20, 2, 40,   40, 3, 60,   12, 2, 12);
+INSERT INTO STATSHISTORY VALUES('stockholm', '2016-11-01', 0,  2, 20, 1, 10, 5,   0, 0, 0,     30, 5, 44,   55, 6, 80,   50, 4, 50);

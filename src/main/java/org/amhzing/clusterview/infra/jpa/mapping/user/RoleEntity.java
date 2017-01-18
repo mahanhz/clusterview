@@ -1,5 +1,7 @@
 package org.amhzing.clusterview.infra.jpa.mapping.user;
 
+import org.amhzing.clusterview.infra.jpa.mapping.BaseEntity;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +12,7 @@ import java.util.Objects;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "role")
-public class RoleEntity {
+public class RoleEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

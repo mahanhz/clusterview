@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "country")
-public final class CountryEntity {
+public final class CountryEntity extends BaseEntity {
 
     @Id
     private String id;

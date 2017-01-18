@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "region")
-public final class RegionEntity {
+public final class RegionEntity extends BaseEntity {
 
     @Id
     private String id;

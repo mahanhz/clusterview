@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity(name = "coreactivity")
-public final class CoreActivityEntity {
+public final class CoreActivityEntity extends BaseEntity {
 
     @Id
     private String id;

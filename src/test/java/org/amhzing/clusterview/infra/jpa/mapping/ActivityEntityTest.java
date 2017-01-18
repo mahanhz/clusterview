@@ -1,13 +1,16 @@
 package org.amhzing.clusterview.infra.jpa.mapping;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
+
+import static nl.jqno.equalsverifier.Warning.*;
 
 public class ActivityEntityTest {
 
     @Test
     public void equalsAndHashCodeContract() throws Exception {
-        EqualsVerifier.forClass(ActivityEntity.class).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
+        EqualsVerifier.forClass(ActivityEntity.class).suppress(STRICT_INHERITANCE,
+                                                               NONFINAL_FIELDS,
+                                                               ALL_FIELDS_SHOULD_BE_USED).verify();
     }
 }

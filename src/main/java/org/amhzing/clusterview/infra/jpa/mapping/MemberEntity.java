@@ -7,7 +7,7 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "member")
-public final class MemberEntity {
+public final class MemberEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

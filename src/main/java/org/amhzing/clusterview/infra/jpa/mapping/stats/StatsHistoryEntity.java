@@ -1,12 +1,14 @@
 package org.amhzing.clusterview.infra.jpa.mapping.stats;
 
+import org.amhzing.clusterview.infra.jpa.mapping.BaseEntity;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Entity(name = "statshistory")
-public final class StatsHistoryEntity {
+public final class StatsHistoryEntity extends BaseEntity {
 
     public static final String QUANTITY = "quantity";
     public static final String TOTAL_PARTICIPANTS = "totalParticipants";

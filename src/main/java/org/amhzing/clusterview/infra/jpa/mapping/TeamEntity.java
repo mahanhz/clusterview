@@ -8,7 +8,7 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "team")
-public final class TeamEntity {
+public final class TeamEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
