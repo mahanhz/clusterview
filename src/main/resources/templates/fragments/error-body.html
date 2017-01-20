@@ -8,35 +8,43 @@
                 <div class="jumbotron">
                     <h1 style="color:red" th:text="${headingText}">Invalid request</h1>
 
+                    <br/>
                     <p th:if="${url}">
-                        <b>Page:</b> <span th:text="${url}">Page URL</span>
+                        <b>Url:</b> <span th:text="${url}">Page URL</span>
                     </p>
 
-                    <p th:if="${timestamp}" id='created'>
-                        <br/>
+                    <p th:if="${path}">
+                        <b>Path:</b> <span th:text="${path}">Page URL</span>
+                    </p>
+
+                    <p th:if="${cameFrom}">
+                        <b>Path:</b> <span th:text="${cameFrom}">Came from</span>
+                    </p>
+
+                    <p th:if="${timestamp}">
                         <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
                     </p>
 
                     <p th:if="${status}">
-                        <br/>
                         <b>There was an error:</b> <span th:text="${status}">status-code</span>
                         <span th:if="${error}" th:text="'('+${error}+')'">error ...</span>
-                        <br/>
-                        (When reporting this issue please include the above error text)
+                    </p>
+
+                    <p th:if="${exception == 'org.thymeleaf.exceptions.TemplateInputException'}">
+                        <b>Extra info:</b> The path appears to be invalid
                     </p>
 
                     <p th:if="${errorId}">
-                        <br/>
                         <b>Error Id:</b> <span th:text="${errorId}">Error Id should display here</span>
-                        <br/>
-                        (When reporting this issue please include the above error id)
                     </p>
 
                     <p th:if="${customMessage}">
-                        <br/>
                         <b>Message:</b> <span th:text="${customMessage}">Custom message</span>
                     </p>
 
+                    <p>
+                        <b>Note:</b> When reporting an issue please take a screenshot of this page
+                    </p>
                 </div>
             </div>
         </th:block>

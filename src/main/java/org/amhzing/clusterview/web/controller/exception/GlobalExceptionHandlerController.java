@@ -1,8 +1,7 @@
 package org.amhzing.clusterview.web.controller.exception;
 
 import com.fasterxml.uuid.Generators;
-import org.amhzing.clusterview.exception.ClusterNotFoundException;
-import org.amhzing.clusterview.exception.GroupNotFoundException;
+import org.amhzing.clusterview.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,6 +21,7 @@ public class GlobalExceptionHandlerController {
     public static final String ERROR_VIEW = "error";
     public static final String CUSTOM_MESSAGE_KEY = "customMessage";
     public static final String ERROR_ID_KEY = "errorId";
+    public static final String CAME_FROM = "cameFrom";
 
     @ExceptionHandler
     public ModelAndView handleException(final HttpServletRequest request, final Throwable throwable) {
@@ -30,7 +30,7 @@ public class GlobalExceptionHandlerController {
         LOGGER.error("ErrorId: {} references the following error: ", errorId, throwable);
 
         final ModelAndView mav = new ModelAndView();
-        mav.addObject("cameFrom", request.getRequestURI());
+        mav.addObject(CAME_FROM, request.getRequestURI());
         mav.addObject(ERROR_ID_KEY, errorId);
         mav.setViewName(ERROR_VIEW);
 
@@ -44,18 +44,15 @@ public class GlobalExceptionHandlerController {
         return new ModelAndView("error/403");
     }
 
-    @ExceptionHandler(ClusterNotFoundException.class)
-    public ModelAndView clusterNotFound(final ClusterNotFoundException ex) {
-        return customMessage("Cluster " + ex.getCluster() + " could not be found");
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView notFound(final HttpServletRequest request) {
+        return customMessage(request, "Not found");
     }
 
-    @ExceptionHandler(GroupNotFoundException.class)
-    public ModelAndView groupNotFound(final GroupNotFoundException ex) {
-        return customMessage("Group in cluster " + ex.getCluster() + " could not be found");
-    }
-
-    private ModelAndView customMessage(final String message) {
+    private ModelAndView customMessage(final HttpServletRequest request, final String message) {
         final ModelAndView mav = new ModelAndView();
+        mav.addObject(CAME_FROM, request.getRequestURI());
         mav.addObject(CUSTOM_MESSAGE_KEY, message);
         mav.setViewName(ERROR_VIEW);
 

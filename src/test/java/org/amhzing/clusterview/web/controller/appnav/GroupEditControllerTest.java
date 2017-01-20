@@ -2,8 +2,7 @@ package org.amhzing.clusterview.web.controller.appnav;
 
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.annotation.TestOffline;
-import org.amhzing.clusterview.exception.ClusterNotFoundException;
-import org.amhzing.clusterview.exception.GroupNotFoundException;
+import org.amhzing.clusterview.exception.NotFoundException;
 import org.amhzing.clusterview.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.adapter.GroupAdapter;
 import org.jsoup.Jsoup;
@@ -69,20 +68,19 @@ public class GroupEditControllerTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_not_be_able_to_create_new_group() throws Exception {
         final String cluster = "fake-cluster";
-        Mockito.doThrow(new ClusterNotFoundException("Cluster not found", cluster)).when(groupAdapter).createGroup(any(), any());
+        Mockito.doThrow(new NotFoundException("Cluster not found")).when(groupAdapter).createGroup(any(), any());
 
         final ResultActions result = this.mvc.perform(post("/clusteredit/se/central/" + cluster + "/creategroup")
                                                               .param("location.coordX", "1")
                                                               .param("location.coordY", "1")
                                                               .param("members[0].name.firstName", "test")
                                                               .param("members[0].name.lastName", "test"))
-                                             .andExpect(status().isOk());
+                                             .andExpect(status().is4xxClientError());
 
         final ModelAndView mav = result.andReturn().getModelAndView();
 
         assertThat(mav.getViewName()).isEqualTo(ERROR_VIEW);
         assertThat(mav.getModel().keySet()).contains(CUSTOM_MESSAGE_KEY);
-        assertThat((String) mav.getModel().get(CUSTOM_MESSAGE_KEY)).contains(cluster);
     }
 
     @Test
@@ -114,20 +112,19 @@ public class GroupEditControllerTest {
     public void should_not_be_able_to_update_group() throws Exception {
         final String cluster = "fake-cluster";
         final String groupId = "123";
-        Mockito.doThrow(new GroupNotFoundException("Group not found", cluster, groupId)).when(groupAdapter).updateGroup(any(), any());
+        Mockito.doThrow(new NotFoundException("Group not found")).when(groupAdapter).updateGroup(any(), any());
 
         final ResultActions result = this.mvc.perform(put("/clusteredit/se/central/stockholm/" + groupId)
                                                               .param("location.coordX", "1")
                                                               .param("location.coordY", "1")
                                                               .param("members[0].name.firstName", "test")
                                                               .param("members[0].name.lastName", "test"))
-                                             .andExpect(status().isOk());
+                                             .andExpect(status().is4xxClientError());
 
         final ModelAndView mav = result.andReturn().getModelAndView();
 
         assertThat(mav.getViewName()).isEqualTo(ERROR_VIEW);
         assertThat(mav.getModel().keySet()).contains(CUSTOM_MESSAGE_KEY);
-        assertThat((String) mav.getModel().get(CUSTOM_MESSAGE_KEY)).contains(cluster);
     }
 
     @Test

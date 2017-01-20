@@ -1,9 +1,8 @@
 package org.amhzing.clusterview.web.adapter;
 
+import org.amhzing.clusterview.exception.NotFoundException;
 import org.amhzing.clusterview.user.UserUtil;
 import org.hashids.Hashids;
-
-import static org.apache.commons.lang3.Validate.isTrue;
 
 public final class Obfuscator {
 
@@ -20,7 +19,9 @@ public final class Obfuscator {
     public static long deobfuscate(final String obfuscatedValue) {
         final long[] decode = hashids().decode(obfuscatedValue);
 
-        isTrue(decode.length == 1);
+        if (decode.length != 1) {
+            throw new NotFoundException("Could not find decoded value for " + obfuscatedValue);
+        }
 
         return decode[0];
     }

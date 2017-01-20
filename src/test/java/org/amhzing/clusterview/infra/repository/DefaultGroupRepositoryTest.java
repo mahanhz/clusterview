@@ -2,8 +2,7 @@ package org.amhzing.clusterview.infra.repository;
 
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Group;
-import org.amhzing.clusterview.exception.ClusterNotFoundException;
-import org.amhzing.clusterview.exception.GroupNotFoundException;
+import org.amhzing.clusterview.exception.NotFoundException;
 import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.infra.jpa.repository.ActivityJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
@@ -103,7 +102,7 @@ public class DefaultGroupRepositoryTest {
         assertThat(teamEntity.getLocation().getX()).isEqualTo(teamEntity().getLocation().getX());
     }
 
-    @Test(expected = ClusterNotFoundException.class)
+    @Test(expected = NotFoundException.class)
     public void should_not_create_group() throws Exception {
 
         given(clusterJpaRepository.findOne(any(String.class))).willReturn(null);
@@ -126,7 +125,7 @@ public class DefaultGroupRepositoryTest {
         assertThat(teamEntity.getLocation().getX()).isEqualTo(teamEntity().getLocation().getX());
     }
 
-    @Test(expected = GroupNotFoundException.class)
+    @Test(expected = NotFoundException.class)
     public void should_not_update_group() throws Exception {
 
         given(teamJpaRepository.findOne(any(Long.class))).willReturn(null);

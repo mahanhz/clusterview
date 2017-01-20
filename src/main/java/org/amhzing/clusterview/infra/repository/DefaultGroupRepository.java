@@ -3,8 +3,7 @@ package org.amhzing.clusterview.infra.repository;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Group;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
-import org.amhzing.clusterview.exception.ClusterNotFoundException;
-import org.amhzing.clusterview.exception.GroupNotFoundException;
+import org.amhzing.clusterview.exception.NotFoundException;
 import org.amhzing.clusterview.infra.jpa.mapping.ClusterEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.infra.jpa.repository.ActivityJpaRepository;
@@ -83,7 +82,7 @@ public class DefaultGroupRepository implements GroupRepository {
         final ClusterEntity clusterEntity = clusterJpaRepository.findOne(id);
 
         if (clusterEntity == null) {
-            throw new ClusterNotFoundException("Cluster does not exist " + id, id);
+            throw new NotFoundException("Cluster '" + id + "' does not exist");
         }
 
         final TeamEntityFactory teamEntityFactory = TeamEntityFactory.create(activityJpaRepository);
@@ -104,7 +103,7 @@ public class DefaultGroupRepository implements GroupRepository {
         final TeamEntity currentTeam = teamJpaRepository.findOne(id);
 
         if (currentTeam == null) {
-            throw new GroupNotFoundException("Group does not exist " + id, clusterId.getId(), "" + id);
+            throw new NotFoundException("Group '" + id + "' does not exist");
         }
 
         final TeamEntityFactory teamEntityFactory = TeamEntityFactory.create(activityJpaRepository);
