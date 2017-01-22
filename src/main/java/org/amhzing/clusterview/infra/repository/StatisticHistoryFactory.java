@@ -18,8 +18,11 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.upperCase;
+import static org.apache.commons.lang3.Validate.notBlank;
+import static org.apache.commons.lang3.Validate.notNull;
 
 public final class StatisticHistoryFactory {
 
@@ -61,45 +64,20 @@ public final class StatisticHistoryFactory {
         return date;
     }
 
-    public static void populateCoreActivitiesStats(final ActivityStatistic activityStatistic,
-                                                   final CoreActivityStats cc,
-                                                   final CoreActivityStats dm,
-                                                   final CoreActivityStats jyg,
-                                                   final CoreActivityStats sc) {
-        activityStatistic.getCoreActivities()
+    public static int activityStats(final ActivityStatistic activityStatistic,
+                                    final String type) {
+        notNull(activityStatistic);
+        notBlank(type);
+
+        return activityStatistic.getActivityQuantity()
+                         .entrySet()
                          .stream()
-                         .forEach(coreActivity -> {
-                             if (coreActivity.getId().getId().equalsIgnoreCase(CC)) {
-                                 coreActivityStats(cc, coreActivity);
-                             } else if (coreActivity.getId().getId().equalsIgnoreCase(DM)) {
-                                 coreActivityStats(dm, coreActivity);
-                             } else if (coreActivity.getId().getId().equalsIgnoreCase(JYG)) {
-                                 coreActivityStats(jyg, coreActivity);
-                             } else if (coreActivity.getId().getId().equalsIgnoreCase(SC)) {
-                                 coreActivityStats(sc, coreActivity);
-                             }
-                         });
-    }
-
-    public static ActivityStats activityStats(final Map<Activity, Quantity> activityQuantity) {
-
-        final ActivityStats activityStats = new ActivityStats();
-        activityQuantity.entrySet().stream()
-                        .forEach(entry -> {
-                            if (activityName(entry).equalsIgnoreCase(CC_TEACHER)) {
-                                activityStats.setCcTeacher(activityValue(entry));
-                            } else if (activityName(entry).equalsIgnoreCase(DM_HOST)) {
-                                activityStats.setDmHost(activityValue(entry));
-                            } else if (activityName(entry).equalsIgnoreCase(FIRESIDE_HOST)) {
-                                activityStats.setFiresideHost(activityValue(entry));
-                            } else if (activityName(entry).equalsIgnoreCase(JYG_ANIMATOR)) {
-                                activityStats.setJygAnimator(activityValue(entry));
-                            } else if (activityName(entry).equalsIgnoreCase(SC_TUTOR)) {
-                                activityStats.setScTutor(activityValue(entry));
-                            }
-                        });
-
-        return  activityStats;
+                         .filter(entry -> activityName(entry).equalsIgnoreCase(type))
+                         .mapToInt(entry -> activityValue(entry))
+                         .reduce((a, b) -> {
+                             throw new IllegalStateException("Duplicate stats found for type " + type);
+                         })
+                         .orElse(0);
     }
 
     private static ImmutableMap<Activity, Quantity> activityStats(final ActivityStats activityStats) {
@@ -129,13 +107,32 @@ public final class StatisticHistoryFactory {
         return Activity.create(Activity.Id.create(type), type);
     }
 
-    private static void coreActivityStats(final CoreActivityStats coreActivityStats, final CoreActivity coreActivity) {
-        coreActivityStats.setQuantity((int) coreActivity.getQuantity().getValue());
-        coreActivityStats.setTotalParticipants((int) coreActivity.getTotalParticipants().getValue());
-        coreActivityStats.setCoi((int) coreActivity.getCommunityOfInterest().getValue());
+    public static Optional<CoreActivity> coreActivity(final ActivityStatistic activityStatistic, final String type) {
+        notNull(activityStatistic);
+        notBlank(type);
+
+        return activityStatistic.getCoreActivities()
+                                .stream()
+                                .filter(coreActivity -> coreActivity.getId().getId().equalsIgnoreCase(type))
+                                .reduce((a, b) -> {
+                                    throw new IllegalStateException("Duplicate stats found for type " + type);
+                                });
     }
 
-    private static String activityName(final Map.Entry<Activity, Quantity> entry) {
+    public static CoreActivityStats coreActivityStats(final Optional<CoreActivity> coreActivity) {
+        if (!coreActivity.isPresent()) {
+            return new CoreActivityStats();
+        }
+
+        final CoreActivity presentCoreActivity = coreActivity.get();
+        final int quantity = (int) presentCoreActivity.getQuantity().getValue();
+        final int totalParticipants = (int) presentCoreActivity.getTotalParticipants().getValue();
+        final int coi = (int) presentCoreActivity.getCommunityOfInterest().getValue();
+
+        return CoreActivityStats.create(quantity, totalParticipants, coi);
+    }
+
+    public static String activityName(final Map.Entry<Activity, Quantity> entry) {
         return entry.getKey().getName();
     }
 

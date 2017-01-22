@@ -2,21 +2,25 @@ package org.amhzing.clusterview.infra.repository;
 
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.statistic.ActivityStatistic;
+import org.amhzing.clusterview.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.domain.model.statistic.DatedActivityStatistic;
 import org.amhzing.clusterview.domain.repository.StatisticHistoryRepository;
-import org.amhzing.clusterview.infra.jpa.mapping.stats.CoreActivityStats;
+import org.amhzing.clusterview.infra.jpa.mapping.stats.ActivityStats;
 import org.amhzing.clusterview.infra.jpa.mapping.stats.StatsHistoryEntity;
 import org.amhzing.clusterview.infra.jpa.mapping.stats.StatsHistoryPk;
 import org.amhzing.clusterview.infra.jpa.repository.stats.StatsHistoryJpaRepository;
+import org.amhzing.clusterview.infra.repository.visitor.*;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
-import static org.amhzing.clusterview.cache.CacheSpec.*;
+import static org.amhzing.clusterview.cache.CacheSpec.DEFAULT_CACHE_KEY;
+import static org.amhzing.clusterview.cache.CacheSpec.STATS_HISTORY_CACHE_NAME;
 import static org.amhzing.clusterview.infra.repository.StatisticHistoryFactory.*;
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -53,16 +57,23 @@ public class DefaultStatisticHistoryRepository implements StatisticHistoryReposi
 
         final StatsHistoryPk statsHistoryPk = StatsHistoryPk.create(clusterId.getId(), thisMonth());
 
-        final CoreActivityStats cc = new CoreActivityStats();
-        final CoreActivityStats dm = new CoreActivityStats();
-        final CoreActivityStats jyg = new CoreActivityStats();
-        final CoreActivityStats sc = new CoreActivityStats();
+        final Optional<CoreActivity> cc = activityStatistic.accept(new CoreActivityStatsHistoryCCVisitor());
+        final Optional<CoreActivity> dm = activityStatistic.accept(new CoreActivityStatsHistoryDMVisitor());
+        final Optional<CoreActivity> jyg = activityStatistic.accept(new CoreActivityStatsHistoryJYGVisitor());
+        final Optional<CoreActivity> sc = activityStatistic.accept(new CoreActivityStatsHistorySCVisitor());
 
-        populateCoreActivitiesStats(activityStatistic, cc, dm, jyg, sc);
+        final ActivityStats activityStats = ActivityStats.create(activityStatistic.accept(new ActivityStatsHistoryCCVisitor()),
+                                                                 activityStatistic.accept(new ActivityStatsHistoryDMVisitor()),
+                                                                 activityStatistic.accept(new ActivityStatsHistoryFiresideVisitor()),
+                                                                 activityStatistic.accept(new ActivityStatsHistoryJYGVisitor()),
+                                                                 activityStatistic.accept(new ActivityStatsHistorySCVisitor()));
 
         final StatsHistoryEntity statsHistoryEntity = StatsHistoryEntity.create(statsHistoryPk,
-                                                                                cc, dm, jyg, sc,
-                                                                                activityStats(activityStatistic.getActivityQuantity()));
+                                                                                coreActivityStats(cc),
+                                                                                coreActivityStats(dm),
+                                                                                coreActivityStats(jyg),
+                                                                                coreActivityStats(sc),
+                                                                                activityStats);
 
         return statsHistoryJpaRepository.save(statsHistoryEntity);
     }

@@ -6,6 +6,7 @@ import org.amhzing.clusterview.domain.model.Activity;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import static java.util.Collections.emptyMap;
@@ -13,7 +14,7 @@ import static java.util.Collections.emptySet;
 import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notNull;
 
-public final class ActivityStatistic {
+public final class ActivityStatistic implements StatsHistoryElement {
 
     private final Map<Activity, Quantity> activityQuantity;
     private final Set<CoreActivity> coreActivities;
@@ -67,5 +68,15 @@ public final class ActivityStatistic {
                 "activityQuantity=" + activityQuantity +
                 ", coreActivities=" + coreActivities +
                 '}';
+    }
+
+    @Override
+    public Optional<CoreActivity> accept(final CoreActivityStatsHistoryVisitor visitor) {
+        return visitor.visit(this);
+    }
+
+    @Override
+    public int accept(final ActivityStatsHistoryVisitor visitor) {
+        return visitor.visit(this);
     }
 }
