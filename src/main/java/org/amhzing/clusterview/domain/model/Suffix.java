@@ -8,7 +8,7 @@ import static org.apache.commons.lang3.Validate.isTrue;
 
 @Value.Immutable
 public interface Suffix {
-    static final int MAX_LENGTH = 10;
+    int MAX_LENGTH = 10;
 
     @Value.Parameter
     String value();

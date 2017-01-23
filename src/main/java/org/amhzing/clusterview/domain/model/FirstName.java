@@ -8,7 +8,7 @@ import static org.apache.commons.lang3.Validate.isTrue;
 
 @Value.Immutable
 public interface FirstName {
-    static final int MAX_LENGTH = 25;
+    int MAX_LENGTH = 25;
 
     @Value.Parameter
     String value();
