@@ -12,8 +12,10 @@ public interface GroupRepository {
 
     Group group(final Group.Id groupId);
 
+    // FIXME - This should not use Infra
     TeamEntity createGroup(final Group group, final Cluster.Id clusterId);
 
+    // FIXME - This should not use Infra
     TeamEntity updateGroup(final Group group, final Cluster.Id clusterId);
 
     void deleteGroup(final Group.Id groupId, final Cluster.Id clusterId);

@@ -4,6 +4,8 @@ endpoints:
 
 management:
   context-path: /manage
+  security:
+    roles: SUPER_ADMIN
 
 server:
   error:

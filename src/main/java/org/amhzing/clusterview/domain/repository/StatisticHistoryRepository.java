@@ -11,5 +11,6 @@ public interface StatisticHistoryRepository {
 
     List<DatedActivityStatistic> history(Cluster.Id clusterId);
 
+    // FIXME - This should not use Infra
     StatsHistoryEntity saveHistory(Cluster.Id clusterId, ActivityStatistic activityStatistic);
 }

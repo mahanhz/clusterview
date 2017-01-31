@@ -2,7 +2,7 @@ buildscript {
 	ext {
 		NEXUS_REPO_URL = 'http://192.168.1.31:8082/nexus/content/repositories'
 
-		springBootVersion = '1.4.3.RELEASE'
+		springBootVersion = '1.5.1.RELEASE'
 		propDepsVersion = '0.0.7'
 	}
 	repositories {
@@ -33,12 +33,9 @@ plugins {
 	id 'findbugs'
 	id 'pmd'
 
-	id 'org.kravemir.gradle.sass' version '1.2.2'
-	id 'net.saliman.cobertura' version '2.3.2'
-	id 'com.github.kt3k.coveralls' version '2.6.3'
-	id 'org.hidetake.ssh' version '2.2.0'
+	id 'net.saliman.cobertura' version '2.4.0'
+	id 'com.github.kt3k.coveralls' version '2.7.1'
 	id 'net.researchgate.release' version '2.4.0'
-	id 'org.owasp.dependencycheck' version '1.4.3'
 	id 'com.gorylenko.gradle-git-properties' version '1.4.17'
 }
 
