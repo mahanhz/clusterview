@@ -13,10 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static org.amhzing.clusterview.helper.DomainModelHelper.activityStatistic;
-import static org.amhzing.clusterview.helper.DomainModelHelper.clusterId;
-import static org.amhzing.clusterview.helper.DomainModelHelper.datedActivityStatistic;
-import static org.amhzing.clusterview.helper.JpaRepositoryHelper.statsHistoryEntity;
+import static org.amhzing.clusterview.helper.DomainModelHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
@@ -53,7 +50,7 @@ public class DefaultStatisticHistoryServiceTest {
     @Test
     public void should_save_history() throws Exception {
 
-        given(statisticHistoryRepository.saveHistory(any(), any())).willReturn(statsHistoryEntity());
+        given(statisticHistoryRepository.saveHistory(any(), any())).willReturn(datedActivityStatistic());
 
         final Cluster.Id clusterId = clusterId();
         final ActivityStatistic activityStatistic = activityStatistic();

@@ -1,12 +1,13 @@
 package org.amhzing.clusterview.infra.repository;
 
-import org.amhzing.clusterview.testconfig.CacheInvalidateRule;
-import org.amhzing.clusterview.testconfig.CacheTestConfig;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.Group;
 import org.amhzing.clusterview.domain.repository.GroupRepository;
+import org.amhzing.clusterview.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
 import org.amhzing.clusterview.infra.jpa.repository.TeamJpaRepository;
+import org.amhzing.clusterview.testconfig.CacheInvalidateRule;
+import org.amhzing.clusterview.testconfig.CacheTestConfig;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,8 +25,10 @@ import static org.amhzing.clusterview.helper.JpaRepositoryHelper.clusterEntity;
 import static org.amhzing.clusterview.helper.JpaRepositoryHelper.teamEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 @RunWith(SpringRunner.class)
@@ -194,10 +197,12 @@ public class DefaultGroupRepositoryCacheTest {
     }
 
     private void whenCreatingGroup() {
+        when(teamJpaRepository.save(any(TeamEntity.class))).thenReturn(teamEntity());
         groupRepository.createGroup(group(), clusterId());
     }
 
     private void whenUpdatingGroup() {
+        when(teamJpaRepository.save(any(TeamEntity.class))).thenReturn(teamEntity());
         groupRepository.updateGroup(group(), clusterId());
     }
 

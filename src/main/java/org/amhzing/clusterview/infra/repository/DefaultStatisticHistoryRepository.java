@@ -51,7 +51,7 @@ public class DefaultStatisticHistoryRepository implements StatisticHistoryReposi
 
     @Override
     @CacheEvict(cacheNames = STATS_HISTORY_CACHE_NAME, key = DEFAULT_CACHE_KEY)
-    public StatsHistoryEntity saveHistory(final Cluster.Id clusterId, final ActivityStatistic activityStatistic) {
+    public DatedActivityStatistic saveHistory(final Cluster.Id clusterId, final ActivityStatistic activityStatistic) {
         notNull(clusterId);
         notNull(activityStatistic);
 
@@ -75,6 +75,6 @@ public class DefaultStatisticHistoryRepository implements StatisticHistoryReposi
                                                                                 coreActivityStats(sc),
                                                                                 activityStats);
 
-        return statsHistoryJpaRepository.save(statsHistoryEntity);
+        return datedActivityStatistic(statsHistoryJpaRepository.save(statsHistoryEntity));
     }
 }

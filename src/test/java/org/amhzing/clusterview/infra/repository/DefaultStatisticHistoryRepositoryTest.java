@@ -46,13 +46,9 @@ public class DefaultStatisticHistoryRepositoryTest {
     public void should_save_history() throws Exception {
 
         given(statsHistoryJpaRepository.save(any(StatsHistoryEntity.class))).willReturn(statsHistoryEntity());
-        final StatsHistoryEntity statsHistoryEntity = defaultStatisticHistoryRepository.saveHistory(cluster().getId(), activityStatistic());
+        final DatedActivityStatistic datedActivityStatistic = defaultStatisticHistoryRepository.saveHistory(cluster().getId(),
+                                                                                                            activityStatistic());
 
-        assertThat(statsHistoryEntity).isNotNull();
-        assertThat(statsHistoryEntity.getActivityStats()).isEqualTo(statsHistoryEntity().getActivityStats());
-        assertThat(statsHistoryEntity.getCc()).isEqualTo(statsHistoryEntity().getCc());
-        assertThat(statsHistoryEntity.getDm()).isEqualTo(statsHistoryEntity().getDm());
-        assertThat(statsHistoryEntity.getJyg()).isEqualTo(statsHistoryEntity().getJyg());
-        assertThat(statsHistoryEntity.getSc()).isEqualTo(statsHistoryEntity().getSc());
+        assertThat(datedActivityStatistic).isNotNull();
     }
 }

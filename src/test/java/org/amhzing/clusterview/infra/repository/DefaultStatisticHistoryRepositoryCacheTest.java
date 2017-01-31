@@ -1,12 +1,13 @@
 package org.amhzing.clusterview.infra.repository;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.testconfig.CacheInvalidateRule;
-import org.amhzing.clusterview.testconfig.CacheTestConfig;
 import org.amhzing.clusterview.domain.model.Cluster;
 import org.amhzing.clusterview.domain.model.statistic.DatedActivityStatistic;
 import org.amhzing.clusterview.domain.repository.StatisticHistoryRepository;
+import org.amhzing.clusterview.infra.jpa.mapping.stats.StatsHistoryEntity;
 import org.amhzing.clusterview.infra.jpa.repository.stats.StatsHistoryJpaRepository;
+import org.amhzing.clusterview.testconfig.CacheInvalidateRule;
+import org.amhzing.clusterview.testconfig.CacheTestConfig;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +23,8 @@ import static org.amhzing.clusterview.helper.DomainModelHelper.activityStatistic
 import static org.amhzing.clusterview.helper.JpaRepositoryHelper.statsHistoryEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
 
 
 @RunWith(SpringRunner.class)
@@ -111,6 +112,7 @@ public class DefaultStatisticHistoryRepositoryCacheTest {
     }
 
     private void whenSavingHistory() {
+        when(statsHistoryJpaRepository.save(any(StatsHistoryEntity.class))).thenReturn(statsHistoryEntity());
         statisticHistoryRepository.saveHistory(clusterId(), activityStatistic());
     }
 

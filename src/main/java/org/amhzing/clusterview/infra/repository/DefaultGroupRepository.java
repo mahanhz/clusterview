@@ -74,7 +74,7 @@ public class DefaultGroupRepository implements GroupRepository {
     @Override
     @Caching(evict = { @CacheEvict(cacheNames = STATS_CACHE_NAME, allEntries = true),
                        @CacheEvict(cacheNames = GROUPS_CACHE_NAME, key = "#root.caches[0].name + '_' + #p1") })
-    public TeamEntity createGroup(final Group group, final Cluster.Id clusterId) {
+    public Group createGroup(final Group group, final Cluster.Id clusterId) {
         notNull(group);
         notNull(clusterId);
 
@@ -88,14 +88,14 @@ public class DefaultGroupRepository implements GroupRepository {
         final TeamEntityFactory teamEntityFactory = TeamEntityFactory.create(activityJpaRepository);
         final TeamEntity teamEntity = teamEntityFactory.convertGroupForNewTeam(group, clusterEntity);
 
-        return teamJpaRepository.save(teamEntity);
+        return convertTeam(teamJpaRepository.save(teamEntity));
     }
 
     @Override
     @Caching(evict = { @CacheEvict(cacheNames = STATS_CACHE_NAME, allEntries = true),
                        @CacheEvict(cacheNames = GROUPS_CACHE_NAME, key = "#root.caches[0].name + '_' + #p1"),
                        @CacheEvict(cacheNames = GROUP_CACHE_NAME, key = "#root.caches[0].name + '_' + #p0.id")})
-    public TeamEntity updateGroup(final Group group, final Cluster.Id clusterId) {
+    public Group updateGroup(final Group group, final Cluster.Id clusterId) {
         notNull(group);
         notNull(clusterId);
 
@@ -109,7 +109,7 @@ public class DefaultGroupRepository implements GroupRepository {
         final TeamEntityFactory teamEntityFactory = TeamEntityFactory.create(activityJpaRepository);
         final TeamEntity updatedTeam = teamEntityFactory.convertGroupForExistingTeam(group, currentTeam);
 
-        return teamJpaRepository.save(updatedTeam);
+        return convertTeam(teamJpaRepository.save(updatedTeam));
     }
 
     @Override

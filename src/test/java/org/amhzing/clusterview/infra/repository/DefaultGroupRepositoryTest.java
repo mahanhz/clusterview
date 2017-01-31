@@ -95,11 +95,11 @@ public class DefaultGroupRepositoryTest {
 
         given(teamJpaRepository.save(any(TeamEntity.class))).willReturn(teamEntity());
 
-        final TeamEntity teamEntity = defaultGroupRepository.createGroup(group(), cluster().getId());
+        final Group group = defaultGroupRepository.createGroup(group(), cluster().getId());
 
-        assertThat(teamEntity).isNotNull();
-        assertThat(teamEntity.getLocation().getX()).isEqualTo(teamEntity().getLocation().getX());
-        assertThat(teamEntity.getLocation().getX()).isEqualTo(teamEntity().getLocation().getX());
+        assertThat(group).isNotNull();
+        assertThat(group.getLocation().coordX()).isEqualTo(teamEntity().getLocation().getX());
+        assertThat(group.getLocation().coordY()).isEqualTo(teamEntity().getLocation().getX());
     }
 
     @Test(expected = NotFoundException.class)
@@ -118,11 +118,11 @@ public class DefaultGroupRepositoryTest {
         given(teamJpaRepository.findOne(any(Long.class))).willReturn(teamEntity());
         given(teamJpaRepository.save(any(TeamEntity.class))).willReturn(teamEntity());
 
-        final TeamEntity teamEntity = defaultGroupRepository.updateGroup(group(), cluster().getId());
+        final Group group = defaultGroupRepository.updateGroup(group(), cluster().getId());
 
-        assertThat(teamEntity).isNotNull();
-        assertThat(teamEntity.getLocation().getX()).isEqualTo(teamEntity().getLocation().getX());
-        assertThat(teamEntity.getLocation().getX()).isEqualTo(teamEntity().getLocation().getX());
+        assertThat(group).isNotNull();
+        assertThat(group.getLocation().coordX()).isEqualTo(teamEntity().getLocation().getX());
+        assertThat(group.getLocation().coordY()).isEqualTo(teamEntity().getLocation().getX());
     }
 
     @Test(expected = NotFoundException.class)
