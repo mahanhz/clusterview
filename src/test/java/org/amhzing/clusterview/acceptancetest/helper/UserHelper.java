@@ -23,7 +23,7 @@ public final class UserHelper {
         return ImmutablePair.of("admin@example.com", "admin123");
     }
 
-    public static ImmutablePair<String, String>superAdminUser() {
+    public static ImmutablePair<String, String> superAdminUser() {
         return ImmutablePair.of("superadmin@example.com", "superadmin123");
     }
 

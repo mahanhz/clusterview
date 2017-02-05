@@ -34,6 +34,12 @@ public class UserLoginSteps extends SpringSteps implements En {
 
             setAuthentication(stockholmUser().getLeft(), stockholmUser().getRight());
         });
+
+        Given("^a logged in super admin user$", () -> {
+            loginHeaders = login(superAdminUser().getLeft(), superAdminUser().getRight(), getTestRestTemplate());
+
+            setAuthentication(superAdminUser().getLeft(), superAdminUser().getRight());
+        });
     }
 
     public static HttpHeaders getLoginHeaders() {
