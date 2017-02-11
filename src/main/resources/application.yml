@@ -22,3 +22,9 @@ spring:
       config: ehcache.xml
   jpa:
     generate-ddl: true
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /manage/v2/api-docs

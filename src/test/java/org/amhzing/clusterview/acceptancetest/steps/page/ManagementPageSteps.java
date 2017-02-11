@@ -34,9 +34,9 @@ public class ManagementPageSteps extends SpringSteps implements En {
             assertThat(getResponse().getStatusCode()).isEqualTo(HttpStatus.OK);
 
             final Document doc = Jsoup.parse(getResponse().getBody());
-            final String html = doc.body().html();
+            final String body = doc.body().html();
 
-            final Map<String, String> links = JsonPath.read(html, "@._links");
+            final Map<String, String> links = JsonPath.read(body, "@._links");
 
             assertThat(links).containsKey("env");
             assertThat(links).containsKey("health");

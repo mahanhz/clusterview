@@ -8,7 +8,6 @@ import static org.amhzing.clusterview.infra.repository.StatisticHistoryFactory.a
 
 public class ActivityStatsHistoryDMVisitor implements ActivityStatsHistoryVisitor {
 
-
     @Override
     public int visit(final ActivityStatistic activityStatistic) {
         return activityStats(activityStatistic, DM_HOST);

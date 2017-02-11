@@ -23,6 +23,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/statsview/history/{country}/**").access("hasRole('USER') and @webSecurity.checkCountry(authentication, #country)")
                 .antMatchers("/clusteredit/{country}/**").access("hasRole('ADMIN') and @webSecurity.checkCountry(authentication, #country)")
                 .antMatchers("/statsedit/history/{country}/**").access("hasRole('ADMIN') and @webSecurity.checkCountry(authentication, #country)")
+                .antMatchers("/swagger-ui.html**").hasRole("SUPER_ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

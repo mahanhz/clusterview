@@ -25,18 +25,25 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         cacheControl.sMaxAge(2, TimeUnit.HOURS);
         cacheControl.mustRevalidate();
 
-        Stream.of(StaticFiles.values()).forEach(resource -> {
-            registry.addResourceHandler(resource.getResourcePattern())
-                    .addResourceLocations("classpath:/static" + resource.getResourceLocation())
-                    .setCacheControl(cacheControl);
-        });
+        staticFiles(registry, cacheControl);
+        webjars(registry, cacheControl);
 
+        super.addResourceHandlers(registry);
+    }
+
+    private void webjars(final ResourceHandlerRegistry registry, final CacheControl cacheControl) {
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/")
                 .setCacheControl(cacheControl)
                 .resourceChain(true)
                 .addResolver(new WebJarsResourceResolver());
+    }
 
-        super.addResourceHandlers(registry);
+    private void staticFiles(final ResourceHandlerRegistry registry, final CacheControl cacheControl) {
+        Stream.of(StaticFiles.values()).forEach(resource -> {
+            registry.addResourceHandler(resource.getResourcePattern())
+                    .addResourceLocations("classpath:/static" + resource.getResourceLocation())
+                    .setCacheControl(cacheControl);
+        });
     }
 }
