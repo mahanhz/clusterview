@@ -27,6 +27,8 @@ ext {
 
     hashidsVersion = '1.0.1'
 
+    beansvizVersion = '0.1.0'
+
     springSecurityTestVersion = '4.2.1.RELEASE'
     junitParamsVersion = '1.0.6'
     cucumberVersion = '1.2.5'
@@ -83,6 +85,8 @@ dependencies {
     compile ("org.stagemonitor:stagemonitor-logging:${stageMonitorVersion}")
 
     compile ("org.hashids:hashids:${hashidsVersion}")
+
+    compile ("am.ik.beansviz:beansviz-spring-boot-actuator:${beansvizVersion}")
 
     provided ("org.immutables:value:${immutablesVersion}")
 
