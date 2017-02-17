@@ -4,6 +4,8 @@ buildscript {
 
 		springBootVersion = '1.5.1.RELEASE'
 		propDepsVersion = '0.0.7'
+		pitestVersion = '1.1.11'
+		owaspDepCheckVersion = '1.4.5'
 	}
 	repositories {
 		mavenCentral()
@@ -18,6 +20,8 @@ buildscript {
 	dependencies {
 		classpath ("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath ("org.springframework.build.gradle:propdeps-plugin:${propDepsVersion}")
+		classpath ("info.solidsoft.gradle.pitest:gradle-pitest-plugin:${pitestVersion}")
+		classpath ("org.owasp:dependency-check-gradle:${owaspDepCheckVersion}")
 	}
 }
 
@@ -41,6 +45,8 @@ plugins {
 }
 
 apply plugin: 'org.springframework.boot'
+apply plugin: 'info.solidsoft.pitest'
+apply plugin: 'org.owasp.dependencycheck'
 
 configure(allprojects) {
 	apply plugin: 'propdeps'

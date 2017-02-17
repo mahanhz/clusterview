@@ -14,3 +14,9 @@ task acceptanceTest(type:Test) {
 task smokeTest(type:Test) {
     include smokeTests
 }
+
+pitest {
+    targetClasses = ['org.amhzing.clusterview.*']
+    excludedClasses = ['org.amhzing.clusterview.smoketest.*', 'org.amhzing.clusterview.acceptancetest.*']
+    outputFormats = ['XML', 'HTML']
+}
