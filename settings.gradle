@@ -1,3 +1,4 @@
 rootProject.name="Cluster View"
 
+include "acceptance-test"
 include "load-test"

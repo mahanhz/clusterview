@@ -1,14 +1,7 @@
-def acceptanceTests = 'org/amhzing/clusterview/acceptancetest/**'
 def smokeTests = 'org/amhzing/clusterview/smoketest/**'
 
 test {
-    exclude acceptanceTests
     exclude smokeTests
-}
-
-task acceptanceTest(type:Test) {
-    include acceptanceTests
-    systemProperties['spring.profiles.active'] = 'acceptancetest'
 }
 
 task smokeTest(type:Test) {

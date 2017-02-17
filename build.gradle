@@ -37,6 +37,7 @@ plugins {
 	id 'findbugs'
 	id 'pmd'
 
+	id "io.spring.dependency-management" version "1.0.0.RELEASE"
 	id 'net.saliman.cobertura' version '2.4.0'
 	id 'com.github.kt3k.coveralls' version '2.7.1'
 	id 'net.researchgate.release' version '2.4.0'
@@ -56,6 +57,20 @@ configure(allprojects) {
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+subprojects {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'java'
+
+	dependencyManagement {
+		imports {
+			mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+		}
+	}
+}
 
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.14'
