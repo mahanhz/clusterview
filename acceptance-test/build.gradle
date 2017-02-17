@@ -21,5 +21,9 @@ dependencies {
 }
 
 task acceptanceTest(type:Test) {
+
+	// Needed to be able to access thymeleaf templates
+	sourceSets.main.resources.srcDir '../src/main/resources'
+
 	systemProperties['spring.profiles.active'] = 'acceptancetest'
 }
