@@ -41,7 +41,6 @@ plugins {
 	id 'com.github.kt3k.coveralls' version '2.7.1'
 	id 'net.researchgate.release' version '2.4.0'
 	id 'com.gorylenko.gradle-git-properties' version '1.4.17'
-	id 'com.github.lkishalmi.gatling' version '0.4.1'
 }
 
 apply plugin: 'org.springframework.boot'
