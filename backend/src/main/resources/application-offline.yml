@@ -1,6 +1,9 @@
 security:
   ignored: /h2-console/**
 
+server:
+  port: 12102
+
 spring:
   datasource:
     platform: h2

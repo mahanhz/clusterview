@@ -1,5 +1,12 @@
+ext {
+	stageMonitorVersion = '0.31.0'
+}
+
 dependencies {
 	compile project(':backend')
+
+	compile ("org.stagemonitor:stagemonitor-web:${stageMonitorVersion}")
+	compile ("org.stagemonitor:stagemonitor-logging:${stageMonitorVersion}")
 }
 
 // Code analysis

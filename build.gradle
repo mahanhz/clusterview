@@ -66,13 +66,13 @@ subprojects {
 }
 
 project(':app') {
+	apply plugin: 'org.springframework.boot'
 	apply plugin: 'maven'
 	apply plugin: 'jacoco'
 	apply plugin: 'idea'
 	apply plugin: 'jdepend'
 	apply plugin: 'findbugs'
 	apply plugin: 'pmd'
-	apply plugin: 'org.springframework.boot'
 	apply plugin: 'org.owasp.dependencycheck'
 	apply plugin: 'net.researchgate.release'
 	apply plugin: 'net.saliman.cobertura'
@@ -81,5 +81,7 @@ project(':app') {
 }
 
 project(':backend') {
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'com.gorylenko.gradle-git-properties'
 	apply plugin: 'info.solidsoft.pitest'
 }

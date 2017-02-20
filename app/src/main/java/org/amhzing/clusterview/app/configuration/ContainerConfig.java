@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.backend.configuration;
+package org.amhzing.clusterview.app.configuration;
 
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
