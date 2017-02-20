@@ -1,4 +1,4 @@
-package gatling.simulations.org.amhzing.clusterview.loadtest
+package org.amhzing.clusterview.loadtest
 
 import scala.concurrent.duration._
 

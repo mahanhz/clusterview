@@ -1,0 +1,6 @@
+spring:
+  cache:
+    jcache:
+      config: ehcache.xml
+  jpa:
+    generate-ddl: true

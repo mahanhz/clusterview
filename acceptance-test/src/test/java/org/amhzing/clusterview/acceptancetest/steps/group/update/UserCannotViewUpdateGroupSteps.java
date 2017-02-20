@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.acceptancetest.steps.group.update;
+package org.amhzing.clusterview.backend.acceptancetest.steps.group.update;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
@@ -7,6 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.http.HttpStatus;
 
+import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.getGroupPageResponse;
 import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.getGroupPageResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 

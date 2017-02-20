@@ -1,0 +1,6 @@
+security:
+  ignored: /h2-console/**
+
+spring:
+  datasource:
+    platform: h2

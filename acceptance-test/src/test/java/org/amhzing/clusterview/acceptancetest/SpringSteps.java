@@ -1,9 +1,9 @@
 package org.amhzing.clusterview.acceptancetest;
 
-import org.amhzing.clusterview.ClusterviewApplication;
-import org.amhzing.clusterview.infra.jpa.repository.ClusterJpaRepository;
-import org.amhzing.clusterview.infra.jpa.repository.TeamJpaRepository;
-import org.amhzing.clusterview.infra.jpa.repository.stats.StatsHistoryJpaRepository;
+import org.amhzing.clusterview.app.MainApplication;
+import org.amhzing.clusterview.backend.infra.jpa.repository.ClusterJpaRepository;
+import org.amhzing.clusterview.backend.infra.jpa.repository.TeamJpaRepository;
+import org.amhzing.clusterview.backend.infra.jpa.repository.stats.StatsHistoryJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +11,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.ContextConfiguration;
 
 @ContextConfiguration
-@SpringBootTest(classes = ClusterviewApplication.class,
+@SpringBootTest(classes = MainApplication.class,
                 webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SpringSteps {
 

@@ -2,12 +2,12 @@ package org.amhzing.clusterview.acceptancetest.steps.stats;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
+import org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper;
+import org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
-import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AdminSaveHistorySteps extends SpringSteps implements En {
@@ -21,9 +21,9 @@ public class AdminSaveHistorySteps extends SpringSteps implements En {
 
             initialHistoryCount = getStatsHistoryJpaRepository().count();
 
-            final HttpHeaders headers = getHeaders(getTestRestTemplate(),
-                                                   "/statsview/history/se",
-                                                   getLoginHeaders());
+            final HttpHeaders headers = RestTemplateHelper.getHeaders(getTestRestTemplate(),
+                                                                      "/statsview/history/se",
+                                                                      UserLoginSteps.getLoginHeaders());
 
             final MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
             form.set("name", "stockholm");

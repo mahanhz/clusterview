@@ -1,0 +1,46 @@
+package org.amhzing.clusterview.backend.web.model;
+
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static com.google.common.collect.ImmutableList.of;
+import static org.amhzing.clusterview.backend.helper.ClientModelHelper.activityModel;
+import static org.amhzing.clusterview.backend.helper.ClientModelHelper.nameModel;
+import static org.amhzing.clusterview.backend.helper.JUnitParamHelper.invalidMatching;
+import static org.amhzing.clusterview.backend.helper.JUnitParamHelper.valid;
+import static org.assertj.core.api.Assertions.assertThat;
+
+@RunWith(JUnitParamsRunner.class)
+public class MemberModelTest {
+
+    @Test
+    @Parameters(method = "values")
+    public void test_creation(final Class<? extends Exception> exception,
+                              final long id,
+                              final NameModel name,
+                              final CapabilityModel capability,
+                              final CommitmentModel commitment) {
+        try {
+            MemberModel.create(id, name, capability, commitment);
+        } catch (Exception ex) {
+            assertThat(ex.getClass()).isEqualTo(exception);
+        }
+    }
+
+    @Test
+    public void equalsAndHashCodeContract() throws Exception {
+        EqualsVerifier.forClass(MemberModel.class).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
+    }
+
+    @SuppressWarnings("unused")
+    private Object values() {
+        return new Object[][]{
+                { valid(), 123L, nameModel(), CapabilityModel.create(of(activityModel())), CommitmentModel.create(of(activityModel())) },
+                { invalidMatching(NullPointerException.class), 123L, null, CapabilityModel.create(of(activityModel())), CommitmentModel.create(of(activityModel())) }
+        };
+    }
+}

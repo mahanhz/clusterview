@@ -3,13 +3,9 @@ ext {
 	jsoupVersion = '1.10.2'
 }
 
-repositories {
-	mavenCentral()
-}
-
 dependencies {
 
-	compile rootProject
+	compile project(':app')
 
 	testCompile ('org.springframework.boot:spring-boot-starter-test')
 
@@ -20,10 +16,22 @@ dependencies {
 	testCompile ("org.jsoup:jsoup:${jsoupVersion}")
 }
 
+def acceptanceTests = 'org/amhzing/clusterview/acceptancetest/**'
+
+test {
+	exclude acceptanceTests
+}
+
 task acceptanceTest(type:Test) {
 
+	include acceptanceTests
+
 	// Needed to be able to access thymeleaf templates
-	sourceSets.main.resources.srcDir '../src/main/resources'
+//	sourceSets.main.resources {
+//		srcDir '../app/src/main/resources'
+//		include 'static/**'
+//		include 'templates/**'
+//	}
 
 	systemProperties['spring.profiles.active'] = 'acceptancetest'
 }

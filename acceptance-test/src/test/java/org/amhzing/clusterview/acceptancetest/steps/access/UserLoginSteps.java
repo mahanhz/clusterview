@@ -4,8 +4,8 @@ import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
 import org.springframework.http.HttpHeaders;
 
-import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.login;
 import static org.amhzing.clusterview.acceptancetest.helper.UserHelper.*;
+import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.login;
 
 public class UserLoginSteps extends SpringSteps implements En {
 

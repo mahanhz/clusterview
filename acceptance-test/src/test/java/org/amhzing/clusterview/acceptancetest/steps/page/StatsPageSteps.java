@@ -2,12 +2,12 @@ package org.amhzing.clusterview.acceptancetest.steps.page;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
+import org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.http.*;
 
-import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StatsPageSteps extends SpringSteps implements En {
@@ -19,7 +19,7 @@ public class StatsPageSteps extends SpringSteps implements En {
         When("^in the stats page$", () -> {
             final HttpHeaders headers = new HttpHeaders();
 
-            final String cookie = getLoginHeaders().getFirst("Set-Cookie");
+            final String cookie = UserLoginSteps.getLoginHeaders().getFirst("Set-Cookie");
             headers.set("Cookie", cookie);
 
             response = getTestRestTemplate().exchange("/statsview/history/se",

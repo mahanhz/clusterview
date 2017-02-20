@@ -2,13 +2,12 @@ package org.amhzing.clusterview.acceptancetest.steps.group.update;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
+import org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
-import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
-import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.CLUSTER;
 import static org.amhzing.clusterview.acceptancetest.steps.page.GroupPageSteps.getObfuscatedId;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +21,7 @@ public class AdminUpdateGroupSteps extends SpringSteps implements En {
         When("^attempting to update the group$", () -> {
             final HttpHeaders headers = getHeaders(getTestRestTemplate(),
                                                    "/clusteredit/se/central/" + CLUSTER + "/" + getObfuscatedId(),
-                                                   getLoginHeaders());
+                                                   UserLoginSteps.getLoginHeaders());
 
             final MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
             form.set("obfuscatedId", getObfuscatedId());
@@ -43,7 +42,7 @@ public class AdminUpdateGroupSteps extends SpringSteps implements En {
                                                                                  super.getPort() +
                                                                                  "/clusterview/se/central/" + CLUSTER);
 
-            assertThat(groupsSize(getTeamJpaRepository())).isEqualTo(getInitialGroupsSize());
+            assertThat(groupsSize(getTeamJpaRepository())).isEqualTo(UserLoginSteps.getInitialGroupsSize());
         });
     }
 }

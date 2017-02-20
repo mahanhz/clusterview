@@ -1,0 +1,31 @@
+dependencies {
+	compile project(':backend')
+}
+
+// Code analysis
+apply from: 'gradle-segment/code-analysis.gradle'
+
+// Publish to Nexus
+apply from: 'gradle-segment/publish.gradle'
+
+// Git properties that display in the actuator /info endpoint
+gitProperties {
+	dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ z"
+	dateFormatTimeZone = "UTC"
+}
+
+springBoot {
+
+	mainClass = 'org.amhzing.clusterview.app.MainApplication'
+
+	buildInfo {
+		additionalProperties = [
+				'description': "${description}"
+		]
+	}
+}
+
+// Make the System.properties available in the bootRun task.
+bootRun {
+	systemProperties = System.properties
+}
