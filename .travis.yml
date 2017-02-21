@@ -15,7 +15,7 @@ cache:
 jdk:
   - oraclejdk8
 
-script: ./gradlew assemble check -PmavenUser=x -PmavenPassword=x
+script: ./gradlew check assemble -PmavenUser=x -PmavenPassword=x
 
 after_success:
   - ./gradlew jacocoTestReport coveralls -PmavenUser=x -PmavenPassword=x

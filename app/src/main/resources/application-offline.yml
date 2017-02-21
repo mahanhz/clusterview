@@ -1,3 +1,6 @@
+security:
+  ignored: /h2-console/**
+
 server:
   port: 12101
 
