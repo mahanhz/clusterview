@@ -22,7 +22,7 @@ stage ('Build') {
 
                 gradle 'clean test assemble'
 
-                stash excludes: 'build/', includes: '**', name: 'source'
+                stash excludes: 'build/, smoke-test/, load-test/, acceptance-test/build/, app/build/', includes: '**', name: 'source'
 
                 // Obtaining commit id like this until JENKINS-26100 is implemented
                 // See http://stackoverflow.com/questions/36304208/jenkins-workflow-checkout-accessing-branch-name-and-git-commit
@@ -135,7 +135,7 @@ if (isMasterBranch()) {
                                        submoduleCfg: [],
                                        userRemoteConfigs: [[url: REPOSITORY_URL]]]
 
-                        stash includes: 'gradle.properties', name: 'masterProperties'
+                        stash includes: 'app/gradle.properties', name: 'masterProperties'
 
                         unstash 'source'
                         unstash 'masterProperties'
@@ -162,7 +162,7 @@ stage ('Clean up') {
 }
 
 def releaseVersion() {
-    def props = readProperties file: 'gradle.properties'
+    def props = readProperties file: 'app/gradle.properties'
     def version = props['version']
 
     if (version.contains('-SNAPSHOT')) {

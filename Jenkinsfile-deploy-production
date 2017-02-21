@@ -32,7 +32,7 @@ lock('lock-deploy-production') {
             timeout(time: 5, unit: 'MINUTES') {
                 checkout scm
 
-                stash excludes: 'build/', includes: '**', name: 'source'
+                stash excludes: 'smoketest/build/', includes: 'app/gradle.properties, smoke-test/**', name: 'source'
 
                 if (SELECTED_DEPLOYMENT_OPTION == "latest") {
                     sh 'git describe --abbrev=0 > releaseTag'
@@ -44,7 +44,7 @@ lock('lock-deploy-production') {
                     throw new RuntimeException("Invalid deployment option selected: ${SELECTED_DEPLOYMENT_OPTION}")
                 }
 
-                def props = readProperties file: 'gradle.properties'
+                def props = readProperties file: 'app/gradle.properties'
 
                 ARTIFACT_NEXUS_URL = props['artifactNexusUrl']
                 ARTIFACT_GROUP = props['artifactGroup']

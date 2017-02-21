@@ -25,13 +25,16 @@ test {
 task acceptanceTest(type:Test) {
 
 	include acceptanceTests
-
-	// Needed to be able to access thymeleaf templates
-//	sourceSets.main.resources {
-//		srcDir '../app/src/main/resources'
-//		include 'static/**'
-//		include 'templates/**'
-//	}
-
 	systemProperties['spring.profiles.active'] = 'acceptancetest'
 }
+
+task copyAppResources(type: Copy) {
+	from('../app/src/main/resources') {
+		include 'static/**'
+		include 'templates/**'
+		include 'data-h2.sql'
+	}
+	into 'build/resources/test'
+}
+
+acceptanceTest.dependsOn copyAppResources
