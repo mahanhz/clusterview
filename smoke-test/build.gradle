@@ -1,0 +1,16 @@
+dependencies {
+
+	compile project(':app')
+
+	testCompile ('org.springframework.boot:spring-boot-starter-test')
+}
+
+def smokeTests = 'org/amhzing/clusterview/smoketest/**'
+
+test {
+	exclude smokeTests
+}
+
+task smokeTest(type:Test) {
+	include smokeTests
+}

@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.smoketest;
+package org.amhzing.clusterview.smoketest;
 
 import org.amhzing.clusterview.app.MainApplication;
 import org.junit.Test;

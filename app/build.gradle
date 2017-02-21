@@ -112,17 +112,6 @@ apply from: 'gradle-segment/publish.gradle'
 //	}
 //}
 
-
-def smokeTests = 'org/amhzing/clusterview/app/smoketest/**'
-
-test {
-	exclude smokeTests
-}
-
-task smokeTest(type:Test) {
-	include smokeTests
-}
-
 pitest {
 	targetClasses = ['org.amhzing.clusterview.*']
 	excludedClasses = ['org.amhzing.clusterview.smoketest.*']
