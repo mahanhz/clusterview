@@ -4,7 +4,6 @@ import org.amhzing.clusterview.app.annotation.TestOffline;
 import org.amhzing.clusterview.app.helper.ClientModelHelper;
 import org.amhzing.clusterview.app.security.WithMockCustomUser;
 import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(StatisticEditController.class)
 @TestOffline
-@Ignore
-
 public class StatisticEditControllerTest {
 
     @Autowired

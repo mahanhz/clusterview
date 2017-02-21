@@ -32,8 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(GroupEditController.class)
 @TestOffline
-@Ignore
-
 public class GroupEditControllerTest {
 
     public static final String OBFUSCATED_GROUP_ID = "3o97MmbN";
