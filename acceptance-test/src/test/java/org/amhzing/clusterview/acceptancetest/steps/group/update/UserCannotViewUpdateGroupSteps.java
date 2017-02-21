@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.acceptancetest.steps.group.update;
+package org.amhzing.clusterview.acceptancetest.steps.group.update;
 
 import cucumber.api.java8.En;
 import org.amhzing.clusterview.acceptancetest.SpringSteps;
