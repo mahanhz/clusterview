@@ -2,7 +2,7 @@
     <!-- always a good idea to add an on console status listener -->
     <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
 
-    <turboFilter class="org.amhzing.clusterview.backend.log.TimeBasedDuplicateMessageFilter">
+    <turboFilter class="org.amhzing.clusterview.app.log.TimeBasedDuplicateMessageFilter">
         <allowedRepetitions>5</allowedRepetitions>
         <cacheSize>200</cacheSize>
         <expireAfterWriteSeconds>60</expireAfterWriteSeconds>

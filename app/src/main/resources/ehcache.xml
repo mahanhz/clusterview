@@ -19,7 +19,7 @@
     <cache-template name="heap-cache">
         <listeners>
             <listener>
-                <class>org.amhzing.clusterview.backend.cache.CacheEventLogger</class>
+                <class>org.amhzing.clusterview.app.cache.CacheEventLogger</class>
                 <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
                 <event-ordering-mode>UNORDERED</event-ordering-mode>
                 <events-to-fire-on>CREATED</events-to-fire-on>

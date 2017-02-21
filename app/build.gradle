@@ -113,7 +113,7 @@ apply from: 'gradle-segment/publish.gradle'
 //}
 
 
-def smokeTests = 'org/amhzing/clusterview/backend/smoketest/**'
+def smokeTests = 'org/amhzing/clusterview/app/smoketest/**'
 
 test {
 	exclude smokeTests
@@ -137,7 +137,7 @@ gitProperties {
 
 springBoot {
 
-	mainClass = 'org.amhzing.clusterview.backend.MainApplication'
+	mainClass = 'org.amhzing.clusterview.app.MainApplication'
 
 	buildInfo {
 		additionalProperties = [

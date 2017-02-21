@@ -18,7 +18,7 @@
                                     th:text="${cache}">cache</option>
                         </select>
                         <button type="submit" id="clearCache" class="btn btn-primary"
-                                sec:authorize="hasRole(T(org.amhzing.clusterview.user.UserRole).SUPER_ADMIN.getRole())">Clear Cache</button>
+                                sec:authorize="hasRole(T(org.amhzing.clusterview.app.user.UserRole).SUPER_ADMIN.getRole())">Clear Cache</button>
 
                     </div>
                     <div class="row" th:if="${clearCacheResponse}">
