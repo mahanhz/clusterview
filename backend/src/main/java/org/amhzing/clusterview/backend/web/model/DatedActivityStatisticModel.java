@@ -1,5 +1,7 @@
 package org.amhzing.clusterview.backend.web.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -7,6 +9,7 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public final class DatedActivityStatisticModel {
 
+    @JsonFormat(pattern="yyyy-MM")
     private Date date;
     private ActivityStatisticModel activityStatisticModel;
 

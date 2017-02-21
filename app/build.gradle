@@ -7,6 +7,15 @@ dependencies {
 
 	compile ("org.stagemonitor:stagemonitor-web:${stageMonitorVersion}")
 	compile ("org.stagemonitor:stagemonitor-logging:${stageMonitorVersion}")
+
+	testCompile ('org.springframework.boot:spring-boot-starter-test')
+	testCompile ("org.springframework.security:spring-security-test:${springSecurityTestVersion}")
+	testCompile ("pl.pragmatists:JUnitParams:${junitParamsVersion}")
+	testCompile ("org.meanbean:meanbean:${meanBeanVersion}")
+	testCompile ("nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}")
+	testCompile ("org.jsoup:jsoup:${jsoupVersion}")
+
+	optional ("org.springframework.boot:spring-boot-devtools")
 }
 
 // Code analysis

@@ -40,6 +40,15 @@ task wrapper(type: Wrapper) {
 	gradleVersion = '2.14'
 }
 
+// common properties
+ext {
+	springSecurityTestVersion = '4.2.1.RELEASE'
+	junitParamsVersion = '1.0.6'
+	meanBeanVersion = '2.0.3'
+	equalsVerifierVersion = '2.2.1'
+	jsoupVersion = '1.10.2'
+}
+
 configure(allprojects) {
 	apply plugin: 'propdeps'
 	apply plugin: 'propdeps-maven'
@@ -84,4 +93,6 @@ project(':backend') {
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'com.gorylenko.gradle-git-properties'
 	apply plugin: 'info.solidsoft.pitest'
+
+	apply plugin: 'idea'
 }

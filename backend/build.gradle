@@ -27,13 +27,6 @@ ext {
 	hashidsVersion = '1.0.1'
 
 	beansvizVersion = '0.1.0'
-
-	springSecurityTestVersion = '4.2.1.RELEASE'
-	junitParamsVersion = '1.0.6'
-	cucumberVersion = '1.2.5'
-	meanBeanVersion = '2.0.3'
-	equalsVerifierVersion = '2.2.1'
-	jsoupVersion = '1.10.2'
 }
 
 dependencies {

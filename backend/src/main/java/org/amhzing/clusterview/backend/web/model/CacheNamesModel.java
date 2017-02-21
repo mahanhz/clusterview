@@ -5,10 +5,23 @@ import org.hibernate.validator.constraints.NotEmpty;
 import java.util.List;
 import java.util.Objects;
 
+import static org.apache.commons.lang3.Validate.noNullElements;
+
 public class CacheNamesModel {
 
     @NotEmpty(message = "Must specify at least one cache")
     private List<String> cacheNames;
+
+    public CacheNamesModel() {
+    }
+
+    private CacheNamesModel(final List<String> cacheNames) {
+        this.cacheNames = noNullElements(cacheNames);
+    }
+
+    public static CacheNamesModel create(final List<String> cacheNames) {
+        return new CacheNamesModel(cacheNames);
+    }
 
     public List<String> getCacheNames() {
         return cacheNames;
