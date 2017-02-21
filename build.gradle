@@ -42,6 +42,11 @@ task wrapper(type: Wrapper) {
 
 // common properties
 ext {
+	commonsLangVersion = '3.5'
+	commonsValidatorVersion = '1.5.1'
+
+	guavaVersion = '21.0'
+
 	springSecurityTestVersion = '4.2.1.RELEASE'
 	junitParamsVersion = '1.0.6'
 	meanBeanVersion = '2.0.3'

@@ -35,14 +35,12 @@ public class CacheRestController {
     }
 
     @DeleteMapping(path = "/clear", consumes = APPLICATION_JSON_V1)
-    public CacheNamesModel clearCache(@Valid @RequestBody final CacheNamesModel cacheNamesModel) {
+    public List<String> clearCache(@Valid @RequestBody final CacheNamesModel cacheNamesModel) {
 
-        final List<String> cacheNames = cacheNamesModel.getCacheNames()
-                                                       .stream()
-                                                       .map(this::clearCache)
-                                                       .collect(Collectors.toList());
-
-        return CacheNamesModel.create(cacheNames);
+        return cacheNamesModel.getCacheNames()
+                              .stream()
+                              .map(this::clearCache)
+                              .collect(Collectors.toList());
     }
 
     private String clearCache(final String name) {

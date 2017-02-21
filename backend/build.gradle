@@ -1,6 +1,4 @@
 ext {
-	commonsLangVersion = '3.5'
-	commonsValidatorVersion = '1.5.1'
 	jugVersion = '3.1.4'
 
 	logstashLogbackVersion = '4.8'
@@ -10,7 +8,6 @@ ext {
 	ehcacheVersion = '3.2.0'
 
 	googleFindbugsVersion = '3.0.1' // needed for javax.annotation.Nullable
-	guavaVersion = '21.0'
 
 	springfoxSwagger2Version = '2.6.1'
 

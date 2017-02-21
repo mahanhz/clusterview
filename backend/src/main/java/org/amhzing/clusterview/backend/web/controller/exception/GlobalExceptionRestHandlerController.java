@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import static org.amhzing.clusterview.backend.web.model.ValidationErrorBuilder.fromBindingErrors;
 
 @ControllerAdvice
-public class GlobalExceptionHandlerController extends ResponseEntityExceptionHandler {
+public class GlobalExceptionRestHandlerController extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,

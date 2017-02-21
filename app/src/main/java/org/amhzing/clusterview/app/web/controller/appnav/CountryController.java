@@ -1,8 +1,9 @@
 package org.amhzing.clusterview.app.web.controller.appnav;
 
+import org.amhzing.clusterview.app.web.controller.base.AbstractController;
 import org.amhzing.clusterview.backend.annotation.LogExecutionTime;
+import org.amhzing.clusterview.backend.web.controller.appnav.CountryRestController;
 import org.amhzing.clusterview.backend.web.model.ActivityStatisticModel;
-import org.amhzing.clusterview.backend.web.adapter.StatisticAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,15 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
-public class CountryController {
+public class CountryController extends AbstractController {
 
     public static final String STATISTICS_MODEL_ATTR = "statistics";
 
-    private StatisticAdapter statisticAdapter;
+    private CountryRestController countryRestController;
 
     @Autowired
-    public CountryController(final StatisticAdapter statisticAdapter) {
-        this.statisticAdapter = notNull(statisticAdapter);
+    public CountryController(final CountryRestController countryRestController) {
+        this.countryRestController = notNull(countryRestController);
     }
 
     @LogExecutionTime
@@ -30,7 +31,7 @@ public class CountryController {
     public ModelAndView country(@ModelAttribute @PathVariable final String country,
                                 final Model model) {
 
-        final ActivityStatisticModel statistics = statisticAdapter.countryStats(country);
+        final ActivityStatisticModel statistics = countryRestController.country(country);
         model.addAttribute(STATISTICS_MODEL_ATTR, statistics);
 
         return new ModelAndView(country + "/index");

@@ -1,8 +1,7 @@
 package org.amhzing.clusterview.app.web.controller.appnav;
 
 import org.amhzing.clusterview.backend.annotation.LogExecutionTime;
-import org.amhzing.clusterview.backend.web.model.ActivityStatisticModel;
-import org.amhzing.clusterview.backend.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.backend.web.controller.appnav.StatisticEditRestController;
 import org.amhzing.clusterview.backend.web.model.ClusterNameModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,11 +20,11 @@ import static org.apache.commons.lang3.Validate.notNull;
 @RequestMapping(path = "/statsedit")
 public class StatisticEditController {
 
-    private StatisticAdapter statisticAdapter;
+    private StatisticEditRestController statisticEditRestController;
 
     @Autowired
-    public StatisticEditController(final StatisticAdapter statisticAdapter) {
-        this.statisticAdapter = notNull(statisticAdapter);
+    public StatisticEditController(final StatisticEditRestController statisticEditRestController) {
+        this.statisticEditRestController = notNull(statisticEditRestController);
     }
 
     @LogExecutionTime
@@ -41,8 +40,7 @@ public class StatisticEditController {
 
         final String cluster = clusterNameModel.getName();
 
-        final ActivityStatisticModel currentStats = statisticAdapter.clusterStats(cluster);
-        statisticAdapter.saveStatsHistory(cluster, currentStats);
+        statisticEditRestController.saveHistory(country, clusterNameModel);
 
         redirectAttributes.addFlashAttribute("statsHistoryMessage", cluster + " history saved");
 

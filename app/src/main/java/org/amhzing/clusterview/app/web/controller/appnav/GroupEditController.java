@@ -1,7 +1,8 @@
 package org.amhzing.clusterview.app.web.controller.appnav;
 
+import org.amhzing.clusterview.app.web.controller.base.AbstractEditController;
 import org.amhzing.clusterview.backend.annotation.LogExecutionTime;
-import org.amhzing.clusterview.backend.web.adapter.GroupAdapter;
+import org.amhzing.clusterview.backend.web.controller.appnav.GroupEditRestController;
 import org.amhzing.clusterview.backend.web.model.GroupModel;
 import org.amhzing.clusterview.backend.web.model.GroupPath;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +15,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-import static org.amhzing.clusterview.backend.web.controller.appnav.GroupController.CLUSTER_PATH;
+import static org.amhzing.clusterview.app.web.controller.appnav.GroupController.CLUSTER_PATH;
 import static org.amhzing.clusterview.backend.web.model.GroupPath.CREATE_GROUP;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
-public class GroupEditController {
+public class GroupEditController extends AbstractEditController {
 
-    private GroupAdapter groupAdapter;
+    private GroupEditRestController groupEditRestController;
 
     @Autowired
-    public GroupEditController(final GroupAdapter groupAdapter) {
-        this.groupAdapter = notNull(groupAdapter);
+    public GroupEditController(final GroupEditRestController groupEditRestController) {
+        this.groupEditRestController = notNull(groupEditRestController);
     }
 
     @ModelAttribute
@@ -52,7 +53,7 @@ public class GroupEditController {
         groupPath.setAction(groupPath.getObfuscatedGroupId());
         groupPath.setMethod(HttpMethod.PUT.name());
 
-        final GroupModel group = groupAdapter.group(groupPath.getObfuscatedGroupId());
+        final GroupModel group = groupEditRestController.editGroup(groupPath);
 
         model.addAttribute("groupModel", group);
 
@@ -69,7 +70,7 @@ public class GroupEditController {
             return groupActionView();
         }
 
-        groupAdapter.createGroup(groupModel, groupPath.getCluster());
+        groupEditRestController.createGroup(groupPath, groupModel);
 
         return redirectToClusterView(groupPath);
     }
@@ -87,7 +88,7 @@ public class GroupEditController {
             return groupActionView();
         }
 
-        groupAdapter.updateGroup(groupModel, groupPath.getCluster());
+        groupEditRestController.updateGroup(groupPath, groupModel);
 
         return redirectToClusterView(groupPath);
     }
@@ -98,7 +99,7 @@ public class GroupEditController {
                               @RequestParam(required = false) final boolean displayConfirmation,
                               final RedirectAttributes redirectAttributes) {
 
-        groupAdapter.deleteGroup(groupPath.getObfuscatedGroupId(), groupPath.getCluster());
+        groupEditRestController.deleteGroup(groupPath);
 
         return redirectToClusterView(groupPath);
     }
