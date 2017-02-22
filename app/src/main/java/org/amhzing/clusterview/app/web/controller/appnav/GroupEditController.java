@@ -2,7 +2,6 @@ package org.amhzing.clusterview.app.web.controller.appnav;
 
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.app.web.adapter.GroupAdapter;
-import org.amhzing.clusterview.app.web.controller.base.AbstractEditController;
 import org.amhzing.clusterview.app.web.model.GroupModel;
 import org.amhzing.clusterview.app.web.model.GroupPath;
 import org.springframework.beans.factory.annotation.Autowired;

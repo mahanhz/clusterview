@@ -17,7 +17,7 @@ import static org.amhzing.clusterview.app.web.MediaType.APPLICATION_JSON_V1;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @RestController
-@RequestMapping(path = "/backend/statsview", produces = APPLICATION_JSON_V1)
+@RequestMapping(path = "/rest/statsview", produces = APPLICATION_JSON_V1)
 public class StatisticRestController {
 
     public static final String HISTORY = "/history";

@@ -18,7 +18,7 @@ import static org.amhzing.clusterview.app.web.MediaType.APPLICATION_JSON_V1;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
-@RequestMapping(path = "/backend/statsedit")
+@RequestMapping(path = "/rest/statsedit")
 public class StatisticEditRestController {
 
     private StatisticAdapter statisticAdapter;

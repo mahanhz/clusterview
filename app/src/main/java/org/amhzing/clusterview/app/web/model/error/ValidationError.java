@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.web.model;
+package org.amhzing.clusterview.app.web.model.error;
 
 import com.google.common.collect.ImmutableList;
 

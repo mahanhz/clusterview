@@ -1,7 +1,6 @@
-package org.amhzing.clusterview.app.web.controller.entry;
+package org.amhzing.clusterview.app.web.controller.appnav;
 
 import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
-import org.amhzing.clusterview.app.web.controller.appnav.CommonModelController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 

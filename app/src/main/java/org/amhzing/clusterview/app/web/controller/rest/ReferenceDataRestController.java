@@ -19,7 +19,7 @@ import static org.amhzing.clusterview.app.web.MediaType.APPLICATION_JSON_V1;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @RestController
-@RequestMapping(path = "/backend/referencedata", produces = APPLICATION_JSON_V1)
+@RequestMapping(path = "/rest/referencedata", produces = APPLICATION_JSON_V1)
 public class ReferenceDataRestController {
 
     private StatisticAdapter statisticAdapter;

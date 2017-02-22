@@ -2,7 +2,6 @@ package org.amhzing.clusterview.app.web.controller.appnav;
 
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
-import org.amhzing.clusterview.app.web.controller.base.AbstractController;
 import org.amhzing.clusterview.app.web.model.ActivityStatisticModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

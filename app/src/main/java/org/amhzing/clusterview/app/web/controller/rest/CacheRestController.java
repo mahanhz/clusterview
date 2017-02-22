@@ -14,7 +14,7 @@ import static org.amhzing.clusterview.app.web.MediaType.APPLICATION_JSON_V1;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @RestController
-@RequestMapping(path = "/backend/manage/caches", produces = APPLICATION_JSON_V1)
+@RequestMapping(path = "/rest/manage/caches", produces = APPLICATION_JSON_V1)
 public class CacheRestController {
 
     private CacheManager cacheManager;

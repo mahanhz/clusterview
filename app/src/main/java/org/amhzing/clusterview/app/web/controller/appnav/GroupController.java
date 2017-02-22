@@ -3,7 +3,6 @@ package org.amhzing.clusterview.app.web.controller.appnav;
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.app.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
-import org.amhzing.clusterview.app.web.controller.base.AbstractController;
 import org.amhzing.clusterview.app.web.model.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

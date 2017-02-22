@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.web.controller.exception;
+package org.amhzing.clusterview.app.web.controller.appnav;
 
 import com.fasterxml.uuid.Generators;
 import org.amhzing.clusterview.app.exception.NotFoundException;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
-@ControllerAdvice
+@ControllerAdvice(basePackageClasses = { GlobalExceptionHandlerController.class })
 public class GlobalExceptionHandlerController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandlerController.class);
@@ -47,7 +47,7 @@ public class GlobalExceptionHandlerController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView notFound(final HttpServletRequest request) {
-        return customMessage(request, "Not found");
+        return customMessage(request, HttpStatus.NOT_FOUND.getReasonPhrase());
     }
 
     private ModelAndView customMessage(final HttpServletRequest request, final String message) {
