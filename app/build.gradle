@@ -139,3 +139,10 @@ springBoot {
 bootRun {
 	systemProperties = System.properties
 }
+
+def dependentProjects = [':acceptance-test',':load-test',':smoke-test']
+
+// Since app is a spring boot executable jar then the repackaging needs to be run after all dependent projects are built
+bootRepackage{
+	shouldRunAfter dependentProjects.collect { project(it).tasks.withType(JavaCompile) }
+}
