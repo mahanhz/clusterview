@@ -46,4 +46,4 @@ nextVersion=$major.$minor.$((patch+1))$snapshotSuffix
 echo "Release version after semantic update: $versionToRelease"
 echo "Next version: $nextVersion"
 
-./gradlew :app:release -Prelease.useAutomaticVersion=true -Prelease.releaseVersion=$versionToRelease -Prelease.newVersion=$nextVersion
+./gradlew :app-ui:release -Prelease.useAutomaticVersion=true -Prelease.releaseVersion=$versionToRelease -Prelease.newVersion=$nextVersion

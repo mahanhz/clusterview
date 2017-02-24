@@ -1,0 +1,57 @@
+ext {
+	stageMonitorVersion = '0.31.0'
+	thymeleafSpringSecurityVersion = '2.1.3.RELEASE'
+}
+
+dependencies {
+	compile project(":app")
+
+	compile ("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile ("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:${thymeleafSpringSecurityVersion}")
+
+	compile ("org.stagemonitor:stagemonitor-web:${stageMonitorVersion}")
+	compile ("org.stagemonitor:stagemonitor-logging:${stageMonitorVersion}")
+
+	testCompile ('org.springframework.boot:spring-boot-starter-test')
+	testCompile ("org.springframework.security:spring-security-test:${springSecurityTestVersion}")
+	testCompile ("pl.pragmatists:JUnitParams:${junitParamsVersion}")
+	testCompile ("org.meanbean:meanbean:${meanBeanVersion}")
+	testCompile ("nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}")
+	testCompile ("org.jsoup:jsoup:${jsoupVersion}")
+
+	optional ("org.springframework.boot:spring-boot-devtools")
+}
+
+// Code analysis
+apply from: 'gradle-segment/code-analysis.gradle'
+
+// Publish to Nexus
+apply from: 'gradle-segment/publish.gradle'
+
+// Git properties that display in the actuator /info endpoint
+gitProperties {
+	dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ z"
+	dateFormatTimeZone = "UTC"
+}
+
+springBoot {
+
+	mainClass = 'org.amhzing.clusterview.appui.MainUIApplication'
+
+	buildInfo {
+		additionalProperties = [
+				'description': "${description}"
+		]
+	}
+}
+
+// Make the System.properties available in the bootRun task.
+bootRun {
+	systemProperties = System.properties
+}
+
+// Since app-ui is a spring boot executable jar then the repackaging needs to be run after all dependent projects are built
+def dependentProjects = [':acceptance-test', ':smoke-test']
+bootRepackage{
+	shouldRunAfter dependentProjects.collect { project(it).tasks.withType(JavaCompile) }
+}

@@ -18,9 +18,9 @@ lock('lock-deploy-snapshot') {
             timeout(time: 5, unit: 'MINUTES') {
                 checkout scm
 
-                stash excludes: 'smoketest/build/', includes: 'app/gradle.properties, smoke-test/**', name: 'source'
+                stash excludes: 'smoketest/build/', includes: 'app-ui/gradle.properties, smoke-test/**', name: 'source'
 
-                def props = readProperties file: 'app/gradle.properties'
+                def props = readProperties file: 'app-ui/gradle.properties'
 
                 ARTIFACT_NEXUS_URL = props['artifactNexusUrl']
                 ARTIFACT_GROUP = props['artifactGroup']

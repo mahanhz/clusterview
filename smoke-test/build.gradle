@@ -1,6 +1,6 @@
 dependencies {
 
-	compile project(':app')
+	compile project(':app-ui')
 
 	testCompile ('org.springframework.boot:spring-boot-starter-test')
 }

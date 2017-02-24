@@ -1,6 +1,6 @@
 package org.amhzing.clusterview.smoketest;
 
-import org.amhzing.clusterview.app.MainApplication;
+import org.amhzing.clusterview.appui.MainUIApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MainApplication.class)
+@SpringBootTest(classes = MainUIApplication.class)
 public class SmokeTest {
 
     @Value("${server.base-uri}")

@@ -1,3 +1,8 @@
+clusterview:
+  rest:
+    error-controller: true
+    security: true
+
 endpoints:
   hypermedia:
     enabled: true
@@ -16,7 +21,7 @@ server:
 
 spring:
   application:
-    name: clusterview
+    name: clusterview-app
   cache:
     jcache:
       config: ehcache.xml

@@ -1,34 +1,7 @@
-group = artifactGroup
-
 jar {
-	baseName = artifactName
-
 	// Do not include environment specific properties in the built jar
 	exclude 'application-*'
 	exclude 'bootstrap-*'
 	exclude 'stagemonitor-*'
 	exclude '*.sql'
 }
-
-uploadArchives {
-	repositories {
-		mavenDeployer {
-			repository(url: "${NEXUS_REPO_URL}/releases") {
-				authentication(userName: mavenUser, password: mavenPassword)
-			}
-			snapshotRepository(url: "${NEXUS_REPO_URL}/snapshots") {
-				authentication(userName: mavenUser, password: mavenPassword)
-			}
-		}
-	}
-}
-
-release {
-	// These allow an older master to be published (e.g. latest master did not pass all tests)
-	failOnCommitNeeded = false
-	failOnUnversionedFiles = false
-	failOnUpdateNeeded = false
-	buildTasks = ['assemble'] // Avoid doing another build
-}
-
-afterReleaseBuild.dependsOn uploadArchives

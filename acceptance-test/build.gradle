@@ -5,7 +5,7 @@ ext {
 
 dependencies {
 
-	compile project(':app')
+	compile project(':app-ui')
 
 	testCompile ('org.springframework.boot:spring-boot-starter-test')
 
@@ -29,7 +29,7 @@ task acceptanceTest(type:Test) {
 }
 
 task copyAppResources(type: Copy) {
-	from('../app/src/main/resources') {
+	from('../app-ui/src/main/resources') {
 		include 'static/**'
 		include 'templates/**'
 		include 'data-h2.sql'

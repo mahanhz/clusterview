@@ -40,6 +40,13 @@ task wrapper(type: Wrapper) {
 	gradleVersion = '2.14'
 }
 
+ext {
+	springSecurityTestVersion = '4.2.1.RELEASE'
+	junitParamsVersion = '1.0.6'
+	meanBeanVersion = '2.0.3'
+	equalsVerifierVersion = '2.2.1'
+	jsoupVersion = '1.10.2'
+}
 
 configure(allprojects) {
 	apply plugin: 'propdeps'
@@ -76,6 +83,22 @@ project(':app') {
 	apply plugin: 'pmd'
 	apply plugin: 'org.owasp.dependencycheck'
 	apply plugin: 'net.researchgate.release'
+	apply plugin: 'net.saliman.cobertura'
+	apply plugin: 'com.github.kt3k.coveralls'
+	apply plugin: 'com.gorylenko.gradle-git-properties'
+	apply plugin: 'info.solidsoft.pitest'
+}
+
+project(':app-ui') {
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'maven'
+	apply plugin: 'idea'
+	apply plugin: 'findbugs'
+	apply plugin: 'pmd'
+	apply plugin: 'jdepend'
+	apply plugin: 'jacoco'
+	apply plugin: 'net.researchgate.release'
+	apply plugin: 'org.owasp.dependencycheck'
 	apply plugin: 'net.saliman.cobertura'
 	apply plugin: 'com.github.kt3k.coveralls'
 	apply plugin: 'com.gorylenko.gradle-git-properties'

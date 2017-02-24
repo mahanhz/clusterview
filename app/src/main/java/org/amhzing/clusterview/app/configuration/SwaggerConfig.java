@@ -15,8 +15,9 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("app")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.amhzing.clusterview.web.controller"))
+                .apis(RequestHandlerSelectors.basePackage("org.amhzing.clusterview.app.web.controller"))
                 .paths(PathSelectors.ant("/**"))
                 .build();
     }
