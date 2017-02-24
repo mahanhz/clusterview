@@ -18,14 +18,15 @@ lock('lock-deploy-snapshot') {
             timeout(time: 5, unit: 'MINUTES') {
                 checkout scm
 
-                stash excludes: 'smoketest/build/', includes: 'app-ui/gradle.properties, smoke-test/**', name: 'source'
+                stash excludes: 'smoketest/build/', includes: 'gradle.properties, app-ui/gradle.properties, smoke-test/**', name: 'source'
 
                 def props = readProperties file: 'app-ui/gradle.properties'
+                def appUIProps = readProperties file: 'app-ui/gradle.properties'
 
                 ARTIFACT_NEXUS_URL = props['artifactNexusUrl']
                 ARTIFACT_GROUP = props['artifactGroup']
                 ARTIFACT_NAME = props['artifactName']
-                ARTIFACT_VERSION = props['version']
+                ARTIFACT_VERSION = appUIProps['version']
 
                 build job: 'Clusterview-deploy-SNAPSHOT-cloudfoundry', parameters: [string(name: 'NEXUS_URL', value: ARTIFACT_NEXUS_URL),
                                                                                     string(name: 'REPO',      value: 'snapshots'),
