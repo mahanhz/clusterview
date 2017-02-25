@@ -78,7 +78,7 @@ subprojects {
 	}
 }
 
-project(':app') {
+configure([project(':app'), project(':app-ui')]) {
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'maven'
 	apply plugin: 'jacoco'
@@ -88,22 +88,6 @@ project(':app') {
 	apply plugin: 'pmd'
 	apply plugin: 'org.owasp.dependencycheck'
 	apply plugin: 'net.researchgate.release'
-	apply plugin: 'net.saliman.cobertura'
-	apply plugin: 'com.github.kt3k.coveralls'
-	apply plugin: 'com.gorylenko.gradle-git-properties'
-	apply plugin: 'info.solidsoft.pitest'
-}
-
-project(':app-ui') {
-	apply plugin: 'org.springframework.boot'
-	apply plugin: 'maven'
-	apply plugin: 'idea'
-	apply plugin: 'findbugs'
-	apply plugin: 'pmd'
-	apply plugin: 'jdepend'
-	apply plugin: 'jacoco'
-	apply plugin: 'net.researchgate.release'
-	apply plugin: 'org.owasp.dependencycheck'
 	apply plugin: 'net.saliman.cobertura'
 	apply plugin: 'com.github.kt3k.coveralls'
 	apply plugin: 'com.gorylenko.gradle-git-properties'
@@ -130,6 +114,14 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
 	reports {
 		html.enabled = true // human readable
 		xml.enabled = true // required by coveralls
+	}
+
+	afterEvaluate {
+		classDirectories = files(classDirectories.files.collect {
+			fileTree(dir: it,
+					exclude: ['org/amhzing/clusterview/app/configuration/**',
+							  'org/amhzing/clusterview/appui/configuration/**'])
+		})
 	}
 
 	doFirst {
