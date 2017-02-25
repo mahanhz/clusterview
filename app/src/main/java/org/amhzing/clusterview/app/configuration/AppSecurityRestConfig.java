@@ -22,6 +22,7 @@ public class AppSecurityRestConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/clusteredit/{country}/**").access("hasRole('ADMIN') and @webSecurity.checkCountry(authentication, #country)")
                 .antMatchers("/**/statsedit/history/{country}/**").access("hasRole('ADMIN') and @webSecurity.checkCountry(authentication, #country)")
                 .antMatchers("/swagger-ui.html**").hasRole("SUPER_ADMIN")
+                .antMatchers("/cloudfoundryapplication/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .httpBasic();
