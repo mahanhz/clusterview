@@ -36,10 +36,15 @@ plugins {
 	id 'com.gorylenko.gradle-git-properties' version '1.4.17'
 }
 
+apply plugin: 'net.saliman.cobertura'
+apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'jacoco'
+
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.14'
 }
 
+// common properties
 ext {
 	springSecurityTestVersion = '4.2.1.RELEASE'
 	junitParamsVersion = '1.0.6'
@@ -53,6 +58,10 @@ configure(allprojects) {
 	apply plugin: 'propdeps-maven'
 	apply plugin: 'propdeps-idea'
 	apply plugin: 'propdeps-eclipse'
+
+	repositories {
+		mavenCentral()
+	}
 }
 
 subprojects {
@@ -66,10 +75,6 @@ subprojects {
 		imports {
 			mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
 		}
-	}
-
-	repositories {
-		mavenCentral()
 	}
 }
 
@@ -103,4 +108,44 @@ project(':app-ui') {
 	apply plugin: 'com.github.kt3k.coveralls'
 	apply plugin: 'com.gorylenko.gradle-git-properties'
 	apply plugin: 'info.solidsoft.pitest'
+}
+
+def publishedProjects = subprojects.findAll { it.name == 'app' || it.name == 'app-ui' }
+task jacocoMerge(type: JacocoMerge) {
+	publishedProjects.each { subproject ->
+		executionData subproject.tasks.withType(Test)
+	}
+}
+
+task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
+	description = 'Generates an aggregate report from all subprojects'
+	dependsOn publishedProjects.test , jacocoMerge
+
+	additionalSourceDirs = files(publishedProjects.sourceSets.main.allSource.srcDirs)
+	sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
+	classDirectories = files(publishedProjects.sourceSets.main.output)
+	//executionData = files(publishedProjects.jacocoTestReport.executionData)
+	executionData jacocoMerge.destinationFile
+
+	reports {
+		html.enabled = true // human readable
+		xml.enabled = true // required by coveralls
+	}
+
+	doFirst {
+		executionData = files(executionData.findAll { it.exists() })
+	}
+}
+
+coveralls {
+	sourceDirs = publishedProjects.sourceSets.main.allSource.srcDirs.flatten()
+	jacocoReportPath = "${buildDir}/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
+}
+
+tasks.coveralls {
+	group = 'Coverage reports'
+	description = 'Uploads the aggregated coverage report to Coveralls'
+
+	dependsOn jacocoRootReport
+	onlyIf { true }
 }
