@@ -30,7 +30,7 @@ public class ClusterCourseStatisticRepositoryCacheTest {
     private ClusterJpaRepository clusterJpaRepository;
 
     @Autowired
-    private CourseStatisticRepository courseStatisticRepository;
+    private CourseStatisticRepository<Cluster.Id> courseStatisticRepository;
 
     @Rule
     @Autowired
@@ -38,7 +38,7 @@ public class ClusterCourseStatisticRepositoryCacheTest {
 
 
     @Test
-    public void should_invoke_course_stats_cache() throws Exception {
+    public void should_invoke_cache() throws Exception {
 
         given(clusterJpaRepository.findOne(EXISTING_CLUSTER)).willReturn(JpaRepositoryHelper.clusterEntity());
 
