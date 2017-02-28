@@ -71,6 +71,21 @@ public class InfraConfig {
     }
 
     @Bean
+    public CourseStatisticRepository<Cluster.Id> clusterCourseStatisticRepository() {
+        return new ClusterCourseStatisticRepository(clusterJpaRepository);
+    }
+
+    @Bean
+    public CourseStatisticRepository<Region.Id> regionCourseStatisticRepository() {
+        return new RegionCourseStatisticRepository(regionJpaRepository);
+    }
+
+    @Bean
+    public CourseStatisticRepository<Country.Id> countryCourseStatisticRepository() {
+        return new CountryCourseStatisticRepository(countryJpaRepository);
+    }
+
+    @Bean
     public StatisticHistoryRepository statisticHistoryRepository() {
         return new DefaultStatisticHistoryRepository(statsHistoryJpaRepository);
     }

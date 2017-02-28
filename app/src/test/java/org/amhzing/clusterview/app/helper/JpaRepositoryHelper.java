@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.app.helper;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import org.amhzing.clusterview.app.infra.jpa.mapping.*;
@@ -62,6 +63,7 @@ public final class JpaRepositoryHelper {
         final ClusterEntity cluster = new ClusterEntity();
         cluster.setId("stockholm");
         cluster.setTeams(ImmutableSet.of(teamEntity()));
+        cluster.setCourses(courses());
         //cluster.setRegion(region());
 
         return cluster;
@@ -145,6 +147,22 @@ public final class JpaRepositoryHelper {
         activityEntity.setName("Something");
 
         return activityEntity;
+    }
+
+    public static CourseEntity courseEntity(final String id, final String name) {
+        final CourseEntity courseEntity = new CourseEntity();
+        courseEntity.setId(id);
+        courseEntity.setName(name);
+
+        return courseEntity;
+    }
+
+    public static Map<CourseEntity, Integer> courses() {
+        return ImmutableMap.of(courseEntity("1", "Book 1"), 50,
+                               courseEntity("2", "Book 2"), 40,
+                               courseEntity("3", "Book 3"), 30,
+                               courseEntity("4", "Book 4"), 20,
+                               courseEntity("5", "Book 5"), 10);
     }
 
     public static Name name() {

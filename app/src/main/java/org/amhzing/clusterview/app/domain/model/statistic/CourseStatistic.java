@@ -5,6 +5,7 @@ import org.amhzing.clusterview.app.domain.model.Course;
 import java.util.Map;
 import java.util.Objects;
 
+import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public class CourseStatistic {
@@ -21,6 +22,10 @@ public class CourseStatistic {
 
     public Map<Course, Quantity> getCourseQuantity() {
         return courseQuantity;
+    }
+
+    public static CourseStatistic empty() {
+        return CourseStatistic.create(emptyMap());
     }
 
     @Override

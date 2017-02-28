@@ -1,15 +1,15 @@
 package org.amhzing.clusterview.app.testconfig;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.app.domain.repository.*;
-import org.amhzing.clusterview.app.infra.jpa.repository.*;
-import org.amhzing.clusterview.app.infra.repository.*;
 import org.amhzing.clusterview.app.cache.CacheSpec;
 import org.amhzing.clusterview.app.domain.model.Cluster;
 import org.amhzing.clusterview.app.domain.model.Country;
 import org.amhzing.clusterview.app.domain.model.Region;
 import org.amhzing.clusterview.app.domain.model.statistic.ActivityStatistic;
+import org.amhzing.clusterview.app.domain.repository.*;
+import org.amhzing.clusterview.app.infra.jpa.repository.*;
 import org.amhzing.clusterview.app.infra.jpa.repository.stats.StatsHistoryJpaRepository;
+import org.amhzing.clusterview.app.infra.repository.*;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cache.annotation.EnableCaching;
@@ -52,6 +52,21 @@ public class CacheTestConfig {
     }
 
     @Bean
+    public CourseStatisticRepository<Country.Id> countryCourseStatisticRepository() {
+        return new CountryCourseStatisticRepository(countryJpaRepository);
+    }
+
+    @Bean
+    public CourseStatisticRepository<Region.Id> regionCourseStatisticRepository() {
+        return new RegionCourseStatisticRepository(regionJpaRepository);
+    }
+
+    @Bean
+    public CourseStatisticRepository<Cluster.Id> clusterCourseStatisticRepository() {
+        return new ClusterCourseStatisticRepository(clusterJpaRepository);
+    }
+
+    @Bean
     public StatisticHistoryRepository statisticHistoryRepository() {
         return new DefaultStatisticHistoryRepository(statsHistoryJpaRepository);
     }
@@ -83,6 +98,7 @@ public class CacheTestConfig {
         cacheManager.setCaches(ImmutableList.of(groupsCache().getObject(),
                                                 groupCache().getObject(),
                                                 statsCache().getObject(),
+                                                statsCourseCache().getObject(),
                                                 statsHistoryCache().getObject(),
                                                 activitiesCache().getObject(),
                                                 coreActivitiesCache().getObject(),
@@ -102,6 +118,13 @@ public class CacheTestConfig {
     public ConcurrentMapCacheFactoryBean statsCache() {
         final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
         cacheFactoryBean.setName(CacheSpec.STATS_CACHE_NAME);
+        return cacheFactoryBean;
+    }
+
+    @Bean
+    public ConcurrentMapCacheFactoryBean statsCourseCache() {
+        final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
+        cacheFactoryBean.setName(CacheSpec.STATS_COURSE_CACHE_NAME);
         return cacheFactoryBean;
     }
 
