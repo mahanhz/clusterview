@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.app.configuration;
 
+import org.amhzing.clusterview.app.domain.model.statistic.CourseStatistic;
 import org.amhzing.clusterview.app.domain.repository.*;
 import org.amhzing.clusterview.app.infra.jpa.repository.*;
 import org.amhzing.clusterview.app.infra.jpa.repository.stats.StatsHistoryJpaRepository;
@@ -71,17 +72,17 @@ public class InfraConfig {
     }
 
     @Bean
-    public CourseStatisticRepository<Cluster.Id> clusterCourseStatisticRepository() {
+    public StatisticRepository<Cluster.Id, CourseStatistic> clusterCourseStatisticRepository() {
         return new ClusterCourseStatisticRepository(clusterJpaRepository);
     }
 
     @Bean
-    public CourseStatisticRepository<Region.Id> regionCourseStatisticRepository() {
+    public StatisticRepository<Region.Id, CourseStatistic> regionCourseStatisticRepository() {
         return new RegionCourseStatisticRepository(regionJpaRepository);
     }
 
     @Bean
-    public CourseStatisticRepository<Country.Id> countryCourseStatisticRepository() {
+    public StatisticRepository<Country.Id, CourseStatistic> countryCourseStatisticRepository() {
         return new CountryCourseStatisticRepository(countryJpaRepository);
     }
 

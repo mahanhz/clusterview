@@ -6,6 +6,7 @@ import org.amhzing.clusterview.app.domain.model.Cluster;
 import org.amhzing.clusterview.app.domain.model.Country;
 import org.amhzing.clusterview.app.domain.model.Region;
 import org.amhzing.clusterview.app.domain.model.statistic.ActivityStatistic;
+import org.amhzing.clusterview.app.domain.model.statistic.CourseStatistic;
 import org.amhzing.clusterview.app.domain.repository.*;
 import org.amhzing.clusterview.app.infra.jpa.repository.*;
 import org.amhzing.clusterview.app.infra.jpa.repository.stats.StatsHistoryJpaRepository;
@@ -52,17 +53,17 @@ public class CacheTestConfig {
     }
 
     @Bean
-    public CourseStatisticRepository<Country.Id> countryCourseStatisticRepository() {
+    public StatisticRepository<Country.Id, CourseStatistic> countryCourseStatisticRepository() {
         return new CountryCourseStatisticRepository(countryJpaRepository);
     }
 
     @Bean
-    public CourseStatisticRepository<Region.Id> regionCourseStatisticRepository() {
+    public StatisticRepository<Region.Id, CourseStatistic> regionCourseStatisticRepository() {
         return new RegionCourseStatisticRepository(regionJpaRepository);
     }
 
     @Bean
-    public CourseStatisticRepository<Cluster.Id> clusterCourseStatisticRepository() {
+    public StatisticRepository<Cluster.Id, CourseStatistic> clusterCourseStatisticRepository() {
         return new ClusterCourseStatisticRepository(clusterJpaRepository);
     }
 

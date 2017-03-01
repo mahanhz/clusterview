@@ -2,7 +2,7 @@ package org.amhzing.clusterview.app.infra.repository;
 
 import org.amhzing.clusterview.app.domain.model.Region;
 import org.amhzing.clusterview.app.domain.model.statistic.CourseStatistic;
-import org.amhzing.clusterview.app.domain.repository.CourseStatisticRepository;
+import org.amhzing.clusterview.app.domain.repository.StatisticRepository;
 import org.amhzing.clusterview.app.helper.JpaRepositoryHelper;
 import org.amhzing.clusterview.app.infra.jpa.repository.RegionJpaRepository;
 import org.amhzing.clusterview.app.testconfig.CacheInvalidateRule;
@@ -30,7 +30,7 @@ public class RegionCourseStatisticRepositoryCacheTest {
     private RegionJpaRepository regionJpaRepository;
 
     @Autowired
-    private CourseStatisticRepository<Region.Id> statisticRepository;
+    private StatisticRepository<Region.Id, CourseStatistic> statisticRepository;
 
     @Rule
     @Autowired

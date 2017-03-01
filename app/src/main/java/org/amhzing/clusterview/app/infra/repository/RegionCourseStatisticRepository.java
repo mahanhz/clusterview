@@ -2,7 +2,7 @@ package org.amhzing.clusterview.app.infra.repository;
 
 import org.amhzing.clusterview.app.domain.model.Region;
 import org.amhzing.clusterview.app.domain.model.statistic.CourseStatistic;
-import org.amhzing.clusterview.app.domain.repository.CourseStatisticRepository;
+import org.amhzing.clusterview.app.domain.repository.StatisticRepository;
 import org.amhzing.clusterview.app.infra.jpa.mapping.ClusterEntity;
 import org.amhzing.clusterview.app.infra.jpa.mapping.RegionEntity;
 import org.amhzing.clusterview.app.infra.jpa.repository.RegionJpaRepository;
@@ -17,7 +17,7 @@ import static org.amhzing.clusterview.app.infra.repository.CourseStatisticFactor
 import static org.apache.commons.lang3.Validate.notNull;
 
 @CacheConfig(cacheNames = STATS_COURSE_CACHE_NAME)
-public class RegionCourseStatisticRepository implements CourseStatisticRepository<Region.Id> {
+public class RegionCourseStatisticRepository implements StatisticRepository<Region.Id, CourseStatistic> {
 
     private RegionJpaRepository regionJpaRepository;
 
