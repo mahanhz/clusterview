@@ -33,7 +33,7 @@ import static org.mockito.Mockito.verify;
 public class StatisticAdapterTest {
 
     @Mock
-    private StatisticService statisticService;
+    private StatisticService<ActivityStatistic> statisticService;
     @Mock
     private StatisticHistoryService statisticHistoryService;
     @Mock

@@ -31,7 +31,7 @@ import static org.apache.commons.lang3.Validate.notNull;
 @Service
 public class StatisticAdapter {
 
-    private StatisticService statisticService;
+    private StatisticService<ActivityStatistic> statisticService;
     private StatisticHistoryService statisticHistoryService;
     private ActivityService activityService;
     private ClusterService clusterService;

@@ -21,7 +21,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DefaultStatisticServiceTest {
+public class ActivityStatisticServiceTest {
 
     @Mock
     private CountryStatisticRepository countryStatisticRepository;
@@ -30,13 +30,13 @@ public class DefaultStatisticServiceTest {
     @Mock
     private ClusterStatisticRepository clusterStatisticRepository;
 
-    private DefaultStatisticService defaultStatisticService;
+    private ActivityStatisticService activityStatisticService;
 
     @Before
     public void setUp() throws Exception {
-        defaultStatisticService = new DefaultStatisticService(countryStatisticRepository,
-                                                              regionStatisticRepository,
-                                                              clusterStatisticRepository);
+        activityStatisticService = new ActivityStatisticService(countryStatisticRepository,
+                                                                regionStatisticRepository,
+                                                                clusterStatisticRepository);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class DefaultStatisticServiceTest {
 
         given(countryStatisticRepository.statistics(any(Country.Id.class))).willReturn(activityStatistic());
 
-        final ActivityStatistic stats = defaultStatisticService.statistics(Country.Id.create("se"));
+        final ActivityStatistic stats = activityStatisticService.statistics(Country.Id.create("se"));
 
         assertThat(stats.getActivityQuantity()).isNotEmpty();
         assertThat(stats.getActivityQuantity().get(activity())).isEqualTo(quantity());
@@ -55,7 +55,7 @@ public class DefaultStatisticServiceTest {
 
         given(regionStatisticRepository.statistics(any(Region.Id.class))).willReturn(activityStatistic());
 
-        final ActivityStatistic stats = defaultStatisticService.statistics(Region.Id.create("central"));
+        final ActivityStatistic stats = activityStatisticService.statistics(Region.Id.create("central"));
 
         assertThat(stats.getActivityQuantity()).isNotEmpty();
         assertThat(stats.getActivityQuantity().get(activity())).isEqualTo(quantity());
@@ -66,7 +66,7 @@ public class DefaultStatisticServiceTest {
 
         given(clusterStatisticRepository.statistics(any(Cluster.Id.class))).willReturn(activityStatistic());
 
-        final ActivityStatistic stats = defaultStatisticService.statistics(Cluster.Id.create("stockholm"));
+        final ActivityStatistic stats = activityStatisticService.statistics(Cluster.Id.create("stockholm"));
 
         assertThat(stats.getActivityQuantity()).isNotEmpty();
         assertThat(stats.getActivityQuantity().get(activity())).isEqualTo(quantity());

@@ -8,15 +8,15 @@ import org.amhzing.clusterview.app.domain.model.statistic.ActivityStatistic;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class DefaultStatisticService implements StatisticService {
+public class ActivityStatisticService implements StatisticService<ActivityStatistic> {
 
     private StatisticRepository<Country.Id, ActivityStatistic> countryStatisticRepository;
     private StatisticRepository<Region.Id, ActivityStatistic> regionStatisticRepository;
     private StatisticRepository<Cluster.Id, ActivityStatistic> clusterStatisticRepository;
 
-    public DefaultStatisticService(final StatisticRepository<Country.Id, ActivityStatistic> countryStatisticRepository,
-                                   final StatisticRepository<Region.Id, ActivityStatistic> regionStatisticRepository,
-                                   final StatisticRepository<Cluster.Id, ActivityStatistic> clusterStatisticRepository) {
+    public ActivityStatisticService(final StatisticRepository<Country.Id, ActivityStatistic> countryStatisticRepository,
+                                    final StatisticRepository<Region.Id, ActivityStatistic> regionStatisticRepository,
+                                    final StatisticRepository<Cluster.Id, ActivityStatistic> clusterStatisticRepository) {
         this.countryStatisticRepository = notNull(countryStatisticRepository);
         this.regionStatisticRepository = notNull(regionStatisticRepository);
         this.clusterStatisticRepository = notNull(clusterStatisticRepository);

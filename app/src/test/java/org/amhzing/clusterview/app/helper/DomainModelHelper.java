@@ -3,10 +3,7 @@ package org.amhzing.clusterview.app.helper;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.app.domain.model.*;
-import org.amhzing.clusterview.app.domain.model.statistic.CoreActivity;
-import org.amhzing.clusterview.app.domain.model.statistic.DatedActivityStatistic;
-import org.amhzing.clusterview.app.domain.model.statistic.Quantity;
-import org.amhzing.clusterview.app.domain.model.statistic.ActivityStatistic;
+import org.amhzing.clusterview.app.domain.model.statistic.*;
 
 import java.util.Date;
 
@@ -85,6 +82,18 @@ public final class DomainModelHelper {
 
     public static ActivityStatistic activityStatistic() {
         return ActivityStatistic.create(ImmutableMap.of(activity(), quantity()), ImmutableSet.of(coreActivity()));
+    }
+
+    public static CourseStatistic courseStatistic() {
+        return CourseStatistic.create(ImmutableMap.of(course("1", "Book 1"), Quantity.create(50),
+                                                      course("2", "Book 2"), Quantity.create(40),
+                                                      course("3", "Book 3"), Quantity.create(30),
+                                                      course("4", "Book 4"), Quantity.create(20),
+                                                      course("5", "Book 5"), Quantity.create(10)));
+    }
+
+    public static Course course(final String id, final String name) {
+        return Course.create(Course.Id.create(id), name);
     }
 
     public static Quantity quantity() {

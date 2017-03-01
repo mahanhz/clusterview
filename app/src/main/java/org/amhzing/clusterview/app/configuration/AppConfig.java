@@ -2,11 +2,12 @@ package org.amhzing.clusterview.app.configuration;
 
 import org.amhzing.clusterview.app.application.*;
 import org.amhzing.clusterview.app.domain.model.Cluster;
-import org.amhzing.clusterview.app.domain.repository.*;
-import org.amhzing.clusterview.app.user.UserServletFilter;
 import org.amhzing.clusterview.app.domain.model.Country;
 import org.amhzing.clusterview.app.domain.model.Region;
 import org.amhzing.clusterview.app.domain.model.statistic.ActivityStatistic;
+import org.amhzing.clusterview.app.domain.model.statistic.CourseStatistic;
+import org.amhzing.clusterview.app.domain.repository.*;
+import org.amhzing.clusterview.app.user.UserServletFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +36,15 @@ public class AppConfig {
     private StatisticRepository<Cluster.Id, ActivityStatistic> clusterStatisticRepository;
 
     @Autowired
+    private StatisticRepository<Country.Id, CourseStatistic> countryCourseStatisticRepository;
+
+    @Autowired
+    private StatisticRepository<Region.Id, CourseStatistic> regionCourseStatisticRepository;
+
+    @Autowired
+    private StatisticRepository<Cluster.Id, CourseStatistic> clusterCourseStatisticRepository;
+
+    @Autowired
     private StatisticHistoryRepository statisticHistoryRepository;
 
     @Autowired
@@ -56,10 +66,17 @@ public class AppConfig {
     }
 
     @Bean
-    public StatisticService statisticService() {
-        return new DefaultStatisticService(countryStatisticRepository,
-                                           regionStatisticRepository,
-                                           clusterStatisticRepository);
+    public StatisticService<ActivityStatistic> statisticService() {
+        return new ActivityStatisticService(countryStatisticRepository,
+                                            regionStatisticRepository,
+                                            clusterStatisticRepository);
+    }
+
+    @Bean
+    public StatisticService<CourseStatistic> courseStatisticService() {
+        return new CourseStatisticService(countryCourseStatisticRepository,
+                                          regionCourseStatisticRepository,
+                                          clusterCourseStatisticRepository);
     }
 
     @Bean
