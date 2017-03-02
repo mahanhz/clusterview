@@ -2,17 +2,21 @@ package org.amhzing.clusterview.app.web.adapter;
 
 import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
 import org.amhzing.clusterview.app.domain.model.Activity;
+import org.amhzing.clusterview.app.domain.model.Course;
 import org.amhzing.clusterview.app.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.app.domain.model.statistic.CoreActivity;
+import org.amhzing.clusterview.app.domain.model.statistic.CourseStatistic;
 import org.amhzing.clusterview.app.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.app.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.app.web.model.CoreActivityModel;
+import org.amhzing.clusterview.app.web.model.CourseStatisticModel;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 public final class StatisticFactory {
@@ -75,5 +79,20 @@ public final class StatisticFactory {
                                    Quantity.create(coreActivity.getQuantity()),
                                    Quantity.create(coreActivity.getTotalParticipants()),
                                    Quantity.create(coreActivity.getCommunityOfInterest()));
+    }
+
+    public static List<CourseStatisticModel> courseStatisticsList(final CourseStatistic statistics) {
+        return statistics.getCourseQuantity()
+                         .entrySet()
+                         .stream()
+                         .map(StatisticFactory::courseStatistics)
+                         .sorted((a1, a2) -> a1.getName().compareTo(a2.getName()))
+                         .collect(toList());
+    }
+
+    private static CourseStatisticModel courseStatistics(final Map.Entry<Course, Quantity> entry) {
+        return CourseStatisticModel.create(entry.getKey().getId().getId(),
+                                           entry.getKey().getName(),
+                                           (int) entry.getValue().getValue());
     }
 }
