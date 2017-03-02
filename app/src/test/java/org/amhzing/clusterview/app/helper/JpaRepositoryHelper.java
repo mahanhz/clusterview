@@ -69,6 +69,16 @@ public final class JpaRepositoryHelper {
         return cluster;
     }
 
+    public static ClusterEntity anotherClusterEntity() {
+        final ClusterEntity cluster = new ClusterEntity();
+        cluster.setId("uppsala");
+        cluster.setTeams(ImmutableSet.of(teamEntity()));
+        cluster.setCourses(courses());
+        //cluster.setRegion(region());
+
+        return cluster;
+    }
+
     public static TeamEntity teamEntity() {
         final TeamEntity team = new TeamEntity();
         team.setLocation(location());

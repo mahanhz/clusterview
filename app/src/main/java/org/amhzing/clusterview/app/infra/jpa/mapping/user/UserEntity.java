@@ -129,7 +129,6 @@ public class UserEntity extends BaseEntity {
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
-                ", countries=" + countries +
-                '}';
+                "} " + super.toString();
     }
 }

@@ -10,6 +10,7 @@ import org.amhzing.clusterview.app.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.app.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.app.web.model.CoreActivityModel;
 import org.amhzing.clusterview.app.web.model.CourseStatisticModel;
+import org.amhzing.clusterview.app.web.model.compare.CourseStatisticComparator;
 
 import java.util.List;
 import java.util.Map;
@@ -86,7 +87,7 @@ public final class StatisticFactory {
                          .entrySet()
                          .stream()
                          .map(StatisticFactory::courseStatistics)
-                         .sorted((a1, a2) -> a1.getName().compareTo(a2.getName()))
+                         .sorted(new CourseStatisticComparator())
                          .collect(toList());
     }
 

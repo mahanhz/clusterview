@@ -43,6 +43,11 @@
         <input type="hidden" id="cluster" name="cluster" th:value="${clusterPath.cluster}" />
 
         <th:block th:replace="fragments/javascript :: javascript"></th:block>
+        <script th:src="@{/js/highcharts.js}"></script>
+        <script th:src="@{/js/funnel.js}"></script>
+        <script th:src="@{/js/exporting.js}"></script>
+        <script th:src="@{/js/jquery.tabletojson.min.js}"></script>
+        <script th:src="@{/js/pyramid.js}"></script>
 
     </body>
 </html>

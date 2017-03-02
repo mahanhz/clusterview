@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.amhzing.clusterview.appui.web.controller.appnav.CountryController.COURSE_STATISTICS_MODEL_ATTR;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
@@ -48,6 +49,9 @@ public class GroupController extends AbstractController {
 
         final ActivityStatisticModel statistics = statisticAdapter.clusterStats(clusterPath.getCluster());
         model.addAttribute(CountryController.STATISTICS_MODEL_ATTR, statistics);
+
+        final List<CourseStatisticModel> courseStatistics = statisticAdapter.clusterCourseStats(clusterPath.getCluster());
+        model.addAttribute(COURSE_STATISTICS_MODEL_ATTR, courseStatistics);
 
         return new ModelAndView("/cluster");
     }
