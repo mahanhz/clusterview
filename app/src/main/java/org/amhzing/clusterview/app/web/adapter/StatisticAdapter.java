@@ -15,6 +15,7 @@ import org.amhzing.clusterview.app.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.app.web.model.ClusterNameModel;
 import org.amhzing.clusterview.app.web.model.CourseStatisticModel;
 import org.amhzing.clusterview.app.web.model.DatedActivityStatisticModel;
+import org.amhzing.clusterview.app.web.model.form.CourseStatisticsForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -133,6 +134,14 @@ public class StatisticAdapter {
         notNull(activityStatisticModel);
 
         statisticHistoryService.saveHistory(Cluster.Id.create(clusterId), activityStatistic(activityStatisticModel));
+    }
+
+    public void saveCourseStats(final String clusterId, final CourseStatisticsForm form) {
+        notBlank(clusterId);
+        notNull(form);
+
+        clusterService.saveCourseStats(Cluster.Id.create(clusterId),
+                                       CourseStatistic.create(courseStatistics(form)));
     }
 
     private ActivityStatisticModel activityStatisticModel(final DatedActivityStatistic stat) {

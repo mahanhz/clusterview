@@ -9,7 +9,10 @@
 
         <div class="container-fluid">
             <div class="row">
-                <th:block th:replace="fragments/adjust-map-size :: adjust-map-size"></th:block>
+                <div class="col-md-3">
+                    <th:block th:replace="fragments/adjust-map-size :: adjust-map-size"></th:block>
+                    <th:block th:replace="fragments/pyramid :: pyramid"></th:block>
+                </div>
                 <div class="col-md-6">
                     <img class="centralRegionImage adjustableImage" th:src="@{/se/images/regions.png}" usemap="#centralRegionMap" />
 
@@ -36,6 +39,7 @@
         <input type="hidden" id="region" name="region" th:value="${regionPath.region}" />
 
         <th:block th:replace="fragments/javascript :: javascript"></th:block>
+        <th:block th:replace="fragments/pyramid-javascript :: pyramid-javascript"></th:block>
         <script th:src="@{/se/js/central.js}"></script>
     </body>
 </html>

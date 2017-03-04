@@ -6,8 +6,11 @@ import org.amhzing.clusterview.app.domain.model.*;
 import org.amhzing.clusterview.app.domain.model.statistic.*;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.google.common.collect.ImmutableSet.of;
+import static java.util.stream.Collectors.toMap;
 
 public final class DomainModelHelper {
 
@@ -85,11 +88,27 @@ public final class DomainModelHelper {
     }
 
     public static CourseStatistic courseStatistic() {
-        return CourseStatistic.create(ImmutableMap.of(course("1", "Book 1"), Quantity.create(50),
-                                                      course("2", "Book 2"), Quantity.create(40),
-                                                      course("3", "Book 3"), Quantity.create(30),
-                                                      course("4", "Book 4"), Quantity.create(20),
-                                                      course("5", "Book 5"), Quantity.create(10)));
+        final Map<Course, Quantity> courses = new HashMap<>();
+        courses.put(course("1", "Book 1"), Quantity.create(50));
+        courses.put(course("2", "Book 2"), Quantity.create(40));
+        courses.put(course("3", "Book 3"), Quantity.create(30));
+        courses.put(course("4", "Book 4"), Quantity.create(20));
+        courses.put(course("5", "Book 5"), Quantity.create(10));
+        courses.put(course("6", "Book 6"), Quantity.create(9));
+        courses.put(course("7", "Book 7"), Quantity.create(8));
+        courses.put(course("8", "Book 8"), Quantity.create(7));
+        courses.put(course("10", "Book 10"), Quantity.create(6));
+
+        return CourseStatistic.create(courses);
+    }
+
+    public static CourseStatistic updatedCourseStatistic() {
+        final Map<Course, Quantity> courses =
+                courseStatistic().getCourseQuantity().entrySet().stream()
+                                 .collect(toMap(Map.Entry::getKey,
+                                                a -> Quantity.create(a.getValue().getValue() + 1)));
+
+        return CourseStatistic.create(courses);
     }
 
     public static Course course(final String id, final String name) {

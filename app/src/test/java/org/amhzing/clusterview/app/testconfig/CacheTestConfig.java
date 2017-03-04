@@ -36,6 +36,8 @@ public class CacheTestConfig {
     private StatsHistoryJpaRepository statsHistoryJpaRepository;
     @MockBean
     private CoreActivityJpaRepository coreActivityJpaRepository;
+    @MockBean
+    private CourseJpaRepository courseJpaRepository;
 
     @Bean
     public StatisticRepository<Country.Id, ActivityStatistic> countryStatisticRepository() {
@@ -64,7 +66,7 @@ public class CacheTestConfig {
 
     @Bean
     public StatisticRepository<Cluster.Id, CourseStatistic> clusterCourseStatisticRepository() {
-        return new ClusterCourseStatisticRepository(clusterJpaRepository);
+        return new ClusterCourseStatisticRepository(clusterJpaRepository, courseJpaRepository);
     }
 
     @Bean
@@ -74,7 +76,7 @@ public class CacheTestConfig {
 
     @Bean
     public ClusterRepository clusterRepository() {
-        return new DefaultClusterRepository(countryJpaRepository);
+        return new DefaultClusterRepository(countryJpaRepository, clusterJpaRepository);
     }
 
     @Bean

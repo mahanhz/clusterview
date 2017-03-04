@@ -11,6 +11,7 @@ import org.amhzing.clusterview.app.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.app.web.model.CoreActivityModel;
 import org.amhzing.clusterview.app.web.model.CourseStatisticModel;
 import org.amhzing.clusterview.app.web.model.compare.CourseStatisticComparator;
+import org.amhzing.clusterview.app.web.model.form.CourseStatisticsForm;
 
 import java.util.List;
 import java.util.Map;
@@ -91,9 +92,22 @@ public final class StatisticFactory {
                          .collect(toList());
     }
 
+    public static Map<Course, Quantity> courseStatistics(final CourseStatisticsForm form) {
+        return form.getCourseStatistics().stream()
+                   .collect(toMap(StatisticFactory::course, StatisticFactory::quantity));
+    }
+
     private static CourseStatisticModel courseStatistics(final Map.Entry<Course, Quantity> entry) {
         return CourseStatisticModel.create(entry.getKey().getId().getId(),
                                            entry.getKey().getName(),
                                            (int) entry.getValue().getValue());
+    }
+
+    private static Course course(final CourseStatisticModel courseStatisticModel) {
+        return Course.create(Course.Id.create(courseStatisticModel.getId()), courseStatisticModel.getName());
+    }
+
+    private static Quantity quantity(final CourseStatisticModel courseStatisticModel) {
+        return Quantity.create(courseStatisticModel.getQuantity());
     }
 }

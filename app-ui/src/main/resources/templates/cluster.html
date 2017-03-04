@@ -10,8 +10,10 @@
 
         <div class="container-fluid">
             <div class="row">
-                <th:block th:replace="fragments/group-operations :: group-operations"></th:block>
-
+                <div class="col-md-3">
+                    <th:block th:replace="fragments/cluster-operations :: cluster-operations"></th:block>
+                    <th:block th:replace="fragments/pyramid :: pyramid"></th:block>
+                </div>
                 <div class="col-md-6">
                     <div class="cluster-container">
                         <img th:src="@{'/' + ${clusterPath.country} + '/images/cluster-' + ${clusterPath.cluster} + '.png'}" onerror="clusterNotFound()" />
@@ -43,11 +45,6 @@
         <input type="hidden" id="cluster" name="cluster" th:value="${clusterPath.cluster}" />
 
         <th:block th:replace="fragments/javascript :: javascript"></th:block>
-        <script th:src="@{/js/highcharts.js}"></script>
-        <script th:src="@{/js/funnel.js}"></script>
-        <script th:src="@{/js/exporting.js}"></script>
-        <script th:src="@{/js/jquery.tabletojson.min.js}"></script>
-        <script th:src="@{/js/pyramid.js}"></script>
-
+        <th:block th:replace="fragments/pyramid-javascript :: pyramid-javascript"></th:block>
     </body>
 </html>

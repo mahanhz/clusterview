@@ -1,6 +1,5 @@
 package org.amhzing.clusterview.app.helper;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import org.amhzing.clusterview.app.infra.jpa.mapping.*;
@@ -168,11 +167,18 @@ public final class JpaRepositoryHelper {
     }
 
     public static Map<CourseEntity, Integer> courses() {
-        return ImmutableMap.of(courseEntity("1", "Book 1"), 50,
-                               courseEntity("2", "Book 2"), 40,
-                               courseEntity("3", "Book 3"), 30,
-                               courseEntity("4", "Book 4"), 20,
-                               courseEntity("5", "Book 5"), 10);
+        final Map<CourseEntity, Integer> courses = new HashMap<>();
+        courses.put(courseEntity("1", "Book 1"), 50);
+        courses.put(courseEntity("2", "Book 2"), 40);
+        courses.put(courseEntity("3", "Book 3"), 30);
+        courses.put(courseEntity("4", "Book 4"), 20);
+        courses.put(courseEntity("5", "Book 5"), 10);
+        courses.put(courseEntity("6", "Book 6"), 9);
+        courses.put(courseEntity("7", "Book 7"), 8);
+        courses.put(courseEntity("8", "Book 8"), 7);
+        courses.put(courseEntity("10", "Book 10"), 6);
+
+        return courses;
     }
 
     public static Name name() {

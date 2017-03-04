@@ -5,23 +5,6 @@
     <body>
         <th:block th:fragment="statistics">
             <div class="col-md-3">
-                <th:block th:unless="${#lists.isEmpty(courseStatistics)}">
-                    <div id="coursesPyramid" style="height: 250px; margin: 0 auto"></div>
-                    <table class="table table-hover coursesTable" style="display:none">
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>y</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="courseStatistic : ${courseStatistics}">
-                                <td th:text="${courseStatistic.name}" />
-                                <td th:text="${courseStatistic.quantity}" />
-                            </tr>
-                        </tbody>
-                    </table>
-                </th:block>
                 <th:block th:if="${statistics != null}">
                     <table class="table table-hover" th:unless="${#lists.isEmpty(statistics.coreActivities)}">
                         <thead>

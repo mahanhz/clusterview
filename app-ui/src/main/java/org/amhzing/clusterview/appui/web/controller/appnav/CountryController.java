@@ -4,6 +4,7 @@ import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.app.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.app.web.model.CourseStatisticModel;
+import org.amhzing.clusterview.app.web.model.form.CourseStatisticsForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +39,7 @@ public class CountryController extends AbstractController {
         model.addAttribute(STATISTICS_MODEL_ATTR, statistics);
 
         final List<CourseStatisticModel> courseStatistics = statisticAdapter.countryCourseStats(country);
-        model.addAttribute(COURSE_STATISTICS_MODEL_ATTR, courseStatistics);
+        model.addAttribute(COURSE_STATISTICS_MODEL_ATTR, CourseStatisticsForm.create(courseStatistics));
 
         return new ModelAndView(country + "/index");
     }

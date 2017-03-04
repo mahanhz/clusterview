@@ -41,6 +41,9 @@ public class InfraConfig {
     @Autowired
     private StatsHistoryJpaRepository statsHistoryJpaRepository;
 
+    @Autowired
+    private CourseJpaRepository courseJpaRepository;
+
     @Bean
     public GroupRepository groupRepository() {
         return new DefaultGroupRepository(clusterJpaRepository, teamJpaRepository, activityJpaRepository);
@@ -73,7 +76,7 @@ public class InfraConfig {
 
     @Bean
     public StatisticRepository<Cluster.Id, CourseStatistic> clusterCourseStatisticRepository() {
-        return new ClusterCourseStatisticRepository(clusterJpaRepository);
+        return new ClusterCourseStatisticRepository(clusterJpaRepository, courseJpaRepository);
     }
 
     @Bean
@@ -93,6 +96,6 @@ public class InfraConfig {
 
     @Bean
     public ClusterRepository clusterRepository() {
-        return new DefaultClusterRepository(countryJpaRepository);
+        return new DefaultClusterRepository(countryJpaRepository, clusterJpaRepository);
     }
 }

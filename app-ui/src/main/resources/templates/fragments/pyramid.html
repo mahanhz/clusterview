@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <body>
+        <th:block th:fragment="pyramid">
+            <th:block th:unless="${#lists.isEmpty(courseStatistics.courseStatistics) or courseStatistics.allZero()}">
+                <div id="coursesPyramid" style="height: 250px; margin: 0 auto"></div>
+                <table class="table table-hover coursesTable" style="display:none">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>y</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="courseStatistic : ${courseStatistics.courseStatistics}">
+                            <td th:text="${courseStatistic.name}" />
+                            <td th:text="${courseStatistic.quantity}" />
+                        </tr>
+                    </tbody>
+                </table>
+            </th:block>
+        </th:block>
+    </body>
+</html>

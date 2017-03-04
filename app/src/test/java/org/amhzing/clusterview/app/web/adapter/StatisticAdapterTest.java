@@ -23,6 +23,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 
+import static org.amhzing.clusterview.app.helper.ClientModelHelper.courseStatisticsForm;
 import static org.amhzing.clusterview.app.helper.DomainModelHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -153,5 +154,15 @@ public class StatisticAdapterTest {
         statisticAdapter.saveStatsHistory(clusterId.getId(), ClientModelHelper.activityStatisticModel());
 
         verify(statisticHistoryService, times(1)).saveHistory(eq(clusterId), any(ActivityStatistic.class));
+    }
+
+    @Test
+    public void should_save_course_stats() throws Exception {
+
+        final Cluster.Id clusterId = cluster().getId();
+
+        statisticAdapter.saveCourseStats(clusterId.getId(), courseStatisticsForm());
+
+        verify(clusterService, times(1)).saveCourseStats(eq(clusterId), any(CourseStatistic.class));
     }
 }

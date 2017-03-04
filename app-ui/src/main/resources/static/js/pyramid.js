@@ -28,7 +28,7 @@ $(document).ready(function() {
             pyramid: {
                 dataLabels: {
                     enabled: true,
-                    format: '<b>{point.name}</b> ({point.y:,.0f})',
+                    format: '<b>{point.name}</b> (<span style="color:#009cf7">{point.y:,.0f}</span>)',
                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
                     softConnector: true,
                     distance: 15
@@ -36,7 +36,7 @@ $(document).ready(function() {
             }
         },
         series: [{
-            name: 'Completed',
+            name: 'Total',
             data: coursesData
         }],
         title: {

@@ -4,6 +4,7 @@ import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.app.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.app.web.model.*;
+import org.amhzing.clusterview.app.web.model.form.CourseStatisticsForm;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class GroupController extends AbstractController {
         model.addAttribute(CountryController.STATISTICS_MODEL_ATTR, statistics);
 
         final List<CourseStatisticModel> courseStatistics = statisticAdapter.clusterCourseStats(clusterPath.getCluster());
-        model.addAttribute(COURSE_STATISTICS_MODEL_ATTR, courseStatistics);
+        model.addAttribute(COURSE_STATISTICS_MODEL_ATTR, CourseStatisticsForm.create(courseStatistics));
 
         return new ModelAndView("/cluster");
     }
