@@ -55,19 +55,19 @@ public class ClusterPageSteps extends SpringSteps implements En {
             assertThat(getClusterPageResponse().getStatusCode()).isEqualTo(HttpStatus.OK);
 
             final Document doc = Jsoup.parse(getClusterPageResponse().getBody());
-            final Element groupOperations = doc.getElementById("groupOperations");
+            final Element clusterOperations = doc.getElementById("clusterOperations");
 
-            assertThat(groupOperations).isNotNull();
-            assertThat(groupOperations.getElementById("addNewGroup")).isNotNull();
+            assertThat(clusterOperations).isNotNull();
+            assertThat(clusterOperations.getElementById("addNewGroup")).isNotNull();
         });
 
         Then("^group operations are not available$", () -> {
             assertThat(getClusterPageResponse().getStatusCode()).isEqualTo(HttpStatus.OK);
 
             final Document doc = Jsoup.parse(getClusterPageResponse().getBody());
-            final Element groupOperations = doc.getElementById("groupOperations");
+            final Element clusterOperations = doc.getElementById("clusterOperations");
 
-            assertThat(groupOperations).isNull();
+            assertThat(clusterOperations).isNull();
         });
 
         Then("^the group is created in \"([^\"]*)\" cluster$", (String cluster) -> {

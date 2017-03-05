@@ -7,7 +7,7 @@
         <th:block th:fragment="cluster-operations">
             <th:block th:replace="fragments/quick-links :: quick-links"></th:block>
             <br/>
-            <div class="list-group" id="groupOperations"
+            <div class="list-group" id="clusterOperations"
                  th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') and @webSecurity.checkAdmin(authentication, '''+#strings.toUpperCase(clusterPath.cluster)+''')')}">
                 <a href="#" class="list-group-item disabled">Operations</a>
                 <a th:href="@{'/clusteredit/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '/newgroup'}"
