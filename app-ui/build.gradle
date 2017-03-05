@@ -50,7 +50,26 @@ bootRun {
 	systemProperties = System.properties
 }
 
-// Since app-ui is a spring boot executable jar then the repackaging needs to be run after all dependent projects are built
+task copyAppResources(type: Copy) {
+	def profiles = System.getProperty('spring.profiles.active');
+
+	if (profiles != null) {
+		def splitProfiles = profiles.split(',')
+
+		if (splitProfiles.contains("offline")) {
+			println "Copy app resources for offline"
+			from('../app/src/main/resources') {
+				include 'data-h2.sql'
+			}
+			into 'build/resources/main'
+		}
+	}
+}
+
+bootRun.dependsOn copyAppResources
+
+// Since app-ui is a spring boot executable jar
+// then the repackaging needs to be run after all dependent projects are compiled
 def dependentProjects = [':acceptance-test', ':smoke-test']
 bootRepackage{
 	shouldRunAfter dependentProjects.collect { project(it).tasks.withType(JavaCompile) }

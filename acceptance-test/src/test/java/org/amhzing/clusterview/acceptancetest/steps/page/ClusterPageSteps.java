@@ -9,6 +9,7 @@ import org.jsoup.nodes.Element;
 import org.springframework.http.*;
 
 import static org.amhzing.clusterview.acceptancetest.helper.GroupHelper.createGroupForm;
+import static org.amhzing.clusterview.acceptancetest.helper.PyramidHelper.createCourseStatisticsForm;
 import static org.amhzing.clusterview.acceptancetest.helper.RestTemplateHelper.getHeaders;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getInitialGroupsSize;
 import static org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps.getLoginHeaders;
@@ -21,6 +22,7 @@ public class ClusterPageSteps extends SpringSteps implements En {
 
     private static ResponseEntity<String> response;
     private static ResponseEntity<String> createGroupResponse;
+    private static ResponseEntity<String> editPyramidResponse;
 
     public ClusterPageSteps() {
 
@@ -48,6 +50,19 @@ public class ClusterPageSteps extends SpringSteps implements En {
             createGroupResponse = getTestRestTemplate().exchange("/clusteredit/se/central/" + clusterToUse + "/creategroup",
                                                                  HttpMethod.POST,
                                                                  new HttpEntity<>(createGroupForm(), headers),
+                                                                 String.class);
+        });
+
+        When("^attempting to save pyramid in \"([^\"]*)\" cluster$", (String cluster) -> {
+            final String clusterToUse = cluster(cluster);
+
+            final HttpHeaders headers = getHeaders(getTestRestTemplate(),
+                                                   "/clusteredit/se/central/" + clusterToUse + "/coursestats",
+                                                   getLoginHeaders());
+
+            editPyramidResponse = getTestRestTemplate().exchange("/clusteredit/se/central/" + clusterToUse + "/coursestats",
+                                                                 HttpMethod.POST,
+                                                                 new HttpEntity<>(createCourseStatisticsForm(), headers),
                                                                  String.class);
         });
 
@@ -81,6 +96,35 @@ public class ClusterPageSteps extends SpringSteps implements En {
 
             assertThat(groupsSize(getTeamJpaRepository())).isGreaterThan(getInitialGroupsSize());
         });
+
+        Then("^edit pyramid link is available$", () -> {
+            assertThat(getClusterPageResponse().getStatusCode()).isEqualTo(HttpStatus.OK);
+
+            final Document doc = Jsoup.parse(getClusterPageResponse().getBody());
+            final Element clusterOperations = doc.getElementById("clusterOperations");
+
+            assertThat(clusterOperations).isNotNull();
+            assertThat(clusterOperations.getElementById("courseStats")).isNotNull();
+        });
+
+        Then("^edit pyramid link is not available$", () -> {
+            assertThat(getClusterPageResponse().getStatusCode()).isEqualTo(HttpStatus.OK);
+
+            final Document doc = Jsoup.parse(getClusterPageResponse().getBody());
+            final Element clusterOperations = doc.getElementById("clusterOperations");
+
+            assertThat(clusterOperations).isNull();
+        });
+
+        Then("^the pyramid is saved in \"([^\"]*)\" cluster$", (String cluster) -> {
+            final String clusterToUse = cluster(cluster);
+
+            assertThat(editPyramidResponse.getStatusCode()).isEqualTo(HttpStatus.FOUND);
+            assertThat(editPyramidResponse.getHeaders().getLocation().toString()).isEqualTo("http://localhost:" +
+                                                                                                    super.getPort() +
+                                                                                                    "/clusterview/se/central/" +
+                                                                                                    clusterToUse);
+        });
     }
 
     public static ResponseEntity<String> getClusterPageResponse() {
@@ -89,6 +133,10 @@ public class ClusterPageSteps extends SpringSteps implements En {
 
     public static ResponseEntity<String> getCreateGroupResponse() {
         return createGroupResponse;
+    }
+
+    public static ResponseEntity<String> getEditPyramidResponse() {
+        return editPyramidResponse;
     }
 
     private String cluster(final String cluster) {

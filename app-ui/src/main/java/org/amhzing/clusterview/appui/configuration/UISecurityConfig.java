@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import static org.amhzing.clusterview.app.configuration.StaticFiles.*;
 
 @Configuration
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER - 1)
 public class UISecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override

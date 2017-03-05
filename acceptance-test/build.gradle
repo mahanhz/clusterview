@@ -32,6 +32,10 @@ task copyAppResources(type: Copy) {
 	from('../app-ui/src/main/resources') {
 		include 'static/**'
 		include 'templates/**'
+	}
+	into 'build/resources/test'
+
+	from('../app/src/main/resources') {
 		include 'data-h2.sql'
 	}
 	into 'build/resources/test'
