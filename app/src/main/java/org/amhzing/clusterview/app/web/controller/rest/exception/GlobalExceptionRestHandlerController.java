@@ -3,20 +3,23 @@ package org.amhzing.clusterview.app.web.controller.rest.exception;
 import com.fasterxml.uuid.Generators;
 import com.google.common.collect.ImmutableMap;
 import org.amhzing.clusterview.app.exception.NotFoundException;
+import org.amhzing.clusterview.app.web.CustomMediaType;
 import org.amhzing.clusterview.app.web.controller.rest.GlobalExceptionRestMarker;
-import org.amhzing.clusterview.app.web.model.error.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.hateoas.VndErrors;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
+import static org.amhzing.clusterview.app.web.controller.rest.exception.VndErrorFactory.vndErrors;
 import static org.amhzing.clusterview.app.web.model.error.ErrorResponse.*;
 
 @RestControllerAdvice(basePackageClasses = { GlobalExceptionRestMarker.class })
@@ -25,38 +28,46 @@ public class GlobalExceptionRestHandlerController {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionRestHandlerController.class);
 
     @ExceptionHandler
-    public ErrorResponse handleException(final HttpServletRequest request,
-                                         final HttpServletResponse response,
-                                         final Throwable throwable) {
+    public ResponseEntity<VndErrors> handleException(final HttpServletRequest request,
+                                                     final HttpServletResponse response,
+                                                     final Throwable throwable) {
 
         final UUID errorId = Generators.timeBasedGenerator().generate();
         LOGGER.error("ErrorId: {} references the following error: ", errorId, throwable);
 
-        final ImmutableMap<String, Object> errorAttributes = ImmutableMap.of(STATUS, response.getStatus(),
+        final HttpStatus httpStatus = HttpStatus.valueOf(response.getStatus());
+        final ImmutableMap<String, String> errorAttributes = ImmutableMap.of(STATUS, httpStatus.toString(),
                                                                              PATH, request.getRequestURI());
 
-        return ErrorResponse.create(errorId.toString(), errorAttributes);
+        return new ResponseEntity(vndErrors(errorAttributes), headers(), httpStatus);
     }
 
     // This is here if a method fails @PreAuthorize
-    @ResponseStatus(value = HttpStatus.FORBIDDEN)
     @ExceptionHandler(AccessDeniedException.class)
-    public ErrorResponse accessDenied(final HttpServletRequest request) {
+    public ResponseEntity<VndErrors> accessDenied(final HttpServletRequest request) {
 
-        final ImmutableMap<String, Object> errorAttributes = ImmutableMap.of(STATUS, HttpStatus.FORBIDDEN.value(),
+        final HttpStatus httpStatus = HttpStatus.FORBIDDEN;
+        final ImmutableMap<String, String> errorAttributes = ImmutableMap.of(STATUS, httpStatus.toString(),
                                                                              PATH, request.getRequestURI(),
-                                                                             MESSAGE, HttpStatus.FORBIDDEN.getReasonPhrase());
+                                                                             MESSAGE, httpStatus.getReasonPhrase());
 
-        return ErrorResponse.create("", errorAttributes);
+        return new ResponseEntity(vndErrors(errorAttributes), headers(), httpStatus);
     }
 
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
-    public ErrorResponse notFound(final HttpServletRequest request) {
-        final ImmutableMap<String, Object> errorAttributes = ImmutableMap.of(STATUS, HttpStatus.NOT_FOUND.value(),
-                                                                             PATH, request.getRequestURI(),
-                                                                             MESSAGE, HttpStatus.NOT_FOUND.getReasonPhrase());
+    public ResponseEntity<VndErrors> notFound(final HttpServletRequest request) {
 
-        return ErrorResponse.create("", errorAttributes);
+        final HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+        final ImmutableMap<String, String> errorAttributes = ImmutableMap.of(STATUS, httpStatus.toString(),
+                                                                             PATH, request.getRequestURI(),
+                                                                             MESSAGE, httpStatus.getReasonPhrase());
+
+        return new ResponseEntity(vndErrors(errorAttributes), headers(), httpStatus);
+    }
+
+    private HttpHeaders headers() {
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(CustomMediaType.APPLICATION_VND_ERROR_JSON);
+        return headers;
     }
 }

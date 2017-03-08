@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-import static org.amhzing.clusterview.app.web.MediaType.APPLICATION_JSON_V1;
+import static org.amhzing.clusterview.app.web.CustomMediaType.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -30,7 +30,7 @@ public class StatisticEditRestController {
     }
 
     @LogExecutionTime
-    @PostMapping(path = StatisticRestController.HISTORY + "/{country}", consumes = APPLICATION_JSON_V1)
+    @PostMapping(path = StatisticRestController.HISTORY + "/{country}", consumes = APPLICATION_JSON_V1_VALUE)
     public SimpleResponse saveHistory(@PathVariable final String country,
                                       @RequestBody @Valid final ClusterNameModel clusterNameModel) {
 

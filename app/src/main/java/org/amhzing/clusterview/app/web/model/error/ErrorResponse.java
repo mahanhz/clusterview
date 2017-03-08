@@ -15,7 +15,7 @@ public final class ErrorResponse {
     public static final String TIMESTAMP = "timestamp";
 
     private final String errorId;
-    public final Integer status;
+    public final String status;
     public final String error;
     public final String path;
     public final String message;
@@ -23,7 +23,7 @@ public final class ErrorResponse {
 
     private ErrorResponse(final String errorId, final Map<String, Object> errorAttributes) {
         this.errorId = notNull(errorId);
-        this.status = (Integer) errorAttributes.getOrDefault(STATUS, -1);
+        this.status = errorAttributes.getOrDefault(STATUS, -1).toString();
         this.error = (String) errorAttributes.getOrDefault(ERROR, "");
         this.path = (String) errorAttributes.getOrDefault(PATH, "");
         this.message = (String) errorAttributes.getOrDefault(MESSAGE, "");
@@ -38,7 +38,7 @@ public final class ErrorResponse {
         return errorId;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
