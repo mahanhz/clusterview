@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.web.controller.rest;
+package org.amhzing.clusterview.app.web.controller.rest.exception;
 
 import org.amhzing.clusterview.app.web.model.error.ErrorResponse;
 import org.springframework.beans.factory.annotation.Autowired;

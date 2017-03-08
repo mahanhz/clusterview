@@ -1,7 +1,8 @@
-package org.amhzing.clusterview.app.web.controller.rest;
+package org.amhzing.clusterview.app.web.controller.rest.appnav;
 
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.app.web.adapter.GroupAdapter;
+import org.amhzing.clusterview.app.web.controller.rest.base.AbstractEditRestController;
 import org.amhzing.clusterview.app.web.model.GroupModel;
 import org.amhzing.clusterview.app.web.model.GroupPath;
 import org.amhzing.clusterview.app.web.model.SimpleResponse;

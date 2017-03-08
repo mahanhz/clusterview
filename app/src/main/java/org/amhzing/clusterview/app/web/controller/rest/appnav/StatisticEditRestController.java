@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.web.controller.rest;
+package org.amhzing.clusterview.app.web.controller.rest.appnav;
 
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 import static org.amhzing.clusterview.app.web.MediaType.APPLICATION_JSON_V1;
+import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
-@RequestMapping(path = "/rest/statsedit")
+@RequestMapping(path = BASE_PATH + "/statsedit")
 public class StatisticEditRestController {
 
     private StatisticAdapter statisticAdapter;

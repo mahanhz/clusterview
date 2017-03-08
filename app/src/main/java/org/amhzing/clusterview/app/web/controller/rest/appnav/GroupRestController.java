@@ -1,8 +1,9 @@
-package org.amhzing.clusterview.app.web.controller.rest;
+package org.amhzing.clusterview.app.web.controller.rest.appnav;
 
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.app.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.app.web.controller.rest.base.AbstractRestController;
 import org.amhzing.clusterview.app.web.model.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

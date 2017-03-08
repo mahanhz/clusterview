@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.appui.web.controller.appnav;
+package org.amhzing.clusterview.appui.web.controller.entry;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

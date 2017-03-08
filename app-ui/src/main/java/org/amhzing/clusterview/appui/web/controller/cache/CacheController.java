@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.appui.web.controller.appnav;
+package org.amhzing.clusterview.appui.web.controller.cache;
 
 import org.amhzing.clusterview.app.web.model.CacheNamesModel;
 import org.springframework.beans.factory.annotation.Autowired;

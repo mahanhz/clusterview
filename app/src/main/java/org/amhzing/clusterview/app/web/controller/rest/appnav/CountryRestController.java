@@ -1,7 +1,8 @@
-package org.amhzing.clusterview.app.web.controller.rest;
+package org.amhzing.clusterview.app.web.controller.rest.appnav;
 
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.app.web.controller.rest.base.AbstractRestController;
 import org.amhzing.clusterview.app.web.model.ActivityStatisticModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

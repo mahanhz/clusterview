@@ -1,8 +1,9 @@
-package org.amhzing.clusterview.app.web.controller.rest;
+package org.amhzing.clusterview.app.web.controller.rest.exception;
 
 import com.fasterxml.uuid.Generators;
 import com.google.common.collect.ImmutableMap;
 import org.amhzing.clusterview.app.exception.NotFoundException;
+import org.amhzing.clusterview.app.web.controller.rest.GlobalExceptionRestMarker;
 import org.amhzing.clusterview.app.web.model.error.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ import java.util.UUID;
 
 import static org.amhzing.clusterview.app.web.model.error.ErrorResponse.*;
 
-@RestControllerAdvice
+@RestControllerAdvice(basePackageClasses = { GlobalExceptionRestMarker.class })
 public class GlobalExceptionRestHandlerController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionRestHandlerController.class);

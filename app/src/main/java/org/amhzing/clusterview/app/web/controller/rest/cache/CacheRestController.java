@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.web.controller.rest;
+package org.amhzing.clusterview.app.web.controller.rest.cache;
 
 import org.amhzing.clusterview.app.web.model.CacheNamesModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +11,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.amhzing.clusterview.app.web.MediaType.APPLICATION_JSON_V1;
+import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @RestController
-@RequestMapping(path = "/rest/manage/caches", produces = APPLICATION_JSON_V1)
+@RequestMapping(path = BASE_PATH + "/manage/caches", produces = APPLICATION_JSON_V1)
 public class CacheRestController {
 
     private CacheManager cacheManager;

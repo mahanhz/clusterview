@@ -1,8 +1,9 @@
-package org.amhzing.clusterview.appui.web.controller.appnav;
+package org.amhzing.clusterview.appui.web.controller.cache;
 
 import com.google.common.collect.ImmutableList;
 import org.amhzing.clusterview.app.annotation.TestOffline;
 import org.amhzing.clusterview.appui.security.WithMockCustomUser;
+import org.amhzing.clusterview.appui.web.controller.appnav.CommonModelController;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -36,6 +37,7 @@ public class CacheControllerTest {
     public static final String CACHE_TEST_NAME = "test";
     public static final String TEST_KEY = "testKey";
     public static final String TEST_VALUE = "testValue";
+
     @Autowired
     private MockMvc mvc;
 

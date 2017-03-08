@@ -25,7 +25,7 @@ test {
 task acceptanceTest(type:Test) {
 
 	include acceptanceTests
-	systemProperties['spring.profiles.active'] = 'acceptancetest'
+	// systemProperties['spring.profiles.active'] = 'acceptancetest'
 }
 
 task copyAppResources(type: Copy) {

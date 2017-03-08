@@ -1,7 +1,8 @@
-package org.amhzing.clusterview.appui.web.controller.appnav;
+package org.amhzing.clusterview.appui.web.controller.exception;
 
 import com.fasterxml.uuid.Generators;
 import org.amhzing.clusterview.app.exception.NotFoundException;
+import org.amhzing.clusterview.appui.web.controller.UIGlobalExceptionMarker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
-@ControllerAdvice(basePackageClasses = { GlobalExceptionHandlerController.class })
+@ControllerAdvice(basePackageClasses = { UIGlobalExceptionMarker.class })
 public class GlobalExceptionHandlerController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandlerController.class);

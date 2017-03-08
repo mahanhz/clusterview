@@ -1,0 +1,8 @@
+management:
+  context-path: /manage
+  security:
+    roles: SUPER_ADMIN
+
+spring:
+  datasource:
+    platform: h2

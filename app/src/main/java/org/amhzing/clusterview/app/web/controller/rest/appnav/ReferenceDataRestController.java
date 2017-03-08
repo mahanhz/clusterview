@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.web.controller.rest;
+package org.amhzing.clusterview.app.web.controller.rest.appnav;
 
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.app.web.adapter.ActivityAdapter;
@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static org.amhzing.clusterview.app.web.MediaType.APPLICATION_JSON_V1;
+import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @RestController
-@RequestMapping(path = "/rest/referencedata", produces = APPLICATION_JSON_V1)
+@RequestMapping(path = BASE_PATH + "/referencedata", produces = APPLICATION_JSON_V1)
 public class ReferenceDataRestController {
 
     private StatisticAdapter statisticAdapter;
