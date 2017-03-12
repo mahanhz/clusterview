@@ -49,9 +49,7 @@ public class UISecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(CSS.getResourcePattern(),
                                    JS.getResourcePattern(),
                                    IMAGES.getResourcePattern(),
-                                   CSS_SE.getResourcePattern(),
-                                   JS_SE.getResourcePattern(),
-                                   IMAGES_SE.getResourcePattern(),
+                                   SE.getResourcePattern(),
                                    "/webjars/**");
     }
 

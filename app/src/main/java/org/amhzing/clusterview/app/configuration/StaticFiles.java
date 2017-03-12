@@ -7,9 +7,7 @@ public enum StaticFiles {
     CSS("/css/", "/css/**"),
     JS("/js/", "/js/**"),
     IMAGES("/images/", "/images/**"),
-    CSS_SE("/se/css/", "/se/css/**"),
-    JS_SE("/se/js/", "/se/js/**"),
-    IMAGES_SE("/se/images/", "/se/images/**");
+    SE("/se/", "/se/**");
 
     private String resourceLocation;
     private String resourcePattern;

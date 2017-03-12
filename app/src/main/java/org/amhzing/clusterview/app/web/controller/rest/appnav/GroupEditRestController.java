@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static org.amhzing.clusterview.app.web.CustomMediaType.APPLICATION_JSON_V1_VALUE;
+import static org.amhzing.clusterview.app.web.MediaTypes.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.app.web.model.GroupPath.CREATE_GROUP;
 import static org.apache.commons.lang3.Validate.notNull;
 

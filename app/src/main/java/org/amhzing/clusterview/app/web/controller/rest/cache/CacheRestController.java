@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.amhzing.clusterview.app.web.CustomMediaType.APPLICATION_JSON_V1_VALUE;
+import static org.amhzing.clusterview.app.web.MediaTypes.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
 

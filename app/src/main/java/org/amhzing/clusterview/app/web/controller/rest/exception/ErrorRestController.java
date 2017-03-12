@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 import static java.util.stream.Collectors.toMap;
-import static org.amhzing.clusterview.app.web.CustomMediaType.APPLICATION_VND_ERROR_JSON_VALUE;
+import static org.amhzing.clusterview.app.web.MediaTypes.APPLICATION_VND_ERROR_JSON_VALUE;
 import static org.amhzing.clusterview.app.web.controller.rest.exception.VndErrorFactory.vndErrors;
 
 @RestController

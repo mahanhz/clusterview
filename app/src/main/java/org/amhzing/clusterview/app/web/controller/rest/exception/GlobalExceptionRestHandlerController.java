@@ -3,7 +3,7 @@ package org.amhzing.clusterview.app.web.controller.rest.exception;
 import com.fasterxml.uuid.Generators;
 import com.google.common.collect.ImmutableMap;
 import org.amhzing.clusterview.app.exception.NotFoundException;
-import org.amhzing.clusterview.app.web.CustomMediaType;
+import org.amhzing.clusterview.app.web.MediaTypes;
 import org.amhzing.clusterview.app.web.controller.rest.GlobalExceptionRestMarker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class GlobalExceptionRestHandlerController {
         final ImmutableMap<String, String> errorAttributes = ImmutableMap.of(STATUS, httpStatus.toString(),
                                                                              PATH, request.getRequestURI());
 
-        return new ResponseEntity(vndErrors(errorAttributes), headers(), httpStatus);
+        return new ResponseEntity<>(vndErrors(errorAttributes), headers(), httpStatus);
     }
 
     // This is here if a method fails @PreAuthorize
@@ -51,7 +51,7 @@ public class GlobalExceptionRestHandlerController {
                                                                              PATH, request.getRequestURI(),
                                                                              MESSAGE, httpStatus.getReasonPhrase());
 
-        return new ResponseEntity(vndErrors(errorAttributes), headers(), httpStatus);
+        return new ResponseEntity<>(vndErrors(errorAttributes), headers(), httpStatus);
     }
 
     @ExceptionHandler(NotFoundException.class)
@@ -62,12 +62,12 @@ public class GlobalExceptionRestHandlerController {
                                                                              PATH, request.getRequestURI(),
                                                                              MESSAGE, httpStatus.getReasonPhrase());
 
-        return new ResponseEntity(vndErrors(errorAttributes), headers(), httpStatus);
+        return new ResponseEntity<>(vndErrors(errorAttributes), headers(), httpStatus);
     }
 
     private HttpHeaders headers() {
         final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(CustomMediaType.APPLICATION_VND_ERROR_JSON);
+        headers.setContentType(MediaTypes.APPLICATION_VND_ERROR_JSON);
         return headers;
     }
 }
