@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.app.web.controller.rest.entry;
 
 import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
+import org.amhzing.clusterview.app.annotation.ConditionalOnRestEnabled;
 import org.amhzing.clusterview.app.web.controller.rest.appnav.CountryRestController;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -16,6 +17,7 @@ import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+@ConditionalOnRestEnabled
 @RestController
 @RequestMapping(path = { "/", BASE_PATH + "/" }, produces = APPLICATION_JSON_V1_VALUE)
 public class IndexRestController {

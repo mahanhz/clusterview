@@ -1,7 +1,6 @@
 clusterview:
   rest:
-    error-controller: true
-    security: true
+    enabled: true
 
 endpoints:
   hypermedia:

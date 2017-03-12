@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.app.web.controller.rest.exception;
 
+import org.amhzing.clusterview.app.annotation.ConditionalOnRestEnabled;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.hateoas.VndErrors;
@@ -19,8 +19,8 @@ import static java.util.stream.Collectors.toMap;
 import static org.amhzing.clusterview.app.web.MediaTypes.APPLICATION_VND_ERROR_JSON_VALUE;
 import static org.amhzing.clusterview.app.web.controller.rest.exception.VndErrorFactory.vndErrors;
 
+@ConditionalOnRestEnabled
 @RestController
-@ConditionalOnProperty(prefix = "clusterview.rest", name = "error-controller")
 public class ErrorRestController implements ErrorController {
 
     public final static String PATH = "/error";

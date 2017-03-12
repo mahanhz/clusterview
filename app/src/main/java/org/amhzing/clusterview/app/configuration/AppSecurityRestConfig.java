@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.app.configuration;
 
+import org.amhzing.clusterview.app.annotation.ConditionalOnRestEnabled;
 import org.amhzing.clusterview.app.user.WebSecurity;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,9 +9,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+@ConditionalOnRestEnabled
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-@ConditionalOnProperty(prefix = "clusterview.rest", name = "security")
 public class AppSecurityRestConfig extends WebSecurityConfigurerAdapter {
 
     @Override
