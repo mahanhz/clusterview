@@ -1,9 +1,5 @@
 package org.amhzing.clusterview.app.user;
 
-import com.google.common.collect.ImmutableSet;
-import org.amhzing.clusterview.app.helper.JpaRepositoryHelper;
-import org.amhzing.clusterview.app.infra.jpa.mapping.user.RoleEntity;
-import org.amhzing.clusterview.app.infra.jpa.mapping.user.UserEntity;
 import org.amhzing.clusterview.app.infra.jpa.repository.user.UserJpaRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,8 +8,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.Set;
-
+import static org.amhzing.clusterview.app.helper.JpaRepositoryHelper.userEntity;
+import static org.amhzing.clusterview.app.user.UserUtil.username;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.BDDMockito.given;
@@ -45,30 +41,5 @@ public class DefaultUserDetailsServiceTest {
         defaultUserDetailsService.loadUserByUsername("hacker");
 
         fail("The user should not have been found");
-    }
-
-    private UserEntity userEntity() {
-        final UserEntity userEntity = new UserEntity();
-        userEntity.setEmail(username());
-        userEntity.setPassword("pass");
-        userEntity.setFirstName("John");
-        userEntity.setLastName("Doe");
-        userEntity.setEnabled(true);
-        userEntity.setRoles(roles());
-        userEntity.setCountries(ImmutableSet.of(JpaRepositoryHelper.countryEntity()));
-
-        return userEntity;
-    }
-
-    private Set<RoleEntity> roles() {
-        final RoleEntity roleEntity = new RoleEntity();
-        roleEntity.setId(1L);
-        roleEntity.setName("ROLE_USER");
-
-        return ImmutableSet.of(roleEntity);
-    }
-
-    private String username() {
-        return "test@example.com";
     }
 }

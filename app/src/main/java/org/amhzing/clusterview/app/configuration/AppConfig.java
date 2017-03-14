@@ -50,6 +50,9 @@ public class AppConfig {
     @Autowired
     private ClusterRepository clusterRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Bean
     public GroupService groupService() {
         return new DefaultGroupService(groupRepository);
@@ -87,6 +90,11 @@ public class AppConfig {
     @Bean
     public ClusterService clusterService() {
         return new DefaultClusterService(clusterRepository);
+    }
+
+    @Bean
+    public UserService userService() {
+        return new DefaultUserService(userRepository);
     }
 
     @Bean

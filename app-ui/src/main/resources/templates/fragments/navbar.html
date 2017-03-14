@@ -21,6 +21,7 @@
                             <ul class="nav navbar-nav">
                                 <li class="active"><a th:href="@{/}">Home</a></li>
                                 <li class="active"><a th:href="@{'/statsview/history/' + ${#httpSession.getAttribute('userCountry')}}">Stats</a></li>
+                                <li class="active"><a th:href="@{/useredit/changepassword}">Change Password</a></li>
                             </ul>
                             <p class="navbar-text navbar-right">
                                 <span sec:authentication="principal.firstName"></span>

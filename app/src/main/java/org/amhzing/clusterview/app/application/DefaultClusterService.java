@@ -18,7 +18,6 @@ public class DefaultClusterService implements ClusterService {
         this.clusterRepository = notNull(clusterRepository);
     }
 
-
     @Override
     public List<Cluster.Id> clusters(final Country.Id id) {
         notNull(id);

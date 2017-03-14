@@ -46,8 +46,8 @@ public class ClusterEditController extends AbstractEditController {
     @LogExecutionTime
     @PostMapping(path = CLUSTER_PATH + COURSE_STATS)
     public String saveCourseStats(@ModelAttribute final ClusterPath clusterPath,
-                              @ModelAttribute(COURSE_STATS_MODEL) @Valid final CourseStatisticsForm form,
-                              final BindingResult bindingResult) {
+                                  @ModelAttribute(COURSE_STATS_MODEL) @Valid final CourseStatisticsForm form,
+                                  final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return courseStatsView();

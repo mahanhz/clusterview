@@ -1,18 +1,21 @@
 package org.amhzing.clusterview.app.configuration;
 
-import org.amhzing.clusterview.app.domain.model.statistic.CourseStatistic;
-import org.amhzing.clusterview.app.domain.repository.*;
-import org.amhzing.clusterview.app.infra.jpa.repository.*;
-import org.amhzing.clusterview.app.infra.jpa.repository.stats.StatsHistoryJpaRepository;
-import org.amhzing.clusterview.app.infra.repository.*;
 import org.amhzing.clusterview.app.domain.model.Cluster;
 import org.amhzing.clusterview.app.domain.model.Country;
 import org.amhzing.clusterview.app.domain.model.Region;
 import org.amhzing.clusterview.app.domain.model.statistic.ActivityStatistic;
+import org.amhzing.clusterview.app.domain.model.statistic.CourseStatistic;
+import org.amhzing.clusterview.app.domain.repository.*;
+import org.amhzing.clusterview.app.infra.jpa.repository.*;
+import org.amhzing.clusterview.app.infra.jpa.repository.stats.StatsHistoryJpaRepository;
+import org.amhzing.clusterview.app.infra.jpa.repository.user.UserJpaRepository;
+import org.amhzing.clusterview.app.infra.repository.*;
+import org.amhzing.clusterview.app.infra.repository.user.DefaultUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
@@ -43,6 +46,12 @@ public class InfraConfig {
 
     @Autowired
     private CourseJpaRepository courseJpaRepository;
+
+    @Autowired
+    private UserJpaRepository userJpaRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Bean
     public GroupRepository groupRepository() {
@@ -97,5 +106,10 @@ public class InfraConfig {
     @Bean
     public ClusterRepository clusterRepository() {
         return new DefaultClusterRepository(countryJpaRepository, clusterJpaRepository);
+    }
+
+    @Bean
+    public UserRepository userRepository() {
+        return new DefaultUserRepository(userJpaRepository, passwordEncoder);
     }
 }

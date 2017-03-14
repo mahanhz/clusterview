@@ -7,11 +7,10 @@ import org.amhzing.clusterview.app.infra.jpa.mapping.stats.ActivityStats;
 import org.amhzing.clusterview.app.infra.jpa.mapping.stats.CoreActivityStats;
 import org.amhzing.clusterview.app.infra.jpa.mapping.stats.StatsHistoryEntity;
 import org.amhzing.clusterview.app.infra.jpa.mapping.stats.StatsHistoryPk;
+import org.amhzing.clusterview.app.infra.jpa.mapping.user.RoleEntity;
+import org.amhzing.clusterview.app.infra.jpa.mapping.user.UserEntity;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 public final class JpaRepositoryHelper {
 
@@ -195,5 +194,30 @@ public final class JpaRepositoryHelper {
 
     private static ActivityStats activityStats() {
         return ActivityStats.create(1, 2, 3, 4, 5);
+    }
+
+    public static UserEntity userEntity() {
+        final UserEntity userEntity = new UserEntity();
+        userEntity.setEmail(username());
+        userEntity.setPassword("pass");
+        userEntity.setFirstName("John");
+        userEntity.setLastName("Doe");
+        userEntity.setEnabled(true);
+        userEntity.setRoles(roles());
+        userEntity.setCountries(ImmutableSet.of(JpaRepositoryHelper.countryEntity()));
+
+        return userEntity;
+    }
+
+    private static Set<RoleEntity> roles() {
+        final RoleEntity roleEntity = new RoleEntity();
+        roleEntity.setId(1L);
+        roleEntity.setName("ROLE_USER");
+
+        return ImmutableSet.of(roleEntity);
+    }
+
+    private static String username() {
+        return "test@example.com";
     }
 }
