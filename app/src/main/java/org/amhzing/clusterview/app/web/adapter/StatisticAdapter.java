@@ -19,11 +19,11 @@ import org.amhzing.clusterview.app.web.model.form.CourseStatisticsForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 import static org.amhzing.clusterview.app.web.adapter.StatisticFactory.*;
 import static org.apache.commons.lang3.Validate.notBlank;
@@ -110,7 +110,7 @@ public class StatisticAdapter {
 
         return clusters.stream()
                        .map(cluster -> ClusterNameModel.create(cluster.getId()))
-                       .sorted((a,b) -> a.getName().compareTo(b.getName()))
+                       .sorted(comparing(ClusterNameModel::getName))
                        .collect(toList());
     }
 
@@ -124,7 +124,7 @@ public class StatisticAdapter {
                           .map(stat -> DatedActivityStatisticModel.create(stat.getDate(), activityStatisticModel(stat)))
                           .collect(toList());
 
-        collectedHistoryStats.sort(Comparator.comparing(DatedActivityStatisticModel::getDate));
+        collectedHistoryStats.sort(comparing(DatedActivityStatisticModel::getDate));
 
         return collectedHistoryStats;
     }

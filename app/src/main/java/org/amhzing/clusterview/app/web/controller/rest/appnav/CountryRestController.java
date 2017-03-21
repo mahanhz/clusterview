@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableMap;
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.app.web.controller.rest.base.AbstractRestController;
-import org.amhzing.clusterview.app.web.controller.rest.entry.IndexRestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
@@ -20,6 +19,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
+import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
+import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.REL_STATS_ACTIVITY;
+import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.REL_STATS_COURSE;
+import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.homeLink;
 import static org.apache.commons.lang3.Validate.notNull;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -27,9 +30,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RestController
 public class CountryRestController extends AbstractRestController {
 
-    // FIXME - Hardcoded - Need to get regions from an adapter
+    // FIXME - Hardcoded - Need to get regions from a service
     private static final Map<String, List<String>> COUNTRY_REGIONS = ImmutableMap.of("se", ImmutableList.of("central", "northern", "southern"));
-    private static final String REGION_PREFIX = "region-";
 
     private StatisticAdapter statisticAdapter;
 
@@ -42,17 +44,17 @@ public class CountryRestController extends AbstractRestController {
     @GetMapping(path = "/{country}")
     public ResponseEntity<ResourceSupport> country(@PathVariable final String country) {
 
-        final ControllerLinkBuilder homeLink = linkTo(IndexRestController.class);
         final ControllerLinkBuilder countryLink = linkTo(methodOn(CountryRestController.class).country(country));
         final ControllerLinkBuilder activityStatsLink = linkTo(methodOn(StatisticRestController.class).activityStats(country));
         final ControllerLinkBuilder courseStatsLink = linkTo(methodOn(StatisticRestController.class).courseStats(country));
 
         final ResourceSupport resourceSupport = new ResourceSupport();
         resourceSupport.add(countryLink.withSelfRel());
-        resourceSupport.add(homeLink.withRel("home"));
+        resourceSupport.add(homeLink());
         resourceSupport.add(regionLinks(country));
-        resourceSupport.add(activityStatsLink.withRel("stats-activity"));
-        resourceSupport.add(courseStatsLink.withRel("stats-course"));
+        resourceSupport.add(activityStatsLink.withRel(REL_STATS_ACTIVITY));
+        resourceSupport.add(courseStatsLink.withRel(REL_STATS_COURSE));
+        resourceSupport.add(statsHistoryLink(country));
 
         return ResponseEntity.ok(resourceSupport);
     }

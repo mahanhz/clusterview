@@ -26,6 +26,8 @@ spring:
       config: ehcache.xml
   jpa:
     generate-ddl: true
+    properties:
+      hibernate.jdbc.time_zone: UTC
 
 springfox:
   documentation:

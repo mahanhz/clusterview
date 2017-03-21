@@ -29,6 +29,9 @@ ext {
     beansvizVersion = '0.1.0'
 }
 
+// Need to override version to be 5.2.3 or greater so that we can use "hibernate.jdbc.time_zone: UTC"
+ext['hibernate.version'] = '5.2.9.Final'
+
 dependencies {
     compile ('org.springframework.boot:spring-boot-starter-actuator')
     compile ('org.springframework.boot:spring-boot-starter-aop')
