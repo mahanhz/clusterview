@@ -71,6 +71,7 @@ public class StatisticRestController {
         activitiesDto.add(selfLink.withSelfRel());
         activitiesDto.add(homeLink());
         activitiesDto.add(countryLink(country));
+        activitiesDto.add(statsHistoryLink(country));
 
         return ResponseEntity.ok(activitiesDto);
     }
@@ -86,6 +87,7 @@ public class StatisticRestController {
         coursesDto.add(selfLink.withSelfRel());
         coursesDto.add(homeLink());
         coursesDto.add(countryLink(country));
+        coursesDto.add(statsHistoryLink(country));
 
         return ResponseEntity.ok(coursesDto);
     }
@@ -106,6 +108,7 @@ public class StatisticRestController {
         activitiesDto.add(homeLink());
         activitiesDto.add(countryLink(country));
         activitiesDto.add(regionLink(country, region));
+        activitiesDto.add(statsHistoryLink(country));
 
         return ResponseEntity.ok(activitiesDto);
     }
@@ -126,6 +129,7 @@ public class StatisticRestController {
         coursesDto.add(homeLink());
         coursesDto.add(countryLink(country));
         coursesDto.add(regionLink(country, region));
+        coursesDto.add(statsHistoryLink(country));
 
         return ResponseEntity.ok(coursesDto);
     }

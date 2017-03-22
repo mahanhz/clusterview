@@ -19,6 +19,7 @@ public class UISecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/stagemonitor/**").permitAll()
+                .antMatchers("/keep-alive.html").permitAll()
                 .antMatchers("/rest/**").denyAll()
                 .antMatchers("/**/clusterview/{country}/**").access("hasRole('USER') and @webSecurity.checkCountry(authentication, #country)")
                 .antMatchers("/**/statsview/history/{country}/**").access("hasRole('USER') and @webSecurity.checkCountry(authentication, #country)")
