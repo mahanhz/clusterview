@@ -15,10 +15,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.REL_STATS_ACTIVITY;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.REL_STATS_COURSE;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.REL_STATS_HISTORY;
+import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.hateoas.Link.REL_SELF;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,7 +32,7 @@ public class CountryRestControllerTest {
 
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
-    public void should_get_country() throws Exception {
+    public void should_get_links() throws Exception {
 
         final ResultActions result = mvc.perform(get(BASE_PATH + "/clusterview/se"))
                                         .andExpect(status().isOk())
@@ -44,7 +43,7 @@ public class CountryRestControllerTest {
 
         final JSONArray rels = JsonPath.read(document, "$.links..rel");
 
-        assertThat(rels).containsExactlyInAnyOrder("home", "self",
+        assertThat(rels).containsExactlyInAnyOrder(REL_HOME, REL_SELF,
                                                    "region-central", "region-northern", "region-southern",
                                                    REL_STATS_ACTIVITY, REL_STATS_COURSE, REL_STATS_HISTORY);
     }

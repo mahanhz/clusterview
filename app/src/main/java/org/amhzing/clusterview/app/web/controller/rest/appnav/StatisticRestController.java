@@ -171,14 +171,14 @@ public class StatisticRestController {
         return ResponseEntity.ok(historicalActivitiesDto);
     }
 
-    private List<Link> clusterHistoryLinks(final String country) {
+    protected List<Link> clusterHistoryLinks(final String country) {
         final List<Cluster.Id> clusters = clusterService.clusters(Country.Id.create(country));
 
         final List<Link> clusterLinks = clusters.stream()
                                               .map(cluster -> linkTo(StatisticRestController.class).slash(HISTORY)
                                                                                                    .slash(country)
                                                                                                    .slash(cluster.getId())
-                                                                                                   .withRel(CLLUSTER_STATS_HISTORY_PREFIX + cluster.getId()))
+                                                                                                   .withRel(CLUSTER_STATS_HISTORY_PREFIX + cluster.getId()))
                                               .collect(Collectors.toList());
         return clusterLinks;
     }

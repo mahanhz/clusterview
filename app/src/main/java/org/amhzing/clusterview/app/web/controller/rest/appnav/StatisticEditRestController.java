@@ -19,7 +19,7 @@ import java.net.URI;
 
 import static org.amhzing.clusterview.app.web.MediaTypes.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.CLLUSTER_STATS_HISTORY_PREFIX;
+import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.CLUSTER_STATS_HISTORY_PREFIX;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.StatisticRestController.HISTORY;
 import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -55,7 +55,7 @@ public class StatisticEditRestController {
 
         final Link clusterStatsHistoryLink = linkTo(StatisticRestController.class).slash(HISTORY)
                                                                                   .slash(country).slash(cluster)
-                                                                                  .withRel(CLLUSTER_STATS_HISTORY_PREFIX + cluster);
+                                                                                  .withRel(CLUSTER_STATS_HISTORY_PREFIX + cluster);
 
         return ResponseEntity.created(URI.create(clusterStatsHistoryLink.getHref())).build();
     }

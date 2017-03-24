@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.web.controller.rest.entry;
+package org.amhzing.clusterview.app.web.controller.rest.appnav;
 
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
@@ -15,8 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.REL_COUNTRY;
-import static org.amhzing.clusterview.app.web.controller.rest.entry.IndexRestController.USER_COUNTRY;
+import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.hateoas.Link.REL_SELF;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -24,9 +23,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(IndexRestController.class)
+@WebMvcTest(RegionRestController.class)
 @TestOffline
-public class IndexRestControllerTest {
+public class RegionRestControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -35,7 +34,7 @@ public class IndexRestControllerTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_links() throws Exception {
 
-        final ResultActions result = mvc.perform(get(BASE_PATH).sessionAttr(USER_COUNTRY, "se"))
+        final ResultActions result = mvc.perform(get(BASE_PATH + "/clusterview/se/central"))
                                         .andExpect(status().isOk())
                                         .andExpect(content().contentTypeCompatibleWith(MediaTypes.APPLICATION_JSON_V1));
 
@@ -44,6 +43,7 @@ public class IndexRestControllerTest {
 
         final JSONArray rels = JsonPath.read(document, "$.links..rel");
 
-        assertThat(rels).containsExactlyInAnyOrder(REL_SELF, REL_COUNTRY);
+        assertThat(rels).containsExactlyInAnyOrder(REL_SELF, REL_HOME, REL_COUNTRY,
+                                                   REL_STATS_ACTIVITY, REL_STATS_COURSE, REL_STATS_HISTORY);
     }
 }

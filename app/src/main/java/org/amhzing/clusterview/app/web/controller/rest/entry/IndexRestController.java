@@ -2,7 +2,6 @@ package org.amhzing.clusterview.app.web.controller.rest.entry;
 
 import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
 import org.amhzing.clusterview.app.annotation.ConditionalOnRestEnabled;
-import org.amhzing.clusterview.app.web.controller.rest.appnav.CountryRestController;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import static org.amhzing.clusterview.app.web.MediaTypes.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
+import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.countryLink;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @ConditionalOnRestEnabled
 @RestController
@@ -34,8 +33,7 @@ public class IndexRestController {
 
         final String userCountry = (String) httpSession.getAttribute(USER_COUNTRY);
         if (StringUtils.isNotBlank(userCountry)) {
-            final ControllerLinkBuilder countryLink = linkTo(methodOn(CountryRestController.class).country(userCountry));
-            resourceSupport.add(countryLink.withRel(userCountry));
+            resourceSupport.add(countryLink(userCountry));
         }
 
         return ResponseEntity.ok(resourceSupport);
