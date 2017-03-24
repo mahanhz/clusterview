@@ -39,10 +39,12 @@ public class ReferenceDataRestController {
     @Autowired
     public ReferenceDataRestController(final StatisticAdapter statisticAdapter,
                                        final ActivityAdapter activityAdapter,
-                                       final CoreActivityAdapter coreActivityAdapter) {
+                                       final CoreActivityAdapter coreActivityAdapter,
+                                       final ClusterService clusterService) {
         this.statisticAdapter = notNull(statisticAdapter);
         this.activityAdapter = notNull(activityAdapter);
         this.coreActivityAdapter = notNull(coreActivityAdapter);
+        this.clusterService = notNull(clusterService);
     }
 
     @LogExecutionTime

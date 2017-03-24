@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.app.helper;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import org.amhzing.clusterview.app.domain.model.*;
@@ -47,6 +48,12 @@ public final class DomainModelHelper {
 
     public static Cluster anotherCluster() {
         return Cluster.create(anotherClusterId(), of(anotherGroup()));
+    }
+
+    public static ImmutableList<Cluster.Id> clustersIds() {
+        return ImmutableList.of(Cluster.Id.create("cluster1"),
+                                Cluster.Id.create("cluster2"),
+                                Cluster.Id.create("cluster3"));
     }
 
     public static Group group() {

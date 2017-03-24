@@ -24,9 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.amhzing.clusterview.app.helper.DomainModelHelper.activityStatistic;
-import static org.amhzing.clusterview.app.helper.DomainModelHelper.courseStatistic;
-import static org.amhzing.clusterview.app.helper.DomainModelHelper.datedActivityStatistic;
+import static org.amhzing.clusterview.app.helper.DomainModelHelper.*;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.StatisticRestController.*;
@@ -132,7 +130,7 @@ public class StatisticRestControllerTest {
     public void should_get_stats_history_links_for_country() throws Exception {
 
         given(courseStatisticService.statistics(any(Country.Id.class))).willReturn(courseStatistic());
-        given(clusterService.clusters(any(Country.Id.class))).willReturn(clusters());
+        given(clusterService.clusters(any(Country.Id.class))).willReturn(clustersIds());
 
         final ResultActions result = mvc.perform(get(BASE_PATH + "/statsview" + HISTORY + "/se"))
                                         .andExpect(status().isOk())
@@ -168,11 +166,5 @@ public class StatisticRestControllerTest {
         assertThat(rels).containsExactlyInAnyOrder(REL_SELF, REL_HOME, REL_COUNTRY,
                                                    REL_STATS_HISTORY,
                                                    REL_STATS_SAVE_HISTORY);
-    }
-
-    private ImmutableList<Cluster.Id> clusters() {
-        return ImmutableList.of(Cluster.Id.create("cluster1"),
-                                Cluster.Id.create("cluster2"),
-                                Cluster.Id.create("cluster3"));
     }
 }
