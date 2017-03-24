@@ -3,9 +3,7 @@ package org.amhzing.clusterview.app.web.controller.rest.appnav;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
-import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.app.web.controller.rest.base.AbstractRestController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -20,10 +18,6 @@ import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.REL_STATS_ACTIVITY;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.REL_STATS_COURSE;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.homeLink;
-import static org.apache.commons.lang3.Validate.notNull;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -32,13 +26,6 @@ public class CountryRestController extends AbstractRestController {
 
     // FIXME - Hardcoded - Need to get regions from a service
     private static final Map<String, List<String>> COUNTRY_REGIONS = ImmutableMap.of("se", ImmutableList.of("central", "northern", "southern"));
-
-    private StatisticAdapter statisticAdapter;
-
-    @Autowired
-    public CountryRestController(final StatisticAdapter statisticAdapter) {
-        this.statisticAdapter = notNull(statisticAdapter);
-    }
 
     @LogExecutionTime
     @GetMapping(path = "/{country}")

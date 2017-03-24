@@ -20,12 +20,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 import static org.amhzing.clusterview.app.web.controller.rest.exception.VndErrorFactory.vndErrors;
-import static org.amhzing.clusterview.app.web.model.error.ErrorResponse.*;
 
 @RestControllerAdvice(basePackageClasses = { GlobalExceptionRestMarker.class })
 public class GlobalExceptionRestHandlerController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionRestHandlerController.class);
+
+    public static final String ERROR_ID = "errorId";
+    public static final String STATUS = "status";
+    public static final String PATH = "path";
+    public static final String MESSAGE = "message";
 
     @ExceptionHandler
     public ResponseEntity<VndErrors> handleException(final HttpServletRequest request,
@@ -36,8 +40,10 @@ public class GlobalExceptionRestHandlerController {
         LOGGER.error("ErrorId: {} references the following error: ", errorId, throwable);
 
         final HttpStatus httpStatus = HttpStatus.valueOf(response.getStatus());
-        final ImmutableMap<String, String> errorAttributes = ImmutableMap.of(STATUS, httpStatus.toString(),
-                                                                             PATH, request.getRequestURI());
+        final ImmutableMap<String, String> errorAttributes = ImmutableMap.of(ERROR_ID, errorId.toString(),
+                                                                             STATUS, httpStatus.toString(),
+                                                                             PATH, request.getRequestURI(),
+                                                                             MESSAGE, throwable.getMessage());
 
         return new ResponseEntity<>(vndErrors(errorAttributes), headers(), httpStatus);
     }

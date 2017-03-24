@@ -19,7 +19,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @ConditionalOnRestEnabled
 @RestController
-@RequestMapping(path = { "/", BASE_PATH + "/" }, produces = APPLICATION_JSON_V1_VALUE)
+@RequestMapping(path = { "/", BASE_PATH }, produces = APPLICATION_JSON_V1_VALUE)
 public class IndexRestController {
 
     public static final String USER_COUNTRY = "userCountry";

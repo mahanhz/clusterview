@@ -25,8 +25,8 @@ cf push clusterview -p /build/libs/clusterview-1.0.0.jar
 
 See: https://docs.run.pivotal.io/devguide/deploy-apps/streaming-logs.html
 
-cf logs clusterview (this tails the log)
-cf logs clusterview --recent (displays all the lines in the Loggregator buffer)
+cf logs clusterview (this tails the log)  
+cf logs clusterview --recent (displays all the lines in the Loggregator buffer)  
 cf logs clusterview --recent | grep -v RTR (excludes all router logs)
 
 ### To restage the application

@@ -12,9 +12,11 @@ public final class CommonLinks {
 
     public static final String HOME = "home";
     public static final String REGION_PREFIX = "region-";
+    public static final String CLLUSTER_STATS_HISTORY_PREFIX = "stats-history-";
     public static final String REL_STATS_ACTIVITY = "stats-activity";
     public static final String REL_STATS_COURSE = "stats-course";
     public static final String REL_STATS_HISTORY = "stats-history";
+    public static final String REL_STATS_SAVE_HISTORY = "stats-save-history";
 
     private CommonLinks() {
         // Prevent instantiation

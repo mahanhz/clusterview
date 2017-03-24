@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 
 import static java.util.Collections.emptyList;
 import static org.amhzing.clusterview.app.cache.CacheSpec.CLUSTERS_CACHE_NAME;
+import static org.amhzing.clusterview.app.cache.CacheSpec.DEFAULT_CACHE_KEY;
 import static org.amhzing.clusterview.app.cache.CacheSpec.STATS_COURSE_CACHE_NAME;
 import static org.amhzing.clusterview.app.infra.repository.ClusterEntityFactory.courses;
 import static org.amhzing.clusterview.app.infra.repository.StatisticFactory.clusterEntities;
@@ -38,7 +39,7 @@ public class DefaultClusterRepository implements ClusterRepository {
     }
 
     @Override
-    @Cacheable(key= "#root.caches[0].name", unless = "#result == null or #result.isEmpty()")
+    @Cacheable(key= DEFAULT_CACHE_KEY, unless = "#result == null or #result.isEmpty()")
     public List<Cluster.Id> clusters(final Country.Id id) {
         notNull(id);
 

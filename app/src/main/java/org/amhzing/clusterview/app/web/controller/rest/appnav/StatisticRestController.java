@@ -160,11 +160,13 @@ public class StatisticRestController {
         final HistoricalActivitiesDTO historicalActivitiesDto = historicalActivitiesDto(currentStats, datedStats);
 
         final ControllerLinkBuilder selfLink = linkTo(StatisticRestController.class).slash(HISTORY).slash(country).slash(cluster);
+        final ControllerLinkBuilder saveLink = linkTo(StatisticEditRestController.class).slash(HISTORY).slash(country).slash(cluster);
 
         historicalActivitiesDto.add(selfLink.withSelfRel());
         historicalActivitiesDto.add(homeLink());
         historicalActivitiesDto.add(countryLink(country));
         historicalActivitiesDto.add(statsHistoryLink(country));
+        historicalActivitiesDto.add(saveLink.withRel(REL_STATS_SAVE_HISTORY));
 
         return ResponseEntity.ok(historicalActivitiesDto);
     }
@@ -176,7 +178,7 @@ public class StatisticRestController {
                                               .map(cluster -> linkTo(StatisticRestController.class).slash(HISTORY)
                                                                                                    .slash(country)
                                                                                                    .slash(cluster.getId())
-                                                                                                   .withRel("stats-history-" + cluster.getId()))
+                                                                                                   .withRel(CLLUSTER_STATS_HISTORY_PREFIX + cluster.getId()))
                                               .collect(Collectors.toList());
         return clusterLinks;
     }

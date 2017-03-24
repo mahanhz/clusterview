@@ -19,6 +19,7 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
+import java.util.TimeZone;
 
 import static org.apache.commons.lang3.StringUtils.upperCase;
 import static org.apache.commons.lang3.Validate.notBlank;
@@ -51,11 +52,13 @@ public final class StatisticHistoryFactory {
     }
 
     public static Date thisMonth() {
-        final SimpleDateFormat yyyyMMFormat = new SimpleDateFormat("yyyy-MM");
         final ZonedDateTime utc = ZonedDateTime.now(ZoneOffset.UTC);
         Date date = Date.from(utc.toInstant());
 
         try {
+            final SimpleDateFormat yyyyMMFormat = new SimpleDateFormat("yyyy-MM");
+            yyyyMMFormat.setTimeZone(TimeZone.getTimeZone(ZoneOffset.UTC));
+
             date = yyyyMMFormat.parse(yyyyMMFormat.format(date));
         } catch (Exception ex) {
             throw new DateTimeException("Could not construct this months date from " + date , ex);

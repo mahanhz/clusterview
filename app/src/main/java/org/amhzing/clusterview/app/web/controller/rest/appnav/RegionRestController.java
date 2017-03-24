@@ -1,10 +1,8 @@
 package org.amhzing.clusterview.app.web.controller.rest.appnav;
 
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
-import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.app.web.controller.rest.base.AbstractRestController;
 import org.amhzing.clusterview.app.web.model.RegionPath;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -14,18 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.StatisticRestController.ACTIVITY_STATS;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.StatisticRestController.COURSE_STATS;
-import static org.apache.commons.lang3.Validate.notNull;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @RestController
 public class RegionRestController extends AbstractRestController {
-
-    private StatisticAdapter statisticAdapter;
-
-    @Autowired
-    public RegionRestController(final StatisticAdapter statisticAdapter) {
-        this.statisticAdapter = notNull(statisticAdapter);
-    }
 
     @LogExecutionTime
     @GetMapping(path = "/{country}/{region}")
