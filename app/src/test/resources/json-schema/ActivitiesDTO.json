@@ -1,0 +1,75 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema#",
+  "title" : "Activities DTO",
+  "type" : "object",
+  "additionalProperties" : false,
+  "properties" : {
+    "links" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Link"
+      }
+    },
+    "activities" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ActivityDTO"
+      }
+    },
+    "coreActivities" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/CoreActivityDTO"
+      }
+    }
+  },
+  "definitions" : {
+    "Link" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "rel" : {
+          "type" : "string"
+        },
+        "href" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ActivityDTO" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "quanity" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "quanity" ]
+    },
+    "CoreActivityDTO" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "quantity" : {
+          "type" : "integer"
+        },
+        "totalParticipants" : {
+          "type" : "integer"
+        },
+        "communityOfInterest" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "quantity", "totalParticipants", "communityOfInterest" ]
+    }
+  }
+}

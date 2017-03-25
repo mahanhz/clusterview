@@ -26,6 +26,9 @@ ext {
 
     hashidsVersion = '1.0.1'
 
+    jsonSchemaVersion = '1.0.21'
+    jsonSchemaValidatorVersion = '2.2.6'
+
     beansvizVersion = '0.1.0'
 }
 
@@ -71,6 +74,9 @@ dependencies {
     compile ("io.springfox:springfox-swagger-ui:${springfoxSwagger2Version}")
 
     compile ("org.hashids:hashids:${hashidsVersion}")
+
+    compile ("com.kjetland:mbknor-jackson-jsonschema_2.12:${jsonSchemaVersion}")
+    compile ("com.github.fge:json-schema-validator:${jsonSchemaValidatorVersion}")
 
     compile ("am.ik.beansviz:beansviz-spring-boot-actuator:${beansvizVersion}")
 
