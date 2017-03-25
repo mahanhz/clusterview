@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import static org.amhzing.clusterview.app.web.MediaTypes.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.countryLink;
+import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @ConditionalOnRestEnabled
@@ -30,6 +30,9 @@ public class IndexRestController {
 
         final ResourceSupport resourceSupport = new ResourceSupport();
         resourceSupport.add(indexLink.withSelfRel());
+        resourceSupport.add(activitiesRefDataLink());
+        resourceSupport.add(coreActivitiesRefDataLink());
+        resourceSupport.add(clustersRefDataLink());
 
         final String userCountry = (String) httpSession.getAttribute(USER_COUNTRY);
         if (StringUtils.isNotBlank(userCountry)) {

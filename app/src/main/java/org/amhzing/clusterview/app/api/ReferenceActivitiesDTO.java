@@ -8,13 +8,13 @@ import java.util.List;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 
-public class ClustersDTO extends ResourceSupport {
+public class ReferenceActivitiesDTO extends ResourceSupport {
 
-    @JsonProperty("clusters")
-    public final List<ClusterDTO> clusters;
+    @JsonProperty("activities")
+    public final List<ReferenceActivityDTO> activities;
 
     @JsonCreator
-    public ClustersDTO(final List<ClusterDTO> clusters) {
-        this.clusters = noNullElements(clusters);
+    public ReferenceActivitiesDTO(final List<ReferenceActivityDTO> activities) {
+        this.activities = noNullElements(activities);
     }
 }

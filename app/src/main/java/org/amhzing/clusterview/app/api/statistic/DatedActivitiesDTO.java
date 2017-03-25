@@ -3,6 +3,7 @@ package org.amhzing.clusterview.app.api.statistic;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import java.util.Date;
 
@@ -13,7 +14,7 @@ public class DatedActivitiesDTO {
     @JsonProperty("date")
     @JsonFormat(pattern="yyyy-MM")
     public final Date date;
-    @JsonProperty("activities")
+    @JsonUnwrapped
     public final ActivitiesDTO activities;
 
     @JsonCreator
