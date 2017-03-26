@@ -13,6 +13,7 @@ import org.amhzing.clusterview.app.domain.model.Region;
 import org.amhzing.clusterview.app.domain.model.statistic.ActivityStatistic;
 import org.amhzing.clusterview.app.domain.model.statistic.CourseStatistic;
 import org.amhzing.clusterview.app.domain.model.statistic.DatedActivityStatistic;
+import org.amhzing.clusterview.app.web.model.ClusterPath;
 import org.amhzing.clusterview.app.web.model.RegionPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
@@ -129,6 +130,60 @@ public class StatisticRestController {
         coursesDto.add(homeLink());
         coursesDto.add(countryLink(country));
         coursesDto.add(regionLink(country, region));
+        coursesDto.add(statsHistoryLink(country));
+
+        return ResponseEntity.ok(coursesDto);
+    }
+
+    @LogExecutionTime
+    @GetMapping(path = "/{country}/{region}/{cluster}/" + ACTIVITY_STATS)
+    public ResponseEntity<ActivitiesDTO> clusterActivityStats(final ClusterPath clusterPath) {
+
+        final String country = clusterPath.getCountry();
+        final String region = clusterPath.getRegion();
+        final String cluster = clusterPath.getCluster();
+
+        final ActivityStatistic statistics = activityStatisticService.statistics(Cluster.Id.create(cluster));
+
+        final ActivitiesDTO activitiesDto = activitiesDto(statistics);
+
+        final ControllerLinkBuilder selfLink = linkTo(StatisticRestController.class).slash(country)
+                                                                                    .slash(region)
+                                                                                    .slash(cluster)
+                                                                                    .slash(ACTIVITY_STATS);
+
+        activitiesDto.add(selfLink.withSelfRel());
+        activitiesDto.add(homeLink());
+        activitiesDto.add(countryLink(country));
+        activitiesDto.add(regionLink(country, region));
+        activitiesDto.add(clusterLink(country, region, cluster));
+        activitiesDto.add(statsHistoryLink(country));
+
+        return ResponseEntity.ok(activitiesDto);
+    }
+
+    @LogExecutionTime
+    @GetMapping(path = "/{country}/{region}/{cluster}/" + COURSE_STATS)
+    public ResponseEntity<CoursesDTO> clusterCourseStats(final ClusterPath clusterPath) {
+
+        final String country = clusterPath.getCountry();
+        final String region = clusterPath.getRegion();
+        final String cluster = clusterPath.getCluster();
+
+        final CourseStatistic statistics = courseStatisticService.statistics(Cluster.Id.create(cluster));
+
+        final CoursesDTO coursesDto = coursesDto(statistics);
+
+        final ControllerLinkBuilder selfLink = linkTo(StatisticRestController.class).slash(country)
+                                                                                    .slash(region)
+                                                                                    .slash(cluster)
+                                                                                    .slash(COURSE_STATS);
+
+        coursesDto.add(selfLink.withSelfRel());
+        coursesDto.add(homeLink());
+        coursesDto.add(countryLink(country));
+        coursesDto.add(regionLink(country, region));
+        coursesDto.add(clusterLink(country, region, cluster));
         coursesDto.add(statsHistoryLink(country));
 
         return ResponseEntity.ok(coursesDto);

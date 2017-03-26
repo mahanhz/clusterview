@@ -69,6 +69,17 @@ public class StatisticRestControllerSchemaValidatorTest {
 
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
+    public void should_validate_activity_stats_cluster_schema() throws Exception {
+
+        given(activityStatisticService.statistics(any(Cluster.Id.class))).willReturn(activityStatistic());
+
+        final ResultActions result = RestHelper.get(mvc, BASE_PATH + "/statsview/se/central/cluster1/" + ACTIVITY_STATS);
+
+        assertSuccessfulSchemaValidation(result, "ActivitiesDTO.json");
+    }
+
+    @Test
+    @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_validate_course_stats_country_schema() throws Exception {
 
         given(courseStatisticService.statistics(any(Country.Id.class))).willReturn(courseStatistic());
@@ -85,6 +96,17 @@ public class StatisticRestControllerSchemaValidatorTest {
         given(courseStatisticService.statistics(any(Region.Id.class))).willReturn(courseStatistic());
 
         final ResultActions result = RestHelper.get(mvc, BASE_PATH + "/statsview/se/northern/" + COURSE_STATS);
+
+        assertSuccessfulSchemaValidation(result, "CoursesDTO.json");
+    }
+
+    @Test
+    @WithMockCustomUser(username = "testU", password = "NotSaying")
+    public void should_validate_course_stats_cluster_schema() throws Exception {
+
+        given(courseStatisticService.statistics(any(Cluster.Id.class))).willReturn(courseStatistic());
+
+        final ResultActions result = RestHelper.get(mvc, BASE_PATH + "/statsview/se/northern/cluster1/" + COURSE_STATS);
 
         assertSuccessfulSchemaValidation(result, "CoursesDTO.json");
     }

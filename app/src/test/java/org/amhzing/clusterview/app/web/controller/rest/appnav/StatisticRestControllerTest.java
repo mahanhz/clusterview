@@ -76,6 +76,20 @@ public class StatisticRestControllerTest {
 
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
+    public void should_get_activity_stats_links_for_cluster() throws Exception {
+
+        given(activityStatisticService.statistics(any(Cluster.Id.class))).willReturn(activityStatistic());
+
+        final Object document =  parseJson(mvc, BASE_PATH + "/statsview/se/central/stockholm/" + ACTIVITY_STATS);
+
+        final JSONArray rels = JsonPath.read(document, "$.links..rel");
+
+        assertThat(rels).containsExactlyInAnyOrder(REL_SELF, REL_HOME, REL_COUNTRY, REL_STATS_HISTORY,
+                                                   REGION_PREFIX + "central", CLUSTER_PREFIX + "stockholm");
+    }
+
+    @Test
+    @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_course_stats_links_for_country() throws Exception {
 
         given(courseStatisticService.statistics(any(Country.Id.class))).willReturn(courseStatistic());
@@ -98,6 +112,20 @@ public class StatisticRestControllerTest {
         final JSONArray rels = JsonPath.read(document, "$.links..rel");
 
         assertThat(rels).containsExactlyInAnyOrder(REL_SELF, REL_HOME, REL_COUNTRY, REL_STATS_HISTORY, REGION_PREFIX + "northern");
+    }
+
+    @Test
+    @WithMockCustomUser(username = "testU", password = "NotSaying")
+    public void should_get_course_stats_links_for_cluster() throws Exception {
+
+        given(courseStatisticService.statistics(any(Cluster.Id.class))).willReturn(courseStatistic());
+
+        final Object document =  parseJson(mvc, BASE_PATH + "/statsview/se/northern/cluster1/" + COURSE_STATS);
+
+        final JSONArray rels = JsonPath.read(document, "$.links..rel");
+
+        assertThat(rels).containsExactlyInAnyOrder(REL_SELF, REL_HOME, REL_COUNTRY, REL_STATS_HISTORY,
+                                                   REGION_PREFIX + "northern", CLUSTER_PREFIX + "cluster1");
     }
 
     @Test
