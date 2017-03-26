@@ -75,6 +75,11 @@ public class CacheTestConfig {
     }
 
     @Bean
+    public RegionRepository regionRepository() {
+        return new DefaultRegionRepository(countryJpaRepository, regionJpaRepository);
+    }
+
+    @Bean
     public ClusterRepository clusterRepository() {
         return new DefaultClusterRepository(countryJpaRepository, clusterJpaRepository);
     }
@@ -105,6 +110,7 @@ public class CacheTestConfig {
                                                 statsHistoryCache().getObject(),
                                                 activitiesCache().getObject(),
                                                 coreActivitiesCache().getObject(),
+                                                regionsCache().getObject(),
                                                 clustersCache().getObject()));
 
         return cacheManager;
@@ -149,6 +155,13 @@ public class CacheTestConfig {
     public ConcurrentMapCacheFactoryBean coreActivitiesCache() {
         final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
         cacheFactoryBean.setName(CacheSpec.CORE_ACTIVITIES_CACHE_NAME);
+        return cacheFactoryBean;
+    }
+
+    @Bean
+    public ConcurrentMapCacheFactoryBean regionsCache() {
+        final ConcurrentMapCacheFactoryBean cacheFactoryBean = new ConcurrentMapCacheFactoryBean();
+        cacheFactoryBean.setName(CacheSpec.REGIONS_CACHE_NAME);
         return cacheFactoryBean;
     }
 

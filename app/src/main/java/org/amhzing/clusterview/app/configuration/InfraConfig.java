@@ -104,6 +104,11 @@ public class InfraConfig {
     }
 
     @Bean
+    public RegionRepository regionRepository() {
+        return new DefaultRegionRepository(countryJpaRepository, regionJpaRepository);
+    }
+
+    @Bean
     public ClusterRepository clusterRepository() {
         return new DefaultClusterRepository(countryJpaRepository, clusterJpaRepository);
     }
