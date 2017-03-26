@@ -19,11 +19,11 @@ public class CoreActivityDTO {
     public final int communityOfInterest;
 
     @JsonCreator
-    public CoreActivityDTO(final String id,
-                           final String name,
-                           final int quantity,
-                           final int totalParticipants,
-                           final int communityOfInterest) {
+    public CoreActivityDTO(@JsonProperty("id") final String id,
+                           @JsonProperty("name") final String name,
+                           @JsonProperty("quantity") final int quantity,
+                           @JsonProperty("totalParticipants") final int totalParticipants,
+                           @JsonProperty("communityOfInterest") final int communityOfInterest) {
         this.id = notBlank(id);
         this.name = notBlank(name);
         this.quantity = quantity;

@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
+import static org.amhzing.clusterview.app.web.model.GroupPath.CREATE_GROUP;
 import static org.apache.commons.lang3.Validate.notNull;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -54,6 +55,11 @@ public class GroupRestController extends AbstractRestController {
                                                                                 .slash(region)
                                                                                 .slash(cluster);
 
+        final ControllerLinkBuilder createGroupLink = linkTo(GroupEditRestController.class).slash(country)
+                                                                                           .slash(region)
+                                                                                           .slash(cluster)
+                                                                                           .slash(CREATE_GROUP);
+
         groupsDto.add(selfLink.withSelfRel());
         groupsDto.add(homeLink());
         groupsDto.add(countryLink(country));
@@ -62,6 +68,7 @@ public class GroupRestController extends AbstractRestController {
         groupsDto.add(clusterActivityStatsLink(country, region, cluster));
         groupsDto.add(clusterCourseStatsLink(country, region, cluster));
         groupsDto.add(groupLinks(country, region, cluster));
+        groupsDto.add(createGroupLink.withRel(GROUP_PREFIX + "create"));
         groupsDto.add(statsHistoryLink(country));
 
         return ResponseEntity.ok(groupsDto);
@@ -91,6 +98,8 @@ public class GroupRestController extends AbstractRestController {
         groupDto.add(countryLink(country));
         groupDto.add(regionLink(country, region));
         groupDto.add(clusterLink(country, region, cluster));
+        groupDto.add(selfLink.withRel(GROUP_PREFIX + "update"));
+        groupDto.add(selfLink.withRel(GROUP_PREFIX + "delete"));
         groupDto.add(statsHistoryLink(country));
 
         return ResponseEntity.ok(groupDto);

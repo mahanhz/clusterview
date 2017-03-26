@@ -1,6 +1,5 @@
 package org.amhzing.clusterview.app.api;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.ResourceSupport;
 
@@ -13,7 +12,6 @@ public class ClustersDTO extends ResourceSupport {
     @JsonProperty("clusters")
     public final List<ClusterDTO> clusters;
 
-    @JsonCreator
     public ClustersDTO(final List<ClusterDTO> clusters) {
         this.clusters = noNullElements(clusters);
     }

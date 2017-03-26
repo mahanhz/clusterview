@@ -52,7 +52,7 @@ public class GroupRestControllerSchemaValidatorTest {
         given(groupService.group(any(Group.Id.class))).willReturn(group());
 
         final String obfuscatedId = Obfuscator.obfuscate(group().getId().getId());
-        
+
         final ResultActions result = RestHelper.get(mvc, BASE_PATH + "/clusterview/se/central/cluster1/" + obfuscatedId);
 
         assertSuccessfulSchemaValidation(result, "GroupDTO.json");

@@ -25,7 +25,8 @@ public class AppSecurityRestConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cloudfoundryapplication/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-            .httpBasic();
+            .httpBasic()
+        .and().csrf().disable();
     }
 
     @Bean

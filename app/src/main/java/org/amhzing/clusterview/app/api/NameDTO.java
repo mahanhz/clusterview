@@ -17,10 +17,13 @@ public class NameDTO {
     public final String suffix;
 
     @JsonCreator
-    public NameDTO(final String firstName, final String middleName, final String lastName, final String suffix) {
-        this.firstName = notBlank(firstName);
+    public NameDTO(@JsonProperty("firstName") final String firstName,
+                   @JsonProperty("middleName") final String middleName,
+                   @JsonProperty("lastName") final String lastName,
+                   @JsonProperty("suffix") final String suffix) {
+        this.firstName = notBlank(firstName, "First name is required");
         this.middleName = middleName;
-        this.lastName = notBlank(lastName);
+        this.lastName = notBlank(lastName, "Last name is required");
         this.suffix = suffix;
     }
 }

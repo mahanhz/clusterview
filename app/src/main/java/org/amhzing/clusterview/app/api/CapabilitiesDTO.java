@@ -13,7 +13,7 @@ public class CapabilitiesDTO {
     public final List<ReferenceActivityDTO> capabilities;
 
     @JsonCreator
-    public CapabilitiesDTO(final List<ReferenceActivityDTO> capabilities) {
+    public CapabilitiesDTO(@JsonProperty("capabilities") final List<ReferenceActivityDTO> capabilities) {
         this.capabilities = noNullElements(capabilities);
     }
 }

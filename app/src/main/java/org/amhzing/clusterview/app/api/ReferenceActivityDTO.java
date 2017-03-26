@@ -13,8 +13,8 @@ public class ReferenceActivityDTO {
     public final String name;
 
     @JsonCreator
-    public ReferenceActivityDTO(final String id,
-                                final String name) {
+    public ReferenceActivityDTO(@JsonProperty("id") final String id,
+                                @JsonProperty("name") final String name) {
         this.id = notBlank(id);
         this.name = notBlank(name);
     }

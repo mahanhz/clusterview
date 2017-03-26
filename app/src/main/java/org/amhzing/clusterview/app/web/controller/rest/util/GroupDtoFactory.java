@@ -1,7 +1,6 @@
 package org.amhzing.clusterview.app.web.controller.rest.util;
 
 import org.amhzing.clusterview.app.api.*;
-import org.amhzing.clusterview.app.api.statistic.CoreActivitiesDTO;
 import org.amhzing.clusterview.app.api.statistic.CoreActivityDTO;
 import org.amhzing.clusterview.app.domain.model.*;
 import org.amhzing.clusterview.app.domain.model.statistic.CoreActivity;
@@ -46,13 +45,11 @@ public final class GroupDtoFactory {
         return new LocationDTO(location.coordX(), location.coordY());
     }
 
-    private static CoreActivitiesDTO coreActivities(final Set<CoreActivity> coreActivities) {
-        final List<CoreActivityDTO> coreActivityDtos = coreActivities.stream()
-                                                                     .map(coreActivity -> convertCoreActivity(coreActivity))
-                                                                     .sorted(Comparator.comparing(a -> a.name))
-                                                                     .collect(Collectors.toList());
-
-        return new CoreActivitiesDTO(coreActivityDtos);
+    private static List<CoreActivityDTO> coreActivities(final Set<CoreActivity> coreActivities) {
+        return coreActivities.stream()
+                             .map(coreActivity -> convertCoreActivity(coreActivity))
+                             .sorted(Comparator.comparing(a -> a.name))
+                             .collect(Collectors.toList());
     }
 
     private static CoreActivityDTO convertCoreActivity(final CoreActivity coreActivity) {
@@ -90,12 +87,12 @@ public final class GroupDtoFactory {
                            suffix == null ? "" : suffix.value());
     }
 
-    private static CapabilitiesDTO convertCapabilities(final Capability capability) {
-        return new CapabilitiesDTO(activities(capability.getActivities()));
+    private static List<ReferenceActivityDTO> convertCapabilities(final Capability capability) {
+        return activities(capability.getActivities());
     }
 
-    private static CommitmentsDTO convertCommitments(final Commitment commitment) {
-        return new CommitmentsDTO(activities(commitment.getActivities()));
+    private static List<ReferenceActivityDTO> convertCommitments(final Commitment commitment) {
+        return activities(commitment.getActivities());
     }
 
     private static List<ReferenceActivityDTO> activities(final Set<Activity> activities) {

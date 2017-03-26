@@ -14,7 +14,7 @@ public class CoreActivitiesDTO extends ResourceSupport {
     public final List<CoreActivityDTO> coreActivities;
 
     @JsonCreator
-    public CoreActivitiesDTO(final List<CoreActivityDTO> coreActivities) {
+    public CoreActivitiesDTO(@JsonProperty("coreActivities") final List<CoreActivityDTO> coreActivities) {
         this.coreActivities = noNullElements(coreActivities);
     }
 }

@@ -75,16 +75,15 @@ public class DefaultGroupRepositoryTest {
         assertThat(group.getLocation().coordY()).isEqualTo(JpaRepositoryHelper.teamEntity().getLocation().getY());
     }
 
-    @Test
-    public void should_get_empty_group() throws Exception {
+    @Test(expected = NotFoundException.class)
+    public void should_not_get_empty_group() throws Exception {
 
         given(teamJpaRepository.findOne(any(Long.class))).willReturn(null);
 
         final Group.Id id = Group.Id.create(1234L);
         final Group group = defaultGroupRepository.group(id);
 
-        assertThat(group).isNotNull();
-        assertThat(group).isEqualTo(Group.empty(id));
+        fail("How did we get this far?");
     }
 
     @Test

@@ -55,6 +55,7 @@ public class GroupRestControllerTest {
                                                    REGION_PREFIX + "central",
                                                    CLUSTER_PREFIX + "cluster1",
                                                    GROUP_PREFIX + obfuscatedId,
+                                                   GROUP_PREFIX + "create",
                                                    REL_STATS_ACTIVITY,
                                                    REL_STATS_COURSE,
                                                    REL_STATS_HISTORY);
@@ -77,6 +78,8 @@ public class GroupRestControllerTest {
                                                    REL_COUNTRY,
                                                    REGION_PREFIX + "central",
                                                    CLUSTER_PREFIX + "cluster1",
+                                                   GROUP_PREFIX + "update",
+                                                   GROUP_PREFIX + "delete",
                                                    REL_STATS_HISTORY);
     }
 }

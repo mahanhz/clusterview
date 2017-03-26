@@ -13,7 +13,7 @@ public class CommitmentsDTO {
     public final List<ReferenceActivityDTO> commitments;
 
     @JsonCreator
-    public CommitmentsDTO(final List<ReferenceActivityDTO> commitments) {
+    public CommitmentsDTO(@JsonProperty("commitments") final List<ReferenceActivityDTO> commitments) {
         this.commitments = noNullElements(commitments);
     }
 }

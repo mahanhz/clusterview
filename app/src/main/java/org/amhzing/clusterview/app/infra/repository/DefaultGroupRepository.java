@@ -65,7 +65,7 @@ public class DefaultGroupRepository implements GroupRepository {
         final TeamEntity team = teamJpaRepository.findOne(groupId.getId());
 
         if (team == null) {
-            return Group.empty(groupId);
+            throw new NotFoundException("Group '" + groupId + "' does not exist");
         }
 
         return convertTeam(team);
