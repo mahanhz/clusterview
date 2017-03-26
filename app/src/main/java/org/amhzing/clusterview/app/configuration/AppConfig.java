@@ -48,6 +48,9 @@ public class AppConfig {
     private StatisticHistoryRepository statisticHistoryRepository;
 
     @Autowired
+    private RegionRepository regionRepository;
+
+    @Autowired
     private ClusterRepository clusterRepository;
 
     @Autowired
@@ -85,6 +88,11 @@ public class AppConfig {
     @Bean
     public StatisticHistoryService statisticHistoryService() {
         return new DefaultStatisticHistoryService(statisticHistoryRepository);
+    }
+
+    @Bean
+    public RegionService regionService() {
+        return new DefaultRegionService(regionRepository);
     }
 
     @Bean
