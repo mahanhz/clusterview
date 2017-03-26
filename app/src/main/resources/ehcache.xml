@@ -13,6 +13,7 @@
             <jsr107:cache name="groupCache" template="heap-cache"/>
             <jsr107:cache name="activitiesCache" template="heap-cache"/>
             <jsr107:cache name="coreActivitiesCache" template="heap-cache"/>
+            <jsr107:cache name="regionsCache" template="heap-cache"/>
             <jsr107:cache name="clustersCache" template="heap-cache"/>
         </jsr107:defaults>
     </service>

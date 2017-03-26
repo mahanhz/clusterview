@@ -17,6 +17,7 @@ public class CacheSpec {
     public static final String GROUP_CACHE_NAME = "groupCache";
     public static final String ACTIVITIES_CACHE_NAME = "activitiesCache";
     public static final String CORE_ACTIVITIES_CACHE_NAME = "coreActivitiesCache";
+    public static final String REGIONS_CACHE_NAME = "regionsCache";
     public static final String CLUSTERS_CACHE_NAME = "clustersCache";
 
     public static enum Cache {
@@ -28,6 +29,7 @@ public class CacheSpec {
         GROUP_CACHE(GROUP_CACHE_NAME, Duration.ONE_DAY),
         ACTIVITIES_CACHE(ACTIVITIES_CACHE_NAME, Duration.ONE_DAY),
         CORE_ACTIVITIES_CACHE(CORE_ACTIVITIES_CACHE_NAME, Duration.ONE_DAY),
+        REGIONS_CACHE(REGIONS_CACHE_NAME, Duration.ONE_DAY),
         CLUSTERS_CACHE(CLUSTERS_CACHE_NAME, Duration.ONE_DAY);
 
         private final String name;

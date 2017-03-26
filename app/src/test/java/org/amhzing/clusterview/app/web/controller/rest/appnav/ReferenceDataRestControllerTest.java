@@ -23,6 +23,7 @@ import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.REL_HOME;
 import static org.amhzing.clusterview.app.web.controller.rest.entry.IndexRestController.USER_COUNTRY;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.hateoas.Link.REL_SELF;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -50,7 +51,7 @@ public class ReferenceDataRestControllerTest {
 
         final JSONArray rels = JsonPath.read(document, "$.links..rel");
 
-        assertThat(rels).containsExactlyInAnyOrder(REL_HOME);
+        assertThat(rels).containsExactlyInAnyOrder(REL_SELF, REL_HOME);
     }
 
     @Test
@@ -60,7 +61,7 @@ public class ReferenceDataRestControllerTest {
 
         final JSONArray rels = JsonPath.read(document, "$.links..rel");
 
-        assertThat(rels).containsExactlyInAnyOrder(REL_HOME);
+        assertThat(rels).containsExactlyInAnyOrder(REL_SELF, REL_HOME);
     }
 
     @Test
@@ -75,6 +76,6 @@ public class ReferenceDataRestControllerTest {
 
         final JSONArray rels = JsonPath.read(document, "$.links..rel");
 
-        assertThat(rels).containsExactlyInAnyOrder(REL_HOME);
+        assertThat(rels).containsExactlyInAnyOrder(REL_SELF, REL_HOME);
     }
 }

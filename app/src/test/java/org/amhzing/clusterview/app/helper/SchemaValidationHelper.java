@@ -21,16 +21,16 @@ public class SchemaValidationHelper {
     }
 
     public static void assertSuccessfulSchemaValidation(final ResultActions result,
-                                                        final String resource) throws IOException, ProcessingException {
+                                                        final String schemaFileName) throws IOException, ProcessingException {
         notNull(result);
-        notBlank(resource);
+        notBlank(schemaFileName);
 
         final String jsonContent = result.andReturn().getResponse().getContentAsString();
 
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode actualJson = mapper.readTree(jsonContent);
 
-        final JsonNode schemaFile = JsonLoader.fromResource("/json-schema/" + resource);
+        final JsonNode schemaFile = JsonLoader.fromResource("/json-schema/" + schemaFileName);
         final JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
         final JsonSchema schema = factory.getJsonSchema(schemaFile);
 

@@ -13,6 +13,7 @@ import org.amhzing.clusterview.app.domain.model.Cluster;
 import org.amhzing.clusterview.app.domain.model.Country;
 import org.amhzing.clusterview.app.domain.model.statistic.CoreActivity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,8 @@ import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.homeLink;
 import static org.amhzing.clusterview.app.web.controller.rest.entry.IndexRestController.USER_COUNTRY;
 import static org.apache.commons.lang3.Validate.notNull;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = BASE_PATH + "/referencedata", produces = APPLICATION_JSON_V1_VALUE)
@@ -52,7 +55,10 @@ public class ReferenceDataRestController {
     public ResponseEntity<ReferenceActivitiesDTO> activities() {
         final List<Activity> activities = activityService.activities();
 
+        final ControllerLinkBuilder selfLink = linkTo(methodOn(ReferenceDataRestController.class).activities());
+
         final ReferenceActivitiesDTO activitiesDto = new ReferenceActivitiesDTO(activitiesDto(activities));
+        activitiesDto.add(selfLink.withSelfRel());
         activitiesDto.add(homeLink());
 
         return ResponseEntity.ok(activitiesDto);
@@ -63,7 +69,10 @@ public class ReferenceDataRestController {
     public ResponseEntity<ReferenceActivitiesDTO> coreActivities() {
         final List<CoreActivity> coreActivities = coreActivityService.coreActivities();
 
+        final ControllerLinkBuilder selfLink = linkTo(methodOn(ReferenceDataRestController.class).coreActivities());
+
         final ReferenceActivitiesDTO coreActivitiesDto = new ReferenceActivitiesDTO(coreActivitiesDto(coreActivities));
+        coreActivitiesDto.add(selfLink.withSelfRel());
         coreActivitiesDto.add(homeLink());
 
         return ResponseEntity.ok(coreActivitiesDto);
@@ -75,8 +84,10 @@ public class ReferenceDataRestController {
         final String userCountry = (String) httpSession.getAttribute(USER_COUNTRY);
 
         final List<Cluster.Id> clusters = clusterService.clusters(Country.Id.create(userCountry));
+        final ControllerLinkBuilder selfLink = linkTo(ReferenceDataRestController.class).slash("/clusters");
 
         final ClustersDTO clustersDto = new ClustersDTO(clustersDto(clusters));
+        clustersDto.add(selfLink.withSelfRel());
         clustersDto.add(homeLink());
 
         return ResponseEntity.ok(clustersDto);
