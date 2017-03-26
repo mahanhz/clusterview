@@ -21,6 +21,7 @@ public final class CommonLinks {
     public static final String REL_REF_DATA_CLUSTERS = "reference-data-clusters";
 
     public static final String REGION_PREFIX = "region-";
+    public static final String CLUSTER_PREFIX = "cluster-";
     public static final String CLUSTER_STATS_HISTORY_PREFIX = REL_STATS_HISTORY + "-";
 
     private CommonLinks() {

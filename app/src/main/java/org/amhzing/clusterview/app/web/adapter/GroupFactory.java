@@ -21,7 +21,7 @@ public final class GroupFactory {
     public static Group convert(final GroupModel groupModel) {
         notNull(groupModel);
 
-        final long id = groupId(groupModel.getObfuscatedId());
+        final long id = id(groupModel.getObfuscatedId());
 
         return Group.create(Group.Id.create(id),
                             convertMembers(groupModel.getMembers()),
@@ -29,7 +29,7 @@ public final class GroupFactory {
                             convertCoreActivities(groupModel.getCoreActivities()));
     }
 
-    private static long groupId(final String obfuscatedId) {
+    private static long id(final String obfuscatedId) {
         if (StringUtils.isNotBlank(obfuscatedId)){
             return Obfuscator.deobfuscate(obfuscatedId);
         }
@@ -62,7 +62,10 @@ public final class GroupFactory {
     }
 
     private static Member convertMember(final MemberModel member) {
-        return Member.create(Member.Id.create(member.getId()),
+
+        final long id = id(member.getObfuscatedId());
+
+        return Member.create(Member.Id.create(id),
                              convertName(member.getName()),
                              convertCapabilities(member.getCapability()),
                              convertCommitments(member.getCommitment()));

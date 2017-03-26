@@ -21,14 +21,14 @@ public class ClientModelHelper {
     }
 
     public static MemberModel memberModel() {
-        return MemberModel.create(2L,
+        return MemberModel.create("4o97MmbN",
                                   nameModel(),
                                   CapabilityModel.create(of(activityModel())),
                                   CommitmentModel.create(of(anotherActivityModel())));
     }
 
     public static MemberModel anotherMemberModel() {
-        return MemberModel.create(3L,
+        return MemberModel.create("5o97MmbN",
                                   anotherNameModel(),
                                   CapabilityModel.create(of(activityModel())),
                                   CommitmentModel.create(of(anotherActivityModel())));

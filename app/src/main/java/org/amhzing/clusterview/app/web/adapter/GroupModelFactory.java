@@ -4,6 +4,7 @@ import org.amhzing.clusterview.app.domain.model.*;
 import org.amhzing.clusterview.app.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.app.web.model.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -43,7 +44,7 @@ public final class GroupModelFactory {
     private static List<CoreActivityModel> coreActivities(final Set<CoreActivity> coreActivities) {
         return coreActivities.stream()
                              .map(coreActivity -> convertCoreActivity(coreActivity))
-                             .sorted((a1, a2) -> a1.getName().compareTo(a2.getName()))
+                             .sorted(Comparator.comparing(CoreActivityModel::getName))
                              .collect(Collectors.toList());
     }
 
@@ -58,12 +59,15 @@ public final class GroupModelFactory {
     private static List<MemberModel> convertMembers(final Set<Member> members) {
         return members.stream()
                       .map(GroupModelFactory::convertMember)
-                      .sorted((a1, a2) -> a1.getName().getLastName().compareTo(a2.getName().getLastName()))
+                      .sorted(Comparator.comparing(a -> a.getName().getLastName()))
                       .collect(Collectors.toList());
     }
 
     private static MemberModel convertMember(final Member member) {
-        return MemberModel.create(member.getId().getId(),
+
+        final String obfuscatedId = Obfuscator.obfuscate(member.getId().getId());
+
+        return MemberModel.create(obfuscatedId,
                                   convertName(member.getName()),
                                   convertCapabilities(member.getCapability()),
                                   convertCommitments(member.getCommitment()));
@@ -93,7 +97,7 @@ public final class GroupModelFactory {
     private static List<ActivityModel> activities(final Set<Activity> activities) {
         return activities.stream()
                          .map(GroupModelFactory::activity)
-                         .sorted((a1, a2) -> a1.getName().compareTo(a2.getName()))
+                         .sorted(Comparator.comparing(ActivityModel::getName))
                          .collect(Collectors.toList());
     }
 

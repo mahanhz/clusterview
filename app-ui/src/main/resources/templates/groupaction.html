@@ -131,7 +131,8 @@
                                 <th:block th:each="member, rowStat : *{members}">
                                     <tr th:id="member + ${rowStat.index}">
                                         <td>
-                                            <input type="checkbox" name="memberIds" th:value="${groupModel.members[__${rowStat.index}__].id}" />
+                                            <input type="hidden" th:field="*{members[__${rowStat.index}__].obfuscatedId}" />
+                                            <input type="checkbox" name="memberIds" th:value="${groupModel.members[__${rowStat.index}__].obfuscatedId}" />
                                         </td>
                                         <td>
                                             <input type="text" th:field="*{members[__${rowStat.index}__].name.firstName}" placeholder="First name" class="form-control"/>

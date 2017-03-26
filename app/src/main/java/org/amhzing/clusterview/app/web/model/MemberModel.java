@@ -4,13 +4,15 @@ import org.apache.commons.collections.CollectionUtils;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
 import java.util.Objects;
 
+import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public final class MemberModel {
 
-    private long id;
+    private String obfuscatedId;
 
     @NotNull @Valid
     private NameModel name;
@@ -27,23 +29,23 @@ public final class MemberModel {
         commitment = new CommitmentModel();
     }
 
-    private MemberModel(final long id, final NameModel name, final CapabilityModel capability, final CommitmentModel commitment) {
-        this.id = id;
+    private MemberModel(final String obfuscatedId, final NameModel name, final CapabilityModel capability, final CommitmentModel commitment) {
+        this.obfuscatedId = notBlank(obfuscatedId);
         this.name = notNull(name);
         this.capability = notNull(capability);
         this.commitment = notNull(commitment);
     }
 
-    public static MemberModel create(final long id, final NameModel name, final CapabilityModel capability, final CommitmentModel commitment) {
-        return new MemberModel(id, name, capability, commitment);
+    public static MemberModel create(final String obfuscatedId, final NameModel name, final CapabilityModel capability, final CommitmentModel commitment) {
+        return new MemberModel(obfuscatedId, name, capability, commitment);
     }
 
-    public long getId() {
-        return id;
+    public String getObfuscatedId() {
+        return obfuscatedId;
     }
 
-    public void setId(final long id) {
-        this.id = id;
+    public void setObfuscatedId(final String obfuscatedId) {
+        this.obfuscatedId = obfuscatedId;
     }
 
     public NameModel getName() {
@@ -79,9 +81,9 @@ public final class MemberModel {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof MemberModel)) return false;
         final MemberModel that = (MemberModel) o;
-        return id == that.id &&
+        return Objects.equals(obfuscatedId, that.obfuscatedId) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(capability, that.capability) &&
                 Objects.equals(commitment, that.commitment);
@@ -89,13 +91,13 @@ public final class MemberModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, capability, commitment);
+        return Objects.hash(obfuscatedId, name, capability, commitment);
     }
 
     @Override
     public String toString() {
         return "MemberModel{" +
-                "id=" + id +
+                "obfuscatedId='" + obfuscatedId + '\'' +
                 ", name=" + name +
                 ", capability=" + capability +
                 ", commitment=" + commitment +

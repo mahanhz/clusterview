@@ -1,9 +1,11 @@
 package org.amhzing.clusterview.app.web.controller.rest.appnav;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
+import org.amhzing.clusterview.app.application.RegionService;
+import org.amhzing.clusterview.app.domain.model.Country;
+import org.amhzing.clusterview.app.domain.model.Region;
 import org.amhzing.clusterview.app.web.controller.rest.base.AbstractRestController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -13,19 +15,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.emptyList;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
+import static org.apache.commons.lang3.Validate.notNull;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 public class CountryRestController extends AbstractRestController {
 
-    // FIXME - Hardcoded - Need to get regions from a service
-    private static final Map<String, List<String>> COUNTRY_REGIONS = ImmutableMap.of("se", ImmutableList.of("central", "northern", "southern"));
+    private RegionService regionService;
+
+    @Autowired
+    public CountryRestController(final RegionService regionService) {
+        this.regionService = notNull(regionService);
+    }
 
     @LogExecutionTime
     @GetMapping(path = "/{country}")
@@ -47,10 +52,12 @@ public class CountryRestController extends AbstractRestController {
     }
 
     private List<Link> regionLinks(final String country) {
-        final List<String> regions = COUNTRY_REGIONS.getOrDefault(country, emptyList());
+        final List<Region.Id> regions = regionService.regions(Country.Id.create(country));
 
         final List<Link> regionLinks = regions.stream()
-                                              .map(region -> linkTo(RegionRestController.class).slash(country).slash(region).withRel(REGION_PREFIX + region))
+                                              .map(region -> linkTo(RegionRestController.class).slash(country)
+                                                                                               .slash(region.getId())
+                                                                                               .withRel(REGION_PREFIX + region.getId()))
                                               .collect(Collectors.toList());
 
         return regionLinks;
