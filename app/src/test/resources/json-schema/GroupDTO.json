@@ -1,0 +1,132 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema#",
+  "title" : "Group DTO",
+  "type" : "object",
+  "additionalProperties" : false,
+  "properties" : {
+    "links" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Link"
+      }
+    },
+    "coreActivities" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/CoreActivityDTO"
+      }
+    },
+    "id" : {
+      "type" : "string"
+    },
+    "members" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/MemberDTO"
+      }
+    },
+    "location" : {
+      "$ref" : "#/definitions/LocationDTO"
+    }
+  },
+  "definitions" : {
+    "Link" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "rel" : {
+          "type" : "string"
+        },
+        "href" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CoreActivityDTO" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "quantity" : {
+          "type" : "integer"
+        },
+        "totalParticipants" : {
+          "type" : "integer"
+        },
+        "communityOfInterest" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "quantity", "totalParticipants", "communityOfInterest" ]
+    },
+    "MemberDTO" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "capabilities" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ReferenceActivityDTO"
+          }
+        },
+        "commitments" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ReferenceActivityDTO"
+          }
+        },
+        "name" : {
+          "$ref" : "#/definitions/NameDTO"
+        }
+      }
+    },
+    "ReferenceActivityDTO" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "NameDTO" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "firstName" : {
+          "type" : "string"
+        },
+        "middleName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "suffix" : {
+          "type" : "string"
+        }
+      }
+    },
+    "LocationDTO" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "x" : {
+          "type" : "integer"
+        },
+        "y" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "x", "y" ]
+    }
+  }
+}
