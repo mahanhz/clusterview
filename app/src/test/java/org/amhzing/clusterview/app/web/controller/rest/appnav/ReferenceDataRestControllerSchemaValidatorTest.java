@@ -20,8 +20,8 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static org.amhzing.clusterview.app.helper.DomainModelHelper.*;
 import static org.amhzing.clusterview.app.helper.SchemaValidationHelper.assertSuccessfulSchemaValidation;
+import static org.amhzing.clusterview.app.user.UserUtil.USER_COUNTRY;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
-import static org.amhzing.clusterview.app.web.controller.rest.entry.IndexRestController.USER_COUNTRY;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

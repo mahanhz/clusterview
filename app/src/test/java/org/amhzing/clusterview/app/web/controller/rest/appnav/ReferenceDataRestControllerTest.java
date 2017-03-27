@@ -19,9 +19,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.amhzing.clusterview.app.helper.RestHelper.parseJson;
+import static org.amhzing.clusterview.app.user.UserUtil.USER_COUNTRY;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.REL_HOME;
-import static org.amhzing.clusterview.app.web.controller.rest.entry.IndexRestController.USER_COUNTRY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.hateoas.Link.REL_SELF;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
