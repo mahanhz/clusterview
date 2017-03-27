@@ -15,6 +15,8 @@ public final class UserUtil {
         // to prevent instantiation
     }
 
+    public static final String USER_COUNTRY = "userCountry";
+
     public static List<String> roles(final Authentication authentication) {
         return authentication.getAuthorities()
                              .stream()

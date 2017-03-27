@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static org.amhzing.clusterview.app.user.UserUtil.USER_COUNTRY;
 import static org.amhzing.clusterview.app.web.MediaTypes.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
@@ -20,8 +21,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 @RestController
 @RequestMapping(path = { "/", BASE_PATH }, produces = APPLICATION_JSON_V1_VALUE)
 public class IndexRestController {
-
-    public static final String USER_COUNTRY = "userCountry";
 
     @GetMapping
     public ResponseEntity<ResourceSupport> index(final HttpServletRequest request) {

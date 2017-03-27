@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
+import static org.amhzing.clusterview.app.user.UserUtil.USER_COUNTRY;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @ControllerAdvice(basePackageClasses = { CommonModelController.class })
 public class CommonModelController {
 
-    public static final String USER_COUNTRY = "userCountry";
     public static final String ACTIVITY_VALUES_MODEL = "activityValues";
     public static final String CORE_ACTIVITY_VALUES_MODEL = "coreActivityValues";
     public static final String CLUSTER_VALUES_MODEL = "clusterValues";

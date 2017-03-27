@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class UserHandlerInterceptor extends HandlerInterceptorAdapter {
+import static org.amhzing.clusterview.app.user.UserUtil.USER_COUNTRY;
 
-    protected static final String USER_COUNTRY = "userCountry";
+public class UserHandlerInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
