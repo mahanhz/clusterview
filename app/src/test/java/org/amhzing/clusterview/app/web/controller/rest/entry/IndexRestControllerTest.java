@@ -35,7 +35,7 @@ public class IndexRestControllerTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_links() throws Exception {
 
-        final ResultActions result = mvc.perform(get(BASE_PATH).sessionAttr(USER_COUNTRY, "se"))
+        final ResultActions result = mvc.perform(get(BASE_PATH).requestAttr(USER_COUNTRY, "se"))
                                         .andExpect(status().isOk())
                                         .andExpect(content().contentTypeCompatibleWith(MediaTypes.APPLICATION_JSON_V1));
 

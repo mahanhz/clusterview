@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,8 +80,8 @@ public class ReferenceDataRestController {
 
     @LogExecutionTime
     @GetMapping(path = "/clusters")
-    public ResponseEntity<ClustersDTO> clusters(final HttpSession httpSession) {
-        final String userCountry = (String) httpSession.getAttribute(USER_COUNTRY);
+    public ResponseEntity<ClustersDTO> clusters(final HttpServletRequest request) {
+        final String userCountry = (String) request.getAttribute(USER_COUNTRY);
 
         final List<Cluster.Id> clusters = clusterService.clusters(Country.Id.create(userCountry));
         final ControllerLinkBuilder selfLink = linkTo(ReferenceDataRestController.class).slash("/clusters");

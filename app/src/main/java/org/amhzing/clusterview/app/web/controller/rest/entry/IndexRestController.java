@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import static org.amhzing.clusterview.app.web.MediaTypes.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
@@ -24,7 +24,7 @@ public class IndexRestController {
     public static final String USER_COUNTRY = "userCountry";
 
     @GetMapping
-    public ResponseEntity<ResourceSupport> index(final HttpSession httpSession) {
+    public ResponseEntity<ResourceSupport> index(final HttpServletRequest request) {
 
         final ControllerLinkBuilder indexLink = linkTo(IndexRestController.class);
 
@@ -34,7 +34,7 @@ public class IndexRestController {
         resourceSupport.add(coreActivitiesRefDataLink());
         resourceSupport.add(clustersRefDataLink());
 
-        final String userCountry = (String) httpSession.getAttribute(USER_COUNTRY);
+        final String userCountry = (String) request.getAttribute(USER_COUNTRY);
         if (StringUtils.isNotBlank(userCountry)) {
             resourceSupport.add(countryLink(userCountry));
         }

@@ -67,7 +67,7 @@ public class ReferenceDataRestControllerTest {
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_clusters_links() throws Exception {
-        final ResultActions result = mvc.perform(get(BASE_PATH + "/referencedata/clusters").sessionAttr(USER_COUNTRY, "se"))
+        final ResultActions result = mvc.perform(get(BASE_PATH + "/referencedata/clusters").requestAttr(USER_COUNTRY, "se"))
                                         .andExpect(status().isOk())
                                         .andExpect(content().contentTypeCompatibleWith(MediaTypes.APPLICATION_JSON_V1));
 

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
@@ -49,8 +49,8 @@ public class CommonModelController {
     }
 
     @ModelAttribute(CLUSTER_VALUES_MODEL)
-    public List<ClusterNameModel> clusters(final HttpSession httpSession) {
-        final String userCountry = (String) httpSession.getAttribute(USER_COUNTRY);
+    public List<ClusterNameModel> clusters(final HttpServletRequest request) {
+        final String userCountry = (String) request.getAttribute(USER_COUNTRY);
 
         return StringUtils.isNotBlank(userCountry) ? statisticAdapter.clusters(userCountry) : emptyList();
     }

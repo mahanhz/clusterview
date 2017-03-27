@@ -71,7 +71,7 @@ public class ReferenceDataRestControllerSchemaValidatorTest {
 
         given(clusterService.clusters(any(Country.Id.class))).willReturn(clustersIds());
 
-        final ResultActions result = mvc.perform(get(BASE_PATH + "/referencedata/clusters").sessionAttr(USER_COUNTRY, "se"))
+        final ResultActions result = mvc.perform(get(BASE_PATH + "/referencedata/clusters").requestAttr(USER_COUNTRY, "se"))
                                         .andExpect(status().isOk())
                                         .andExpect(content().contentTypeCompatibleWith(MediaTypes.APPLICATION_JSON_V1));
 

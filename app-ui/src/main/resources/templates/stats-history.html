@@ -10,7 +10,7 @@
 
         <div class="container-fluid">
             <div class="jumbotron">
-                <form action="#" th:action="'/statsedit/history/' + ${#httpSession.getAttribute('userCountry')}"
+                <form action="#" th:action="'/statsedit/history/' + ${#httpServletRequest.getAttribute('userCountry')}"
                       th:object="${clusterNameModel}"
                       th:method="post">
                     <div class="row">
@@ -20,7 +20,7 @@
                                     th:value="${cluster.name}"
                                     th:text="${cluster.name}">Stockholm</option>
                         </select>
-                        <th:block th:with="viewHistoryUri=('/statsview/history/' + ${#httpSession.getAttribute('userCountry')}  + '/')">
+                        <th:block th:with="viewHistoryUri=('/statsview/history/' + ${#httpServletRequest.getAttribute('userCountry')}  + '/')">
                             <button type="button" id="viewHistory" class="btn btn-primary"
                                     th:onclick="'viewClusterHistory(\'' + ${viewHistoryUri} + '\')'">
                                 View History

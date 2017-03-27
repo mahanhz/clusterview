@@ -1,9 +1,11 @@
 package org.amhzing.clusterview.app.configuration;
 
+import org.amhzing.clusterview.app.configuration.handler.UserHandlerInterceptor;
 import org.amhzing.clusterview.app.web.model.ActivityModelFormatter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.CacheControl;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.resource.WebJarsResourceResolver;
@@ -17,6 +19,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addFormatters(final FormatterRegistry formatterRegistry) {
         formatterRegistry.addFormatter(new ActivityModelFormatter());
+    }
+
+    @Override
+    public void addInterceptors(final InterceptorRegistry registry) {
+        registry.addInterceptor(new UserHandlerInterceptor());
+
+        super.addInterceptors(registry);
     }
 
     @Override
