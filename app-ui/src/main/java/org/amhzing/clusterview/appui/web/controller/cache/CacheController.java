@@ -1,6 +1,6 @@
 package org.amhzing.clusterview.appui.web.controller.cache;
 
-import org.amhzing.clusterview.app.web.model.CacheNamesModel;
+import org.amhzing.clusterview.appui.web.model.CacheNamesModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;

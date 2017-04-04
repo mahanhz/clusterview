@@ -6,7 +6,7 @@ import org.amhzing.clusterview.app.api.GroupDTO;
 import org.amhzing.clusterview.app.application.GroupService;
 import org.amhzing.clusterview.app.security.WithMockCustomUser;
 import org.amhzing.clusterview.app.web.MediaTypes;
-import org.amhzing.clusterview.app.web.adapter.Obfuscator;
+import org.amhzing.clusterview.app.web.Obfuscator;
 import org.amhzing.clusterview.app.web.controller.rest.util.GroupDtoFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static org.amhzing.clusterview.app.helper.DomainModelHelper.group;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
-import static org.amhzing.clusterview.app.web.model.GroupPath.CREATE_GROUP;
+import static org.amhzing.clusterview.app.web.controller.rest.appnav.GroupEditRestController.CREATE_GROUP;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

@@ -1,11 +1,11 @@
 package org.amhzing.clusterview.appui.web.controller.appnav;
 
 import com.google.common.collect.ImmutableSet;
-import org.amhzing.clusterview.app.annotation.TestOffline;
+import org.amhzing.clusterview.appui.annotation.TestOffline;
 import org.amhzing.clusterview.app.exception.NotFoundException;
-import org.amhzing.clusterview.app.web.adapter.GroupAdapter;
 import org.amhzing.clusterview.appui.helper.ClientModelHelper;
 import org.amhzing.clusterview.appui.security.WithMockCustomUser;
+import org.amhzing.clusterview.appui.web.adapter.GroupAdapter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,8 +22,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.amhzing.clusterview.appui.web.controller.exception.GlobalExceptionHandlerController.*;
-import static org.amhzing.clusterview.appui.web.controller.exception.GlobalExceptionHandlerController.CUSTOM_MESSAGE_KEY;
-import static org.amhzing.clusterview.appui.web.controller.exception.GlobalExceptionHandlerController.ERROR_VIEW;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;

@@ -1,10 +1,10 @@
 package org.amhzing.clusterview.appui.web.controller.appnav;
 
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
-import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
-import org.amhzing.clusterview.app.web.model.ActivityStatisticModel;
-import org.amhzing.clusterview.app.web.model.ClusterNameModel;
-import org.amhzing.clusterview.app.web.model.DatedActivityStatisticModel;
+import org.amhzing.clusterview.appui.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.appui.web.model.ActivityStatisticModel;
+import org.amhzing.clusterview.appui.web.model.ClusterNameModel;
+import org.amhzing.clusterview.appui.web.model.DatedActivityStatisticModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.annotation;
+package org.amhzing.clusterview.appui.annotation;
 
 import org.springframework.test.context.ActiveProfiles;
 

@@ -7,7 +7,7 @@ import org.amhzing.clusterview.acceptancetest.steps.access.UserLoginSteps;
 import org.amhzing.clusterview.app.domain.model.Group;
 import org.amhzing.clusterview.app.infra.jpa.mapping.TeamEntity;
 import org.amhzing.clusterview.app.infra.repository.GroupFactory;
-import org.amhzing.clusterview.app.web.adapter.Obfuscator;
+import org.amhzing.clusterview.app.web.Obfuscator;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;

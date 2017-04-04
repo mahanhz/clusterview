@@ -24,6 +24,7 @@ import static org.amhzing.clusterview.app.web.controller.rest.appnav.StatisticRe
 import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.notNull;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = BASE_PATH + "/statsedit", produces = APPLICATION_JSON_V1_VALUE)
@@ -53,9 +54,7 @@ public class StatisticEditRestController {
 
         statisticHistoryService.saveHistory(Cluster.Id.create(cluster), clusterStats);
 
-        final Link clusterStatsHistoryLink = linkTo(StatisticRestController.class).slash(HISTORY)
-                                                                                  .slash(country).slash(cluster)
-                                                                                  .withRel(CLUSTER_STATS_HISTORY_PREFIX + cluster);
+        final Link clusterStatsHistoryLink = linkTo(methodOn(StatisticRestController.class).clusterHistory(country, cluster)).withRel(CLUSTER_STATS_HISTORY_PREFIX + cluster);
 
         return ResponseEntity.created(URI.create(clusterStatsHistoryLink.getHref())).build();
     }

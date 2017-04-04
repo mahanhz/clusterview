@@ -6,16 +6,15 @@ import org.amhzing.clusterview.app.api.GroupsDTO;
 import org.amhzing.clusterview.app.application.GroupService;
 import org.amhzing.clusterview.app.domain.model.Cluster;
 import org.amhzing.clusterview.app.domain.model.Group;
-import org.amhzing.clusterview.app.web.adapter.Obfuscator;
+import org.amhzing.clusterview.app.web.Obfuscator;
 import org.amhzing.clusterview.app.web.controller.rest.base.AbstractRestController;
 import org.amhzing.clusterview.app.web.controller.rest.util.GroupDtoFactory;
-import org.amhzing.clusterview.app.web.model.ClusterPath;
-import org.amhzing.clusterview.app.web.model.GroupPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,9 +22,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
-import static org.amhzing.clusterview.app.web.model.GroupPath.CREATE_GROUP;
+import static org.amhzing.clusterview.app.web.controller.rest.appnav.GroupEditRestController.CREATE_GROUP;
 import static org.apache.commons.lang3.Validate.notNull;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 public class GroupRestController extends AbstractRestController {
@@ -41,19 +41,15 @@ public class GroupRestController extends AbstractRestController {
 
     @LogExecutionTime
     @GetMapping(path = CLUSTER_PATH)
-    public ResponseEntity<GroupsDTO> groups(final ClusterPath clusterPath) {
-
-        final String country = clusterPath.getCountry();
-        final String region = clusterPath.getRegion();
-        final String cluster = clusterPath.getCluster();
+    public ResponseEntity<GroupsDTO> groups(@PathVariable final String country,
+                                            @PathVariable final String region,
+                                            @PathVariable final String cluster) {
 
         final Set<Group> groups = groupService.groups(Cluster.Id.create(cluster));
 
         final GroupsDTO groupsDto = GroupDtoFactory.convertGroups(groups);
 
-        final ControllerLinkBuilder selfLink = linkTo(GroupRestController.class).slash(country)
-                                                                                .slash(region)
-                                                                                .slash(cluster);
+        final ControllerLinkBuilder selfLink = linkTo(methodOn(GroupRestController.class).groups(country, region, cluster));
 
         final ControllerLinkBuilder createGroupLink = linkTo(GroupEditRestController.class).slash(country)
                                                                                            .slash(region)
@@ -76,30 +72,30 @@ public class GroupRestController extends AbstractRestController {
 
     @LogExecutionTime
     @GetMapping(path = CLUSTER_PATH + "/{obfuscatedGroupId}")
-    public ResponseEntity<GroupDTO> group(final GroupPath groupPath) {
-
-        final String country = groupPath.getCountry();
-        final String region = groupPath.getRegion();
-        final String cluster = groupPath.getCluster();
-        final String obfuscatedGroupId = groupPath.getObfuscatedGroupId();
+    public ResponseEntity<GroupDTO> group(@PathVariable final String country,
+                                          @PathVariable final String region,
+                                          @PathVariable final String cluster,
+                                          @PathVariable final String obfuscatedGroupId) {
 
         final long groupId = Obfuscator.deobfuscate(obfuscatedGroupId);
         final Group group = groupService.group(Group.Id.create(groupId));
 
         final GroupDTO groupDto = GroupDtoFactory.convertGroup(group);
 
-        final ControllerLinkBuilder selfLink = linkTo(GroupRestController.class).slash(country)
-                                                                                .slash(region)
-                                                                                .slash(cluster)
-                                                                                .slash(obfuscatedGroupId);
+        final ControllerLinkBuilder selfLink = linkTo(methodOn(GroupRestController.class).group(country, region, cluster, obfuscatedGroupId));
+
+        final ControllerLinkBuilder actionGroupLink = linkTo(GroupEditRestController.class).slash(country)
+                                                                                           .slash(region)
+                                                                                           .slash(cluster)
+                                                                                           .slash(obfuscatedGroupId);
 
         groupDto.add(selfLink.withSelfRel());
         groupDto.add(homeLink());
         groupDto.add(countryLink(country));
         groupDto.add(regionLink(country, region));
         groupDto.add(clusterLink(country, region, cluster));
-        groupDto.add(selfLink.withRel(GROUP_PREFIX + "update"));
-        groupDto.add(selfLink.withRel(GROUP_PREFIX + "delete"));
+        groupDto.add(actionGroupLink.withRel(GROUP_PREFIX + "update"));
+        groupDto.add(actionGroupLink.withRel(GROUP_PREFIX + "delete"));
         groupDto.add(statsHistoryLink(country));
 
         return ResponseEntity.ok(groupDto);
@@ -110,11 +106,7 @@ public class GroupRestController extends AbstractRestController {
         final GroupsDTO groupsDto = GroupDtoFactory.convertGroups(groups);
 
         final List<Link> groupLinks = groupsDto.groups.stream()
-                                                      .map(group -> linkTo(GroupRestController.class).slash(country)
-                                                                                                     .slash(region)
-                                                                                                     .slash(cluster)
-                                                                                                     .slash(group.id)
-                                                                                                     .withRel(GROUP_PREFIX + group.id))
+                                                      .map(group -> linkTo(methodOn(GroupRestController.class).group(country, region, cluster, group.id)).withRel(GROUP_PREFIX + group.id))
                                                       .collect(Collectors.toList());
 
         return groupLinks;

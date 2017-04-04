@@ -4,7 +4,7 @@ import org.amhzing.clusterview.app.api.*;
 import org.amhzing.clusterview.app.api.statistic.CoreActivityDTO;
 import org.amhzing.clusterview.app.domain.model.*;
 import org.amhzing.clusterview.app.domain.model.statistic.CoreActivity;
-import org.amhzing.clusterview.app.web.adapter.Obfuscator;
+import org.amhzing.clusterview.app.web.Obfuscator;
 
 import java.util.Comparator;
 import java.util.List;

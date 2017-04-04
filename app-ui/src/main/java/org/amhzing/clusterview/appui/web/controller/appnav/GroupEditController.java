@@ -1,9 +1,9 @@
 package org.amhzing.clusterview.appui.web.controller.appnav;
 
 import org.amhzing.clusterview.app.annotation.LogExecutionTime;
-import org.amhzing.clusterview.app.web.adapter.GroupAdapter;
-import org.amhzing.clusterview.app.web.model.GroupModel;
-import org.amhzing.clusterview.app.web.model.GroupPath;
+import org.amhzing.clusterview.appui.web.adapter.GroupAdapter;
+import org.amhzing.clusterview.appui.web.model.GroupModel;
+import org.amhzing.clusterview.appui.web.model.GroupPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-import static org.amhzing.clusterview.app.web.model.GroupPath.CREATE_GROUP;
+import static org.amhzing.clusterview.appui.web.model.GroupPath.CREATE_GROUP;
 import static org.amhzing.clusterview.appui.web.controller.appnav.GroupController.CLUSTER_PATH;
 import static org.apache.commons.lang3.Validate.notNull;
 

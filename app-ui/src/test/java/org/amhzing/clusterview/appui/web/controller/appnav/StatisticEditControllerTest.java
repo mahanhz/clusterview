@@ -1,9 +1,9 @@
 package org.amhzing.clusterview.appui.web.controller.appnav;
 
-import org.amhzing.clusterview.app.annotation.TestOffline;
-import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.appui.annotation.TestOffline;
 import org.amhzing.clusterview.appui.helper.ClientModelHelper;
 import org.amhzing.clusterview.appui.security.WithMockCustomUser;
+import org.amhzing.clusterview.appui.web.adapter.StatisticAdapter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

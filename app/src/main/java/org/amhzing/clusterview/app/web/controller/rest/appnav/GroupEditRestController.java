@@ -5,7 +5,7 @@ import org.amhzing.clusterview.app.api.GroupDTO;
 import org.amhzing.clusterview.app.application.GroupService;
 import org.amhzing.clusterview.app.domain.model.Cluster;
 import org.amhzing.clusterview.app.domain.model.Group;
-import org.amhzing.clusterview.app.web.adapter.Obfuscator;
+import org.amhzing.clusterview.app.web.Obfuscator;
 import org.amhzing.clusterview.app.web.controller.rest.base.AbstractEditRestController;
 import org.amhzing.clusterview.app.web.controller.rest.util.GroupFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,12 @@ import java.net.URI;
 
 import static org.amhzing.clusterview.app.web.MediaTypes.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.clusterLink;
-import static org.amhzing.clusterview.app.web.model.GroupPath.CREATE_GROUP;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @RestController
 public class GroupEditRestController extends AbstractEditRestController {
+
+    public static final String CREATE_GROUP = "creategroup";
 
     private GroupService groupService;
 

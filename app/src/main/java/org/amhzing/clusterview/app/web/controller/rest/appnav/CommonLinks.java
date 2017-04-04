@@ -4,8 +4,6 @@ import org.amhzing.clusterview.app.web.controller.rest.entry.IndexRestController
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.StatisticRestController.ACTIVITY_STATS;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.StatisticRestController.COURSE_STATS;
 import static org.apache.commons.lang3.Validate.notBlank;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -62,7 +60,7 @@ public final class CommonLinks {
         notBlank(country);
         notBlank(region);
 
-        final ControllerLinkBuilder regionLink = linkTo(RegionRestController.class).slash(country).slash(region);
+        final ControllerLinkBuilder regionLink = linkTo(methodOn(RegionRestController.class).region(country, region));
         return regionLink.withRel(REGION_PREFIX + region);
     }
 
@@ -71,9 +69,7 @@ public final class CommonLinks {
         notBlank(region);
         notBlank(cluster);
 
-        final ControllerLinkBuilder regionLink = linkTo(GroupRestController.class).slash(country)
-                                                                                   .slash(region)
-                                                                                   .slash(cluster);
+        final ControllerLinkBuilder regionLink = linkTo(methodOn(GroupRestController.class).groups(country, region, cluster));
         return regionLink.withRel(CLUSTER_PREFIX + cluster);
     }
 
@@ -82,7 +78,7 @@ public final class CommonLinks {
         notBlank(region);
         notBlank(cluster);
 
-        final ControllerLinkBuilder activityStatsLink = linkTo(StatisticRestController.class).slash(country).slash(region).slash(cluster).slash(ACTIVITY_STATS);
+        final ControllerLinkBuilder activityStatsLink = linkTo(methodOn(StatisticRestController.class).clusterActivityStats(country, region, cluster));
         return activityStatsLink.withRel(REL_STATS_ACTIVITY);
     }
 
@@ -91,7 +87,7 @@ public final class CommonLinks {
         notBlank(region);
         notBlank(cluster);
 
-        final ControllerLinkBuilder courseStatsLink = linkTo(StatisticRestController.class).slash(country).slash(region).slash(cluster).slash(COURSE_STATS);
+        final ControllerLinkBuilder courseStatsLink = linkTo(methodOn(StatisticRestController.class).clusterCourseStats(country, region, cluster));
         return courseStatsLink.withRel(REL_STATS_COURSE);
     }
 

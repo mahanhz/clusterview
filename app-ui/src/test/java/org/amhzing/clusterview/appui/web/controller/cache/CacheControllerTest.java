@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.appui.web.controller.cache;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.app.annotation.TestOffline;
+import org.amhzing.clusterview.appui.annotation.TestOffline;
 import org.amhzing.clusterview.appui.security.WithMockCustomUser;
 import org.amhzing.clusterview.appui.web.controller.appnav.CommonModelController;
 import org.jsoup.Jsoup;

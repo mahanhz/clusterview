@@ -5,23 +5,22 @@ import org.amhzing.clusterview.app.application.RegionService;
 import org.amhzing.clusterview.app.domain.model.Cluster;
 import org.amhzing.clusterview.app.domain.model.Region;
 import org.amhzing.clusterview.app.web.controller.rest.base.AbstractRestController;
-import org.amhzing.clusterview.app.web.model.RegionPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.*;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.StatisticRestController.ACTIVITY_STATS;
-import static org.amhzing.clusterview.app.web.controller.rest.appnav.StatisticRestController.COURSE_STATS;
 import static org.apache.commons.lang3.Validate.notNull;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 public class RegionRestController extends AbstractRestController {
@@ -35,14 +34,12 @@ public class RegionRestController extends AbstractRestController {
 
     @LogExecutionTime
     @GetMapping(path = "/{country}/{region}")
-    public ResponseEntity<ResourceSupport> region(final RegionPath regionPath) {
+    public ResponseEntity<ResourceSupport> region(@PathVariable final String country,
+                                                  @PathVariable final String region) {
 
-        final String country = regionPath.getCountry();
-        final String region = regionPath.getRegion();
-
-        final ControllerLinkBuilder regionLink = linkTo(RegionRestController.class).slash(country).slash(region);
-        final ControllerLinkBuilder activityStatsLink = linkTo(StatisticRestController.class).slash(country).slash(region).slash(ACTIVITY_STATS);
-        final ControllerLinkBuilder courseStatsLink = linkTo(StatisticRestController.class).slash(country).slash(region).slash(COURSE_STATS);
+        final ControllerLinkBuilder regionLink = linkTo(methodOn(RegionRestController.class).region(country, region));
+        final ControllerLinkBuilder activityStatsLink = linkTo(methodOn(StatisticRestController.class).regionActivityStats(country, region));
+        final ControllerLinkBuilder courseStatsLink = linkTo(methodOn(StatisticRestController.class).regionCourseStats(country, region));
 
         final ResourceSupport resourceSupport = new ResourceSupport();
         resourceSupport.add(regionLink.withSelfRel());
@@ -60,10 +57,7 @@ public class RegionRestController extends AbstractRestController {
         final List<Cluster.Id> clusters = regionService.clusters(Region.Id.create(region));
 
         final List<Link> clusterLinks = clusters.stream()
-                                              .map(cluster -> linkTo(GroupRestController.class).slash(country)
-                                                                                                .slash(region)
-                                                                                                .slash(cluster.getId())
-                                                                                                .withRel(CLUSTER_PREFIX + cluster.getId()))
+                                              .map(cluster -> linkTo(methodOn(GroupRestController.class).groups(country, region, cluster.getId())).withRel(CLUSTER_PREFIX + cluster.getId()))
                                               .collect(Collectors.toList());
 
         return clusterLinks;

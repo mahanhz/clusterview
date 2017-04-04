@@ -55,9 +55,7 @@ public class CountryRestController extends AbstractRestController {
         final List<Region.Id> regions = regionService.regions(Country.Id.create(country));
 
         final List<Link> regionLinks = regions.stream()
-                                              .map(region -> linkTo(RegionRestController.class).slash(country)
-                                                                                               .slash(region.getId())
-                                                                                               .withRel(REGION_PREFIX + region.getId()))
+                                              .map(region -> linkTo(methodOn(RegionRestController.class).region(country, region.getId())).withRel(REGION_PREFIX + region.getId()))
                                               .collect(Collectors.toList());
 
         return regionLinks;

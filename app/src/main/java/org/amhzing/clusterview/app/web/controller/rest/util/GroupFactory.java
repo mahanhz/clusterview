@@ -6,7 +6,7 @@ import org.amhzing.clusterview.app.api.statistic.CoreActivityDTO;
 import org.amhzing.clusterview.app.domain.model.*;
 import org.amhzing.clusterview.app.domain.model.statistic.CoreActivity;
 import org.amhzing.clusterview.app.domain.model.statistic.Quantity;
-import org.amhzing.clusterview.app.web.adapter.Obfuscator;
+import org.amhzing.clusterview.app.web.Obfuscator;
 
 import java.util.List;
 import java.util.Set;

@@ -8,7 +8,7 @@ import org.amhzing.clusterview.app.application.GroupService;
 import org.amhzing.clusterview.app.domain.model.Cluster;
 import org.amhzing.clusterview.app.domain.model.Group;
 import org.amhzing.clusterview.app.security.WithMockCustomUser;
-import org.amhzing.clusterview.app.web.adapter.Obfuscator;
+import org.amhzing.clusterview.app.web.Obfuscator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

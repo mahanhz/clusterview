@@ -1,11 +1,11 @@
 package org.amhzing.clusterview.appui.web.controller.appnav;
 
-import org.amhzing.clusterview.app.web.adapter.ActivityAdapter;
-import org.amhzing.clusterview.app.web.adapter.CoreActivityAdapter;
-import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
-import org.amhzing.clusterview.app.web.model.ActivityModel;
-import org.amhzing.clusterview.app.web.model.ClusterNameModel;
-import org.amhzing.clusterview.app.web.model.CoreActivityModel;
+import org.amhzing.clusterview.appui.web.adapter.ActivityAdapter;
+import org.amhzing.clusterview.appui.web.adapter.CoreActivityAdapter;
+import org.amhzing.clusterview.appui.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.appui.web.model.ActivityModel;
+import org.amhzing.clusterview.appui.web.model.ClusterNameModel;
+import org.amhzing.clusterview.appui.web.model.CoreActivityModel;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;

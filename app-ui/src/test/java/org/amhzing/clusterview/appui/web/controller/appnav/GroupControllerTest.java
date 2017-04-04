@@ -1,10 +1,10 @@
 package org.amhzing.clusterview.appui.web.controller.appnav;
 
 import com.google.common.collect.ImmutableSet;
-import org.amhzing.clusterview.app.annotation.TestOffline;
-import org.amhzing.clusterview.app.web.adapter.GroupAdapter;
-import org.amhzing.clusterview.app.web.adapter.StatisticAdapter;
+import org.amhzing.clusterview.appui.annotation.TestOffline;
 import org.amhzing.clusterview.appui.security.WithMockCustomUser;
+import org.amhzing.clusterview.appui.web.adapter.GroupAdapter;
+import org.amhzing.clusterview.appui.web.adapter.StatisticAdapter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
