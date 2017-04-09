@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.domain.model;
+package org.amhzing.clusterview.app.domain.model.user;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -12,9 +12,9 @@ import static org.apache.commons.lang3.StringUtils.trim;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
-public class LastNameTest {
+public class EmailTest {
 
-    private static final String VALUE_WITH_WHITE_SPACE = "  Smith  ";
+    private static final String VALUE_WITH_WHITE_SPACE = "  test@example.com  ";
 
     @Test
     @Parameters(method = "values")
@@ -24,7 +24,7 @@ public class LastNameTest {
         Class<? extends Exception> actualException = NoException.class;
 
         try {
-            ImmutableLastName.of(value);
+            ImmutableEmail.of(value);
         } catch (Exception ex) {
             actualException = ex.getClass();
         }
@@ -34,19 +34,24 @@ public class LastNameTest {
 
     @Test
     public void should_trim_value() {
-        final ImmutableLastName lastName = ImmutableLastName.of(VALUE_WITH_WHITE_SPACE);
+        final ImmutableEmail email = ImmutableEmail.of(VALUE_WITH_WHITE_SPACE);
 
-        assertThat(lastName.value()).isEqualTo(trim(VALUE_WITH_WHITE_SPACE));
+        assertThat(email.value()).isEqualTo(trim(VALUE_WITH_WHITE_SPACE));
     }
 
     @SuppressWarnings("unused")
     private Object values() {
         return new Object[][]{
-                {JUnitParamHelper.valid(), "Doe"},
-                {JUnitParamHelper.valid(), StringUtils.repeat("a", LastName.MAX_LENGTH)},
+                {JUnitParamHelper.valid(), "test@example.com"},
+                {JUnitParamHelper.valid(), "test@example.se"},
+                {JUnitParamHelper.valid(), "test@a.se"},
+                {JUnitParamHelper.valid(), StringUtils.repeat("a", Email.MAX_LENGTH - 6) + "@a.com"},
+                {JUnitParamHelper.invalidMatching(IllegalArgumentException.class), StringUtils.repeat("a", Email.MAX_LENGTH - 5) + "@a.com"},
+                {JUnitParamHelper.invalidMatching(IllegalArgumentException.class), "test@example"},
+                {JUnitParamHelper.invalidMatching(IllegalArgumentException.class), "test@example."},
+                {JUnitParamHelper.invalidMatching(IllegalArgumentException.class), "test@example.abc"},
                 {JUnitParamHelper.invalidMatching(IllegalArgumentException.class), ""},
                 {JUnitParamHelper.invalidMatching(IllegalArgumentException.class), " "},
-                {JUnitParamHelper.invalidMatching(IllegalArgumentException.class), StringUtils.repeat("b", LastName.MAX_LENGTH + 1)},
                 {JUnitParamHelper.invalidMatching(NullPointerException.class), null}
         };
     }

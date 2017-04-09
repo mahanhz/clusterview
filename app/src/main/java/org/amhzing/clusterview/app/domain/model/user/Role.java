@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.app.domain.model;
+package org.amhzing.clusterview.app.domain.model.user;
 
 import org.apache.commons.lang3.StringUtils;
 import org.immutables.value.Value;
@@ -8,21 +8,21 @@ import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.notBlank;
 
 @Value.Immutable
-public interface LastName {
-    int MAX_LENGTH = 25;
+public interface Role {
+    int MAX_LENGTH = 50;
 
     @Value.Parameter
     String value();
 
     @Value.Check
-    default LastName check() {
+    default Role check() {
         notBlank(value());
 
         final String trimmed = trim(value());
         isTrue(trimmed.length() <= MAX_LENGTH);
 
         if (!StringUtils.equals(value(), trimmed)) {
-            return ImmutableLastName.of(trimmed);
+            return ImmutableRole.of(trimmed);
         }
 
         return this;

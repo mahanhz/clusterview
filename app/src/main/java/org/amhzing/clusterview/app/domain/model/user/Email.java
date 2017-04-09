@@ -1,28 +1,26 @@
-package org.amhzing.clusterview.app.domain.model;
+package org.amhzing.clusterview.app.domain.model.user;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.immutables.value.Value;
 
 import static org.apache.commons.lang3.StringUtils.trim;
 import static org.apache.commons.lang3.Validate.isTrue;
-import static org.apache.commons.lang3.Validate.notBlank;
 
 @Value.Immutable
-public interface LastName {
-    int MAX_LENGTH = 25;
+public interface Email {
+    int MAX_LENGTH = 65;
 
     @Value.Parameter
     String value();
 
     @Value.Check
-    default LastName check() {
-        notBlank(value());
-
+    default Email check() {
         final String trimmed = trim(value());
-        isTrue(trimmed.length() <= MAX_LENGTH);
+        isTrue(trimmed.length() <= MAX_LENGTH && EmailValidator.getInstance().isValid(trimmed));
 
         if (!StringUtils.equals(value(), trimmed)) {
-            return ImmutableLastName.of(trimmed);
+            return ImmutableEmail.of(trimmed);
         }
 
         return this;

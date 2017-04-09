@@ -41,8 +41,8 @@ public class StatisticRestController {
 
     public static final String PARTICIPANT = "participant";
     public static final String HISTORY = "/history";
-    public static final String ACTIVITY_STATS = "activityStats";
-    public static final String COURSE_STATS = "courseStats";
+    public static final String ACTIVITY_STATS = "activitystats";
+    public static final String COURSE_STATS = "coursestats";
 
     private StatisticService<ActivityStatistic> activityStatisticService;
     private StatisticService<CourseStatistic> courseStatisticService;

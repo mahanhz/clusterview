@@ -6,7 +6,7 @@ public class JUnitParamHelper {
     }
 
     public static Class<? extends Exception> valid() {
-        return null;
+        return NoException.class;
     }
 
     public static Class<? extends Exception> invalidMatching(final Class<? extends Exception> exception) {
