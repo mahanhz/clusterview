@@ -33,4 +33,12 @@ public class DefaultUserServiceTest {
 
         verify(userRepository, times(1)).changePassword(password);
     }
+
+    @Test
+    public void should_delegate_users_to_repository() throws Exception {
+
+        defaultUserService.users(1);
+
+        verify(userRepository, times(1)).users(1);
+    }
 }

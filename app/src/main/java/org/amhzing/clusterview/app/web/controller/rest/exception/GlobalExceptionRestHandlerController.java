@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import org.amhzing.clusterview.app.exception.NotFoundException;
 import org.amhzing.clusterview.app.web.MediaTypes;
 import org.amhzing.clusterview.app.web.controller.rest.GlobalExceptionRestMarker;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.VndErrors;
@@ -39,11 +40,12 @@ public class GlobalExceptionRestHandlerController {
         final UUID errorId = Generators.timeBasedGenerator().generate();
         LOGGER.error("ErrorId: {} references the following error: ", errorId, throwable);
 
+        // FIXME - Message can potentially output too much info. Remove or make it a standard message
         final HttpStatus httpStatus = HttpStatus.valueOf(response.getStatus());
         final ImmutableMap<String, String> errorAttributes = ImmutableMap.of(ERROR_ID, errorId.toString(),
                                                                              STATUS, httpStatus.toString(),
                                                                              PATH, request.getRequestURI(),
-                                                                             MESSAGE, throwable.getMessage());
+                                                                             MESSAGE, defaulted(throwable.getMessage()));
 
         return new ResponseEntity<>(vndErrors(errorAttributes), headers(), httpStatus);
     }
@@ -69,6 +71,10 @@ public class GlobalExceptionRestHandlerController {
                                                                              MESSAGE, httpStatus.getReasonPhrase());
 
         return new ResponseEntity<>(vndErrors(errorAttributes), headers(), httpStatus);
+    }
+
+    private String defaulted(final String value) {
+        return StringUtils.defaultIfBlank(value, "");
     }
 
     private HttpHeaders headers() {

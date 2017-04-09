@@ -14,13 +14,14 @@ import java.util.stream.Collectors;
 
 import static org.amhzing.clusterview.app.web.MediaTypes.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.BASE_PATH;
+import static org.amhzing.clusterview.app.web.controller.rest.RestControllerPath.MANAGE_PATH;
 import static org.amhzing.clusterview.app.web.controller.rest.appnav.CommonLinks.homeLink;
 import static org.apache.commons.lang3.Validate.notNull;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping(path = BASE_PATH + "/manage/caches", produces = APPLICATION_JSON_V1_VALUE)
+@RequestMapping(path = MANAGE_PATH + BASE_PATH + "/caches", produces = APPLICATION_JSON_V1_VALUE)
 public class CacheRestController {
 
     private CacheManager cacheManager;

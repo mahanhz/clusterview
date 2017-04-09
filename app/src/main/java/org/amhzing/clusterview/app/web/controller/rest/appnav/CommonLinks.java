@@ -20,6 +20,7 @@ public final class CommonLinks {
     public static final String REL_REF_DATA_CORE_ACTIVITIES = "reference-data-core-activities";
     public static final String REL_REF_DATA_CLUSTERS = "reference-data-clusters";
 
+    public static final String USERS_PAGE_PREFIX = "users-page-";
     public static final String REGION_PREFIX = "region-";
     public static final String CLUSTER_PREFIX = "cluster-";
     public static final String GROUP_PREFIX = "group-";

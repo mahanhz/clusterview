@@ -1,6 +1,8 @@
 package org.amhzing.clusterview.app.application;
 
+import org.amhzing.clusterview.app.domain.model.user.Page;
 import org.amhzing.clusterview.app.domain.model.user.Password;
+import org.amhzing.clusterview.app.domain.model.user.User;
 import org.amhzing.clusterview.app.domain.repository.UserRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -20,5 +22,10 @@ public class DefaultUserService implements UserService {
         notNull(password);
 
         userRepository.changePassword(password);
+    }
+
+    @Override
+    public Page<User> users(final int pageNumber) {
+        return userRepository.users(pageNumber);
     }
 }

@@ -3,6 +3,7 @@ package org.amhzing.clusterview.app.configuration.handler;
 import org.amhzing.clusterview.app.user.DefaultUserDetails;
 import org.amhzing.clusterview.app.user.UserUtil;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -26,7 +27,9 @@ public class UserHandlerInterceptor extends HandlerInterceptorAdapter {
     }
 
     private boolean isAnonymous() {
-        return SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken;
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return authentication == null || authentication instanceof AnonymousAuthenticationToken;
     }
 
     private void setUserCountry(final HttpServletRequest request,

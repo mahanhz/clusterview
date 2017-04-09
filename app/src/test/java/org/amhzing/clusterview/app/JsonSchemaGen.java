@@ -7,6 +7,7 @@ import org.amhzing.clusterview.app.api.ClustersDTO;
 import org.amhzing.clusterview.app.api.GroupDTO;
 import org.amhzing.clusterview.app.api.GroupsDTO;
 import org.amhzing.clusterview.app.api.ReferenceActivitiesDTO;
+import org.amhzing.clusterview.app.api.cache.CacheDTO;
 import org.amhzing.clusterview.app.api.statistic.ActivitiesDTO;
 import org.amhzing.clusterview.app.api.statistic.CoursesDTO;
 import org.amhzing.clusterview.app.api.statistic.HistoricalActivitiesDTO;
@@ -54,6 +55,7 @@ public final class JsonSchemaGen {
         map.put(ActivitiesDTO.class, ActivitiesDTO.class.getSimpleName() + JSON_EXT);
         map.put(GroupDTO.class, GroupDTO.class.getSimpleName() + JSON_EXT);
         map.put(GroupsDTO.class, GroupsDTO.class.getSimpleName() + JSON_EXT);
+        map.put(CacheDTO.class, CacheDTO.class.getSimpleName() + JSON_EXT);
 
         return map;
     }

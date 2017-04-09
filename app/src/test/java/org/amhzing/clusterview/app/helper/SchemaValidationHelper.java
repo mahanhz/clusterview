@@ -36,6 +36,6 @@ public class SchemaValidationHelper {
 
         final ProcessingReport report = schema.validate(actualJson);
 
-        assertThat(report.isSuccess()).isTrue();
+        assertThat(report.isSuccess()).as("Schema validation failed").isTrue();
     }
 }

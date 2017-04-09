@@ -12,25 +12,34 @@ import static org.apache.commons.lang3.Validate.notNull;
 public final class User {
 
     private final Email email;
+    private final Password password;
     private final Name name;
     private final State state;
     private final List<Role> roles;
     private final List<Country.Id> countries;
 
-    private User(final Email email, final Name name, final State state, final List<Role> roles, final List<Country.Id> countries) {
+    private User(final Email email, final Password password, final Name name,
+                 final State state, final List<Role> roles, final List<Country.Id> countries) {
         this.email = notNull(email);
+        this.password = notNull(password);
         this.name = notNull(name);
         this.state = notNull(state);
         this.roles = notNull(roles);
         this.countries = notNull(countries);
     }
 
-    public static User create(final Email email, final Name name, final State state, final List<Role> roles, final List<Country.Id> countries) {
-        return new User(email, name, state, roles, countries);
+    public static User create(final Email email, final Password password,
+                              final Name name, final State state,
+                              final List<Role> roles, final List<Country.Id> countries) {
+        return new User(email, password, name, state, roles, countries);
     }
 
     public Email getEmail() {
         return email;
+    }
+
+    public Password getPassword() {
+        return password;
     }
 
     public Name getName() {

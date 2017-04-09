@@ -1,0 +1,34 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema#",
+  "title" : "Cache DTO",
+  "type" : "object",
+  "additionalProperties" : false,
+  "properties" : {
+    "cacheNames" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "links" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Link"
+      }
+    }
+  },
+  "definitions" : {
+    "Link" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "rel" : {
+          "type" : "string"
+        },
+        "href" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

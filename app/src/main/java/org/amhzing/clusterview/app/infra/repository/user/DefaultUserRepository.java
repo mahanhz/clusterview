@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.app.infra.repository.user;
 
+import org.amhzing.clusterview.app.domain.model.user.Page;
 import org.amhzing.clusterview.app.domain.model.user.Password;
 import org.amhzing.clusterview.app.domain.model.user.User;
 import org.amhzing.clusterview.app.domain.repository.UserRepository;
@@ -7,9 +8,10 @@ import org.amhzing.clusterview.app.exception.NotFoundException;
 import org.amhzing.clusterview.app.infra.jpa.mapping.user.UserEntity;
 import org.amhzing.clusterview.app.infra.jpa.repository.user.UserJpaRepository;
 import org.amhzing.clusterview.app.user.UserUtil;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.List;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -41,10 +43,12 @@ public class DefaultUserRepository implements UserRepository {
 
     @Override
     public Page<User> users(final int pageNumber) {
-        final PageRequest pageRequest = new PageRequest(pageNumber, 5);
+        final PageRequest pageRequest = new PageRequest(pageNumber, 2);
 
-        final Page<UserEntity> pagedEntity = userJpaRepository.findAll(pageRequest);
+        final org.springframework.data.domain.Page<UserEntity> pagedEntity = userJpaRepository.findAll(pageRequest);
 
-        return null;
+        final List<User> users = UserFactory.users(pagedEntity.getContent());
+
+        return Page.create(users, pagedEntity.getTotalPages());
     }
 }
