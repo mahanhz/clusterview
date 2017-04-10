@@ -4,47 +4,45 @@
 
     <body>
         <th:block th:fragment="statistics">
-            <div class="col-md-3">
-                <th:block th:if="${statistics != null}">
-                    <table class="table table-hover" th:unless="${#lists.isEmpty(statistics.coreActivities)}">
-                        <thead>
+            <th:block th:if="${statistics != null}">
+                <table class="table table-hover modal-content" th:unless="${#lists.isEmpty(statistics.coreActivities)}">
+                    <thead>
                         <tr>
                             <th></th>
                             <th>No.</th>
                             <th>Par.</th>
                             <th>CoI</th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         <tr th:each="coreActivity : ${statistics.coreActivities}">
-                            <td th:text="${coreActivity.name}" />
+                            <td th:text="${coreActivity.name}" class="warning" />
                             <td th:text="${coreActivity.quantity}" />
                             <td th:text="${coreActivity.totalParticipants}" />
                             <td th:text="${coreActivity.communityOfInterest}" />
                         </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>No.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="statistic : ${statistics.activityQuantity}">
-                                <td th:text="${statistic.key}" th:if="not ${clusterPath}"/>
-                                <td th:if="${clusterPath}">
-                                    <a th:href="@{'/clusterview/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '?highlight=' + ${statistic.key}}"
-                                       th:text="${statistic.key}"
-                                       th:class="${param.highlight != null and (param.highlight[0] == statistic.key)} ? 'statistic-highlight' : ''"></a>
-                                </td>
-                                <td th:text="${statistic.value}" />
-                            </tr>
-                        </tbody>
-                    </table>
-                </th:block>
-            </div>
+                    </tbody>
+                </table>
+                <table class="table table-hover modal-content" th:unless="${#lists.isEmpty(statistics.activityQuantity)}">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>No.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="statistic : ${statistics.activityQuantity}">
+                            <td th:text="${statistic.key}" th:if="not ${clusterPath}" class="warning"/>
+                            <td th:if="${clusterPath}" class="warning">
+                                <a th:href="@{'/clusterview/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '?highlight=' + ${statistic.key}}"
+                                   th:text="${statistic.key}"
+                                   th:class="${param.highlight != null and (param.highlight[0] == statistic.key)} ? 'statistic-highlight' : ''"></a>
+                            </td>
+                            <td th:text="${statistic.value}" />
+                        </tr>
+                    </tbody>
+                </table>
+            </th:block>
         </th:block>
     </body>
 </html>

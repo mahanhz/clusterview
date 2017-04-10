@@ -33,7 +33,9 @@
                         <area data-group="skane-cluster" th:href="@{${baseUrl} + '/skane'}" shape="poly" coords="44,468,42,469,40,469,42,475,39,475,35,474,39,482,42,489,45,496,43,505,50,510,56,507,63,504,68,508,72,506,73,504,72,497,71,494,71,490,74,487,77,484,79,480,78,478,75,475,77,472,77,470,76,468,70,465,67,467,63,469,57,467,52,468,51,471" />
                     </map>
                 </div>
-                <th:block th:replace="fragments/statistics :: statistics"></th:block>
+                <div class="col-md-3">
+                    <th:block th:replace="fragments/statistics :: statistics"></th:block>
+                </div>
             </div>
         </div>
 

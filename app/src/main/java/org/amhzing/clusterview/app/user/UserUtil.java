@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.Validate.notNull;
 
 public final class UserUtil {
 
@@ -18,6 +19,8 @@ public final class UserUtil {
     public static final String USER_COUNTRY = "userCountry";
 
     public static List<String> roles(final Authentication authentication) {
+        notNull(authentication);
+
         return authentication.getAuthorities()
                              .stream()
                              .map(GrantedAuthority::getAuthority)
@@ -30,5 +33,15 @@ public final class UserUtil {
 
     public static String username() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    public static boolean isSuperAdmin() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null) {
+            return roles(authentication).contains(UserRole.SUPER_ADMIN.getRole());
+        }
+
+        return false;
     }
 }

@@ -23,6 +23,7 @@
                                 <li class="active"><a th:href="@{/}">Home</a></li>
                                 <li class="active"><a th:href="@{'/statsview/history/' + ${#httpServletRequest.getAttribute('userCountry')}}">Stats</a></li>
                                 <li class="active"><a th:href="@{/useredit/changepassword}">Change Password</a></li>
+                                <li class="active" sec:authorize="hasRole('ROLE_SUPER_ADMIN')"><a th:href="@{/manage/caches/list}">Caches</a></li>
                             </ul>
                             <p class="navbar-text navbar-right">
                                 <span sec:authentication="principal.firstName"></span>
