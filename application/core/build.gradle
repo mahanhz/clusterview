@@ -1,0 +1,26 @@
+ext {
+    guavaVersion = '21.0'
+    commonsLangVersion = '3.5'
+    commonsValidatorVersion = '1.6'
+    immutablesVersion = '2.4.6'
+    nullableVersion = '3.0.2'
+
+    junitVersion = '4.12'
+    junitParamsVersion = '1.1.0'
+    assertJVersion = '3.6.2'
+    equalsVerifierVersion = '2.2.2'
+}
+
+dependencies {
+
+    compile group: 'com.google.guava', name: 'guava', version: "${guavaVersion}"
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: "${commonsLangVersion}"
+    compile group: 'commons-validator', name: 'commons-validator', version: "${commonsValidatorVersion}"
+    compile group: 'org.immutables', name: 'value', version: "${immutablesVersion}"
+    compile group: 'com.google.code.findbugs', name: 'jsr305', version: "${nullableVersion}"
+
+    testCompile group: 'junit', name: 'junit', version: "${junitVersion}"
+    testCompile group: 'pl.pragmatists', name: 'JUnitParams', version: "${junitParamsVersion}"
+    testCompile group: 'org.assertj', name: 'assertj-core', version: "${assertJVersion}"
+    testCompile group: 'nl.jqno.equalsverifier', name: 'equalsverifier', version: "${equalsVerifierVersion}"
+}

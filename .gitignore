@@ -23,3 +23,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+clean-app/
+app/generated/
+application/core/generated/
