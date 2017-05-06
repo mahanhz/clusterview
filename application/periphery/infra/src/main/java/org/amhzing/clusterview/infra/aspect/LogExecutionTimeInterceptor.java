@@ -18,7 +18,7 @@ public class LogExecutionTimeInterceptor {
         // Any public method with or without arguments
     }
 
-    @Around("anyPublicOperation() && @annotation(org.amhzing.clusterview.annotation.LogExecutionTime)")
+    @Around("anyPublicOperation() && @annotation(org.amhzing.clusterview.infra.annotation.LogExecutionTime)")
     public Object logExecutionTaken(final ProceedingJoinPoint joinPoint) throws Throwable
     {
         final String nameOfClass = joinPoint.getTarget().toString();
