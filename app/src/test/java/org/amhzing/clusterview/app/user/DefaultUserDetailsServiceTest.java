@@ -1,13 +1,18 @@
 package org.amhzing.clusterview.app.user;
 
 import org.amhzing.clusterview.app.infra.jpa.repository.user.UserJpaRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import static java.util.Collections.emptyList;
 import static org.amhzing.clusterview.app.helper.JpaRepositoryHelper.userEntity;
 import static org.amhzing.clusterview.app.user.UserUtil.username;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,8 +26,16 @@ public class DefaultUserDetailsServiceTest {
     @Mock
     private UserJpaRepository userJpaRepository;
 
-    @InjectMocks
     private DefaultUserDetailsService defaultUserDetailsService;
+
+    @Before
+    public void setUp() throws Exception {
+        defaultUserDetailsService = new DefaultUserDetailsService(userJpaRepository);
+
+        final User user = new User("me@example.com", "Nopass" , emptyList());
+        final Authentication auth = new UsernamePasswordAuthenticationToken(user, null);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+    }
 
     @Test
     public void should_return_user_details() {

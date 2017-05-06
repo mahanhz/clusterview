@@ -1,0 +1,27 @@
+ext.libs = [
+        data: [
+                "org.springframework.boot:spring-boot-starter-data-jpa",
+                "org.springframework.boot:spring-boot-starter-security",
+                "org.springframework.boot:spring-boot-starter-cache",
+                "org.apache.commons:commons-lang3:${commonsLangVersion}"
+        ],
+        infra: [
+                "org.springframework.boot:spring-boot-starter-security",
+                "javax.cache:cache-api:${jcacheVersion}",
+                "org.ehcache:ehcache:${ehcacheVersion}",
+                "org.apache.commons:commons-lang3:${commonsLangVersion}",
+                "com.google.guava:guava:${guavaVersion}",
+                "org.apache.commons:commons-collections4:${commonsCollectionsVersion}"
+        ],
+        unit_test: [
+                "junit:junit:${junitVersion}",
+                "org.assertj:assertj-core:${assertJVersion}",
+                "org.mockito:mockito-core:${mockitoVersion}",
+                "nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}",
+                "pl.pragmatists:JUnitParams:${junitParamsVersion}"
+        ],
+        spring_test: [
+                "org.springframework.boot:spring-boot-starter-test",
+                "org.springframework.security:spring-security-test:${springSecurityTestVersion}"
+        ]
+]

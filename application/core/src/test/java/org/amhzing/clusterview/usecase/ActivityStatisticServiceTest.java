@@ -15,7 +15,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.amhzing.clusterview.helper.DomainModelHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ActivityStatisticServiceTest {

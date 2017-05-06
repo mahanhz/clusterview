@@ -1,0 +1,27 @@
+dependencies {
+	compile project(':application:periphery:data')
+
+	testCompile tests.unit_test
+	testCompile tests.spring_test
+}
+
+def integrationTests = 'org/amhzing/clusterview/integrationtest/**'
+
+test {
+	exclude integrationTests
+}
+
+task integrationTest(type:Test) {
+
+	include integrationTests
+}
+
+task copyAppResources(type: Copy) {
+
+	from('../app/src/main/resources') {
+		include 'data-h2.sql'
+	}
+	into 'build/resources/test'
+}
+
+integrationTest.dependsOn copyAppResources

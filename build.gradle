@@ -44,14 +44,41 @@ task wrapper(type: Wrapper) {
 	gradleVersion = '3.4'
 }
 
-// common properties
 ext {
+	jcacheVersion = '1.0.0'
+	ehcacheVersion = '3.3.1'
+
 	springSecurityTestVersion = '4.2.1.RELEASE'
-	junitParamsVersion = '1.0.6'
+	junitParamsVersion = '1.1.0'
 	meanBeanVersion = '2.0.3'
-	equalsVerifierVersion = '2.2.1'
+	equalsVerifierVersion = '2.2.2'
 	jsoupVersion = '1.10.2'
+
+	guavaVersion = '21.0'
+	commonsLangVersion = '3.5'
+	commonsCollectionsVersion = '4.1'
+	commonsValidatorVersion = '1.6'
+	immutablesVersion = '2.4.6'
+	nullableVersion = '3.0.2'
+
+	junitVersion = '4.12'
+	assertJVersion = '3.6.2'
+	mockitoVersion = '2.7.22'
 }
+
+ext.tests = [
+		unit_test: [
+				"junit:junit:${junitVersion}",
+				"org.assertj:assertj-core:${assertJVersion}",
+				"org.mockito:mockito-core:${mockitoVersion}",
+				"nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}",
+				"pl.pragmatists:JUnitParams:${junitParamsVersion}"
+		],
+		spring_test: [
+				"org.springframework.boot:spring-boot-starter-test",
+				"org.springframework.security:spring-security-test:${springSecurityTestVersion}"
+		]
+]
 
 configure(allprojects) {
 	apply plugin: 'propdeps'
@@ -78,7 +105,7 @@ subprojects {
 	}
 }
 
-configure([project(':app'), project(':app-ui')]) {
+configure([project(':app'), project(':application'), project(':app-ui')]) {
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'maven'
 	apply plugin: 'jacoco'
