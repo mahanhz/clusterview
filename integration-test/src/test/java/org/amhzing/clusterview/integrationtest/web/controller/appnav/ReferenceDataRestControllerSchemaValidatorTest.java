@@ -1,12 +1,12 @@
 package org.amhzing.clusterview.integrationtest.web.controller.appnav;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.MediaTypes;
-import org.amhzing.clusterview.boundary.enter.ActivityService;
-import org.amhzing.clusterview.boundary.enter.ClusterService;
-import org.amhzing.clusterview.boundary.enter.CoreActivityService;
-import org.amhzing.clusterview.controller.appnav.ReferenceDataRestController;
-import org.amhzing.clusterview.domain.Country;
+import org.amhzing.clusterview.web.MediaTypes;
+import org.amhzing.clusterview.core.boundary.enter.ActivityService;
+import org.amhzing.clusterview.core.boundary.enter.ClusterService;
+import org.amhzing.clusterview.core.boundary.enter.CoreActivityService;
+import org.amhzing.clusterview.web.controller.appnav.ReferenceDataRestController;
+import org.amhzing.clusterview.core.domain.Country;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
 import org.amhzing.clusterview.integrationtest.helper.RestHelper;
 import org.amhzing.clusterview.integrationtest.security.WithMockCustomUser;
@@ -19,12 +19,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.amhzing.clusterview.controller.RestControllerPath.BASE_PATH;
+import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
 import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.activity;
 import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.clustersIds;
 import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.coreActivity;
 import static org.amhzing.clusterview.integrationtest.helper.SchemaValidationHelper.assertSuccessfulSchemaValidation;
-import static org.amhzing.clusterview.user.UserUtil.USER_COUNTRY;
+import static org.amhzing.clusterview.infra.user.UserUtil.USER_COUNTRY;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

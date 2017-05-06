@@ -1,14 +1,14 @@
 package org.amhzing.clusterview.integrationtest.web.controller.appnav;
 
 import com.google.common.collect.ImmutableSet;
-import org.amhzing.clusterview.Obfuscator;
-import org.amhzing.clusterview.boundary.enter.GroupService;
-import org.amhzing.clusterview.controller.appnav.GroupRestController;
-import org.amhzing.clusterview.domain.Cluster;
-import org.amhzing.clusterview.domain.Group;
+import org.amhzing.clusterview.core.boundary.enter.GroupService;
+import org.amhzing.clusterview.core.domain.Cluster;
+import org.amhzing.clusterview.core.domain.Group;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
 import org.amhzing.clusterview.integrationtest.helper.RestHelper;
 import org.amhzing.clusterview.integrationtest.security.WithMockCustomUser;
+import org.amhzing.clusterview.web.Obfuscator;
+import org.amhzing.clusterview.web.controller.appnav.GroupRestController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +18,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.amhzing.clusterview.controller.RestControllerPath.BASE_PATH;
 import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.group;
 import static org.amhzing.clusterview.integrationtest.helper.SchemaValidationHelper.assertSuccessfulSchemaValidation;
-import static org.mockito.BDDMockito.given;
+import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(GroupRestController.class)

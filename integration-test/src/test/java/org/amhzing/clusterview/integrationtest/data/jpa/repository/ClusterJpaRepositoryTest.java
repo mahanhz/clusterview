@@ -2,8 +2,8 @@ package org.amhzing.clusterview.integrationtest.data.jpa.repository;
 
 import org.amhzing.clusterview.integrationtest.helper.JpaRepositoryHelper;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
-import org.amhzing.clusterview.jpa.entity.*;
-import org.amhzing.clusterview.jpa.repository.*;
+import org.amhzing.clusterview.data.jpa.entity.*;
+import org.amhzing.clusterview.data.jpa.repository.*;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,11 +1,11 @@
 package org.amhzing.clusterview.integrationtest.web.controller.cache;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.api.cache.CacheDTO;
-import org.amhzing.clusterview.controller.cache.CacheRestController;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
 import org.amhzing.clusterview.integrationtest.helper.RestHelper;
 import org.amhzing.clusterview.integrationtest.security.WithMockCustomUser;
+import org.amhzing.clusterview.web.api.cache.CacheDTO;
+import org.amhzing.clusterview.web.controller.cache.CacheRestController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.amhzing.clusterview.controller.RestControllerPath.BASE_PATH;
-import static org.amhzing.clusterview.controller.RestControllerPath.MANAGE_PATH;
 import static org.amhzing.clusterview.integrationtest.helper.SchemaValidationHelper.assertSuccessfulSchemaValidation;
-import static org.mockito.BDDMockito.given;
+import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
+import static org.amhzing.clusterview.web.controller.RestControllerPath.MANAGE_PATH;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CacheRestController.class)

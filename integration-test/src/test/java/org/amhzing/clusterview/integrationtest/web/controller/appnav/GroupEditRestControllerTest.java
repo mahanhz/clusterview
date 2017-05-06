@@ -1,14 +1,14 @@
 package org.amhzing.clusterview.integrationtest.web.controller.appnav;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.amhzing.clusterview.MediaTypes;
-import org.amhzing.clusterview.Obfuscator;
-import org.amhzing.clusterview.api.GroupDTO;
-import org.amhzing.clusterview.boundary.enter.GroupService;
-import org.amhzing.clusterview.controller.appnav.GroupEditRestController;
-import org.amhzing.clusterview.controller.util.GroupDtoFactory;
+import org.amhzing.clusterview.core.boundary.enter.GroupService;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
 import org.amhzing.clusterview.integrationtest.security.WithMockCustomUser;
+import org.amhzing.clusterview.web.MediaTypes;
+import org.amhzing.clusterview.web.Obfuscator;
+import org.amhzing.clusterview.web.api.GroupDTO;
+import org.amhzing.clusterview.web.controller.appnav.GroupEditRestController;
+import org.amhzing.clusterview.web.controller.util.GroupDtoFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +18,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.amhzing.clusterview.controller.RestControllerPath.BASE_PATH;
-import static org.amhzing.clusterview.controller.appnav.GroupEditRestController.CREATE_GROUP;
 import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.group;
+import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
+import static org.amhzing.clusterview.web.controller.appnav.GroupEditRestController.CREATE_GROUP;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

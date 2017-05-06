@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.integrationtest.helper;
 
 import com.jayway.jsonpath.Configuration;
-import org.amhzing.clusterview.MediaTypes;
+import org.amhzing.clusterview.web.MediaTypes;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;

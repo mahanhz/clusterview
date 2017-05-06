@@ -2,8 +2,8 @@ package org.amhzing.clusterview.integrationtest.data.jpa.repository.stats;
 
 import org.amhzing.clusterview.integrationtest.helper.JpaRepositoryHelper;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
-import org.amhzing.clusterview.jpa.entity.stats.StatsHistoryEntity;
-import org.amhzing.clusterview.jpa.repository.stats.StatsHistoryJpaRepository;
+import org.amhzing.clusterview.data.jpa.entity.stats.StatsHistoryEntity;
+import org.amhzing.clusterview.data.jpa.repository.stats.StatsHistoryJpaRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.integrationtest.data.jpa.repository;
 
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
-import org.amhzing.clusterview.jpa.entity.CapabilityEntity;
-import org.amhzing.clusterview.jpa.repository.CapabilityJpaRepository;
+import org.amhzing.clusterview.data.jpa.entity.CapabilityEntity;
+import org.amhzing.clusterview.data.jpa.repository.CapabilityJpaRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

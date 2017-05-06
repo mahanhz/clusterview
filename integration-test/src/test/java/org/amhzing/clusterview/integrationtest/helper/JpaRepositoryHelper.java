@@ -2,13 +2,13 @@ package org.amhzing.clusterview.integrationtest.helper;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
-import org.amhzing.clusterview.jpa.entity.*;
-import org.amhzing.clusterview.jpa.entity.stats.ActivityStats;
-import org.amhzing.clusterview.jpa.entity.stats.CoreActivityStats;
-import org.amhzing.clusterview.jpa.entity.stats.StatsHistoryEntity;
-import org.amhzing.clusterview.jpa.entity.stats.StatsHistoryPk;
-import org.amhzing.clusterview.jpa.entity.user.RoleEntity;
-import org.amhzing.clusterview.jpa.entity.user.UserEntity;
+import org.amhzing.clusterview.data.jpa.entity.*;
+import org.amhzing.clusterview.data.jpa.entity.stats.ActivityStats;
+import org.amhzing.clusterview.data.jpa.entity.stats.CoreActivityStats;
+import org.amhzing.clusterview.data.jpa.entity.stats.StatsHistoryEntity;
+import org.amhzing.clusterview.data.jpa.entity.stats.StatsHistoryPk;
+import org.amhzing.clusterview.data.jpa.entity.user.RoleEntity;
+import org.amhzing.clusterview.data.jpa.entity.user.UserEntity;
 
 import java.util.*;
 

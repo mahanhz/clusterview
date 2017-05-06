@@ -1,11 +1,11 @@
 package org.amhzing.clusterview.integrationtest.web.controller.appnav;
 
-import org.amhzing.clusterview.boundary.enter.ClusterService;
-import org.amhzing.clusterview.boundary.enter.StatisticHistoryService;
-import org.amhzing.clusterview.boundary.enter.StatisticService;
-import org.amhzing.clusterview.controller.appnav.StatisticEditRestController;
-import org.amhzing.clusterview.domain.Country;
-import org.amhzing.clusterview.domain.statistic.ActivityStatistic;
+import org.amhzing.clusterview.core.boundary.enter.ClusterService;
+import org.amhzing.clusterview.core.boundary.enter.StatisticHistoryService;
+import org.amhzing.clusterview.core.boundary.enter.StatisticService;
+import org.amhzing.clusterview.web.controller.appnav.StatisticEditRestController;
+import org.amhzing.clusterview.core.domain.Country;
+import org.amhzing.clusterview.core.domain.statistic.ActivityStatistic;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
 import org.amhzing.clusterview.integrationtest.security.WithMockCustomUser;
 import org.junit.Test;
@@ -17,8 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.amhzing.clusterview.controller.RestControllerPath.BASE_PATH;
-import static org.amhzing.clusterview.controller.appnav.StatisticRestController.HISTORY;
+import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
+import static org.amhzing.clusterview.web.controller.appnav.StatisticRestController.HISTORY;
 import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.activityStatistic;
 import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.clustersIds;
 import static org.assertj.core.api.Assertions.assertThat;
