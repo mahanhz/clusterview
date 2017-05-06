@@ -1,0 +1,9 @@
+dependencies {
+    compile project(':application:core')
+    compile project(':application:periphery:infra')
+
+    compile libs.web
+
+    testCompile libs.unit_test
+    testCompile libs.spring_test
+}

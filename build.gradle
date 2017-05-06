@@ -61,6 +61,12 @@ ext {
 	immutablesVersion = '2.4.6'
 	nullableVersion = '3.0.2'
 
+	hashidsVersion = '1.0.1'
+	jugVersion = '3.1.4'
+
+	jsonSchemaVersion = '1.0.21'
+	jsonSchemaValidatorVersion = '2.2.6'
+
 	junitVersion = '4.12'
 	assertJVersion = '3.6.2'
 	mockitoVersion = '2.7.22'
