@@ -9,6 +9,7 @@ ext {
     junitParamsVersion = '1.1.0'
     assertJVersion = '3.6.2'
     equalsVerifierVersion = '2.2.2'
+    mockitoVersion = '2.7.22'
 }
 
 dependencies {
@@ -23,4 +24,5 @@ dependencies {
     testCompile group: 'pl.pragmatists', name: 'JUnitParams', version: "${junitParamsVersion}"
     testCompile group: 'org.assertj', name: 'assertj-core', version: "${assertJVersion}"
     testCompile group: 'nl.jqno.equalsverifier', name: 'equalsverifier', version: "${equalsVerifierVersion}"
+    testCompile group: 'org.mockito', name: 'mockito-core', version: "${mockitoVersion}"
 }

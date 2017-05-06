@@ -2,6 +2,8 @@ rootProject.name="Cluster View"
 
 include "acceptance-test"
 include "app"
+include "application:core"
 include "app-ui"
+include "clean-app"
 include "load-test"
 include "smoke-test"
