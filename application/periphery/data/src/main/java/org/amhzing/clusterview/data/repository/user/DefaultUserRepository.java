@@ -9,6 +9,7 @@ import org.amhzing.clusterview.data.jpa.repository.user.UserJpaRepository;
 import org.amhzing.clusterview.infra.exception.NotFoundException;
 import org.amhzing.clusterview.infra.user.UserUtil;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class DefaultUserRepository implements UserRepository {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public void changePassword(final Password password) {
         notNull(password);
 

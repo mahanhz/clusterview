@@ -1,27 +1,28 @@
 package org.amhzing.clusterview.data.repository;
 
 import org.amhzing.clusterview.core.boundary.exit.repository.ClusterRepository;
-import org.amhzing.clusterview.data.jpa.entity.ClusterEntity;
-import org.amhzing.clusterview.data.jpa.repository.ClusterJpaRepository;
-import org.amhzing.clusterview.data.jpa.repository.CountryJpaRepository;
-import org.amhzing.clusterview.data.jpa.entity.CountryEntity;
 import org.amhzing.clusterview.core.domain.Cluster;
 import org.amhzing.clusterview.core.domain.Country;
 import org.amhzing.clusterview.core.domain.statistic.CourseStatistic;
+import org.amhzing.clusterview.data.jpa.entity.ClusterEntity;
+import org.amhzing.clusterview.data.jpa.entity.CountryEntity;
+import org.amhzing.clusterview.data.jpa.repository.ClusterJpaRepository;
+import org.amhzing.clusterview.data.jpa.repository.CountryJpaRepository;
 import org.amhzing.clusterview.infra.exception.NotFoundException;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.Collections.emptyList;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.*;
 import static org.amhzing.clusterview.data.repository.ClusterEntityFactory.courses;
 import static org.amhzing.clusterview.data.repository.StatisticFactory.clusterEntities;
+import static org.amhzing.clusterview.infra.cache.CacheSpec.*;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @CacheConfig(cacheNames = CLUSTERS_CACHE_NAME)
@@ -54,15 +55,16 @@ public class DefaultClusterRepository implements ClusterRepository {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') and @webSecurity.checkAdmin(authentication, #clusterId.id)")
     @Caching(evict = { @CacheEvict(cacheNames = STATS_COURSE_CACHE_NAME, allEntries = true) })
-    public void saveCourseStats(final Cluster.Id id, final CourseStatistic courseStatistic) {
-        notNull(id);
+    public void saveCourseStats(final Cluster.Id clusterId, final CourseStatistic courseStatistic) {
+        notNull(clusterId);
         notNull(courseStatistic);
 
-        final ClusterEntity clusterEntity = clusterJpaRepository.findOne(id.getId());
+        final ClusterEntity clusterEntity = clusterJpaRepository.findOne(clusterId.getId());
 
         if (clusterEntity == null) {
-            throw new NotFoundException("Cluster '" + id + "' does not exist");
+            throw new NotFoundException("Cluster '" + clusterId + "' does not exist");
         }
 
         clusterEntity.getCourses().clear();

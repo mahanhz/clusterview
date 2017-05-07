@@ -13,6 +13,7 @@ import org.amhzing.clusterview.data.repository.visitor.*;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +51,7 @@ public class DefaultStatisticHistoryRepository implements StatisticHistoryReposi
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') and @webSecurity.checkAdmin(authentication, #clusterId.id)")
     @CacheEvict(cacheNames = STATS_HISTORY_CACHE_NAME, key = DEFAULT_CACHE_KEY)
     public DatedActivityStatistic saveHistory(final Cluster.Id clusterId, final ActivityStatistic activityStatistic) {
         notNull(clusterId);

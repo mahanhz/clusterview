@@ -1,26 +1,27 @@
 package org.amhzing.clusterview.data.repository;
 
 import org.amhzing.clusterview.core.boundary.exit.repository.GroupRepository;
-import org.amhzing.clusterview.data.jpa.entity.ClusterEntity;
-import org.amhzing.clusterview.data.jpa.repository.ClusterJpaRepository;
-import org.amhzing.clusterview.data.jpa.entity.TeamEntity;
-import org.amhzing.clusterview.data.jpa.repository.ActivityJpaRepository;
-import org.amhzing.clusterview.data.jpa.repository.TeamJpaRepository;
 import org.amhzing.clusterview.core.domain.Cluster;
 import org.amhzing.clusterview.core.domain.Group;
+import org.amhzing.clusterview.data.jpa.entity.ClusterEntity;
+import org.amhzing.clusterview.data.jpa.entity.TeamEntity;
+import org.amhzing.clusterview.data.jpa.repository.ActivityJpaRepository;
+import org.amhzing.clusterview.data.jpa.repository.ClusterJpaRepository;
+import org.amhzing.clusterview.data.jpa.repository.TeamJpaRepository;
 import org.amhzing.clusterview.infra.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.Set;
 
 import static java.util.Collections.emptySet;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.*;
 import static org.amhzing.clusterview.data.repository.GroupFactory.convertTeam;
 import static org.amhzing.clusterview.data.repository.GroupFactory.convertTeams;
+import static org.amhzing.clusterview.infra.cache.CacheSpec.*;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public class DefaultGroupRepository implements GroupRepository {
@@ -72,6 +73,7 @@ public class DefaultGroupRepository implements GroupRepository {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') and @webSecurity.checkAdmin(authentication, #clusterId.id)")
     @Caching(evict = { @CacheEvict(cacheNames = STATS_CACHE_NAME, allEntries = true),
                        @CacheEvict(cacheNames = GROUPS_CACHE_NAME, key = "#root.caches[0].name + '_' + #p1") })
     public Group createGroup(final Group group, final Cluster.Id clusterId) {
@@ -92,6 +94,7 @@ public class DefaultGroupRepository implements GroupRepository {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') and @webSecurity.checkAdmin(authentication, #clusterId.id)")
     @Caching(evict = { @CacheEvict(cacheNames = STATS_CACHE_NAME, allEntries = true),
                        @CacheEvict(cacheNames = GROUPS_CACHE_NAME, key = "#root.caches[0].name + '_' + #p1"),
                        @CacheEvict(cacheNames = GROUP_CACHE_NAME, key = "#root.caches[0].name + '_' + #p0.id")})
@@ -113,6 +116,7 @@ public class DefaultGroupRepository implements GroupRepository {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') and @webSecurity.checkAdmin(authentication, #clusterId.id)")
     @Caching(evict = { @CacheEvict(cacheNames = STATS_CACHE_NAME, allEntries = true),
                        @CacheEvict(cacheNames = GROUPS_CACHE_NAME, key = "#root.caches[0].name + '_' + #p1"),
                        @CacheEvict(cacheNames = GROUP_CACHE_NAME, key = DEFAULT_CACHE_KEY)})
