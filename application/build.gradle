@@ -1,0 +1,31 @@
+pitest {
+    targetClasses = ['org.amhzing.clusterview.*']
+    outputFormats = ['XML', 'HTML']
+}
+
+// Git properties that display in the actuator /info endpoint
+gitProperties {
+    dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ z"
+    dateFormatTimeZone = "UTC"
+}
+
+springBoot {
+    mainClass = 'org.amhzing.clusterview.MainApplication'
+}
+
+// Make the System.properties available in the bootRun task.
+bootRun {
+    systemProperties = System.properties
+}
+
+bootRepackage{
+    enabled = false
+}
+
+jar {
+    // Do not include environment specific properties in the built jar
+    exclude 'application-*'
+    exclude 'bootstrap-*'
+    exclude 'stagemonitor-*'
+    exclude '*.sql'
+}

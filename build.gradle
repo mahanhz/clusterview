@@ -101,7 +101,7 @@ configure(subprojects - project(":application:core")) {
 	}
 }
 
-configure([project(':app'), project(':application:configuration'), project(':app-ui')]) {
+configure([project(':app'), project(':application'), project(':app-ui')]) {
 	apply plugin: 'org.springframework.boot'
 }
 
@@ -155,6 +155,14 @@ ext.app_tests = [
 				"org.springframework.security:spring-security-test:${springSecurityTestVersion}"
 		]
 ]
+
+project("application") {
+	description = "Application"
+
+	dependencies {
+		compile project(':application:configuration')
+	}
+}
 
 project("application:configuration") {
 	description = "Application configuration"
