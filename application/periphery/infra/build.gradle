@@ -1,6 +1,0 @@
-dependencies {
-
-    compile libs.infra
-
-    testCompile libs.unit_test
-}

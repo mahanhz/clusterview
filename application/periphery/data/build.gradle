@@ -1,9 +1,0 @@
-dependencies {
-    compile project(':application:core')
-    compile project(':application:periphery:infra')
-
-    compile libs.data
-
-    testCompile libs.unit_test
-    testCompile libs.spring_test
-}

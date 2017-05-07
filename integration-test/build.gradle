@@ -2,8 +2,8 @@ dependencies {
 	compile project(':application:periphery:data')
 	compile project(':application:periphery:web')
 
-	testCompile tests.unit_test
-	testCompile tests.spring_test
+	testCompile app_tests.unit_test
+	testCompile app_tests.spring_test
 }
 
 def integrationTests = 'org/amhzing/clusterview/integrationtest/**'
