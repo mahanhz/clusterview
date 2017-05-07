@@ -5,6 +5,7 @@ import org.amhzing.clusterview.core.domain.user.Page;
 import org.amhzing.clusterview.core.domain.user.User;
 import org.amhzing.clusterview.web.api.user.UsersDTO;
 import org.amhzing.clusterview.web.controller.util.UserDtoFactory;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -39,6 +40,7 @@ public class UserRestController {
         this.userService = notNull(userService);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/page/{pageNumber}")
     public ResponseEntity<UsersDTO> users(final @PathVariable int pageNumber) {
         isTrue(pageNumber > 0, "Pages start from 1 and above");

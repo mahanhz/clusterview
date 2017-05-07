@@ -19,8 +19,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static org.amhzing.clusterview.infra.cache.CacheSpec.DEFAULT_CACHE_KEY;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.STATS_CACHE_NAME;
+import static org.amhzing.clusterview.data.cache.CacheSpec.DEFAULT_CACHE_KEY;
+import static org.amhzing.clusterview.data.cache.CacheSpec.STATS_CACHE_NAME;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @CacheConfig(cacheNames = STATS_CACHE_NAME)

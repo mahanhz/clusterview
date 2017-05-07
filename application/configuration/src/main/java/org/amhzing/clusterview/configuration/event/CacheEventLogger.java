@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.cache;
+package org.amhzing.clusterview.configuration.event;
 
 import org.ehcache.event.CacheEvent;
 import org.ehcache.event.CacheEventListener;

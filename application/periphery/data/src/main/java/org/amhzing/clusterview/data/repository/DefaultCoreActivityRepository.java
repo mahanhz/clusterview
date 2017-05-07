@@ -1,11 +1,11 @@
 package org.amhzing.clusterview.data.repository;
 
 import org.amhzing.clusterview.core.boundary.exit.repository.CoreActivityRepository;
-import org.amhzing.clusterview.infra.cache.CacheSpec;
-import org.amhzing.clusterview.data.jpa.entity.CoreActivityEntity;
-import org.amhzing.clusterview.data.jpa.repository.CoreActivityJpaRepository;
 import org.amhzing.clusterview.core.domain.statistic.CoreActivity;
 import org.amhzing.clusterview.core.domain.statistic.Quantity;
+import org.amhzing.clusterview.data.cache.CacheSpec;
+import org.amhzing.clusterview.data.jpa.entity.CoreActivityEntity;
+import org.amhzing.clusterview.data.jpa.repository.CoreActivityJpaRepository;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 

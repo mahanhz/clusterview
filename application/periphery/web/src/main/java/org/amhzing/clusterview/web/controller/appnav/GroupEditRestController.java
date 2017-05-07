@@ -7,6 +7,7 @@ import org.amhzing.clusterview.web.Obfuscator;
 import org.amhzing.clusterview.web.api.GroupDTO;
 import org.amhzing.clusterview.web.controller.base.AbstractEditRestController;
 import org.amhzing.clusterview.web.controller.util.GroupFactory;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,7 @@ public class GroupEditRestController extends AbstractEditRestController {
         this.groupService = notNull(groupService);
     }
 
+    @LogExecutionTime
     @PostMapping(path = GroupRestController.CLUSTER_PATH + "/" + CREATE_GROUP, consumes = APPLICATION_JSON_V1_VALUE)
     public ResponseEntity<?> createGroup(@PathVariable final String country,
                                          @PathVariable final String region,
@@ -42,6 +44,7 @@ public class GroupEditRestController extends AbstractEditRestController {
         return ResponseEntity.created(URI.create(clusterLink(country, region, cluster).getHref())).build();
     }
 
+    @LogExecutionTime
     @PutMapping(path = GroupRestController.CLUSTER_PATH + "/{obfuscatedGroupId}", consumes = APPLICATION_JSON_V1_VALUE)
     public ResponseEntity<?> updateGroup(@PathVariable final String country,
                                          @PathVariable final String region,
@@ -55,6 +58,7 @@ public class GroupEditRestController extends AbstractEditRestController {
         return ResponseEntity.ok().location(URI.create(clusterLink(country, region, cluster).getHref())).build();
     }
 
+    @LogExecutionTime
     @DeleteMapping(path = GroupRestController.CLUSTER_PATH + "/{obfuscatedGroupId}")
     public ResponseEntity<?> deleteGroup(@PathVariable final String country,
                                          @PathVariable final String region,

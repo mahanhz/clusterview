@@ -16,8 +16,8 @@ import java.util.Map;
 import java.util.function.Function;
 
 import static java.util.stream.Collectors.toMap;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.STATS_COURSE_CACHE_NAME;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.DEFAULT_CACHE_KEY;
+import static org.amhzing.clusterview.data.cache.CacheSpec.STATS_COURSE_CACHE_NAME;
+import static org.amhzing.clusterview.data.cache.CacheSpec.DEFAULT_CACHE_KEY;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @CacheConfig(cacheNames = STATS_COURSE_CACHE_NAME)

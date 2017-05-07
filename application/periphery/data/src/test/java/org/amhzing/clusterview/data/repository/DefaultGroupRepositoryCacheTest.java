@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Set;
 
-import static org.amhzing.clusterview.infra.cache.CacheSpec.*;
+import static org.amhzing.clusterview.data.cache.CacheSpec.*;
 import static org.amhzing.clusterview.data.helper.DomainModelHelper.group;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;

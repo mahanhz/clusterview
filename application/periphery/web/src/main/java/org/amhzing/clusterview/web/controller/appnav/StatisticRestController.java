@@ -12,6 +12,7 @@ import org.amhzing.clusterview.core.domain.statistic.DatedActivityStatistic;
 import org.amhzing.clusterview.web.api.statistic.ActivitiesDTO;
 import org.amhzing.clusterview.web.api.statistic.CoursesDTO;
 import org.amhzing.clusterview.web.api.statistic.HistoricalActivitiesDTO;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
@@ -58,6 +59,7 @@ public class StatisticRestController {
         this.clusterService = notNull(clusterService);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/{country}/" + ACTIVITY_STATS)
     public ResponseEntity<ActivitiesDTO> activityStats(@PathVariable final String country) {
         final ActivityStatistic statistics = activityStatisticService.statistics(Country.Id.create(country));
@@ -73,6 +75,7 @@ public class StatisticRestController {
         return ResponseEntity.ok(activitiesDto);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/{country}/" + COURSE_STATS)
     public ResponseEntity<CoursesDTO> courseStats(@PathVariable final String country) {
         final CourseStatistic statistics = courseStatisticService.statistics(Country.Id.create(country));
@@ -88,6 +91,7 @@ public class StatisticRestController {
         return ResponseEntity.ok(coursesDto);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/{country}/{region}/" + ACTIVITY_STATS)
     public ResponseEntity<ActivitiesDTO> regionActivityStats(@PathVariable final String country,
                                                              @PathVariable final String region) {
@@ -106,6 +110,7 @@ public class StatisticRestController {
         return ResponseEntity.ok(activitiesDto);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/{country}/{region}/" + COURSE_STATS)
     public ResponseEntity<CoursesDTO> regionCourseStats(@PathVariable final String country,
                                                         @PathVariable final String region) {
@@ -124,6 +129,7 @@ public class StatisticRestController {
         return ResponseEntity.ok(coursesDto);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/{country}/{region}/{cluster}/" + ACTIVITY_STATS)
     public ResponseEntity<ActivitiesDTO> clusterActivityStats(@PathVariable final String country,
                                                               @PathVariable final String region,
@@ -145,6 +151,7 @@ public class StatisticRestController {
         return ResponseEntity.ok(activitiesDto);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/{country}/{region}/{cluster}/" + COURSE_STATS)
     public ResponseEntity<CoursesDTO> clusterCourseStats(@PathVariable final String country,
                                                          @PathVariable final String region,
@@ -166,6 +173,7 @@ public class StatisticRestController {
         return ResponseEntity.ok(coursesDto);
     }
 
+    @LogExecutionTime
     @GetMapping(path = HISTORY + "/{country}")
     public ResponseEntity<ResourceSupport> history(@PathVariable final String country) {
 
@@ -180,6 +188,7 @@ public class StatisticRestController {
         return ResponseEntity.ok(resourceSupport);
     }
 
+    @LogExecutionTime
     @GetMapping(path = HISTORY + "/{country}/{cluster}")
     public ResponseEntity<HistoricalActivitiesDTO> clusterHistory(@PathVariable final String country,
                                                                   @PathVariable final String cluster) {

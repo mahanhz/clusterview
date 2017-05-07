@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.DEFAULT_CACHE_KEY;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.REGIONS_CACHE_NAME;
+import static org.amhzing.clusterview.data.cache.CacheSpec.DEFAULT_CACHE_KEY;
+import static org.amhzing.clusterview.data.cache.CacheSpec.REGIONS_CACHE_NAME;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @CacheConfig(cacheNames = REGIONS_CACHE_NAME)

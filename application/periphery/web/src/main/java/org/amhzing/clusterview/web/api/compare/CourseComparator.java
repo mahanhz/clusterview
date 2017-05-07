@@ -1,7 +1,5 @@
 package org.amhzing.clusterview.web.api.compare;
 
-
-import org.amhzing.clusterview.infra.util.NaturalOrderComparator;
 import org.amhzing.clusterview.web.api.statistic.CourseDTO;
 
 import java.util.Comparator;

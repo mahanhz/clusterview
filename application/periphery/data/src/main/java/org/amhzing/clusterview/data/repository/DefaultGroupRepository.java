@@ -21,7 +21,7 @@ import java.util.Set;
 import static java.util.Collections.emptySet;
 import static org.amhzing.clusterview.data.repository.GroupFactory.convertTeam;
 import static org.amhzing.clusterview.data.repository.GroupFactory.convertTeams;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.*;
+import static org.amhzing.clusterview.data.cache.CacheSpec.*;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public class DefaultGroupRepository implements GroupRepository {

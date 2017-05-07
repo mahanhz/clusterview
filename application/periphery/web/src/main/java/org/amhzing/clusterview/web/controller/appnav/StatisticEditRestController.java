@@ -6,6 +6,7 @@ import org.amhzing.clusterview.core.boundary.enter.StatisticService;
 import org.amhzing.clusterview.core.domain.Cluster;
 import org.amhzing.clusterview.core.domain.Country;
 import org.amhzing.clusterview.core.domain.statistic.ActivityStatistic;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,7 @@ public class StatisticEditRestController {
         this.clusterService = notNull(clusterService);
     }
 
+    @LogExecutionTime
     @PostMapping(path = HISTORY + "/{country}/{cluster}")
     public ResponseEntity<?> saveHistory(@PathVariable final String country,
                                          @PathVariable final String cluster) {

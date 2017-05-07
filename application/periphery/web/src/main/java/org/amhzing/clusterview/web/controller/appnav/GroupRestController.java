@@ -8,6 +8,7 @@ import org.amhzing.clusterview.web.api.GroupDTO;
 import org.amhzing.clusterview.web.api.GroupsDTO;
 import org.amhzing.clusterview.web.controller.base.AbstractRestController;
 import org.amhzing.clusterview.web.controller.util.GroupDtoFactory;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -38,6 +39,7 @@ public class GroupRestController extends AbstractRestController {
         this.groupService = notNull(groupService);
     }
 
+    @LogExecutionTime
     @GetMapping(path = CLUSTER_PATH)
     public ResponseEntity<GroupsDTO> groups(@PathVariable final String country,
                                             @PathVariable final String region,
@@ -68,6 +70,7 @@ public class GroupRestController extends AbstractRestController {
         return ResponseEntity.ok(groupsDto);
     }
 
+    @LogExecutionTime
     @GetMapping(path = CLUSTER_PATH + "/{obfuscatedGroupId}")
     public ResponseEntity<GroupDTO> group(@PathVariable final String country,
                                           @PathVariable final String region,

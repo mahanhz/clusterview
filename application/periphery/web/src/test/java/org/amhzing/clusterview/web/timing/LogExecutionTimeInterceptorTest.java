@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.aspect;
+package org.amhzing.clusterview.web.timing;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;

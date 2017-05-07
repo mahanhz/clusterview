@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 import static java.util.Collections.emptyList;
 import static org.amhzing.clusterview.data.repository.ClusterEntityFactory.courses;
 import static org.amhzing.clusterview.data.repository.StatisticFactory.clusterEntities;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.*;
+import static org.amhzing.clusterview.data.cache.CacheSpec.*;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @CacheConfig(cacheNames = CLUSTERS_CACHE_NAME)

@@ -11,8 +11,8 @@ import org.springframework.cache.annotation.Cacheable;
 
 import java.util.stream.Stream;
 
-import static org.amhzing.clusterview.infra.cache.CacheSpec.DEFAULT_CACHE_KEY;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.STATS_COURSE_CACHE_NAME;
+import static org.amhzing.clusterview.data.cache.CacheSpec.DEFAULT_CACHE_KEY;
+import static org.amhzing.clusterview.data.cache.CacheSpec.STATS_COURSE_CACHE_NAME;
 import static org.amhzing.clusterview.data.repository.CourseStatisticFactory.courseStats;
 import static org.apache.commons.lang3.Validate.notNull;
 

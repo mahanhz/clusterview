@@ -1,18 +1,17 @@
 package org.amhzing.clusterview.data.repository;
 
-import org.amhzing.clusterview.data.jpa.entity.ClusterEntity;
-import org.amhzing.clusterview.data.jpa.entity.CountryEntity;
-import org.amhzing.clusterview.data.jpa.repository.CountryJpaRepository;
-import org.amhzing.clusterview.infra.cache.CacheSpec;
 import org.amhzing.clusterview.core.boundary.exit.repository.StatisticRepository;
 import org.amhzing.clusterview.core.domain.Country;
 import org.amhzing.clusterview.core.domain.statistic.CourseStatistic;
+import org.amhzing.clusterview.data.cache.CacheSpec;
+import org.amhzing.clusterview.data.jpa.entity.ClusterEntity;
+import org.amhzing.clusterview.data.jpa.entity.CountryEntity;
+import org.amhzing.clusterview.data.jpa.repository.CountryJpaRepository;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 
 import java.util.stream.Stream;
 
-import static org.amhzing.clusterview.data.repository.CourseStatisticFactory.courseStats;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @CacheConfig(cacheNames = CacheSpec.STATS_COURSE_CACHE_NAME)

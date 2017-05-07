@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.amhzing.clusterview.infra.cache.CacheSpec.STATS_COURSE_CACHE_NAME;
+import static org.amhzing.clusterview.data.cache.CacheSpec.STATS_COURSE_CACHE_NAME;
 import static org.amhzing.clusterview.data.helper.DomainModelHelper.courseStatistic;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;

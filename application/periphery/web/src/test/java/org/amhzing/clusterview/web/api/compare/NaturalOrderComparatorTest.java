@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.util;
+package org.amhzing.clusterview.web.api.compare;
 
 import org.junit.Test;
 

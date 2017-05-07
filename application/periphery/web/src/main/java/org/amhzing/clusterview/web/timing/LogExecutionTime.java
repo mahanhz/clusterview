@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.annotation;
+package org.amhzing.clusterview.web.timing;
 
 import java.lang.annotation.*;
 

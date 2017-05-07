@@ -4,6 +4,7 @@ import org.amhzing.clusterview.core.boundary.enter.RegionService;
 import org.amhzing.clusterview.core.domain.Country;
 import org.amhzing.clusterview.core.domain.Region;
 import org.amhzing.clusterview.web.controller.base.AbstractRestController;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
@@ -31,6 +32,7 @@ public class CountryRestController extends AbstractRestController {
         this.regionService = notNull(regionService);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/{country}")
     public ResponseEntity<ResourceSupport> country(@PathVariable final String country) {
 

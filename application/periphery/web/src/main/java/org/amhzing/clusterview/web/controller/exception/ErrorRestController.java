@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.web.controller.exception;
 
 import org.amhzing.clusterview.infra.annotation.ConditionalOnRestEnabled;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
@@ -28,6 +29,7 @@ public class ErrorRestController implements ErrorController {
     @Autowired
     private ErrorAttributes errorAttributes;
 
+    @LogExecutionTime
     @GetMapping(value = PATH, produces = APPLICATION_VND_ERROR_JSON_VALUE)
     public ResponseEntity<VndErrors> error(HttpServletRequest request) {
 

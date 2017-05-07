@@ -1,6 +1,7 @@
 package org.amhzing.clusterview.web.controller.cache;
 
 import org.amhzing.clusterview.web.api.cache.CacheDTO;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -31,6 +32,7 @@ public class CacheRestController {
         this.cacheManager = notNull(cacheManager);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/list")
     public ResponseEntity<CacheDTO> caches() {
         final List<String> cacheNames = cacheManager.getCacheNames()

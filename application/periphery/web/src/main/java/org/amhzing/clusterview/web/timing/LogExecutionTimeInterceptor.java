@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.aspect;
+package org.amhzing.clusterview.web.timing;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -18,7 +18,7 @@ public class LogExecutionTimeInterceptor {
         // Any public method with or without arguments
     }
 
-    @Around("anyPublicOperation() && @annotation(org.amhzing.clusterview.infra.annotation.LogExecutionTime)")
+    @Around("anyPublicOperation() && @annotation(org.amhzing.clusterview.web.timing.LogExecutionTime)")
     public Object logExecutionTaken(final ProceedingJoinPoint joinPoint) throws Throwable
     {
         final String nameOfClass = joinPoint.getTarget().toString();

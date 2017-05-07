@@ -20,9 +20,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
+import static org.amhzing.clusterview.data.cache.CacheSpec.DEFAULT_CACHE_KEY;
+import static org.amhzing.clusterview.data.cache.CacheSpec.STATS_HISTORY_CACHE_NAME;
 import static org.amhzing.clusterview.data.repository.StatisticHistoryFactory.*;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.DEFAULT_CACHE_KEY;
-import static org.amhzing.clusterview.infra.cache.CacheSpec.STATS_HISTORY_CACHE_NAME;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @CacheConfig(cacheNames = STATS_HISTORY_CACHE_NAME)

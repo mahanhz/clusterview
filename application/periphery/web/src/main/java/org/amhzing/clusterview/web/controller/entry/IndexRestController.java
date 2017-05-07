@@ -5,6 +5,7 @@ import org.amhzing.clusterview.infra.annotation.ConditionalOnRestEnabled;
 import org.amhzing.clusterview.infra.user.UserUtil;
 import org.amhzing.clusterview.web.controller.cache.CacheRestController;
 import org.amhzing.clusterview.web.controller.user.UserRestController;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
@@ -30,6 +31,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RequestMapping(path = { "/", BASE_PATH }, produces = APPLICATION_JSON_V1_VALUE)
 public class IndexRestController {
 
+    @LogExecutionTime
     @GetMapping
     public ResponseEntity<ResourceSupport> index(final HttpServletRequest request) {
 

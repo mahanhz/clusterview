@@ -11,6 +11,7 @@ import org.amhzing.clusterview.web.api.ClusterDTO;
 import org.amhzing.clusterview.web.api.ClustersDTO;
 import org.amhzing.clusterview.web.api.ReferenceActivitiesDTO;
 import org.amhzing.clusterview.web.api.ReferenceActivityDTO;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,7 @@ public class ReferenceDataRestController {
         this.clusterService = notNull(clusterService);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/activities")
     public ResponseEntity<ReferenceActivitiesDTO> activities() {
         final List<Activity> activities = activityService.activities();
@@ -62,6 +64,7 @@ public class ReferenceDataRestController {
         return ResponseEntity.ok(activitiesDto);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/coreactivities")
     public ResponseEntity<ReferenceActivitiesDTO> coreActivities() {
         final List<CoreActivity> coreActivities = coreActivityService.coreActivities();
@@ -75,6 +78,7 @@ public class ReferenceDataRestController {
         return ResponseEntity.ok(coreActivitiesDto);
     }
 
+    @LogExecutionTime
     @GetMapping(path = "/clusters")
     public ResponseEntity<ClustersDTO> clusters(final HttpServletRequest request) {
         final String userCountry = (String) request.getAttribute(USER_COUNTRY);

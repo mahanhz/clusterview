@@ -10,7 +10,6 @@ import org.amhzing.clusterview.core.domain.statistic.CourseStatistic;
 import org.amhzing.clusterview.data.jpa.repository.*;
 import org.amhzing.clusterview.data.jpa.repository.stats.StatsHistoryJpaRepository;
 import org.amhzing.clusterview.data.repository.*;
-import org.amhzing.clusterview.infra.cache.CacheSpec;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cache.annotation.EnableCaching;

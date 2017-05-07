@@ -10,7 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.amhzing.clusterview.infra.cache.CacheSpec.ACTIVITIES_CACHE_NAME;
+import static org.amhzing.clusterview.data.cache.CacheSpec.ACTIVITIES_CACHE_NAME;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @CacheConfig(cacheNames = ACTIVITIES_CACHE_NAME)

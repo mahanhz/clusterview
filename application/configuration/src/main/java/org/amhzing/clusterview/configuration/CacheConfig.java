@@ -1,6 +1,6 @@
 package org.amhzing.clusterview.configuration;
 
-import org.amhzing.clusterview.infra.cache.CacheSpec;
+import org.amhzing.clusterview.data.cache.CacheSpec;
 import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.cache;
+package org.amhzing.clusterview.data.cache;
 
 import javax.cache.expiry.Duration;
 
