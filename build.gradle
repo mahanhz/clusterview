@@ -67,6 +67,11 @@ ext {
 	jsonSchemaVersion = '1.0.21'
 	jsonSchemaValidatorVersion = '2.2.6'
 
+	logstashLogbackVersion = '4.8'
+	janinoVersion = '3.0.6'
+
+	springfoxSwagger2Version = '2.6.1'
+
 	junitVersion = '4.12'
 	assertJVersion = '3.6.2'
 	mockitoVersion = '2.7.22'

@@ -4,7 +4,6 @@ import org.amhzing.clusterview.data.jpa.entity.CountryEntity;
 import org.amhzing.clusterview.data.jpa.entity.user.RoleEntity;
 import org.amhzing.clusterview.data.jpa.entity.user.UserEntity;
 import org.amhzing.clusterview.data.jpa.repository.user.UserJpaRepository;
-import org.amhzing.clusterview.infra.user.DefaultUserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

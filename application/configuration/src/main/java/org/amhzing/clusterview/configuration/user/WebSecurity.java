@@ -1,5 +1,6 @@
-package org.amhzing.clusterview.infra.user;
+package org.amhzing.clusterview.configuration.user;
 
+import org.amhzing.clusterview.data.repository.user.DefaultUserDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 

@@ -1,6 +1,6 @@
-package org.amhzing.clusterview.infra.user;
+package org.amhzing.clusterview.configuration.user;
 
-import org.amhzing.clusterview.infra.helper.AuthenticationHelper;
+import org.amhzing.clusterview.configuration.helper.AuthenticationHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

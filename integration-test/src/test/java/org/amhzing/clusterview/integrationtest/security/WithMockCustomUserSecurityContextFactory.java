@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.integrationtest.security;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.infra.user.DefaultUserDetails;
+import org.amhzing.clusterview.data.repository.user.DefaultUserDetails;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

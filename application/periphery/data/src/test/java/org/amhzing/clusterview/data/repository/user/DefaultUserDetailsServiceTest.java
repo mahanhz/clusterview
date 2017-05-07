@@ -2,7 +2,6 @@ package org.amhzing.clusterview.data.repository.user;
 
 import org.amhzing.clusterview.data.helper.JpaRepositoryHelper;
 import org.amhzing.clusterview.data.jpa.repository.user.UserJpaRepository;
-import org.amhzing.clusterview.infra.user.DefaultUserDetails;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.user;
+package org.amhzing.clusterview.data.repository.user;
 
 import com.google.common.collect.ImmutableList;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.user;
+package org.amhzing.clusterview.configuration.user;
 
 import org.junit.Before;
 import org.junit.Test;
