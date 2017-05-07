@@ -14,7 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static org.amhzing.clusterview.infra.user.UserUtil.USER_COUNTRY;
+import static org.amhzing.clusterview.configuration.user.UserUtil.USER_COUNTRY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.core.authority.AuthorityUtils.createAuthorityList;
 

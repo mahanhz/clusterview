@@ -24,7 +24,7 @@ import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.a
 import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.clustersIds;
 import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.coreActivity;
 import static org.amhzing.clusterview.integrationtest.helper.SchemaValidationHelper.assertSuccessfulSchemaValidation;
-import static org.amhzing.clusterview.infra.user.UserUtil.USER_COUNTRY;
+import static org.amhzing.clusterview.web.controller.util.UserUtil.USER_COUNTRY;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

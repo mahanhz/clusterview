@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.data.repository;
 
 import org.amhzing.clusterview.core.domain.Cluster;
+import org.amhzing.clusterview.data.exception.NotFoundException;
 import org.amhzing.clusterview.data.helper.JpaRepositoryHelper;
-import org.amhzing.clusterview.infra.exception.NotFoundException;
 import org.amhzing.clusterview.data.jpa.entity.ClusterEntity;
 import org.amhzing.clusterview.data.jpa.entity.CourseEntity;
 import org.amhzing.clusterview.data.jpa.repository.ClusterJpaRepository;

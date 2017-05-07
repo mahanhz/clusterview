@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.annotation;
+package org.amhzing.clusterview.web.annotation;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 

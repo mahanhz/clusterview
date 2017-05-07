@@ -1,10 +1,10 @@
 package org.amhzing.clusterview.web.controller.entry;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.infra.annotation.ConditionalOnRestEnabled;
-import org.amhzing.clusterview.infra.user.UserUtil;
+import org.amhzing.clusterview.web.annotation.ConditionalOnRestEnabled;
 import org.amhzing.clusterview.web.controller.cache.CacheRestController;
 import org.amhzing.clusterview.web.controller.user.UserRestController;
+import org.amhzing.clusterview.web.controller.util.UserUtil;
 import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.hateoas.Link;
@@ -19,10 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 
-import static org.amhzing.clusterview.infra.user.UserUtil.USER_COUNTRY;
 import static org.amhzing.clusterview.web.MediaTypes.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
 import static org.amhzing.clusterview.web.controller.appnav.CommonLinks.*;
+import static org.amhzing.clusterview.web.controller.util.UserUtil.USER_COUNTRY;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 

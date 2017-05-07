@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import static java.util.Collections.emptyList;
-import static org.amhzing.clusterview.infra.user.UserUtil.username;
+import static org.amhzing.clusterview.data.repository.user.UserUtil.username;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.BDDMockito.given;

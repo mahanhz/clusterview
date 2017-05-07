@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.configuration.handler;
 
+import org.amhzing.clusterview.configuration.user.UserUtil;
 import org.amhzing.clusterview.data.repository.user.DefaultUserDetails;
-import org.amhzing.clusterview.infra.user.UserUtil;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-import static org.amhzing.clusterview.infra.user.UserUtil.USER_COUNTRY;
+import static org.amhzing.clusterview.configuration.user.UserUtil.USER_COUNTRY;
+
 
 public class UserHandlerInterceptor extends HandlerInterceptorAdapter {
 

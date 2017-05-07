@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.configuration.handler;
 
+import org.amhzing.clusterview.configuration.user.UserRole;
+import org.amhzing.clusterview.configuration.user.UserUtil;
 import org.amhzing.clusterview.data.repository.user.DefaultUserDetails;
-import org.amhzing.clusterview.infra.user.UserRole;
-import org.amhzing.clusterview.infra.user.UserUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.DefaultSavedRequest;

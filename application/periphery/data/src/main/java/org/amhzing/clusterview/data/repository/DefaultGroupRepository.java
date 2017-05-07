@@ -8,7 +8,7 @@ import org.amhzing.clusterview.data.jpa.entity.TeamEntity;
 import org.amhzing.clusterview.data.jpa.repository.ActivityJpaRepository;
 import org.amhzing.clusterview.data.jpa.repository.ClusterJpaRepository;
 import org.amhzing.clusterview.data.jpa.repository.TeamJpaRepository;
-import org.amhzing.clusterview.infra.exception.NotFoundException;
+import org.amhzing.clusterview.data.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;

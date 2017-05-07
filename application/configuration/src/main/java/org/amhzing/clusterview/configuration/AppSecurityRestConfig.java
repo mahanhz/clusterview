@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.configuration;
 
+import org.amhzing.clusterview.configuration.annotation.ConditionalOnRestEnabled;
 import org.amhzing.clusterview.configuration.user.WebSecurity;
-import org.amhzing.clusterview.infra.annotation.ConditionalOnRestEnabled;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

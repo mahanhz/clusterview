@@ -2,8 +2,8 @@ package org.amhzing.clusterview.configuration.helper;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import org.amhzing.clusterview.configuration.user.UserRole;
 import org.amhzing.clusterview.data.repository.user.DefaultUserDetails;
-import org.amhzing.clusterview.infra.user.UserRole;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;

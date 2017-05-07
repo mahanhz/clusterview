@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
 import static org.amhzing.clusterview.web.controller.appnav.CommonLinks.REL_HOME;
 import static org.amhzing.clusterview.integrationtest.helper.RestHelper.parseJson;
-import static org.amhzing.clusterview.infra.user.UserUtil.USER_COUNTRY;
+import static org.amhzing.clusterview.web.controller.util.UserUtil.USER_COUNTRY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.hateoas.Link.REL_SELF;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

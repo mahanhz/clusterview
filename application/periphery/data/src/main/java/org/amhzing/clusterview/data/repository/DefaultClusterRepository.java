@@ -4,11 +4,11 @@ import org.amhzing.clusterview.core.boundary.exit.repository.ClusterRepository;
 import org.amhzing.clusterview.core.domain.Cluster;
 import org.amhzing.clusterview.core.domain.Country;
 import org.amhzing.clusterview.core.domain.statistic.CourseStatistic;
+import org.amhzing.clusterview.data.exception.NotFoundException;
 import org.amhzing.clusterview.data.jpa.entity.ClusterEntity;
 import org.amhzing.clusterview.data.jpa.entity.CountryEntity;
 import org.amhzing.clusterview.data.jpa.repository.ClusterJpaRepository;
 import org.amhzing.clusterview.data.jpa.repository.CountryJpaRepository;
-import org.amhzing.clusterview.infra.exception.NotFoundException;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.Collections.emptyList;
+import static org.amhzing.clusterview.data.cache.CacheSpec.*;
 import static org.amhzing.clusterview.data.repository.ClusterEntityFactory.courses;
 import static org.amhzing.clusterview.data.repository.StatisticFactory.clusterEntities;
-import static org.amhzing.clusterview.data.cache.CacheSpec.*;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @CacheConfig(cacheNames = CLUSTERS_CACHE_NAME)

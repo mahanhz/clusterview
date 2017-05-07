@@ -218,31 +218,16 @@ project("application:periphery:data") {
 
 	dependencies {
 		compile project(':application:core')
-		compile project(':application:periphery:infra')
 
 		compile("org.springframework.boot:spring-boot-starter-data-jpa")
 		compile("org.springframework.boot:spring-boot-starter-security")
 		compile("org.springframework.boot:spring-boot-starter-cache")
 		compile("org.apache.commons:commons-lang3:${commonsLangVersion}")
+		compile("javax.cache:cache-api:${jcacheVersion}")
+		compile("org.ehcache:ehcache:${ehcacheVersion}")
 
 		testCompile app_tests.unit_test
 		testCompile app_tests.spring_test
-	}
-}
-
-project("application:periphery:infra") {
-	description = "Application periphery infra"
-
-	dependencies {
-		compile("org.springframework.boot:spring-boot-starter-security")
-		compile("org.springframework.boot:spring-boot-starter-aop")
-		compile("javax.cache:cache-api:${jcacheVersion}")
-		compile("org.ehcache:ehcache:${ehcacheVersion}")
-		compile("org.apache.commons:commons-lang3:${commonsLangVersion}")
-		compile("com.google.guava:guava:${guavaVersion}")
-		compile("org.apache.commons:commons-collections4:${commonsCollectionsVersion}")
-
-		testCompile app_tests.unit_test
 	}
 }
 
@@ -251,15 +236,15 @@ project("application:periphery:web") {
 
 	dependencies {
 		compile project(':application:core')
-		compile project(':application:periphery:infra')
 
 		compile("org.springframework.boot:spring-boot-starter-web")
 		compile("org.springframework.boot:spring-boot-starter-hateoas")
 		compile("org.springframework.data:spring-data-rest-hal-browser")
+		compile("org.springframework.boot:spring-boot-starter-security")
+		compile("org.springframework.boot:spring-boot-starter-aop")
 		compile("com.fasterxml.uuid:java-uuid-generator:${jugVersion}")
 		compile("org.hashids:hashids:${hashidsVersion}")
-		compile("com.kjetland:mbknor-jackson-jsonschema_2.12:${jsonSchemaVersion}")
-		compile("com.github.fge:json-schema-validator:${jsonSchemaValidatorVersion}")
+		compile("org.apache.commons:commons-collections4:${commonsCollectionsVersion}")
 
 		testCompile app_tests.unit_test
 		testCompile app_tests.spring_test

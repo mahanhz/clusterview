@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.web;
 
-import org.amhzing.clusterview.infra.exception.NotFoundException;
-import org.amhzing.clusterview.infra.user.UserUtil;
+import org.amhzing.clusterview.web.controller.exception.NotFoundException;
+import org.amhzing.clusterview.web.controller.util.UserUtil;
 import org.hashids.Hashids;
 
 public final class Obfuscator {

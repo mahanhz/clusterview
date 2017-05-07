@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.exception;
+package org.amhzing.clusterview.data.exception;
 
 public class NotFoundException extends RuntimeException {
 

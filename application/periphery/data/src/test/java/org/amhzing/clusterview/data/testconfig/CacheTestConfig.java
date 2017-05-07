@@ -7,6 +7,7 @@ import org.amhzing.clusterview.core.domain.Country;
 import org.amhzing.clusterview.core.domain.Region;
 import org.amhzing.clusterview.core.domain.statistic.ActivityStatistic;
 import org.amhzing.clusterview.core.domain.statistic.CourseStatistic;
+import org.amhzing.clusterview.data.cache.CacheSpec;
 import org.amhzing.clusterview.data.jpa.repository.*;
 import org.amhzing.clusterview.data.jpa.repository.stats.StatsHistoryJpaRepository;
 import org.amhzing.clusterview.data.repository.*;

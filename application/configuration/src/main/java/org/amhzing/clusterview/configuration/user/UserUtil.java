@@ -1,9 +1,8 @@
-package org.amhzing.clusterview.infra.user;
+package org.amhzing.clusterview.configuration.user;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
@@ -29,19 +28,5 @@ public final class UserUtil {
 
     public static boolean isSingleCountry(final List<String> countries) {
         return CollectionUtils.isNotEmpty(countries) && countries.size() == 1;
-    }
-
-    public static String username() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
-
-    public static boolean isSuperAdmin() {
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication != null) {
-            return roles(authentication).contains(UserRole.SUPER_ADMIN.getRole());
-        }
-
-        return false;
     }
 }

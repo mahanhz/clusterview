@@ -2,6 +2,9 @@ dependencies {
 	compile project(':application:periphery:data')
 	compile project(':application:periphery:web')
 
+	compile("com.kjetland:mbknor-jackson-jsonschema_2.12:${jsonSchemaVersion}")
+	compile("com.github.fge:json-schema-validator:${jsonSchemaValidatorVersion}")
+
 	testCompile app_tests.unit_test
 	testCompile app_tests.spring_test
 }

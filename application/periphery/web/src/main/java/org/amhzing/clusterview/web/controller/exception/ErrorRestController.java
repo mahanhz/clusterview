@@ -1,6 +1,6 @@
 package org.amhzing.clusterview.web.controller.exception;
 
-import org.amhzing.clusterview.infra.annotation.ConditionalOnRestEnabled;
+import org.amhzing.clusterview.web.annotation.ConditionalOnRestEnabled;
 import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;

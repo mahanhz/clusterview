@@ -25,10 +25,10 @@ import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
-import static org.amhzing.clusterview.infra.user.UserUtil.USER_COUNTRY;
 import static org.amhzing.clusterview.web.MediaTypes.APPLICATION_JSON_V1_VALUE;
 import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
 import static org.amhzing.clusterview.web.controller.appnav.CommonLinks.homeLink;
+import static org.amhzing.clusterview.web.controller.util.UserUtil.USER_COUNTRY;
 import static org.apache.commons.lang3.Validate.notNull;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
