@@ -1,5 +1,6 @@
 package org.amhzing.clusterview.configuration.event;
 
+import org.amhzing.clusterview.data.repository.user.DefaultUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;

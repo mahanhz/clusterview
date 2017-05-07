@@ -9,8 +9,10 @@ import org.springframework.security.core.Authentication;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static org.amhzing.clusterview.app.configuration.handler.RedirectAuthenticationSuccessHandler.URI;
-import static org.amhzing.clusterview.app.helper.AuthenticationHelper.*;
+import static org.amhzing.clusterview.configuration.handler.RedirectAuthenticationSuccessHandler.URI;
+import static org.amhzing.clusterview.configuration.helper.AuthenticationHelper.AUTHENTICATION_COUNTRY;
+import static org.amhzing.clusterview.configuration.helper.AuthenticationHelper.role;
+import static org.amhzing.clusterview.configuration.helper.AuthenticationHelper.userDetails;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
