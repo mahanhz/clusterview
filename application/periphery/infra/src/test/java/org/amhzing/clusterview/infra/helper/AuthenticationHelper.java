@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.data.helper;
+package org.amhzing.clusterview.infra.helper;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
