@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.log;
+package org.amhzing.clusterview.configuration.log;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;

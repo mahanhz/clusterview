@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.infra.log;
+package org.amhzing.clusterview.configuration.log;
 
 import ch.qos.logback.core.spi.FilterReply;
 import org.junit.Test;

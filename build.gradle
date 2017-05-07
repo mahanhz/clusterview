@@ -51,8 +51,43 @@ configure(allprojects) {
 	apply plugin: 'propdeps-idea'
 	apply plugin: 'propdeps-eclipse'
 
+	apply plugin: 'maven'
+	apply plugin: 'jacoco'
+	apply plugin: 'idea'
+	apply plugin: 'jdepend'
+	apply plugin: 'findbugs'
+	apply plugin: 'pmd'
+	apply plugin: 'org.owasp.dependencycheck'
+	apply plugin: 'net.researchgate.release'
+	apply plugin: 'net.saliman.cobertura'
+	apply plugin: 'com.github.kt3k.coveralls'
+	apply plugin: 'com.gorylenko.gradle-git-properties'
+	apply plugin: 'info.solidsoft.pitest'
+
 	repositories {
 		mavenCentral()
+	}
+
+	findbugs {
+		sourceSets = [sourceSets.main, sourceSets.test]
+		ignoreFailures = true
+	}
+
+	pmd {
+		sourceSets = [sourceSets.main, sourceSets.test]
+		ignoreFailures = true
+	}
+
+	jdepend {
+		sourceSets = [sourceSets.main, sourceSets.test]
+		ignoreFailures = true
+	}
+
+	jacocoTestReport {
+		reports {
+			xml.enabled = true // coveralls plugin depends on xml format report
+			html.enabled = true
+		}
 	}
 }
 
@@ -68,18 +103,6 @@ configure(subprojects - project(":application:core")) {
 
 configure([project(':app'), project(':application:configuration'), project(':app-ui')]) {
 	apply plugin: 'org.springframework.boot'
-	apply plugin: 'maven'
-	apply plugin: 'jacoco'
-	apply plugin: 'idea'
-	apply plugin: 'jdepend'
-	apply plugin: 'findbugs'
-	apply plugin: 'pmd'
-	apply plugin: 'org.owasp.dependencycheck'
-	apply plugin: 'net.researchgate.release'
-	apply plugin: 'net.saliman.cobertura'
-	apply plugin: 'com.github.kt3k.coveralls'
-	apply plugin: 'com.gorylenko.gradle-git-properties'
-	apply plugin: 'info.solidsoft.pitest'
 }
 
 task wrapper(type: Wrapper) {
@@ -182,6 +205,9 @@ project("application:core") {
 project("application:periphery:data") {
 	description = "Application periphery data"
 
+	// Need to override version to be 5.2.3 or greater so that we can use "hibernate.jdbc.time_zone: UTC"
+	ext['hibernate.version'] = '5.2.9.Final'
+
 	dependencies {
 		compile project(':application:core')
 		compile project(':application:periphery:infra')
@@ -231,11 +257,6 @@ project("application:periphery:web") {
 		testCompile app_tests.spring_test
 	}
 }
-
-
-
-
-
 
 def publishedProjects = subprojects.findAll { it.name == 'app' || it.name == 'app-ui' }
 task jacocoMerge(type: JacocoMerge) {
