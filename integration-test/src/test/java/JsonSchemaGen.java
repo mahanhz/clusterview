@@ -1,14 +1,14 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kjetland.jackson.jsonSchema.JsonSchemaGenerator;
-import org.amhzing.clusterview.web.api.ClustersDTO;
-import org.amhzing.clusterview.web.api.GroupDTO;
-import org.amhzing.clusterview.web.api.GroupsDTO;
-import org.amhzing.clusterview.web.api.ReferenceActivitiesDTO;
-import org.amhzing.clusterview.web.api.cache.CacheDTO;
-import org.amhzing.clusterview.web.api.statistic.ActivitiesDTO;
-import org.amhzing.clusterview.web.api.statistic.CoursesDTO;
-import org.amhzing.clusterview.web.api.statistic.HistoricalActivitiesDTO;
+import org.amhzing.clusterview.adapter.web.api.ClustersDTO;
+import org.amhzing.clusterview.adapter.web.api.GroupDTO;
+import org.amhzing.clusterview.adapter.web.api.GroupsDTO;
+import org.amhzing.clusterview.adapter.web.api.ReferenceActivitiesDTO;
+import org.amhzing.clusterview.adapter.web.api.cache.CacheDTO;
+import org.amhzing.clusterview.adapter.web.api.statistic.ActivitiesDTO;
+import org.amhzing.clusterview.adapter.web.api.statistic.CoursesDTO;
+import org.amhzing.clusterview.adapter.web.api.statistic.HistoricalActivitiesDTO;
 
 import java.io.FileWriter;
 import java.net.URL;

@@ -1,8 +1,7 @@
 package org.amhzing.clusterview.web.controller.appnav;
 
-import org.amhzing.clusterview.core.boundary.enter.RegionService;
-import org.amhzing.clusterview.core.domain.Country;
-import org.amhzing.clusterview.core.domain.Region;
+import org.amhzing.clusterview.adapter.web.RegionAdapter;
+import org.amhzing.clusterview.adapter.web.api.RegionDTO;
 import org.amhzing.clusterview.web.controller.base.AbstractRestController;
 import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +24,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RestController
 public class CountryRestController extends AbstractRestController {
 
-    private RegionService regionService;
+    private RegionAdapter regionAdapter;
 
     @Autowired
-    public CountryRestController(final RegionService regionService) {
-        this.regionService = notNull(regionService);
+    public CountryRestController(final RegionAdapter regionAdapter) {
+        this.regionAdapter = notNull(regionAdapter);
     }
 
     @LogExecutionTime
@@ -52,12 +51,18 @@ public class CountryRestController extends AbstractRestController {
     }
 
     private List<Link> regionLinks(final String country) {
-        final List<Region.Id> regions = regionService.regions(Country.Id.create(country));
+        final List<RegionDTO> regions = regionAdapter.regions(country);
 
-        final List<Link> regionLinks = regions.stream()
-                                              .map(region -> linkTo(methodOn(RegionRestController.class).region(country, region.getId())).withRel(REGION_PREFIX + region.getId()))
-                                              .collect(Collectors.toList());
+        return regions.stream()
+                      .map(region -> linkTo(linkToValue(country, region.name)).withRel(rel(region.name)))
+                      .collect(Collectors.toList());
+    }
 
-        return regionLinks;
+    private String rel(final String region) {
+        return REGION_PREFIX + region;
+    }
+
+    private ResponseEntity<ResourceSupport> linkToValue(final String country, final String region) {
+        return methodOn(RegionRestController.class).region(country, region);
     }
 }

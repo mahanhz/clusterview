@@ -2,6 +2,7 @@ package org.amhzing.clusterview.web.controller.exception;
 
 import com.fasterxml.uuid.Generators;
 import com.google.common.collect.ImmutableMap;
+import org.amhzing.clusterview.adapter.web.NotFoundException;
 import org.amhzing.clusterview.web.MediaTypes;
 import org.amhzing.clusterview.web.controller.GlobalExceptionRestMarker;
 import org.apache.commons.lang3.StringUtils;

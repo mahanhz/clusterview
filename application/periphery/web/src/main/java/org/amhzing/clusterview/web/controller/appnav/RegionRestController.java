@@ -1,12 +1,13 @@
 package org.amhzing.clusterview.web.controller.appnav;
 
-import org.amhzing.clusterview.core.boundary.enter.RegionService;
-import org.amhzing.clusterview.core.domain.Cluster;
-import org.amhzing.clusterview.core.domain.Region;
+import org.amhzing.clusterview.adapter.web.RegionAdapter;
+import org.amhzing.clusterview.adapter.web.api.ClusterDTO;
+import org.amhzing.clusterview.adapter.web.api.GroupsDTO;
 import org.amhzing.clusterview.web.controller.base.AbstractRestController;
 import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
 import static org.amhzing.clusterview.web.controller.appnav.CommonLinks.*;
 import static org.apache.commons.lang3.Validate.notNull;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -25,11 +26,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RestController
 public class RegionRestController extends AbstractRestController {
 
-    private RegionService regionService;
+    private RegionAdapter regionAdapter;
 
     @Autowired
-    public RegionRestController(final RegionService regionService) {
-        this.regionService = notNull(regionService);
+    public RegionRestController(final RegionAdapter regionAdapter) {
+        this.regionAdapter = notNull(regionAdapter);
     }
 
     @LogExecutionTime
@@ -54,12 +55,18 @@ public class RegionRestController extends AbstractRestController {
     }
 
     private List<Link> clusterLinks(final String country, final String region) {
-        final List<Cluster.Id> clusters = regionService.clusters(Region.Id.create(region));
+        final List<ClusterDTO> clusters = regionAdapter.clusters(region);
 
-        final List<Link> clusterLinks = clusters.stream()
-                                              .map(cluster -> linkTo(methodOn(GroupRestController.class).groups(country, region, cluster.getId())).withRel(CLUSTER_PREFIX + cluster.getId()))
-                                              .collect(Collectors.toList());
+        return clusters.stream()
+                       .map(cluster -> linkTo(linkToValue(country, region, cluster.name)).withRel(rel(cluster.name)))
+                       .collect(toList());
+    }
 
-        return clusterLinks;
+    private String rel(final String cluster) {
+        return CLUSTER_PREFIX + cluster;
+    }
+
+    private ResponseEntity<Resource<GroupsDTO>> linkToValue(final String country, final String region, final String cluster) {
+        return methodOn(GroupRestController.class).groups(country, region, cluster);
     }
 }

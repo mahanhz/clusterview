@@ -1,11 +1,7 @@
 package org.amhzing.clusterview.web.controller.appnav;
 
-import org.amhzing.clusterview.core.boundary.enter.ClusterService;
-import org.amhzing.clusterview.core.boundary.enter.StatisticHistoryService;
-import org.amhzing.clusterview.core.boundary.enter.StatisticService;
-import org.amhzing.clusterview.core.domain.Cluster;
-import org.amhzing.clusterview.core.domain.Country;
-import org.amhzing.clusterview.core.domain.statistic.ActivityStatistic;
+import org.amhzing.clusterview.adapter.web.ClusterAdapter;
+import org.amhzing.clusterview.adapter.web.StatisticAdapter;
 import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
@@ -30,17 +26,14 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RequestMapping(path = BASE_PATH + "/statsedit", produces = APPLICATION_JSON_V1_VALUE)
 public class StatisticEditRestController {
 
-    private StatisticHistoryService statisticHistoryService;
-    private StatisticService<ActivityStatistic> statisticService;
-    private ClusterService clusterService;
+    private StatisticAdapter statisticAdapter;
+    private ClusterAdapter clusterAdapter;
 
     @Autowired
-    public StatisticEditRestController(final StatisticHistoryService statisticHistoryService,
-                                       final StatisticService<ActivityStatistic> statisticService,
-                                       final ClusterService clusterService) {
-        this.statisticHistoryService = notNull(statisticHistoryService);
-        this.statisticService = notNull(statisticService);
-        this.clusterService = notNull(clusterService);
+    public StatisticEditRestController(final StatisticAdapter statisticAdapter,
+                                       final ClusterAdapter clusterAdapter) {
+        this.statisticAdapter = notNull(statisticAdapter);
+        this.clusterAdapter = notNull(clusterAdapter);
     }
 
     @LogExecutionTime
@@ -50,9 +43,7 @@ public class StatisticEditRestController {
 
         isTrue(isValidCluster(country, cluster), "Cluster " + cluster + " is not valid for country " + country);
 
-        final ActivityStatistic clusterStats = statisticService.statistics(Cluster.Id.create(cluster));
-
-        statisticHistoryService.saveHistory(Cluster.Id.create(cluster), clusterStats);
+        statisticAdapter.saveHistory(cluster);
 
         final Link clusterStatsHistoryLink = linkTo(methodOn(StatisticRestController.class).clusterHistory(country, cluster)).withRel(CLUSTER_STATS_HISTORY_PREFIX + cluster);
 
@@ -60,8 +51,8 @@ public class StatisticEditRestController {
     }
 
     private boolean isValidCluster(final String country, final String cluster) {
-        return clusterService.clusters(Country.Id.create(country)).stream()
-                             .map(Cluster.Id::getId)
+        return clusterAdapter.clusters(country).clusters.stream()
+                             .map(clusterDTO -> clusterDTO.name)
                              .anyMatch(c -> c.equals(cluster));
     }
 }

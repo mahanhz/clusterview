@@ -1,14 +1,14 @@
 package org.amhzing.clusterview.integrationtest.web.controller.appnav;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.amhzing.clusterview.adapter.web.Obfuscator;
+import org.amhzing.clusterview.adapter.web.api.GroupDTO;
+import org.amhzing.clusterview.adapter.web.util.GroupDtoFactory;
 import org.amhzing.clusterview.core.boundary.enter.GroupService;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
 import org.amhzing.clusterview.integrationtest.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.MediaTypes;
-import org.amhzing.clusterview.web.Obfuscator;
-import org.amhzing.clusterview.web.api.GroupDTO;
 import org.amhzing.clusterview.web.controller.appnav.GroupEditRestController;
-import org.amhzing.clusterview.web.controller.util.GroupDtoFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

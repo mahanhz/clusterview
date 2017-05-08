@@ -1,10 +1,11 @@
 package org.amhzing.clusterview.web.controller.cache;
 
-import org.amhzing.clusterview.web.api.cache.CacheDTO;
+import org.amhzing.clusterview.adapter.web.api.cache.CacheDTO;
 import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,17 +35,16 @@ public class CacheRestController {
 
     @LogExecutionTime
     @GetMapping(path = "/list")
-    public ResponseEntity<CacheDTO> caches() {
+    public ResponseEntity<Resource<CacheDTO>> caches() {
         final List<String> cacheNames = cacheManager.getCacheNames()
                                                     .stream()
                                                     .sorted(String::compareTo)
                                                     .collect(Collectors.toList());
 
-        final CacheDTO cacheDto = new CacheDTO(cacheNames);
-
         final ControllerLinkBuilder selfLink = linkTo(methodOn(CacheRestController.class).caches());
         final ControllerLinkBuilder clearCacheLink = linkTo(CacheRestController.class).slash("clear");
 
+        final Resource<CacheDTO> cacheDto = new Resource<>(new CacheDTO(cacheNames));
         cacheDto.add(selfLink.withSelfRel());
         cacheDto.add(homeLink());
         cacheDto.add(clearCacheLink.withRel("cache-clear"));
@@ -53,17 +53,16 @@ public class CacheRestController {
     }
 
     @DeleteMapping(path = "/clear", consumes = APPLICATION_JSON_V1_VALUE)
-    public ResponseEntity<CacheDTO> clearCache(@Valid @RequestBody final CacheDTO cacheNames) {
+    public ResponseEntity<Resource<CacheDTO>> clearCache(@Valid @RequestBody final CacheDTO cacheNames) {
 
         final List<String> clearedCaches = cacheNames.cacheNames.stream()
                                                                 .map(this::clearCache)
                                                                 .collect(Collectors.toList());
 
-        final CacheDTO cacheDto = new CacheDTO(clearedCaches);
-
         final ControllerLinkBuilder selfLink = linkTo(CacheRestController.class).slash("clear");
         final ControllerLinkBuilder cachesLink = linkTo(methodOn(CacheRestController.class).caches());
 
+        final Resource<CacheDTO> cacheDto = new Resource<>(new CacheDTO(clearedCaches));
         cacheDto.add(selfLink.withSelfRel());
         cacheDto.add(homeLink());
         cacheDto.add(cachesLink.withRel("cache-names"));

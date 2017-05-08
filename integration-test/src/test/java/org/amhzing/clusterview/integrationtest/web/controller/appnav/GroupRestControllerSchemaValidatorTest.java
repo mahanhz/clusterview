@@ -1,13 +1,13 @@
 package org.amhzing.clusterview.integrationtest.web.controller.appnav;
 
 import com.google.common.collect.ImmutableSet;
+import org.amhzing.clusterview.adapter.web.Obfuscator;
 import org.amhzing.clusterview.core.boundary.enter.GroupService;
 import org.amhzing.clusterview.core.domain.Cluster;
 import org.amhzing.clusterview.core.domain.Group;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
 import org.amhzing.clusterview.integrationtest.helper.RestHelper;
 import org.amhzing.clusterview.integrationtest.security.WithMockCustomUser;
-import org.amhzing.clusterview.web.Obfuscator;
 import org.amhzing.clusterview.web.controller.appnav.GroupRestController;
 import org.junit.Test;
 import org.junit.runner.RunWith;

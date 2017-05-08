@@ -1,10 +1,10 @@
 package org.amhzing.clusterview.integrationtest.web.controller.cache;
 
 import com.google.common.collect.ImmutableList;
+import org.amhzing.clusterview.adapter.web.api.cache.CacheDTO;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
 import org.amhzing.clusterview.integrationtest.helper.RestHelper;
 import org.amhzing.clusterview.integrationtest.security.WithMockCustomUser;
-import org.amhzing.clusterview.web.api.cache.CacheDTO;
 import org.amhzing.clusterview.web.controller.cache.CacheRestController;
 import org.junit.Test;
 import org.junit.runner.RunWith;

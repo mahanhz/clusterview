@@ -1,12 +1,8 @@
 package org.amhzing.clusterview.web.controller.appnav;
 
-import org.amhzing.clusterview.core.boundary.enter.GroupService;
-import org.amhzing.clusterview.core.domain.Cluster;
-import org.amhzing.clusterview.core.domain.Group;
-import org.amhzing.clusterview.web.Obfuscator;
-import org.amhzing.clusterview.web.api.GroupDTO;
+import org.amhzing.clusterview.adapter.web.GroupAdapter;
+import org.amhzing.clusterview.adapter.web.api.GroupDTO;
 import org.amhzing.clusterview.web.controller.base.AbstractEditRestController;
-import org.amhzing.clusterview.web.controller.util.GroupFactory;
 import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +20,11 @@ public class GroupEditRestController extends AbstractEditRestController {
 
     public static final String CREATE_GROUP = "creategroup";
 
-    private GroupService groupService;
+    private GroupAdapter groupAdapter;
 
     @Autowired
-    public GroupEditRestController(final GroupService groupService) {
-        this.groupService = notNull(groupService);
+    public GroupEditRestController(final GroupAdapter groupAdapter) {
+        this.groupAdapter = notNull(groupAdapter);
     }
 
     @LogExecutionTime
@@ -38,8 +34,7 @@ public class GroupEditRestController extends AbstractEditRestController {
                                          @PathVariable final String cluster,
                                          @RequestBody @Valid final GroupDTO groupDto) {
 
-        final Group group = GroupFactory.convert(groupDto);
-        groupService.createGroup(group, Cluster.Id.create(cluster));
+        groupAdapter.create(groupDto, cluster);
 
         return ResponseEntity.created(URI.create(clusterLink(country, region, cluster).getHref())).build();
     }
@@ -52,8 +47,7 @@ public class GroupEditRestController extends AbstractEditRestController {
                                          @PathVariable final String obfuscatedGroupId,
                                          @RequestBody @Valid final GroupDTO groupDto) {
 
-        final Group group = GroupFactory.convert(groupDto);
-        groupService.updateGroup(group, Cluster.Id.create(cluster));
+        groupAdapter.update(groupDto, obfuscatedGroupId);
 
         return ResponseEntity.ok().location(URI.create(clusterLink(country, region, cluster).getHref())).build();
     }
@@ -65,8 +59,7 @@ public class GroupEditRestController extends AbstractEditRestController {
                                          @PathVariable final String cluster,
                                          @PathVariable final String obfuscatedGroupId) {
 
-        final long groupId = Obfuscator.deobfuscate(obfuscatedGroupId);
-        groupService.deleteGroup(Group.Id.create(groupId), Cluster.Id.create(cluster));
+        groupAdapter.delete(obfuscatedGroupId, cluster);
 
         return ResponseEntity.ok().location(URI.create(clusterLink(country, region, cluster).getHref())).build();
     }
