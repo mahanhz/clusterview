@@ -3,8 +3,8 @@ package org.amhzing.clusterview.appui.helper;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import org.amhzing.clusterview.app.domain.model.*;
-import org.amhzing.clusterview.app.domain.model.statistic.*;
+import org.amhzing.clusterview.core.domain.*;
+import org.amhzing.clusterview.core.domain.statistic.*;
 
 import java.util.Date;
 import java.util.HashMap;

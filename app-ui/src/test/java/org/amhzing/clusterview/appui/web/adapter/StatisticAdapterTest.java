@@ -1,20 +1,20 @@
 package org.amhzing.clusterview.appui.web.adapter;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.app.application.ActivityService;
-import org.amhzing.clusterview.app.application.ClusterService;
-import org.amhzing.clusterview.app.application.StatisticHistoryService;
-import org.amhzing.clusterview.app.application.StatisticService;
-import org.amhzing.clusterview.app.domain.model.Cluster;
-import org.amhzing.clusterview.app.domain.model.Country;
-import org.amhzing.clusterview.app.domain.model.Region;
-import org.amhzing.clusterview.app.domain.model.statistic.ActivityStatistic;
-import org.amhzing.clusterview.app.domain.model.statistic.CourseStatistic;
 import org.amhzing.clusterview.appui.helper.ClientModelHelper;
 import org.amhzing.clusterview.appui.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.appui.web.model.ClusterNameModel;
 import org.amhzing.clusterview.appui.web.model.CourseStatisticModel;
 import org.amhzing.clusterview.appui.web.model.DatedActivityStatisticModel;
+import org.amhzing.clusterview.core.boundary.enter.ActivityService;
+import org.amhzing.clusterview.core.boundary.enter.ClusterService;
+import org.amhzing.clusterview.core.boundary.enter.StatisticHistoryService;
+import org.amhzing.clusterview.core.boundary.enter.StatisticService;
+import org.amhzing.clusterview.core.domain.Cluster;
+import org.amhzing.clusterview.core.domain.Country;
+import org.amhzing.clusterview.core.domain.Region;
+import org.amhzing.clusterview.core.domain.statistic.ActivityStatistic;
+import org.amhzing.clusterview.core.domain.statistic.CourseStatistic;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,8 +23,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static org.amhzing.clusterview.appui.helper.DomainModelHelper.*;
 import static org.amhzing.clusterview.appui.helper.ClientModelHelper.courseStatisticsForm;
+import static org.amhzing.clusterview.appui.helper.DomainModelHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;

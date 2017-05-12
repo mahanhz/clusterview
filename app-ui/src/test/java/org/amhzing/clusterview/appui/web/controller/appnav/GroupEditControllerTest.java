@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.appui.web.controller.appnav;
 
 import com.google.common.collect.ImmutableSet;
+import org.amhzing.clusterview.adapter.web.NotFoundException;
 import org.amhzing.clusterview.appui.annotation.TestOffline;
-import org.amhzing.clusterview.app.exception.NotFoundException;
 import org.amhzing.clusterview.appui.helper.ClientModelHelper;
 import org.amhzing.clusterview.appui.security.WithMockCustomUser;
 import org.amhzing.clusterview.appui.web.adapter.GroupAdapter;

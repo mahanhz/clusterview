@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.appui.web.adapter;
 
-import org.amhzing.clusterview.app.application.UserService;
-import org.amhzing.clusterview.app.domain.model.user.ImmutablePassword;
-import org.amhzing.clusterview.app.domain.model.user.Password;
+import org.amhzing.clusterview.core.boundary.enter.UserService;
+import org.amhzing.clusterview.core.domain.user.ImmutablePassword;
+import org.amhzing.clusterview.core.domain.user.Password;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

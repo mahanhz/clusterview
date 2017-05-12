@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.appui.web.adapter;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.app.application.CoreActivityService;
 import org.amhzing.clusterview.appui.web.model.CoreActivityModel;
+import org.amhzing.clusterview.core.boundary.enter.CoreActivityService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

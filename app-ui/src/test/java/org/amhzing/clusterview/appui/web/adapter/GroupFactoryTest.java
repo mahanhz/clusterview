@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.appui.web.adapter;
 
-import org.amhzing.clusterview.app.domain.model.Group;
-import org.amhzing.clusterview.app.web.Obfuscator;
+import org.amhzing.clusterview.adapter.web.Obfuscator;
 import org.amhzing.clusterview.appui.helper.ClientModelHelper;
+import org.amhzing.clusterview.core.domain.Group;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
