@@ -1,17 +1,17 @@
 package org.amhzing.clusterview.appui.web.adapter;
 
 import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
-import org.amhzing.clusterview.app.domain.model.Activity;
-import org.amhzing.clusterview.app.domain.model.Course;
-import org.amhzing.clusterview.app.domain.model.statistic.ActivityStatistic;
-import org.amhzing.clusterview.app.domain.model.statistic.CoreActivity;
-import org.amhzing.clusterview.app.domain.model.statistic.CourseStatistic;
-import org.amhzing.clusterview.app.domain.model.statistic.Quantity;
 import org.amhzing.clusterview.appui.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.appui.web.model.CoreActivityModel;
 import org.amhzing.clusterview.appui.web.model.CourseStatisticModel;
 import org.amhzing.clusterview.appui.web.model.compare.CourseStatisticComparator;
 import org.amhzing.clusterview.appui.web.model.form.CourseStatisticsForm;
+import org.amhzing.clusterview.core.domain.Activity;
+import org.amhzing.clusterview.core.domain.Course;
+import org.amhzing.clusterview.core.domain.statistic.ActivityStatistic;
+import org.amhzing.clusterview.core.domain.statistic.CoreActivity;
+import org.amhzing.clusterview.core.domain.statistic.CourseStatistic;
+import org.amhzing.clusterview.core.domain.statistic.Quantity;
 
 import java.util.List;
 import java.util.Map;

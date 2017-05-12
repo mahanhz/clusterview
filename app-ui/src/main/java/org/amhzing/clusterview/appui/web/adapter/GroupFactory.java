@@ -1,11 +1,11 @@
 package org.amhzing.clusterview.appui.web.adapter;
 
 import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
-import org.amhzing.clusterview.app.domain.model.*;
-import org.amhzing.clusterview.app.domain.model.statistic.CoreActivity;
-import org.amhzing.clusterview.app.domain.model.statistic.Quantity;
-import org.amhzing.clusterview.app.web.Obfuscator;
+import org.amhzing.clusterview.adapter.web.Obfuscator;
 import org.amhzing.clusterview.appui.web.model.*;
+import org.amhzing.clusterview.core.domain.*;
+import org.amhzing.clusterview.core.domain.statistic.CoreActivity;
+import org.amhzing.clusterview.core.domain.statistic.Quantity;
 
 import java.util.List;
 import java.util.Set;
@@ -88,9 +88,9 @@ public final class GroupFactory {
 
     private static Capability convertCapabilities(final CapabilityModel capability) {
         final Set<Activity> activities = capability.getActivities()
-                                                .stream()
-                                                .map(GroupFactory::activity)
-                                                .collect(Collectors.toSet());
+                                                   .stream()
+                                                   .map(GroupFactory::activity)
+                                                   .collect(Collectors.toSet());
 
         return Capability.create(activities);
     }

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 import org.stagemonitor.core.Stagemonitor;
 
 @SpringBootApplication
-@Import(org.amhzing.clusterview.app.MainApplication.class)
+@Import(org.amhzing.clusterview.MainApplication.class)
 public class MainUIApplication {
 
 	public static void main(String[] args) {

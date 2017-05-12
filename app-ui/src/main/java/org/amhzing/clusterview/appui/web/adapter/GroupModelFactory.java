@@ -1,9 +1,9 @@
 package org.amhzing.clusterview.appui.web.adapter;
 
-import org.amhzing.clusterview.app.domain.model.*;
-import org.amhzing.clusterview.app.domain.model.statistic.CoreActivity;
-import org.amhzing.clusterview.app.web.Obfuscator;
+import org.amhzing.clusterview.adapter.web.Obfuscator;
 import org.amhzing.clusterview.appui.web.model.*;
+import org.amhzing.clusterview.core.domain.*;
+import org.amhzing.clusterview.core.domain.statistic.CoreActivity;
 
 import java.util.Comparator;
 import java.util.List;

@@ -138,6 +138,15 @@ ext {
 
 	springfoxSwagger2Version = '2.6.1'
 
+	stageMonitorVersion = '0.31.0'
+	thymeleafSpringSecurityVersion = '2.1.3.RELEASE'
+
+	webjarsJqueryVersion = '3.1.1-1'
+	webjarsBootstrapVersion = '3.3.7-1'
+	webjarsLocatorVersion = '0.32'
+	webjarsFontAwesomeVersion = '4.7.0'
+	webjarsModernizrVersion = '2.8.3'
+
 	jacksonVersion = '2.8.8'
 
 	junitVersion = '4.12'
@@ -158,6 +167,35 @@ ext.app_tests = [
 				"org.springframework.security:spring-security-test:${springSecurityTestVersion}"
 		]
 ]
+
+project("app-ui") {
+	description = "Application UI"
+
+	dependencies {
+		compile project(':application')
+
+		compile ("org.springframework.boot:spring-boot-starter-thymeleaf")
+		compile ("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:${thymeleafSpringSecurityVersion}")
+
+		compile ("org.stagemonitor:stagemonitor-web:${stageMonitorVersion}")
+		compile ("org.stagemonitor:stagemonitor-logging:${stageMonitorVersion}")
+
+		compile ("org.webjars:jquery:${webjarsJqueryVersion}")
+		compile ("org.webjars:bootstrap:${webjarsBootstrapVersion}")
+		compile ("org.webjars:font-awesome:${webjarsFontAwesomeVersion}")
+		compile ("org.webjars:modernizr:${webjarsModernizrVersion}")
+		compile ("org.webjars:webjars-locator:${webjarsLocatorVersion}")
+
+		testCompile ('org.springframework.boot:spring-boot-starter-test')
+		testCompile ("org.springframework.security:spring-security-test:${springSecurityTestVersion}")
+		testCompile ("pl.pragmatists:JUnitParams:${junitParamsVersion}")
+		testCompile ("org.meanbean:meanbean:${meanBeanVersion}")
+		testCompile ("nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}")
+		testCompile ("org.jsoup:jsoup:${jsoupVersion}")
+
+		optional ("org.springframework.boot:spring-boot-devtools")
+	}
+}
 
 project("application") {
 	description = "Application"
@@ -190,6 +228,7 @@ project("application:configuration") {
 	description = "Application configuration"
 
 	dependencies {
+		compile project(':application:adapter')
 		compile project(':application:core')
 		compile project(':application:periphery:data')
 		compile project(':application:periphery:web')

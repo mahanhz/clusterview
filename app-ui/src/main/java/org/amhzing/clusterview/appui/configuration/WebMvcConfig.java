@@ -1,8 +1,7 @@
 package org.amhzing.clusterview.appui.configuration;
 
-import org.amhzing.clusterview.app.configuration.StaticFiles;
-import org.amhzing.clusterview.app.configuration.handler.UserHandlerInterceptor;
 import org.amhzing.clusterview.appui.web.model.ActivityModelFormatter;
+import org.amhzing.clusterview.configuration.handler.UserHandlerInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.CacheControl;

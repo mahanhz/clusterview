@@ -1,29 +1,5 @@
-ext {
-	stageMonitorVersion = '0.31.0'
-	thymeleafSpringSecurityVersion = '2.1.3.RELEASE'
-}
-
-dependencies {
-	compile project(":app")
-
-	compile ("org.springframework.boot:spring-boot-starter-thymeleaf")
-	compile ("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:${thymeleafSpringSecurityVersion}")
-
-	compile ("org.stagemonitor:stagemonitor-web:${stageMonitorVersion}")
-	compile ("org.stagemonitor:stagemonitor-logging:${stageMonitorVersion}")
-
-	testCompile ('org.springframework.boot:spring-boot-starter-test')
-	testCompile ("org.springframework.security:spring-security-test:${springSecurityTestVersion}")
-	testCompile ("pl.pragmatists:JUnitParams:${junitParamsVersion}")
-	testCompile ("org.meanbean:meanbean:${meanBeanVersion}")
-	testCompile ("nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}")
-	testCompile ("org.jsoup:jsoup:${jsoupVersion}")
-
-	optional ("org.springframework.boot:spring-boot-devtools")
-}
-
 // Publish to Nexus
-apply from: 'gradle-segment/publish.gradle'
+apply from: 'publish.gradle'
 
 // Git properties that display in the actuator /info endpoint
 gitProperties {
@@ -46,24 +22,6 @@ springBoot {
 bootRun {
 	systemProperties = System.properties
 }
-
-task copyAppResources(type: Copy) {
-	def profiles = System.getProperty('spring.profiles.active');
-
-	if (profiles != null) {
-		def splitProfiles = profiles.split(',')
-
-		if (splitProfiles.contains("offline")) {
-			println "Copy app resources for offline"
-			from('../app/src/main/resources') {
-				include 'data-h2.sql'
-			}
-			into 'build/resources/main'
-		}
-	}
-}
-
-bootRun.dependsOn copyAppResources
 
 // Since app-ui is a spring boot executable jar
 // then the repackaging needs to be run after all dependent projects are compiled

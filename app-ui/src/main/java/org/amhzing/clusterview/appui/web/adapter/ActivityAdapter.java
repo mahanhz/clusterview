@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.appui.web.adapter;
 
-import org.amhzing.clusterview.app.application.ActivityService;
-import org.amhzing.clusterview.app.domain.model.Activity;
 import org.amhzing.clusterview.appui.web.model.ActivityModel;
+import org.amhzing.clusterview.core.boundary.enter.ActivityService;
+import org.amhzing.clusterview.core.domain.Activity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

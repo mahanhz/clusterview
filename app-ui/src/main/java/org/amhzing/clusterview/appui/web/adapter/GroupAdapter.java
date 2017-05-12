@@ -1,10 +1,10 @@
 package org.amhzing.clusterview.appui.web.adapter;
 
-import org.amhzing.clusterview.app.application.GroupService;
-import org.amhzing.clusterview.app.domain.model.Cluster;
-import org.amhzing.clusterview.app.domain.model.Group;
-import org.amhzing.clusterview.app.web.Obfuscator;
+import org.amhzing.clusterview.adapter.web.Obfuscator;
 import org.amhzing.clusterview.appui.web.model.GroupModel;
+import org.amhzing.clusterview.core.boundary.enter.GroupService;
+import org.amhzing.clusterview.core.domain.Cluster;
+import org.amhzing.clusterview.core.domain.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

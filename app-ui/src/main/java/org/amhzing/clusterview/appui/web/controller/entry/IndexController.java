@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static org.amhzing.clusterview.app.user.UserUtil.USER_COUNTRY;
+import static org.amhzing.clusterview.web.controller.util.UserUtil.USER_COUNTRY;
 
 @Controller
 public class IndexController {

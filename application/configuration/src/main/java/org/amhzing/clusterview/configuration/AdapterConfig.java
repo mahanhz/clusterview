@@ -39,34 +39,34 @@ public class AdapterConfig {
     private UserService userService;
 
     @Bean
-    public ActivityAdapter activityAdapter() {
+    public ActivityAdapter apiActivityAdapter() {
         return new ActivityAdapter(activityService, coreActivityService);
     }
 
     @Bean
-    public ClusterAdapter clusterAdapter() {
+    public ClusterAdapter apiClusterAdapter() {
         return new ClusterAdapter(clusterService);
     }
 
     @Bean
-    public GroupAdapter groupAdapter() {
+    public GroupAdapter apiGroupAdapter() {
         return new GroupAdapter(groupService);
     }
 
     @Bean
-    public RegionAdapter regionAdapter() {
+    public RegionAdapter apiRegionAdapter() {
         return new RegionAdapter(regionService);
     }
 
     @Bean
-    public StatisticAdapter statisticAdapter() {
+    public StatisticAdapter apiStatisticAdapter() {
         return new StatisticAdapter(statisticHistoryService,
                                     statisticService,
                                     courseStatisticService);
     }
 
     @Bean
-    public UserAdapter userAdapter() {
+    public UserAdapter apiUserAdapter() {
         return new UserAdapter(userService);
     }
 }

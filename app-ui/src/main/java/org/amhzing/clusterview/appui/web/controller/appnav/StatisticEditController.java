@@ -1,9 +1,9 @@
 package org.amhzing.clusterview.appui.web.controller.appnav;
 
-import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.appui.web.adapter.StatisticAdapter;
 import org.amhzing.clusterview.appui.web.model.ActivityStatisticModel;
 import org.amhzing.clusterview.appui.web.model.ClusterNameModel;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-import static org.amhzing.clusterview.appui.web.controller.appnav.StatisticController.*;
+import static org.amhzing.clusterview.appui.web.controller.appnav.StatisticController.HISTORY;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller

@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.appui.web.controller.appnav;
 
-import org.amhzing.clusterview.app.annotation.LogExecutionTime;
 import org.amhzing.clusterview.appui.web.adapter.UserAdapter;
 import org.amhzing.clusterview.appui.web.model.user.ChangePasswordModel;
+import org.amhzing.clusterview.web.timing.LogExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
-import static org.amhzing.clusterview.app.user.UserUtil.USER_COUNTRY;
+import static org.amhzing.clusterview.web.controller.util.UserUtil.USER_COUNTRY;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @ControllerAdvice(basePackageClasses = { CommonModelController.class })

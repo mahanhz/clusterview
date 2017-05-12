@@ -1,4 +1,4 @@
-package org.amhzing.clusterview.configuration;
+package org.amhzing.clusterview.appui.configuration;
 
 import static org.apache.commons.lang3.Validate.notBlank;
 

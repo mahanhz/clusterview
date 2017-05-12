@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.appui.web.adapter;
 
-import org.amhzing.clusterview.app.application.UserService;
-import org.amhzing.clusterview.app.domain.model.user.ImmutablePassword;
+import org.amhzing.clusterview.core.boundary.enter.UserService;
+import org.amhzing.clusterview.core.domain.user.ImmutablePassword;
 import org.springframework.stereotype.Service;
 
 import static org.apache.commons.lang3.Validate.notBlank;

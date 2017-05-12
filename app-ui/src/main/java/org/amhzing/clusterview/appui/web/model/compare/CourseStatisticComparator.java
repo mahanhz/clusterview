@@ -1,6 +1,6 @@
 package org.amhzing.clusterview.appui.web.model.compare;
 
-import org.amhzing.clusterview.app.util.NaturalOrderComparator;
+import org.amhzing.clusterview.adapter.web.api.compare.NaturalOrderComparator;
 import org.amhzing.clusterview.appui.web.model.CourseStatisticModel;
 
 import java.util.Comparator;

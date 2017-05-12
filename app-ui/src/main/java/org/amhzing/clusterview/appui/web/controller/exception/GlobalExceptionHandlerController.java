@@ -1,7 +1,7 @@
 package org.amhzing.clusterview.appui.web.controller.exception;
 
 import com.fasterxml.uuid.Generators;
-import org.amhzing.clusterview.app.exception.NotFoundException;
+import org.amhzing.clusterview.adapter.web.NotFoundException;
 import org.amhzing.clusterview.appui.web.controller.UIGlobalExceptionMarker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
