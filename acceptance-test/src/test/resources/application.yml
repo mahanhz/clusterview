@@ -5,4 +5,5 @@ management:
 
 spring:
   datasource:
+    continue-on-error: true
     platform: h2

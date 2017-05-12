@@ -1,9 +1,9 @@
 package org.amhzing.clusterview.acceptancetest;
 
-import org.amhzing.clusterview.app.infra.jpa.repository.ClusterJpaRepository;
-import org.amhzing.clusterview.app.infra.jpa.repository.TeamJpaRepository;
-import org.amhzing.clusterview.app.infra.jpa.repository.stats.StatsHistoryJpaRepository;
 import org.amhzing.clusterview.appui.MainUIApplication;
+import org.amhzing.clusterview.data.jpa.repository.ClusterJpaRepository;
+import org.amhzing.clusterview.data.jpa.repository.TeamJpaRepository;
+import org.amhzing.clusterview.data.jpa.repository.stats.StatsHistoryJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;

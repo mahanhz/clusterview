@@ -1,8 +1,8 @@
 package org.amhzing.clusterview.acceptancetest.helper;
 
 import com.google.common.collect.ImmutableSet;
-import org.amhzing.clusterview.app.infra.jpa.mapping.*;
-import org.amhzing.clusterview.app.infra.jpa.repository.ClusterJpaRepository;
+import org.amhzing.clusterview.data.jpa.entity.*;
+import org.amhzing.clusterview.data.jpa.repository.ClusterJpaRepository;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
