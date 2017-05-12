@@ -152,21 +152,42 @@ ext {
 	junitVersion = '4.12'
 	assertJVersion = '3.6.2'
 	mockitoVersion = '2.7.22'
+
+	cucumberVersion = '1.2.5'
+	jsoupVersion = '1.10.2'
 }
 
 ext.app_tests = [
+		acceptance_test: [
+				"info.cukes:cucumber-junit:${cucumberVersion}",
+				"info.cukes:cucumber-java8:${cucumberVersion}",
+				"info.cukes:cucumber-spring:${cucumberVersion}",
+				"org.jsoup:jsoup:${jsoupVersion}"
+		],
+		spring_test: [
+				"org.springframework.boot:spring-boot-starter-test",
+				"org.springframework.security:spring-security-test:${springSecurityTestVersion}"
+		],
 		unit_test: [
 				"junit:junit:${junitVersion}",
 				"org.assertj:assertj-core:${assertJVersion}",
 				"org.mockito:mockito-core:${mockitoVersion}",
 				"nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}",
 				"pl.pragmatists:JUnitParams:${junitParamsVersion}"
-		],
-		spring_test: [
-				"org.springframework.boot:spring-boot-starter-test",
-				"org.springframework.security:spring-security-test:${springSecurityTestVersion}"
 		]
 ]
+
+
+project("acceptance-test") {
+	description = "Acceptance test"
+
+	dependencies {
+		compile project(':app-ui')
+
+		testCompile app_tests.acceptance_test
+		testCompile app_tests.spring_test
+	}
+}
 
 project("app-ui") {
 	description = "Application UI"
