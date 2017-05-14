@@ -18,7 +18,7 @@ jdk:
 script: ./gradlew check assemble -PmavenUser=x -PmavenPassword=x
 
 after_success:
-  - ./gradlew jacocoRootReport coveralls -PmavenUser=x -PmavenPassword=x
+  - ./gradlew jacocoTestReport coveralls -PmavenUser=x -PmavenPassword=x
 
 notifications:
   email: false
