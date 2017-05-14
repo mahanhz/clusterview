@@ -1,6 +1,5 @@
 rootProject.name="Cluster View"
 
-include "app"
 include "application:adapter"
 include "application:configuration"
 include "application:core"
