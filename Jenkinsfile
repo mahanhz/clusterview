@@ -41,6 +41,23 @@ stage ('Build') {
     }
 }
 
+stage ('Integration test') {
+    node {
+        timeout(time: 10, unit: 'MINUTES') {
+            try {
+                unstash 'source'
+
+                grantExecutePermission 'gradlew'
+
+                gradle 'integrationTest'
+            } catch(err) {
+                junit '**/build/test-results/*.xml'
+                throw err
+            }
+        }
+    }
+}
+
 if (!isMasterBranch()) {
     // one at a time!
     lock('lock-merge') {
