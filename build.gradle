@@ -181,7 +181,7 @@ ext.app_tests = [
 		]
 ]
 
-project("acceptance-test") {
+project("test:acceptance-test") {
 	description = "Acceptance test"
 
 	dependencies {
@@ -192,7 +192,7 @@ project("acceptance-test") {
 	}
 }
 
-project("integration-test") {
+project("test:integration-test") {
 	description = "Integration test"
 
 	dependencies {
@@ -204,7 +204,7 @@ project("integration-test") {
 	}
 }
 
-project("smoke-test") {
+project("test:smoke-test") {
 	description = "Acceptance test"
 
 	dependencies {

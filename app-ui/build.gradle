@@ -25,7 +25,7 @@ bootRun {
 
 // Since app-ui is a spring boot executable jar
 // then the repackaging needs to be run after all dependent projects are compiled
-def dependentProjects = [':acceptance-test', ':smoke-test']
+def dependentProjects = [':test:acceptance-test', ':test:smoke-test']
 bootRepackage{
 	shouldRunAfter dependentProjects.collect { project(it).tasks.withType(JavaCompile) }
 }
