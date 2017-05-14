@@ -8,13 +8,3 @@ task integrationTest(type:Test) {
 
 	include integrationTests
 }
-
-task copyAppResources(type: Copy) {
-
-	from('../app/src/main/resources') {
-		include 'data-h2.sql'
-	}
-	into 'build/resources/test'
-}
-
-integrationTest.dependsOn copyAppResources

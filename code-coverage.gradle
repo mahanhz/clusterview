@@ -1,17 +1,16 @@
 def publishedProjects = subprojects.findAll {
 	(it.displayName.contains(":application:") && !it.displayName.contains(":application:periphery")) ||
-			it.name == 'app-ui'
+			it.name == 'app-ui' ||
+			it.name == 'integration-test"'
 }
 
 task jacocoMerge(type: JacocoMerge) {
-	publishedProjects.each { subproject ->
-		executionData subproject.tasks.withType(Test)
-	}
+	executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 }
 
 task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
 	description = 'Generates an aggregate report from all subprojects'
-	dependsOn publishedProjects.test , jacocoMerge
+	dependsOn publishedProjects.test, jacocoMerge
 
 	additionalSourceDirs = files(publishedProjects.sourceSets.main.allSource.srcDirs)
 	sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
