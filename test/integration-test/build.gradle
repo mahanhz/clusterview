@@ -1,4 +1,4 @@
-def integrationTests = 'org/amhzing/clusterview/integrationtest/**'
+def integrationTests = '**'
 
 test {
 	exclude integrationTests
