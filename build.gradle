@@ -103,7 +103,7 @@ configure(subprojects - frameworkAgnostic.collect { project(it) }) {
 	}
 }
 
-configure([project(':app'), project(':application'), project(':app-ui')]) {
+configure([project(':application'), project(':app-ui')]) {
 	apply plugin: 'org.springframework.boot'
 }
 
