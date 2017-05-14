@@ -2,7 +2,7 @@ buildscript {
 	ext {
 		NEXUS_REPO_URL = 'http://192.168.1.31:8082/nexus/content/repositories'
 
-		springBootVersion = '1.5.2.RELEASE'
+		springBootVersion = '1.5.3.RELEASE'
 		propDepsVersion = '0.0.8'
 		pitestVersion = '1.1.11'
 		owaspDepCheckVersion = '1.4.5'
@@ -92,7 +92,8 @@ configure(allprojects) {
 	}
 }
 
-configure(subprojects - project(":application:core")) {
+def frameworkAgnostic = [':application:core', ':application:adapter']
+configure(subprojects - frameworkAgnostic.collect { project(it) }) {
 	apply plugin: 'io.spring.dependency-management'
 
 	dependencyManagement {
@@ -106,9 +107,6 @@ configure([project(':app'), project(':application'), project(':app-ui')]) {
 	apply plugin: 'org.springframework.boot'
 }
 
-task wrapper(type: Wrapper) {
-	gradleVersion = '3.4'
-}
 
 ext {
 	jcacheVersion = '1.0.0'
@@ -181,225 +179,11 @@ ext.app_tests = [
 		]
 ]
 
-project("test:acceptance-test") {
-	description = "Acceptance test"
-
-	dependencies {
-		compile project(':app-ui')
-
-		testCompile app_tests.acceptance_test
-		testCompile app_tests.spring_test
-	}
+task wrapper(type: Wrapper) {
+	gradleVersion = '3.5'
 }
 
-project("test:integration-test") {
-	description = "Integration test"
+apply from: 'application.gradle'
+apply from: 'test.gradle'
+apply from: 'code-coverage.gradle'
 
-	dependencies {
-		compile project(':application')
-
-		testCompile app_tests.integration_test
-		testCompile app_tests.unit_test
-		testCompile app_tests.spring_test
-	}
-}
-
-project("test:smoke-test") {
-	description = "Acceptance test"
-
-	dependencies {
-		compile project(':app-ui')
-
-		testCompile app_tests.spring_test
-	}
-}
-
-project("app-ui") {
-	description = "Application UI"
-
-	dependencies {
-		compile project(':application')
-
-		compile ("org.springframework.boot:spring-boot-starter-thymeleaf")
-		compile ("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:${thymeleafSpringSecurityVersion}")
-
-		compile ("org.stagemonitor:stagemonitor-web:${stageMonitorVersion}")
-		compile ("org.stagemonitor:stagemonitor-logging:${stageMonitorVersion}")
-
-		compile ("org.webjars:jquery:${webjarsJqueryVersion}")
-		compile ("org.webjars:bootstrap:${webjarsBootstrapVersion}")
-		compile ("org.webjars:font-awesome:${webjarsFontAwesomeVersion}")
-		compile ("org.webjars:modernizr:${webjarsModernizrVersion}")
-		compile ("org.webjars:webjars-locator:${webjarsLocatorVersion}")
-
-		testCompile ('org.springframework.boot:spring-boot-starter-test')
-		testCompile ("org.springframework.security:spring-security-test:${springSecurityTestVersion}")
-		testCompile ("pl.pragmatists:JUnitParams:${junitParamsVersion}")
-		testCompile ("org.meanbean:meanbean:${meanBeanVersion}")
-		testCompile ("nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}")
-		testCompile ("org.jsoup:jsoup:${jsoupVersion}")
-
-		optional ("org.springframework.boot:spring-boot-devtools")
-	}
-}
-
-project("application") {
-	description = "Application"
-
-	dependencies {
-		compile project(':application:configuration')
-
-		optional ("org.springframework.boot:spring-boot-devtools")
-	}
-}
-
-project("application:adapter") {
-	description = "Application adapter"
-
-	dependencies {
-		compile project(':application:core')
-
-		compile ("com.fasterxml.jackson.core:jackson-core:${jacksonVersion}")
-		compile ("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
-		compile ("org.apache.commons:commons-lang3:${commonsLangVersion}")
-		compile ("org.hashids:hashids:${hashidsVersion}")
-
-		provided group: 'org.immutables', name: 'value', version: "${immutablesVersion}"
-
-		testCompile app_tests.unit_test
-	}
-}
-
-project("application:configuration") {
-	description = "Application configuration"
-
-	dependencies {
-		compile project(':application:adapter')
-		compile project(':application:core')
-		compile project(':application:periphery:data')
-		compile project(':application:periphery:web')
-
-		compile ("org.springframework.boot:spring-boot-starter-security")
-		compile ('org.springframework.boot:spring-boot-starter-actuator')
-		compile ('org.springframework.boot:spring-boot-actuator-docs')
-		compile ('org.springframework.boot:spring-boot-starter-aop')
-		compile ('org.springframework.retry:spring-retry')
-
-		compile ("com.h2database:h2")
-
-		compile ("net.logstash.logback:logstash-logback-encoder:${logstashLogbackVersion}")
-		compile ("org.codehaus.janino:janino:${janinoVersion}")
-
-		compile ("io.springfox:springfox-swagger2:${springfoxSwagger2Version}")
-		compile ("io.springfox:springfox-swagger-ui:${springfoxSwagger2Version}")
-
-		compile ("org.apache.commons:commons-lang3:${commonsLangVersion}")
-
-		testCompile app_tests.unit_test
-		testCompile app_tests.spring_test
-	}
-}
-
-project("application:core") {
-	description = "Application core"
-
-	dependencies {
-		compile group: 'com.google.guava', name: 'guava', version: "${guavaVersion}"
-		compile group: 'org.apache.commons', name: 'commons-lang3', version: "${commonsLangVersion}"
-		compile group: 'commons-validator', name: 'commons-validator', version: "${commonsValidatorVersion}"
-		compile group: 'com.google.code.findbugs', name: 'jsr305', version: "${nullableVersion}"
-
-		provided group: 'org.immutables', name: 'value', version: "${immutablesVersion}"
-
-		testCompile app_tests.unit_test
-	}
-}
-
-project("application:periphery:data") {
-	description = "Application periphery data"
-
-	// Need to override version to be 5.2.3 or greater so that we can use "hibernate.jdbc.time_zone: UTC"
-	ext['hibernate.version'] = '5.2.9.Final'
-
-	dependencies {
-		compile project(':application:core')
-
-		compile("org.springframework.boot:spring-boot-starter-data-jpa")
-		compile("org.springframework.boot:spring-boot-starter-security")
-		compile("org.springframework.boot:spring-boot-starter-cache")
-		compile("org.apache.commons:commons-lang3:${commonsLangVersion}")
-		compile("javax.cache:cache-api:${jcacheVersion}")
-		compile("org.ehcache:ehcache:${ehcacheVersion}")
-
-		testCompile app_tests.unit_test
-		testCompile app_tests.spring_test
-	}
-}
-
-project("application:periphery:web") {
-	description = "Application periphery web"
-
-	dependencies {
-		compile project(':application:adapter')
-
-		compile("org.springframework.boot:spring-boot-starter-web")
-		compile("org.springframework.boot:spring-boot-starter-hateoas")
-		compile("org.springframework.data:spring-data-rest-hal-browser")
-		compile("org.springframework.boot:spring-boot-starter-security")
-		compile("org.springframework.boot:spring-boot-starter-aop")
-		compile("com.fasterxml.uuid:java-uuid-generator:${jugVersion}")
-		compile("org.hashids:hashids:${hashidsVersion}")
-		compile("org.apache.commons:commons-collections4:${commonsCollectionsVersion}")
-
-		testCompile app_tests.unit_test
-		testCompile app_tests.spring_test
-	}
-}
-
-def publishedProjects = subprojects.findAll { it.name == 'app' || it.name == 'app-ui' }
-task jacocoMerge(type: JacocoMerge) {
-	publishedProjects.each { subproject ->
-		executionData subproject.tasks.withType(Test)
-	}
-}
-
-task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
-	description = 'Generates an aggregate report from all subprojects'
-	dependsOn publishedProjects.test , jacocoMerge
-
-	additionalSourceDirs = files(publishedProjects.sourceSets.main.allSource.srcDirs)
-	sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
-	classDirectories = files(publishedProjects.sourceSets.main.output)
-	//executionData = files(publishedProjects.jacocoTestReport.executionData)
-	executionData jacocoMerge.destinationFile
-
-	reports {
-		html.enabled = true // human readable
-		xml.enabled = true // required by coveralls
-	}
-
-	afterEvaluate {
-		classDirectories = files(classDirectories.files.collect {
-			fileTree(dir: it,
-					exclude: ['org/amhzing/clusterview/app/configuration/**',
-							  'org/amhzing/clusterview/appui/configuration/**'])
-		})
-	}
-
-	doFirst {
-		executionData = files(executionData.findAll { it.exists() })
-	}
-}
-
-coveralls {
-	sourceDirs = publishedProjects.sourceSets.main.allSource.srcDirs.flatten()
-	jacocoReportPath = "${buildDir}/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
-}
-
-tasks.coveralls {
-	group = 'Coverage reports'
-	description = 'Uploads the aggregated coverage report to Coveralls'
-
-	dependsOn jacocoRootReport
-	onlyIf { true }
-}

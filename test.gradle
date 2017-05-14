@@ -1,0 +1,32 @@
+project("test:acceptance-test") {
+	description = "Acceptance test"
+
+	dependencies {
+		compile project(':app-ui')
+
+		testCompile app_tests.acceptance_test
+		testCompile app_tests.spring_test
+	}
+}
+
+project("test:integration-test") {
+	description = "Integration test"
+
+	dependencies {
+		compile project(':application')
+
+		testCompile app_tests.integration_test
+		testCompile app_tests.unit_test
+		testCompile app_tests.spring_test
+	}
+}
+
+project("test:smoke-test") {
+	description = "Acceptance test"
+
+	dependencies {
+		compile project(':app-ui')
+
+		testCompile app_tests.spring_test
+	}
+}

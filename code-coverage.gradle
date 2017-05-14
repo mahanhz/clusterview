@@ -1,0 +1,47 @@
+def publishedProjects = subprojects.findAll { it.name == 'app' || it.name == 'app-ui' }
+task jacocoMerge(type: JacocoMerge) {
+	publishedProjects.each { subproject ->
+		executionData subproject.tasks.withType(Test)
+	}
+}
+
+task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
+	description = 'Generates an aggregate report from all subprojects'
+	dependsOn publishedProjects.test , jacocoMerge
+
+	additionalSourceDirs = files(publishedProjects.sourceSets.main.allSource.srcDirs)
+	sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
+	classDirectories = files(publishedProjects.sourceSets.main.output)
+	//executionData = files(publishedProjects.jacocoTestReport.executionData)
+	executionData jacocoMerge.destinationFile
+
+	reports {
+		html.enabled = true // human readable
+		xml.enabled = true // required by coveralls
+	}
+
+	afterEvaluate {
+		classDirectories = files(classDirectories.files.collect {
+			fileTree(dir: it,
+					exclude: ['org/amhzing/clusterview/app/configuration/**',
+							  'org/amhzing/clusterview/appui/configuration/**'])
+		})
+	}
+
+	doFirst {
+		executionData = files(executionData.findAll { it.exists() })
+	}
+}
+
+coveralls {
+	sourceDirs = publishedProjects.sourceSets.main.allSource.srcDirs.flatten()
+	jacocoReportPath = "${buildDir}/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
+}
+
+tasks.coveralls {
+	group = 'Coverage reports'
+	description = 'Uploads the aggregated coverage report to Coveralls'
+
+	dependsOn jacocoRootReport
+	onlyIf { true }
+}
