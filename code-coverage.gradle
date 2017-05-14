@@ -1,11 +1,12 @@
 def publishedProjects = subprojects.findAll {
-	(it.path.contains(":application:") && it.name != "periphery") ||
-			it.name == 'app-ui'
+	((it.path.contains(":application:") && it.name != "periphery") ||
+			it.name == 'app-ui' ||
+			it.name == 'integration-test')
 }
 
 task jacocoMerge(type: JacocoMerge) {
 	publishedProjects.each { subproject ->
-		executionData subproject.tasks.withType(Test)
+		executionData fileTree(subproject.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 	}
 	doFirst {
 		executionData = files(executionData.findAll { it.exists() })
