@@ -5,7 +5,9 @@ def publishedProjects = subprojects.findAll {
 }
 
 task jacocoMerge(type: JacocoMerge) {
-	executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+	publishedProjects.each { subproject ->
+		executionData fileTree(subproject.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+	}
 }
 
 task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
