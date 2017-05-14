@@ -1,5 +1,5 @@
 def publishedProjects = subprojects.findAll {
-	(it.displayName.contains(":application:") && !it.displayName.contains(":application:periphery")) ||
+	(it.path.contains(":application:") && it.name != "periphery") ||
 			it.name == 'app-ui'
 }
 
