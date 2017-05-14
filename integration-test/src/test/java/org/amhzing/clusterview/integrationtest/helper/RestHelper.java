@@ -11,6 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class RestHelper {
 
+    public static final String COUNTRY = "se";
+
     private RestHelper() {
     }
 

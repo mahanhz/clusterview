@@ -1,18 +1,14 @@
 package org.amhzing.clusterview.integrationtest.web.controller.appnav;
 
 import com.google.common.collect.ImmutableList;
-import org.amhzing.clusterview.core.boundary.enter.ClusterService;
-import org.amhzing.clusterview.core.boundary.enter.StatisticHistoryService;
-import org.amhzing.clusterview.core.boundary.enter.StatisticService;
-import org.amhzing.clusterview.web.controller.appnav.StatisticRestController;
-import org.amhzing.clusterview.core.domain.Cluster;
-import org.amhzing.clusterview.core.domain.Country;
-import org.amhzing.clusterview.core.domain.Region;
+import org.amhzing.clusterview.adapter.web.ClusterAdapter;
+import org.amhzing.clusterview.adapter.web.StatisticAdapter;
 import org.amhzing.clusterview.core.domain.statistic.ActivityStatistic;
-import org.amhzing.clusterview.core.domain.statistic.CourseStatistic;
+import org.amhzing.clusterview.core.domain.statistic.DatedActivityStatistic;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
 import org.amhzing.clusterview.integrationtest.helper.RestHelper;
 import org.amhzing.clusterview.integrationtest.security.WithMockCustomUser;
+import org.amhzing.clusterview.web.controller.appnav.StatisticRestController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +18,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
-import static org.amhzing.clusterview.web.controller.appnav.StatisticRestController.ACTIVITY_STATS;
-import static org.amhzing.clusterview.web.controller.appnav.StatisticRestController.COURSE_STATS;
-import static org.amhzing.clusterview.web.controller.appnav.StatisticRestController.HISTORY;
-import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.activityStatistic;
-import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.courseStatistic;
-import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.datedActivityStatistic;
+import java.util.List;
+
+import static org.amhzing.clusterview.adapter.web.util.StatisticFactory.*;
+import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.*;
+import static org.amhzing.clusterview.integrationtest.helper.RestHelper.COUNTRY;
 import static org.amhzing.clusterview.integrationtest.helper.SchemaValidationHelper.assertSuccessfulSchemaValidation;
+import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
+import static org.amhzing.clusterview.web.controller.appnav.StatisticRestController.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(StatisticRestController.class)
@@ -42,19 +37,15 @@ public class StatisticRestControllerSchemaValidatorTest {
     private MockMvc mvc;
 
     @MockBean
-    private StatisticService<ActivityStatistic> activityStatisticService;
+    private StatisticAdapter statisticAdapter;
     @MockBean
-    private StatisticService<CourseStatistic> courseStatisticService;
-    @MockBean
-    private StatisticHistoryService statisticHistoryService;
-    @MockBean
-    private ClusterService clusterService;
+    private ClusterAdapter clusterAdapter;
 
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_validate_activity_stats_country_schema() throws Exception {
 
-        given(activityStatisticService.statistics(any(Country.Id.class))).willReturn(activityStatistic());
+        given(statisticAdapter.countryActivityStatistics(COUNTRY)).willReturn(activitiesDto(activityStatistic()));
 
         final ResultActions result = RestHelper.get(mvc, BASE_PATH + "/statsview/se/" + ACTIVITY_STATS);
 
@@ -65,7 +56,7 @@ public class StatisticRestControllerSchemaValidatorTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_validate_activity_stats_region_schema() throws Exception {
 
-        given(activityStatisticService.statistics(any(Region.Id.class))).willReturn(activityStatistic());
+        given(statisticAdapter.regionActivityStatistics("central")).willReturn(activitiesDto(activityStatistic()));
 
         final ResultActions result = RestHelper.get(mvc, BASE_PATH + "/statsview/se/central/" + ACTIVITY_STATS);
 
@@ -76,7 +67,7 @@ public class StatisticRestControllerSchemaValidatorTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_validate_activity_stats_cluster_schema() throws Exception {
 
-        given(activityStatisticService.statistics(any(Cluster.Id.class))).willReturn(activityStatistic());
+        given(statisticAdapter.clusterActivityStatistics("cluster1")).willReturn(activitiesDto(activityStatistic()));
 
         final ResultActions result = RestHelper.get(mvc, BASE_PATH + "/statsview/se/central/cluster1/" + ACTIVITY_STATS);
 
@@ -87,7 +78,7 @@ public class StatisticRestControllerSchemaValidatorTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_validate_course_stats_country_schema() throws Exception {
 
-        given(courseStatisticService.statistics(any(Country.Id.class))).willReturn(courseStatistic());
+        given(statisticAdapter.countryCourseStatistics(COUNTRY)).willReturn(coursesDto(courseStatistic()));
 
         final ResultActions result = RestHelper.get(mvc, BASE_PATH + "/statsview/se/" + COURSE_STATS);
 
@@ -98,7 +89,7 @@ public class StatisticRestControllerSchemaValidatorTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_validate_course_stats_region_schema() throws Exception {
 
-        given(courseStatisticService.statistics(any(Region.Id.class))).willReturn(courseStatistic());
+        given(statisticAdapter.regionCourseStatistics("northern")).willReturn(coursesDto(courseStatistic()));
 
         final ResultActions result = RestHelper.get(mvc, BASE_PATH + "/statsview/se/northern/" + COURSE_STATS);
 
@@ -109,7 +100,7 @@ public class StatisticRestControllerSchemaValidatorTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_validate_course_stats_cluster_schema() throws Exception {
 
-        given(courseStatisticService.statistics(any(Cluster.Id.class))).willReturn(courseStatistic());
+        given(statisticAdapter.clusterCourseStatistics("cluster1")).willReturn(coursesDto(courseStatistic()));
 
         final ResultActions result = RestHelper.get(mvc, BASE_PATH + "/statsview/se/northern/cluster1/" + COURSE_STATS);
 
@@ -120,8 +111,10 @@ public class StatisticRestControllerSchemaValidatorTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_validate_stats_history_cluster_schema() throws Exception {
 
-        given(activityStatisticService.statistics(any(Cluster.Id.class))).willReturn(activityStatistic());
-        given(statisticHistoryService.history(any(Cluster.Id.class))).willReturn(ImmutableList.of(datedActivityStatistic()));
+        final ActivityStatistic currentStats = activityStatistic();
+        final List<DatedActivityStatistic> datedStats = ImmutableList.of(datedActivityStatistic());
+
+        given(statisticAdapter.clusterHistory("cluster1")).willReturn(historicalActivitiesDto(currentStats, datedStats));
 
         final ResultActions result = RestHelper.get(mvc, BASE_PATH + "/statsview" + HISTORY + "/se/cluster1");
 

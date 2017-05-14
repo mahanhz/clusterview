@@ -3,17 +3,13 @@ package org.amhzing.clusterview.integrationtest.web.controller.appnav;
 import com.google.common.collect.ImmutableList;
 import com.jayway.jsonpath.JsonPath;
 import net.minidev.json.JSONArray;
-import org.amhzing.clusterview.core.boundary.enter.ClusterService;
-import org.amhzing.clusterview.core.boundary.enter.StatisticHistoryService;
-import org.amhzing.clusterview.core.boundary.enter.StatisticService;
-import org.amhzing.clusterview.web.controller.appnav.StatisticRestController;
-import org.amhzing.clusterview.core.domain.Cluster;
-import org.amhzing.clusterview.core.domain.Country;
-import org.amhzing.clusterview.core.domain.Region;
+import org.amhzing.clusterview.adapter.web.ClusterAdapter;
+import org.amhzing.clusterview.adapter.web.StatisticAdapter;
 import org.amhzing.clusterview.core.domain.statistic.ActivityStatistic;
-import org.amhzing.clusterview.core.domain.statistic.CourseStatistic;
+import org.amhzing.clusterview.core.domain.statistic.DatedActivityStatistic;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
 import org.amhzing.clusterview.integrationtest.security.WithMockCustomUser;
+import org.amhzing.clusterview.web.controller.appnav.StatisticRestController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +18,18 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
+import static org.amhzing.clusterview.adapter.web.util.ClusterDtoFactory.clustersDTO;
+import static org.amhzing.clusterview.adapter.web.util.StatisticFactory.*;
+import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.*;
+import static org.amhzing.clusterview.integrationtest.helper.RestHelper.COUNTRY;
+import static org.amhzing.clusterview.integrationtest.helper.RestHelper.parseJson;
 import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
 import static org.amhzing.clusterview.web.controller.appnav.CommonLinks.*;
-import static org.amhzing.clusterview.web.controller.appnav.StatisticRestController.ACTIVITY_STATS;
-import static org.amhzing.clusterview.web.controller.appnav.StatisticRestController.COURSE_STATS;
-import static org.amhzing.clusterview.web.controller.appnav.StatisticRestController.HISTORY;
-import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.*;
-import static org.amhzing.clusterview.integrationtest.helper.RestHelper.parseJson;
+import static org.amhzing.clusterview.web.controller.appnav.StatisticRestController.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.hateoas.Link.REL_SELF;
 
 @RunWith(SpringRunner.class)
@@ -43,19 +41,15 @@ public class StatisticRestControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private StatisticService<ActivityStatistic> activityStatisticService;
+    private StatisticAdapter statisticAdapter;
     @MockBean
-    private StatisticService<CourseStatistic> courseStatisticService;
-    @MockBean
-    private StatisticHistoryService statisticHistoryService;
-    @MockBean
-    private ClusterService clusterService;
+    private ClusterAdapter clusterAdapter;
 
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_activity_stats_links_for_country() throws Exception {
 
-        given(activityStatisticService.statistics(any(Country.Id.class))).willReturn(activityStatistic());
+        given(statisticAdapter.countryActivityStatistics(COUNTRY)).willReturn(activitiesDto(activityStatistic()));
 
         final Object document = parseJson(mvc, BASE_PATH + "/statsview/se/" + ACTIVITY_STATS);
 
@@ -68,7 +62,7 @@ public class StatisticRestControllerTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_activity_stats_links_for_region() throws Exception {
 
-        given(activityStatisticService.statistics(any(Region.Id.class))).willReturn(activityStatistic());
+        given(statisticAdapter.regionActivityStatistics("central")).willReturn(activitiesDto(activityStatistic()));
 
         final Object document =  parseJson(mvc, BASE_PATH + "/statsview/se/central/" + ACTIVITY_STATS);
 
@@ -81,7 +75,7 @@ public class StatisticRestControllerTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_activity_stats_links_for_cluster() throws Exception {
 
-        given(activityStatisticService.statistics(any(Cluster.Id.class))).willReturn(activityStatistic());
+        given(statisticAdapter.clusterActivityStatistics("stockholm")).willReturn(activitiesDto(activityStatistic()));
 
         final Object document =  parseJson(mvc, BASE_PATH + "/statsview/se/central/stockholm/" + ACTIVITY_STATS);
 
@@ -95,7 +89,7 @@ public class StatisticRestControllerTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_course_stats_links_for_country() throws Exception {
 
-        given(courseStatisticService.statistics(any(Country.Id.class))).willReturn(courseStatistic());
+        given(statisticAdapter.countryCourseStatistics(COUNTRY)).willReturn(coursesDto(courseStatistic()));
 
         final Object document =  parseJson(mvc, BASE_PATH + "/statsview/se/" + COURSE_STATS);
 
@@ -108,7 +102,7 @@ public class StatisticRestControllerTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_course_stats_links_for_region() throws Exception {
 
-        given(courseStatisticService.statistics(any(Region.Id.class))).willReturn(courseStatistic());
+        given(statisticAdapter.regionCourseStatistics("northern")).willReturn(coursesDto(courseStatistic()));
 
         final Object document =  parseJson(mvc, BASE_PATH + "/statsview/se/northern/" + COURSE_STATS);
 
@@ -121,7 +115,7 @@ public class StatisticRestControllerTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_course_stats_links_for_cluster() throws Exception {
 
-        given(courseStatisticService.statistics(any(Cluster.Id.class))).willReturn(courseStatistic());
+        given(statisticAdapter.clusterCourseStatistics("cluster1")).willReturn(coursesDto(courseStatistic()));
 
         final Object document =  parseJson(mvc, BASE_PATH + "/statsview/se/northern/cluster1/" + COURSE_STATS);
 
@@ -135,8 +129,7 @@ public class StatisticRestControllerTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_stats_history_links_for_country() throws Exception {
 
-        given(courseStatisticService.statistics(any(Country.Id.class))).willReturn(courseStatistic());
-        given(clusterService.clusters(any(Country.Id.class))).willReturn(clustersIds());
+        given(clusterAdapter.clusters(COUNTRY)).willReturn(clustersDTO(clustersIds()));
 
         final Object document =  parseJson(mvc, BASE_PATH + "/statsview" + HISTORY + "/se");
 
@@ -152,8 +145,10 @@ public class StatisticRestControllerTest {
     @WithMockCustomUser(username = "testU", password = "NotSaying")
     public void should_get_stats_history_links_for_cluster() throws Exception {
 
-        given(activityStatisticService.statistics(any(Cluster.Id.class))).willReturn(activityStatistic());
-        given(statisticHistoryService.history(any(Cluster.Id.class))).willReturn(ImmutableList.of(datedActivityStatistic()));
+        final ActivityStatistic currentStats = activityStatistic();
+        final List<DatedActivityStatistic> datedStats = ImmutableList.of(datedActivityStatistic());
+
+        given(statisticAdapter.clusterHistory("cluster1")).willReturn(historicalActivitiesDto(currentStats, datedStats));
 
         final Object document =  parseJson(mvc, BASE_PATH + "/statsview" + HISTORY + "/se/cluster1");
 

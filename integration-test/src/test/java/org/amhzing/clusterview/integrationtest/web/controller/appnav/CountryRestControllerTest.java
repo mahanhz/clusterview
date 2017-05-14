@@ -16,6 +16,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
+import static org.amhzing.clusterview.integrationtest.helper.RestHelper.COUNTRY;
 import static org.amhzing.clusterview.integrationtest.helper.RestHelper.parseJson;
 import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
 import static org.amhzing.clusterview.web.controller.appnav.CommonLinks.*;
@@ -28,7 +31,6 @@ import static org.springframework.hateoas.Link.REL_SELF;
 @TestOffline
 public class CountryRestControllerTest {
 
-    public static final String COUNTRY = "se";
     public static final String REGION_1 = "central";
     public static final String REGION_2 = "northern";
     public static final String REGION_3 = "southern";
@@ -55,7 +57,7 @@ public class CountryRestControllerTest {
                                                    REL_STATS_ACTIVITY, REL_STATS_COURSE, REL_STATS_HISTORY);
     }
 
-    private ImmutableList<RegionDTO> regions() {
+    private List<RegionDTO> regions() {
         return ImmutableList.of(region(REGION_1),
                                 region(REGION_2),
                                 region(REGION_3));

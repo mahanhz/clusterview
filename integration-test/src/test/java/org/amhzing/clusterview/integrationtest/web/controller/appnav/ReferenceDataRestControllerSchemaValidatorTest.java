@@ -21,6 +21,7 @@ import static org.amhzing.clusterview.adapter.web.util.ActivityDtoFactory.activi
 import static org.amhzing.clusterview.adapter.web.util.ActivityDtoFactory.coreActivitiesDTO;
 import static org.amhzing.clusterview.adapter.web.util.ClusterDtoFactory.clustersDTO;
 import static org.amhzing.clusterview.integrationtest.helper.DomainModelHelper.*;
+import static org.amhzing.clusterview.integrationtest.helper.RestHelper.COUNTRY;
 import static org.amhzing.clusterview.integrationtest.helper.SchemaValidationHelper.assertSuccessfulSchemaValidation;
 import static org.amhzing.clusterview.web.controller.RestControllerPath.BASE_PATH;
 import static org.amhzing.clusterview.web.controller.util.UserUtil.USER_COUNTRY;
@@ -34,7 +35,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestOffline
 public class ReferenceDataRestControllerSchemaValidatorTest {
 
-    public static final String COUNTRY = "se";
     @Autowired
     private MockMvc mvc;
 
