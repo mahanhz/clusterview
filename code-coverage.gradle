@@ -1,12 +1,14 @@
 def publishedProjects = subprojects.findAll {
 	(it.displayName.contains(":application:") && !it.displayName.contains(":application:periphery")) ||
-			it.name == 'app-ui' ||
-			it.name == 'integration-test"'
+			it.name == 'app-ui'
 }
 
 task jacocoMerge(type: JacocoMerge) {
 	publishedProjects.each { subproject ->
-		executionData fileTree(subproject.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+		executionData subproject.tasks.withType(Test)
+	}
+	doFirst {
+		executionData = files(executionData.findAll { it.exists() })
 	}
 }
 
@@ -17,7 +19,7 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
 	additionalSourceDirs = files(publishedProjects.sourceSets.main.allSource.srcDirs)
 	sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
 	classDirectories = files(publishedProjects.sourceSets.main.output)
-	//executionData = files(publishedProjects.jacocoTestReport.executionData)
+
 	executionData jacocoMerge.destinationFile
 
 	reports {
@@ -31,10 +33,6 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
 					exclude: ['org/amhzing/clusterview/configuration/**',
 							  'org/amhzing/clusterview/appui/configuration/**'])
 		})
-	}
-
-	doFirst {
-		executionData = files(executionData.findAll { it.exists() })
 	}
 }
 
