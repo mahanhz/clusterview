@@ -1,4 +1,8 @@
-def publishedProjects = subprojects.findAll { it.name == 'application' || it.name == 'app-ui' }
+def publishedProjects = subprojects.findAll {
+	(it.displayName.contains(":application:") && !it.displayName.contains(":application:periphery")) ||
+			it.name == 'app-ui'
+}
+
 task jacocoMerge(type: JacocoMerge) {
 	publishedProjects.each { subproject ->
 		executionData subproject.tasks.withType(Test)
