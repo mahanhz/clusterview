@@ -1,4 +1,4 @@
-def publishedProjects = subprojects.findAll { it.name == 'app' || it.name == 'app-ui' }
+def publishedProjects = subprojects.findAll { it.name == 'application' || it.name == 'app-ui' || it.name == 'test:integration-test' }
 task jacocoMerge(type: JacocoMerge) {
 	publishedProjects.each { subproject ->
 		executionData subproject.tasks.withType(Test)
@@ -23,7 +23,7 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
 	afterEvaluate {
 		classDirectories = files(classDirectories.files.collect {
 			fileTree(dir: it,
-					exclude: ['org/amhzing/clusterview/app/configuration/**',
+					exclude: ['org/amhzing/clusterview/configuration/**',
 							  'org/amhzing/clusterview/appui/configuration/**'])
 		})
 	}
