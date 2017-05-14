@@ -1,10 +1,10 @@
 package org.amhzing.clusterview.integrationtest.web.controller.appnav;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.amhzing.clusterview.adapter.web.GroupAdapter;
 import org.amhzing.clusterview.adapter.web.Obfuscator;
 import org.amhzing.clusterview.adapter.web.api.GroupDTO;
 import org.amhzing.clusterview.adapter.web.util.GroupDtoFactory;
-import org.amhzing.clusterview.core.boundary.enter.GroupService;
 import org.amhzing.clusterview.integrationtest.annotation.TestOffline;
 import org.amhzing.clusterview.integrationtest.security.WithMockCustomUser;
 import org.amhzing.clusterview.web.MediaTypes;
@@ -34,7 +34,7 @@ public class GroupEditRestControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private GroupService groupService;
+    private GroupAdapter groupAdapter;
 
     @Test
     @WithMockCustomUser(username = "testU", password = "NotSaying")
