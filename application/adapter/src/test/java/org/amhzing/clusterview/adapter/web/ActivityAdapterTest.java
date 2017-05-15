@@ -11,8 +11,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.amhzing.clusterview.core.helper.DomainModelHelper.activity;
-import static org.amhzing.clusterview.core.helper.DomainModelHelper.coreActivity;
+import static org.amhzing.clusterview.adapter.web.helper.DomainModelHelper.activity;
+import static org.amhzing.clusterview.adapter.web.helper.DomainModelHelper.coreActivity;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
