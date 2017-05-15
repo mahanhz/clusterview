@@ -50,15 +50,12 @@ configure(allprojects) {
 	apply plugin: 'propdeps-eclipse'
 
 	apply plugin: 'maven'
-	apply plugin: 'jacoco'
 	apply plugin: 'idea'
 	apply plugin: 'jdepend'
 	apply plugin: 'findbugs'
 	apply plugin: 'pmd'
 	apply plugin: 'org.owasp.dependencycheck'
 	apply plugin: 'net.researchgate.release'
-	apply plugin: 'net.saliman.cobertura'
-	apply plugin: 'com.github.kt3k.coveralls'
 	apply plugin: 'com.gorylenko.gradle-git-properties'
 	apply plugin: 'info.solidsoft.pitest'
 
@@ -82,13 +79,6 @@ configure(allprojects) {
 	jdepend {
 		sourceSets = [sourceSets.main, sourceSets.test]
 		ignoreFailures = true
-	}
-
-	jacocoTestReport {
-		reports {
-			xml.enabled = true // coveralls plugin depends on xml format report
-			html.enabled = true
-		}
 	}
 }
 

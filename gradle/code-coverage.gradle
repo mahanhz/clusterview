@@ -1,13 +1,31 @@
+def integrationTestProj = project(':test:integration-test')
+
 def publishedProjects = subprojects.findAll {
 	((it.path.contains(":application:") && it.name != "periphery") ||
 			it.name == 'app-ui' ||
-			it.name == 'integration-test')
+			it.name == integrationTestProj.getName())
+}
+
+configure(publishedProjects) {
+	apply plugin: 'net.saliman.cobertura'
+	apply plugin: 'com.github.kt3k.coveralls'
+	apply plugin: 'jacoco'
+
+	jacocoTestReport {
+		reports {
+			xml.enabled = true // coveralls plugin depends on xml format report
+			html.enabled = true
+		}
+	}
 }
 
 task jacocoMerge(type: JacocoMerge) {
 	publishedProjects.each { subproject ->
-		executionData fileTree(subproject.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+		executionData subproject.tasks.withType(Test)
 	}
+
+	executionData fileTree(integrationTestProj.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
 	doFirst {
 		executionData = files(executionData.findAll { it.exists() })
 	}
@@ -15,7 +33,7 @@ task jacocoMerge(type: JacocoMerge) {
 
 task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
 	description = 'Generates an aggregate report from all subprojects'
-	dependsOn publishedProjects.test, jacocoMerge
+	dependsOn publishedProjects.test, ':test:integration-test:integrationTest', jacocoMerge
 
 	additionalSourceDirs = files(publishedProjects.sourceSets.main.allSource.srcDirs)
 	sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
