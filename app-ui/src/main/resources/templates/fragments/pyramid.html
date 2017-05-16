@@ -5,7 +5,7 @@
     <body>
         <th:block th:fragment="pyramid">
             <th:block th:unless="${#lists.isEmpty(courseStatistics.courseStatistics) or courseStatistics.allZero()}">
-                <div id="coursesPyramid" class="modal-content" style="height: 250px; margin: 0 auto"></div>
+                <div id="coursesPyramid" style="height: 250px; margin: 0 auto"></div>
                 <table class="table table-hover coursesTable" style="display:none">
                     <thead>
                         <tr>

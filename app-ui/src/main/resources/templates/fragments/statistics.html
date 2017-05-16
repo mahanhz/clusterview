@@ -5,7 +5,7 @@
     <body>
         <th:block th:fragment="statistics">
             <th:block th:if="${statistics != null}">
-                <table class="table table-hover modal-content" th:unless="${#lists.isEmpty(statistics.coreActivities)}">
+                <table class="table table-hover" th:unless="${#lists.isEmpty(statistics.coreActivities)}">
                     <thead>
                         <tr>
                             <th></th>
@@ -23,7 +23,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <table class="table table-hover modal-content" th:unless="${#lists.isEmpty(statistics.activityQuantity)}">
+                <table class="table table-hover" th:unless="${#lists.isEmpty(statistics.activityQuantity)}">
                     <thead>
                         <tr>
                             <th></th>
