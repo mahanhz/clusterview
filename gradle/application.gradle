@@ -5,23 +5,21 @@ project("app-ui") {
 		compile project(':application')
 
 		compile ("org.springframework.boot:spring-boot-starter-thymeleaf")
-		compile ("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:${thymeleafSpringSecurityVersion}")
+		compile ("org.stagemonitor:stagemonitor-logging:${ui_versions.stageMonitor}")
+		compile ("org.stagemonitor:stagemonitor-web:${ui_versions.stageMonitor}")
+		compile ("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:${ui_versions.thymeleafSpringSecurity}")
+		compile ("org.webjars:bootstrap:${ui_versions.webjarsBootstrap}")
+		compile ("org.webjars:font-awesome:${ui_versions.webjarsFontAwesome}")
+		compile ("org.webjars:jquery:${ui_versions.webjarsJquery}")
+		compile ("org.webjars:modernizr:${ui_versions.webjarsModernizr}")
+		compile ("org.webjars:webjars-locator:${ui_versions.webjarsLocator}")
 
-		compile ("org.stagemonitor:stagemonitor-web:${stageMonitorVersion}")
-		compile ("org.stagemonitor:stagemonitor-logging:${stageMonitorVersion}")
-
-		compile ("org.webjars:jquery:${webjarsJqueryVersion}")
-		compile ("org.webjars:bootstrap:${webjarsBootstrapVersion}")
-		compile ("org.webjars:font-awesome:${webjarsFontAwesomeVersion}")
-		compile ("org.webjars:modernizr:${webjarsModernizrVersion}")
-		compile ("org.webjars:webjars-locator:${webjarsLocatorVersion}")
-
+		testCompile ("org.jsoup:jsoup:${test_versions.jsoup}")
+		testCompile ("org.meanbean:meanbean:${test_versions.meanBean}")
 		testCompile ('org.springframework.boot:spring-boot-starter-test')
-		testCompile ("org.springframework.security:spring-security-test:${springSecurityTestVersion}")
-		testCompile ("pl.pragmatists:JUnitParams:${junitParamsVersion}")
-		testCompile ("org.meanbean:meanbean:${meanBeanVersion}")
-		testCompile ("nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}")
-		testCompile ("org.jsoup:jsoup:${jsoupVersion}")
+		testCompile ("org.springframework.security:spring-security-test:${test_versions.springSecurityTest}")
+		testCompile ("nl.jqno.equalsverifier:equalsverifier:${test_versions.equalsVerifier}")
+		testCompile ("pl.pragmatists:JUnitParams:${test_versions.junitParams}")
 
 		optional ("org.springframework.boot:spring-boot-devtools")
 	}
@@ -43,12 +41,12 @@ project("application:adapter") {
 	dependencies {
 		compile project(':application:core')
 
-		compile ("com.fasterxml.jackson.core:jackson-core:${jacksonVersion}")
-		compile ("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
-		compile ("org.apache.commons:commons-lang3:${commonsLangVersion}")
-		compile ("org.hashids:hashids:${hashidsVersion}")
+		compile ("com.fasterxml.jackson.core:jackson-core:${versions.jackson}")
+		compile ("com.fasterxml.jackson.core:jackson-databind:${versions.jackson}")
+		compile ("org.apache.commons:commons-lang3:${versions.commonsLang}")
+		compile ("org.hashids:hashids:${versions.hashids}")
 
-		provided group: 'org.immutables', name: 'value', version: "${immutablesVersion}"
+		provided group: 'org.immutables', name: 'value', version: "${versions.immutables}"
 
 		testCompile app_tests.unit_test
 	}
@@ -63,24 +61,20 @@ project("application:configuration") {
 		compile project(':application:periphery:data')
 		compile project(':application:periphery:web')
 
+		compile ("com.h2database:h2")
+		compile ("io.springfox:springfox-swagger-ui:${versions.springfoxSwagger2}")
+		compile ("io.springfox:springfox-swagger2:${versions.springfoxSwagger2}")
+		compile ("net.logstash.logback:logstash-logback-encoder:${log_versions.logstashLogback}")
+		compile ("org.apache.commons:commons-lang3:${versions.commonsLang}")
+		compile ("org.codehaus.janino:janino:${log_versions.janino}")
 		compile ("org.springframework.boot:spring-boot-starter-security")
-		compile ('org.springframework.boot:spring-boot-starter-actuator')
 		compile ('org.springframework.boot:spring-boot-actuator-docs')
+		compile ('org.springframework.boot:spring-boot-starter-actuator')
 		compile ('org.springframework.boot:spring-boot-starter-aop')
 		compile ('org.springframework.retry:spring-retry')
 
-		compile ("com.h2database:h2")
-
-		compile ("net.logstash.logback:logstash-logback-encoder:${logstashLogbackVersion}")
-		compile ("org.codehaus.janino:janino:${janinoVersion}")
-
-		compile ("io.springfox:springfox-swagger2:${springfoxSwagger2Version}")
-		compile ("io.springfox:springfox-swagger-ui:${springfoxSwagger2Version}")
-
-		compile ("org.apache.commons:commons-lang3:${commonsLangVersion}")
-
-		testCompile app_tests.unit_test
 		testCompile app_tests.spring_test
+		testCompile app_tests.unit_test
 	}
 }
 
@@ -88,12 +82,12 @@ project("application:core") {
 	description = "Application core"
 
 	dependencies {
-		compile group: 'com.google.guava', name: 'guava', version: "${guavaVersion}"
-		compile group: 'org.apache.commons', name: 'commons-lang3', version: "${commonsLangVersion}"
-		compile group: 'commons-validator', name: 'commons-validator', version: "${commonsValidatorVersion}"
-		compile group: 'com.google.code.findbugs', name: 'jsr305', version: "${nullableVersion}"
+		compile group: 'com.google.code.findbugs', name: 'jsr305', version: "${versions.nullableJsr305}"
+		compile group: 'com.google.guava', name: 'guava', version: "${versions.guava}"
+		compile group: 'commons-validator', name: 'commons-validator', version: "${versions.commonsValidator}"
+		compile group: 'org.apache.commons', name: 'commons-lang3', version: "${versions.commonsLang}"
 
-		provided group: 'org.immutables', name: 'value', version: "${immutablesVersion}"
+		provided group: 'org.immutables', name: 'value', version: "${versions.immutables}"
 
 		testCompile app_tests.unit_test
 	}
@@ -108,12 +102,12 @@ project("application:periphery:data") {
 	dependencies {
 		compile project(':application:core')
 
+		compile("javax.cache:cache-api:${cache_versions.jcache}")
+		compile("org.apache.commons:commons-lang3:${versions.commonsLang}")
+		compile("org.ehcache:ehcache:${cache_versions.ehcache}")
+		compile("org.springframework.boot:spring-boot-starter-cache")
 		compile("org.springframework.boot:spring-boot-starter-data-jpa")
 		compile("org.springframework.boot:spring-boot-starter-security")
-		compile("org.springframework.boot:spring-boot-starter-cache")
-		compile("org.apache.commons:commons-lang3:${commonsLangVersion}")
-		compile("javax.cache:cache-api:${jcacheVersion}")
-		compile("org.ehcache:ehcache:${ehcacheVersion}")
 
 		testCompile app_tests.unit_test
 		testCompile app_tests.spring_test
@@ -126,16 +120,16 @@ project("application:periphery:web") {
 	dependencies {
 		compile project(':application:adapter')
 
-		compile("org.springframework.boot:spring-boot-starter-web")
-		compile("org.springframework.boot:spring-boot-starter-hateoas")
-		compile("org.springframework.data:spring-data-rest-hal-browser")
-		compile("org.springframework.boot:spring-boot-starter-security")
+		compile("com.fasterxml.uuid:java-uuid-generator:${versions.jug}")
+		compile("org.apache.commons:commons-collections4:${versions.commonsCollections}")
+		compile("org.hashids:hashids:${versions.hashids}")
 		compile("org.springframework.boot:spring-boot-starter-aop")
-		compile("com.fasterxml.uuid:java-uuid-generator:${jugVersion}")
-		compile("org.hashids:hashids:${hashidsVersion}")
-		compile("org.apache.commons:commons-collections4:${commonsCollectionsVersion}")
+		compile("org.springframework.boot:spring-boot-starter-hateoas")
+		compile("org.springframework.boot:spring-boot-starter-security")
+		compile("org.springframework.boot:spring-boot-starter-web")
+		compile("org.springframework.data:spring-data-rest-hal-browser")
 
-		testCompile app_tests.unit_test
 		testCompile app_tests.spring_test
+		testCompile app_tests.unit_test
 	}
 }

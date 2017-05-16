@@ -26,9 +26,6 @@ buildscript {
 }
 
 plugins {
-	// Build scan should be first
-	// id 'com.gradle.build-scan' version '1.4'
-
 	id "io.spring.dependency-management" version "1.0.0.RELEASE"
 	id 'net.saliman.cobertura' version '2.4.0'
 	id 'com.github.kt3k.coveralls' version '2.7.1'
@@ -59,8 +56,7 @@ configure(allprojects) {
 	apply plugin: 'com.gorylenko.gradle-git-properties'
 	apply plugin: 'info.solidsoft.pitest'
 
-	sourceCompatibility = 1.8
-	targetCompatibility = 1.8
+	sourceCompatibility = JavaVersion.VERSION_1_8
 
 	repositories {
 		mavenCentral()
@@ -97,75 +93,72 @@ configure([project(':application'), project(':app-ui')]) {
 	apply plugin: 'org.springframework.boot'
 }
 
-
 ext {
-	jcacheVersion = '1.0.0'
-	ehcacheVersion = '3.3.1'
-
-	springSecurityTestVersion = '4.2.1.RELEASE'
-	junitParamsVersion = '1.1.0'
-	meanBeanVersion = '2.0.3'
-	equalsVerifierVersion = '2.2.2'
-	jsoupVersion = '1.10.2'
-
-	guavaVersion = '21.0'
-	commonsLangVersion = '3.5'
-	commonsCollectionsVersion = '4.1'
-	commonsValidatorVersion = '1.6'
-	immutablesVersion = '2.4.6'
-	nullableVersion = '3.0.2'
-
-	hashidsVersion = '1.0.1'
-	jugVersion = '3.1.4'
-
-	jsonSchemaVersion = '1.0.21'
-	jsonSchemaValidatorVersion = '2.2.6'
-
-	logstashLogbackVersion = '4.8'
-	janinoVersion = '3.0.6'
-
-	springfoxSwagger2Version = '2.6.1'
-
-	stageMonitorVersion = '0.31.0'
-	thymeleafSpringSecurityVersion = '2.1.3.RELEASE'
-
-	webjarsJqueryVersion = '3.1.1-1'
-	webjarsBootstrapVersion = '3.3.7-1'
-	webjarsLocatorVersion = '0.32'
-	webjarsFontAwesomeVersion = '4.7.0'
-	webjarsModernizrVersion = '2.8.3'
-
-	jacksonVersion = '2.8.8'
-
-	junitVersion = '4.12'
-	assertJVersion = '3.6.2'
-	mockitoVersion = '2.7.22'
-
-	cucumberVersion = '1.2.5'
-	jsoupVersion = '1.10.2'
+	versions = [
+        commonsCollections: '4.1',
+        commonsLang: '3.5',
+        commonsValidator: '1.6',
+        guava: '21.0',
+        hashids: '1.0.1',
+        immutables: '2.4.6',
+        jackson: '2.8.8',
+        jug: '3.1.4',
+        nullableJsr305: '3.0.2',
+        springfoxSwagger2: '2.6.1'
+	]
+    cache_versions = [
+        ehcache: '3.3.1',
+        jcache: '1.0.0'
+    ]
+    log_versions = [
+        janino: '3.0.6',
+        logstashLogback: '4.8'
+    ]
+    ui_versions = [
+        stageMonitor: '0.31.0',
+        thymeleafSpringSecurity: '2.1.3.RELEASE',
+        webjarsBootstrap: '3.3.7-1',
+        webjarsFontAwesome: '4.7.0',
+        webjarsJquery: '3.1.1-1',
+        webjarsLocator: '0.32',
+        webjarsModernizr: '2.8.3'
+    ]
+	test_versions = [
+        equalsVerifier: '2.2.2',
+        jsoup: '1.10.2',
+        junitParams: '1.1.0',
+        meanBean: '2.0.3',
+        assertJ: '3.6.2',
+        cucumber: '1.2.5',
+        jsonSchemaValidator: '2.2.6',
+        jsonSchema: '1.0.21',
+        junit: '4.12',
+        mockito: '2.7.22',
+        springSecurityTest: '4.2.1.RELEASE'
+	]
 }
 
 ext.app_tests = [
 		acceptance_test: [
-				"info.cukes:cucumber-junit:${cucumberVersion}",
-				"info.cukes:cucumber-java8:${cucumberVersion}",
-				"info.cukes:cucumber-spring:${cucumberVersion}",
-				"org.jsoup:jsoup:${jsoupVersion}"
+            "info.cukes:cucumber-junit:${test_versions.cucumber}",
+            "info.cukes:cucumber-java8:${test_versions.cucumber}",
+            "info.cukes:cucumber-spring:${test_versions.cucumber}",
+            "org.jsoup:jsoup:${test_versions.jsoup}"
 		],
 		integration_test: [
-				"com.kjetland:mbknor-jackson-jsonschema_2.12:${jsonSchemaVersion}",
-				"com.github.fge:json-schema-validator:${jsonSchemaValidatorVersion}"
+            "com.kjetland:mbknor-jackson-jsonschema_2.12:${test_versions.jsonSchema}",
+            "com.github.fge:json-schema-validator:${test_versions.jsonSchemaValidator}"
 		],
 		spring_test: [
-				"org.springframework.boot:spring-boot-starter-test",
-				"org.springframework.security:spring-security-test:${springSecurityTestVersion}"
+            "org.springframework.boot:spring-boot-starter-test",
+            "org.springframework.security:spring-security-test:${test_versions.springSecurityTest}"
 		],
 		unit_test: [
-				"junit:junit:${junitVersion}",
-				"org.assertj:assertj-core:${assertJVersion}",
-				"org.mockito:mockito-core:${mockitoVersion}",
-				"nl.jqno.equalsverifier:equalsverifier:${equalsVerifierVersion}",
-				"pl.pragmatists:JUnitParams:${junitParamsVersion}"
+            "junit:junit:${test_versions.junit}",
+            "nl.jqno.equalsverifier:equalsverifier:${test_versions.equalsVerifier}",
+            "org.assertj:assertj-core:${test_versions.assertJ}",
+            "org.mockito:mockito-core:${test_versions.mockito}",
+            "pl.pragmatists:JUnitParams:${test_versions.junitParams}"
 		]
 ]
 
