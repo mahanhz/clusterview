@@ -4,6 +4,14 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
     <body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNFSNBX"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <noscript>You need to turn on Javascript!</noscript>
+
         <th:block th:fragment="navbar(infoText)">
             <input type="hidden" id="sessionTimeoutInSeconds" name="sessionTimeoutInSeconds" th:value="${@environment.getProperty('server.session.timeout')}" />
             <nav class="navbar navbar-inverse navbar-fixed-top">
