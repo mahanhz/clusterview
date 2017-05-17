@@ -49,7 +49,7 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
 	afterEvaluate {
 		classDirectories = files(classDirectories.files.collect {
 			fileTree(dir: it,
-					exclude: ['org/amhzing/clusterview/configuration/*Config',
+					exclude: ['org/amhzing/clusterview/configuration/*Config.*',
 							  'org/amhzing/clusterview/appui/configuration/**'])
 		})
 	}
