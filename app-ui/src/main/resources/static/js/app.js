@@ -2,17 +2,17 @@ $(document).ready(function() {
 
     sessionTimeout();
 
-	$(".fancyLightbox").fancybox({
-		maxWidth	: 800,
-		maxHeight	: 600,
-		fitToView	: false,
-		width		: '70%',
-		height		: '70%',
-		autoSize	: false,
-		closeClick	: false,
-		openEffect	: 'elastic',
-		closeEffect	: 'elastic'
-	});
+    $("[data-fancybox]").fancybox({
+        fullScreen: false,
+        smallBtn: true,
+
+        iframe : {
+            css : {
+                width: '70%',
+                height: '70%'
+            }
+        }
+    });
 });
 
 function sessionTimeout() {

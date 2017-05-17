@@ -22,7 +22,7 @@
                                  th:style="'left: ' + ${group.location.coordX - 10} + 'px; top: ' + ${group.location.coordY - 10} + 'px;'"
                                  th:with="baseUrl=('/clusterview/' + ${clusterPath.country} + '/' + ${clusterPath.region} + '/' + ${clusterPath.cluster} + '/')">
                                 <div class="hidden-xs">
-                                    <a th:href="${baseUrl} + ${group.obfuscatedId}" class="fancyLightbox" data-fancybox-type="iframe">
+                                    <a href="javascript:;" th:attr="data-src=${baseUrl} + ${group.obfuscatedId}" data-fancybox="">
                                         <th:block th:replace="fragments/group-icon :: group-icon(${group.members.size()})"></th:block>
                                     </a>
                                 </div>

@@ -107,6 +107,7 @@ ext {
         springfoxSwagger2: '2.6.1'
 	]
     cache_versions = [
+        caffeine: '2.5.0',
         ehcache: '3.3.1',
         jcache: '1.0.0'
     ]
