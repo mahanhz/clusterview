@@ -81,7 +81,7 @@ if (!isMasterBranch()) {
 
 if (isMasterBranch()) {
 
-    stage ('Acceptance test') {
+/*    stage ('Acceptance test') {
         node {
             timeout(time: 10, unit: 'MINUTES') {
                 try {
@@ -91,17 +91,17 @@ if (isMasterBranch()) {
 
                     gradle 'acceptanceTest'
 
-                    step([$class: 'CucumberTestResultArchiver', testResults: '**/build/reports/cucumber/*.json'])
+                    step([$class: 'CucumberTestResultArchiver', testResults: '**//*build/reports/cucumber*//*.json'])
 
                     // Doesn't work with cucumber > 2.0.0 - See https://issues.jenkins-ci.org/browse/JENKINS-29328
-                    // step([$class: 'CucumberReportPublisher', fileIncludePattern: '**/cucumber.json'])
+                    // step([$class: 'CucumberReportPublisher', fileIncludePattern: '**//*cucumber.json'])
                 } catch(err) {
-                    step([$class: 'CucumberTestResultArchiver', testResults: '**/build/reports/cucumber/*.json'])
+                    step([$class: 'CucumberTestResultArchiver', testResults: '**//*build/reports/cucumber*//*.json'])
                     throw err
                 }
             }
         }
-    }
+    }*/
 
     // one at a time!
     lock('lock-publish-snapshot') {
