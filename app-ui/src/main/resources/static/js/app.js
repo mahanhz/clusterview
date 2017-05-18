@@ -28,10 +28,12 @@ function sessionTimeout() {
         message: 'Your session will expire in 1 minute.',
         ajaxType: 'GET',
         keepAliveUrl: '/keep-alive.html',
-        logoutUrl: '/logout',
-        redirUrl: '/logout',
+        logoutButton: 'Home',
+        keepAliveButton: 'Stay on this page',
+        logoutUrl: '/',
+        redirUrl: '/',
         warnAfter: sessionTimeoutMilliseconds - 60000,
-        redirAfter: sessionTimeoutMilliseconds
+        redirAfter: sessionTimeoutMilliseconds + 5000
     });
 }
 
