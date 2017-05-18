@@ -4,9 +4,10 @@ $(document).ready(function() {
 
     $("[data-fancybox]").fancybox({
         fullScreen: false,
-        smallBtn: true,
+        smallBtn: false,
 
         iframe : {
+            scrolling : 'yes',
             css : {
                 width: '70%',
                 height: '70%'
