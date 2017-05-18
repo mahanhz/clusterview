@@ -1,4 +1,4 @@
-rootProject.name="Cluster View"
+rootProject.name="clusterview"
 
 include "application:adapter"
 include "application:configuration"
