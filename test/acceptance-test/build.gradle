@@ -9,3 +9,13 @@ task acceptanceTest(type:Test) {
 	include acceptanceTests
 	// systemProperties['spring.profiles.active'] = 'acceptancetest'
 }
+
+task copyAppResources(type: Copy) {
+	from('../../app-ui/src/main/resources') {
+		include 'static/**'
+		include 'templates/**'
+	}
+	into 'build/resources/test'
+}
+
+acceptanceTest.dependsOn copyAppResources
