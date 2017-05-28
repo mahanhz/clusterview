@@ -56,12 +56,4 @@ public class ChangePasswordModel {
     public int hashCode() {
         return Objects.hash(newPassword, confirmNewPassword);
     }
-
-    @Override
-    public String toString() {
-        return "ChangePasswordModel{" +
-                "newPassword=****" +
-                ", confirmNewPassword=****" +
-                "}";
-    }
 }
