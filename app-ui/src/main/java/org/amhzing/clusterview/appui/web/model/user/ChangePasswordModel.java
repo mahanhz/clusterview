@@ -60,8 +60,8 @@ public class ChangePasswordModel {
     @Override
     public String toString() {
         return "ChangePasswordModel{" +
-                "newPassword='" + newPassword + '\'' +
-                ", confirmNewPassword='" + confirmNewPassword + '\'' +
-                '}';
+                "newPassword=****" +
+                ", confirmNewPassword=****" +
+                "}";
     }
 }
