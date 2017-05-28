@@ -62,9 +62,6 @@ project("application:configuration") {
 		compile project(':application:periphery:data')
 		compile project(':application:periphery:web')
 
-		compile ("com.h2database:h2")
-		compile ("io.springfox:springfox-swagger-ui:${versions.springfoxSwagger2}")
-		compile ("io.springfox:springfox-swagger2:${versions.springfoxSwagger2}")
 		compile ("net.logstash.logback:logstash-logback-encoder:${log_versions.logstashLogback}")
 		compile ("org.apache.commons:commons-lang3:${versions.commonsLang}")
 		compile ("org.codehaus.janino:janino:${log_versions.janino}")
@@ -103,6 +100,7 @@ project("application:periphery:data") {
 	dependencies {
 		compile project(':application:core')
 
+		compile ("com.h2database:h2")
 		compile("javax.cache:cache-api:${cache_versions.jcache}")
 		compile("org.apache.commons:commons-lang3:${versions.commonsLang}")
 		compile("org.ehcache:ehcache:${cache_versions.ehcache}")
@@ -122,6 +120,8 @@ project("application:periphery:web") {
 		compile project(':application:adapter')
 
 		compile("com.fasterxml.uuid:java-uuid-generator:${versions.jug}")
+		compile ("io.springfox:springfox-swagger-ui:${versions.springfoxSwagger2}")
+		compile ("io.springfox:springfox-swagger2:${versions.springfoxSwagger2}")
 		compile("org.apache.commons:commons-collections4:${versions.commonsCollections}")
 		compile("org.hashids:hashids:${versions.hashids}")
 		compile("org.springframework.boot:spring-boot-starter-aop")

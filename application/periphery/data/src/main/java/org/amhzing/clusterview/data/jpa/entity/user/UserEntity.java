@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
+import static org.apache.commons.lang3.Validate.notBlank;
+import static org.apache.commons.lang3.Validate.notNull;
 
 @Entity(name = "userlogin")
 public class UserEntity extends BaseEntity {
@@ -39,7 +41,20 @@ public class UserEntity extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "country_id", referencedColumnName = "id"))
     private Set<CountryEntity> countries;
 
-    public UserEntity() {
+    protected UserEntity() {
+    }
+
+    public UserEntity(final long id, final String firstName, final String lastName, final String email,
+                      final String password, final boolean enabled, final Set<RoleEntity> roles,
+                      final Set<CountryEntity> countries) {
+        this.id = id;
+        this.firstName = notBlank(firstName);
+        this.lastName = notBlank(lastName);
+        this.email = notBlank(email);
+        this.password = notBlank(password);
+        this.enabled = enabled;
+        this.roles = notNull(roles);
+        this.countries = notNull(countries);
     }
 
     public long getId() {
@@ -126,7 +141,6 @@ public class UserEntity extends BaseEntity {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
                 "} " + super.toString();

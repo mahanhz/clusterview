@@ -9,6 +9,7 @@ import org.amhzing.clusterview.data.jpa.entity.stats.StatsHistoryEntity;
 import org.amhzing.clusterview.data.jpa.entity.stats.StatsHistoryPk;
 import org.amhzing.clusterview.data.jpa.entity.user.RoleEntity;
 import org.amhzing.clusterview.data.jpa.entity.user.UserEntity;
+import org.amhzing.clusterview.data.jpa.entity.user.UserEntityBuilder;
 
 import java.util.*;
 
@@ -197,16 +198,16 @@ public final class JpaRepositoryHelper {
     }
 
     public static UserEntity userEntity() {
-        final UserEntity userEntity = new UserEntity();
-        userEntity.setEmail(username());
-        userEntity.setPassword("pass");
-        userEntity.setFirstName("John");
-        userEntity.setLastName("Doe");
-        userEntity.setEnabled(true);
-        userEntity.setRoles(roles());
-        userEntity.setCountries(ImmutableSet.of(JpaRepositoryHelper.countryEntity()));
+        final UserEntityBuilder builder = new UserEntityBuilder();
+        builder.setEmail(username());
+        builder.setPassword("pass");
+        builder.setFirstName("John");
+        builder.setLastName("Doe");
+        builder.setEnabled(true);
+        builder.setRoles(roles());
+        builder.setCountries(ImmutableSet.of(JpaRepositoryHelper.countryEntity()));
 
-        return userEntity;
+        return builder.build();
     }
 
     private static Set<RoleEntity> roles() {
