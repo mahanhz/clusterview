@@ -25,7 +25,7 @@ $("#delete_row").click(function() {
 
     if (numSelected > 0) {
         selectedMembers.each(function() {
-            var member = $(this).closest('tr').remove();
+            $(this).closest('tr').remove();
         });
 
         //reset the index of each row

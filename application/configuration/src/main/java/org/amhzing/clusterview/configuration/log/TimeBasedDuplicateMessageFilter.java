@@ -21,9 +21,9 @@ public class TimeBasedDuplicateMessageFilter extends TurboFilter {
     public static final int DEFAULT_ALLOWED_REPETITIONS = 5;
     public static final int DEFAULT_EXPIRE_AFTER_WRITE_SECONDS = 60;
 
-    public int allowedRepetitions = DEFAULT_ALLOWED_REPETITIONS;
-    public int cacheSize = DEFAULT_CACHE_SIZE;
-    public int expireAfterWriteSeconds = DEFAULT_EXPIRE_AFTER_WRITE_SECONDS;
+    private int allowedRepetitions = DEFAULT_ALLOWED_REPETITIONS;
+    private int cacheSize = DEFAULT_CACHE_SIZE;
+    private int expireAfterWriteSeconds = DEFAULT_EXPIRE_AFTER_WRITE_SECONDS;
 
     private Cache<String, Integer> msgCache;
 
