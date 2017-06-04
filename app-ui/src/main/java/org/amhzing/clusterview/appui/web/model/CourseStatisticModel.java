@@ -29,10 +29,6 @@ public final class CourseStatisticModel {
         return new CourseStatisticModel(id, name, quantity);
     }
 
-    public static CourseStatisticModel empty() {
-        return create("", "", 0);
-    }
-
     public boolean isZero() {
         return quantity == 0;
     }

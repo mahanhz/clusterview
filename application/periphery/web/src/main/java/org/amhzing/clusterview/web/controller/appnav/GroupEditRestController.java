@@ -47,7 +47,7 @@ public class GroupEditRestController extends AbstractEditRestController {
                                          @PathVariable final String obfuscatedGroupId,
                                          @RequestBody @Valid final GroupDTO groupDto) {
 
-        groupAdapter.update(groupDto, obfuscatedGroupId);
+        groupAdapter.update(groupDto, cluster);
 
         return ResponseEntity.ok().location(URI.create(clusterLink(country, region, cluster).getHref())).build();
     }
